@@ -1,19 +1,43 @@
-\documentclass[12pt]{extarticle}
-%\usepackage[T1]{fontenc}
- \renewcommand{\familydefault}{\rmdefault}
+\documentclass[12pt]{article}\pagestyle{myheadings}
+\renewcommand{\familydefault}{\rmdefault}
+
+\usepackage[utf8]{inputenc} % usually not needed (loaded by default)
+\usepackage{fontenc} 
+\usepackage[italian,english]{babel}
+\usepackage{enumitem}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true, %set true if you want colored links
+    linktoc=all,     %set to all if you want both sections and subsections linked
+    linkcolor=black,  %choose some color if you want links to stand out
+}
+ 
+\setlength\parindent{0pt}
 
 \usepackage{titling}
 \usepackage{lipsum}  
-\usepackage[a4paper,bindingoffset=0.2in,%
-            left=0.9in,right=0.9in,top=1in,bottom=1in,%
-            footskip=.25in]{geometry}
+\usepackage[a4paper,bindingoffset=0.2in,left=0.9in,right=0.9in,top=2in,bottom=1in,footskip=.25in]{geometry}
 	
+\newcounter{interview}
+\setcounter{interview}{0}
 
-\date{}	
-\setlength{\droptitle}{-5em}   % This is your set screw
+\setcounter{secnumdepth}{0} % sections are level 1
+
+\newcommand\Interview[1]{\clearpage
+   \stepcounter{interview}
+	\markright{\normalfont Intervista \theinterview \ \ - \ \ #1}
+}
+
+\addto{\captionsenglish}{\renewcommand*{\contentsname}{Tabella dei contenuti}}
+
+\setlist[enumerate]{label={\textbf{Domanda \arabic{enumi}:}},ref={Step \arabic{enumi}},leftmargin=*}
+
+\date{}
+%\setlength{\droptitle}{-5em}   % This is your set screw
 
 
-\title{\textbf{Relazione GuideMe}}
+\title{\textbf{\huge{Relazione GuideMe}}}
 \author{Agosta, Belli, Luciani, Emili}
 
 
@@ -21,11 +45,22 @@
 
 \begin{document}
 
-\maketitle
+\clearpage\maketitle
+\thispagestyle{empty}
+\clearpage
 
+\thispagestyle{empty}
+\tableofcontents
+
+\clearpage
+
+\section{Need Finding}
 \input{../need_finding/need_finding.tex}
 
+\section{Interviews}
 \input{../interviews/interviews.tex}
+
+\clearpage
 
 \input{../questionnaires/questionnaires.tex}
 
