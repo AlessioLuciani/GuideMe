@@ -5,6 +5,8 @@
 \usepackage{fontenc} 
 \usepackage[italian,english]{babel}
 \usepackage{enumitem}
+\usepackage{gensymb}
+
 
 \usepackage{hyperref}
 \hypersetup{
@@ -24,10 +26,15 @@
 
 \setcounter{secnumdepth}{0} % sections are level 1
 
-\newcommand\Interview[1]{\clearpage
+\newcommand\Interview[1]{
    \stepcounter{interview}
 	\markright{\normalfont Intervista n. \theinterview \ \ - \ \ #1}
 }
+
+\newcommand\invisiblesection[1]{%
+  \refstepcounter{section}%
+  \addcontentsline{toc}{section}{\protect{}#1}%
+  \sectionmark{#1}}
 
 \addto{\captionsenglish}{\renewcommand*{\contentsname}{Tabella dei contenuti}}
 
@@ -58,12 +65,20 @@
 \section{Need Finding}
 \input{../need_finding/need_finding.tex}
 
-\section{Interviews}
-\input{../interviews/interviews.tex}
+\clearpage
+
+\section{Conclusioni interviste}
+Le interviste sono state condotte in luoghi diversi, variando il più possibile il target per cercare di trovare un campione che fosse il più verosimile possibile alla situazione reale. \\
+Tutti i dati raccolti dalle interviste venivano annotati su blocco note e sono di seguito elencati.
 
 \clearpage
 
 \input{../questionnaires/questionnaires.tex}
+
+\clearpage
+
+\invisiblesection{Interviews}
+\input{../interviews/interviews.tex}
 
 \clearpage
 
