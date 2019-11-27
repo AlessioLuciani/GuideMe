@@ -1,5 +1,6 @@
 \babel@toc {english}{}
 \contentsline {section}{Need Finding}{3}{section*.2}
+\contentsline {section}{Analisi delle App simili}{4}{section*.3}
 \contentsline {section}{Conclusioni interviste}{5}{section*.8}
 \contentsline {section}{{}Interviews}{7}{section.1}
 \contentsline {section}{Revisioni}{22}{section*.10}
