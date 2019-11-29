@@ -1,6 +1,10 @@
 \babel@toc {english}{}
-\contentsline {section}{Need Finding}{3}{section*.2}
-\contentsline {section}{Analisi delle App simili}{4}{section*.3}
-\contentsline {section}{Conclusioni interviste}{5}{section*.8}
-\contentsline {section}{{}Interviews}{7}{section.1}
-\contentsline {section}{Revisioni}{22}{section*.10}
+\contentsline {section}{Process}{3}{section*.2}
+\contentsline {subsection}{\emph {Step 1 - L'idea}}{3}{section*.3}
+\contentsline {subsection}{\emph {Step 2 - Analisi delle app simili}}{3}{section*.4}
+\contentsline {subsection}{\emph {Step 3 - Interviste} \& \emph {conseguenze}}{3}{section*.5}
+\contentsline {section}{Need Finding}{5}{section*.6}
+\contentsline {section}{Analisi delle App simili}{6}{section*.7}
+\contentsline {section}{Conclusioni interviste}{7}{section*.12}
+\contentsline {section}{{}Interviews}{9}{section.1}
+\contentsline {section}{Revisioni}{24}{section*.14}
