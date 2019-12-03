@@ -4,10 +4,11 @@
 \contentsline {section}{Need Finding}{5}{section*.8}% 
 \contentsline {section}{Conseguenze Interviste}{6}{section*.9}% 
 \contentsline {section}{Questionari}{7}{section*.10}% 
-\contentsline {section}{Storyboard}{8}{section*.11}% 
-\contentsline {subsection}{Aggiunta itinerario}{8}{section*.12}% 
-\contentsline {subsection}{Ricerca itinerario}{8}{section*.13}% 
-\contentsline {subsection}{Utilizzo itinerario}{9}{section*.14}% 
-\contentsline {subsection}{Recensione itinerario}{9}{section*.15}% 
-\contentsline {section}{{}Elenco Interviste}{10}{section.1}% 
-\contentsline {section}{Revisioni}{29}{section*.16}% 
+\contentsline {subsection}{Grafici significativi}{8}{section*.11}% 
+\contentsline {section}{Storyboard}{9}{section*.12}% 
+\contentsline {subsection}{Aggiunta itinerario}{9}{section*.13}% 
+\contentsline {subsection}{Ricerca itinerario}{9}{section*.14}% 
+\contentsline {subsection}{Utilizzo itinerario}{10}{section*.15}% 
+\contentsline {subsection}{Recensione itinerario}{10}{section*.16}% 
+\contentsline {section}{{}Elenco Interviste}{11}{section.1}% 
+\contentsline {section}{Revisioni}{30}{section*.17}% 
