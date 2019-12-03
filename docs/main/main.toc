@@ -1,9 +1,9 @@
 \babel@toc {english}{}
-\contentsline {section}{L'obbiettivo}{3}{section*.2}
-\contentsline {section}{Analisi delle App simili}{4}{section*.3}
-\contentsline {section}{Need Finding}{5}{section*.8}
-\contentsline {section}{Conseguenze Interviste}{6}{section*.9}
-\contentsline {section}{Questionari}{7}{section*.10}
-\contentsline {subsection}{Conclusioni}{7}{section*.11}
-\contentsline {section}{{}Elenco Interviste}{8}{section.1}
-\contentsline {section}{Revisioni}{27}{section*.12}
+\contentsline {section}{L'obbiettivo}{3}{section*.2}% 
+\contentsline {section}{Analisi delle App simili}{4}{section*.3}% 
+\contentsline {section}{Need Finding}{5}{section*.8}% 
+\contentsline {section}{Conseguenze Interviste}{6}{section*.9}% 
+\contentsline {section}{Questionari}{7}{section*.10}% 
+\contentsline {subsection}{Conclusioni}{7}{section*.11}% 
+\contentsline {section}{{}Elenco Interviste}{8}{section.1}% 
+\contentsline {section}{Revisioni}{27}{section*.12}% 
