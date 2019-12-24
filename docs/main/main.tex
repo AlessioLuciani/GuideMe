@@ -7,12 +7,14 @@
 \usepackage{enumitem}
 \usepackage{gensymb}
 \usepackage{graphicx}
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=true, %set true if you want colored links
-    linktoc=all,     %set to all if you want both sections and subsections linked
-    linkcolor=black,  %choose some color if you want links to stand out
-}
+
+
+\usepackage{xcolor}
+\usepackage[colorlinks = true,
+            linkcolor = black,
+            urlcolor  = black,
+            citecolor = black,
+            anchorcolor = black]{hyperref}
  
 \setlength\parindent{0pt}
 
@@ -88,6 +90,11 @@
 
 \section{Storyboard}
 \input{../storyboards/storyboards.tex}
+
+\clearpage
+
+\section{Prototipi}
+\input{../prototypes/prototypes.tex}
 
 \clearpage
 
