@@ -7,12 +7,14 @@
 \usepackage{enumitem}
 \usepackage{gensymb}
 \usepackage{graphicx}
-\usepackage{hyperref}
-\hypersetup{
-    colorlinks=true, %set true if you want colored links
-    linktoc=all,     %set to all if you want both sections and subsections linked
-    linkcolor=black,  %choose some color if you want links to stand out
-}
+
+
+\usepackage{xcolor}
+\usepackage[colorlinks = true,
+            linkcolor = black,
+            urlcolor  = black,
+            citecolor = black,
+            anchorcolor = black]{hyperref}
  
 \setlength\parindent{0pt}
 
@@ -91,6 +93,11 @@
 
 \clearpage
 
+\section{Prototipi}
+\input{../prototypes/prototypes.tex}
+
+\clearpage
+
 \invisiblesection{Elenco Interviste}
 \input{../interviews/interviews.tex}
 
@@ -100,11 +107,11 @@
 
 \begin{table*}[!h]
 \centering
-\begin{tabular}{|@{}p{3cm}@{}|@{}p{4.5cm}@{}|@{}p{2cm}@{}|}
+\begin{tabular}{|c|c|c|}
  \hline
  \ Numero & \ Descrizione & \ Data \\
  \hline
- \ 1 &  &  \\
+ \ 1 & Discussione dell'idea, need, interviste, questionari e storyboard. &  4/12/19\\
  \hline
  \ 2 &  &  \\
  \hline
