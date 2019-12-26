@@ -8,8 +8,14 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="guide_me"
+        android:label="GuideMe"
         android:icon="@mipmap/ic_launcher">
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyACvxWLDFT4vUP_f8975zOnAbBcVoPN0PE"/>
+        
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

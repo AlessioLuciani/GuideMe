@@ -1,5 +1,9 @@
+import 'dart:ui';
+
 import 'package:GuideMe/commons/Itinerary.dart';
+import 'package:GuideMe/commons/itinerary_stop.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class DetailsPage extends StatefulWidget {
   final Itinerary itinerary;
@@ -11,48 +15,122 @@ class DetailsPage extends StatefulWidget {
 }
 
 class DetailsPageState extends State<DetailsPage> {
+  final Set<Marker> _markers = {};
+  final Set<Polyline> _polyline = {};
+  List<LatLng> segment = [];
+  GoogleMapController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    for (ItineraryStop stop in widget.itinerary.stops) {
+      segment.add(stop.coord);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(title: Text(widget.itinerary.title)),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Image(
-            image: AssetImage(widget.itinerary.coverImage),
+          Container(
+              height: 160,
+              child: GoogleMap(
+                mapType: MapType.terrain,
+                //that needs a list<Polyline>
+                polylines: _polyline,
+                markers: _markers,
+                onMapCreated: _onMapCreated,
+                initialCameraPosition: CameraPosition(
+                  target: segment[0],
+                  zoom: 13.0,
+                ),
+              )),
+          Padding(
+            padding: EdgeInsets.only(left: 20, top: 20),
+            child: Text(
+              "Descrizione",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
           Padding(
-            padding: EdgeInsets.only(left: 20, right: 20, top: 20),
+            padding: EdgeInsets.only(left: 20, right: 20, top: 16),
             child: Text(
               widget.itinerary.longDescription,
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(
+                fontSize: 16,
+              ),
             ),
           ),
           SizedBox(
-            height: 40,
+            height: 20,
           ),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            SizedBox(
-              width: 10,
+          Padding(
+            child: Row(
+              children: <Widget>[
+                Icon(Icons.access_time, size: 30),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "3 ore e 40 minuti",
+                  style: TextStyle(fontSize: 18),
+                )
+              ],
             ),
-            _displayCard(widget.itinerary.duration, Icons.access_time),
-            _displayCard(widget.itinerary.distance, Icons.directions_walk),
-            SizedBox(
-              width: 10,
-            ),
-          ]),
-          SizedBox(
-            height: 6,
+            padding: EdgeInsets.only(left: 16),
           ),
-          Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            SizedBox(
-              width: 10,
+          Padding(
+            child: Row(
+              children: <Widget>[
+                Icon(Icons.directions_walk, size: 30),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "7 km",
+                  style: TextStyle(fontSize: 18),
+                )
+              ],
             ),
-            _displayCard(widget.itinerary.priceRange, Icons.euro_symbol),
-            _displayCard("TODO", Icons.restaurant),
-            SizedBox(
-              width: 10,
+            padding: EdgeInsets.only(left: 16, top: 4),
+          ),
+          Padding(
+            child: Row(
+              children: <Widget>[
+                Icon(Icons.euro_symbol, size: 30),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "0 - 30",
+                  style: TextStyle(fontSize: 18),
+                )
+              ],
             ),
-          ]),
+            padding: EdgeInsets.only(left: 16, top: 4),
+          ),
+          Padding(
+            child: Row(
+              children: <Widget>[
+                Icon(Icons.restaurant, size: 30),
+                SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  "Ristoranti tipici",
+                  style: TextStyle(fontSize: 18),
+                )
+              ],
+            ),
+            padding: EdgeInsets.only(left: 16, top: 4),
+          ),
           Expanded(
             child: Align(
               alignment: FractionalOffset.bottomCenter,
@@ -98,6 +176,31 @@ class DetailsPageState extends State<DetailsPage> {
         ],
       ),
     );
+  }
+
+  void _onMapCreated(GoogleMapController controllerParam) {
+    setState(() {
+      controller = controllerParam;
+      for (int i = 0; i < segment.length; i++) {
+        _markers.add(Marker(
+          markerId: MarkerId(segment[i].toString()),
+          position: segment[i],
+          infoWindow: InfoWindow(
+            title: 'Awesome Polyline tutorial',
+            snippet: 'This is a snippet',
+          ),
+        ));
+      }
+
+      _polyline.add(Polyline(
+        polylineId: PolylineId('itinerary'),
+        visible: true,
+        //latlng is List<LatLng>
+        points: segment,
+        width: 2,
+        color: Colors.blue,
+      ));
+    });
   }
 }
 

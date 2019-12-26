@@ -64,7 +64,6 @@ class AndroidHomePageState extends State<AndroidHomePage> {
     }
 
     return new Scaffold(
-      backgroundColor: Colors.blueGrey[400],
       appBar: new AppBar(
         title: new Text(widget.drawerItems[_selectedDrawerIndex].title),
       ),

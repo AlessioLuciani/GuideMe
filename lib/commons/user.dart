@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class User {
   String name;
   String surname;
@@ -5,9 +7,9 @@ class User {
   String photo;
 
   User({
-    this.name,
-    this.surname,
-    this.email,
+    @required this.name,
+    @required this.surname,
+    @required this.email,
     this.photo,
   });
 }

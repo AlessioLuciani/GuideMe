@@ -1,5 +1,6 @@
 import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/pages/details.dart';
+import 'package:GuideMe/pages/new_p.dart';
 import 'package:flutter/material.dart';
 
 class ExploreCard extends StatelessWidget {
@@ -14,6 +15,7 @@ class ExploreCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(left: 10, right: 10, bottom: 6),
       child: Card(
+        
         elevation: 5, //TODO: check if Android/iOS
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(8.0))),
@@ -21,9 +23,8 @@ class ExploreCard extends StatelessWidget {
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => DetailsPage(
-                      itinerary: itinerary,
-                    )),
+                builder: (context) => DetailsPage(itinerary: itinerary,)),
+                //builder: (context) => TestMapPolyline()),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -79,7 +80,7 @@ Widget _getDuration(String duration) {
 Widget _getDistance(String distance) {
   return Row(
     children: <Widget>[
-      Icon(Icons.directions_walk),
+      Icon(Icons.directions_walk,),
       SizedBox(
         width: 4,
       ),
@@ -96,7 +97,7 @@ Widget _getRating(String rating) {
       Text(
         rating,
       ),
-      Icon(Icons.star),
+      Icon(Icons.star, color: Colors.red,),
       SizedBox(
         width: 10,
       )
