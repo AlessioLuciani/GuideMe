@@ -5,8 +5,6 @@ import 'dart:io';
 
 import 'android_home.dart';
 
-
-
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {

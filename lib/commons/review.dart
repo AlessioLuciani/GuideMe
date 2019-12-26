@@ -1,4 +1,4 @@
-import 'package:GuideMe/utils/user.dart';
+import 'package:GuideMe/commons/user.dart';
 
 class Review {
   User user;

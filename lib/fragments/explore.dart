@@ -1,5 +1,5 @@
-import 'package:GuideMe/explore_card.dart';
-import 'package:GuideMe/utils/Itinerary.dart';
+import 'package:GuideMe/commons/Itinerary.dart';
+import 'package:GuideMe/widgets/explore_card.dart';
 import 'package:flutter/material.dart';
 
 class ExploreFragment extends StatelessWidget {
@@ -10,18 +10,22 @@ class ExploreFragment extends StatelessWidget {
         title: "Giro de Roma",
         duration: "1.10 ore",
         distance: "7 km",
-        longDescription: "asd"),
+        priceRange: "0-15",
+        longDescription:
+            "Bellissimo ed impegnativo percorso in Val Squaranto da Montorio/Ferrazze. Il giro propone due salite e due discese più alcuni mangia e bevi di collegamento. La prima salita porta da Montorio a Maroni. Ci sono ovviamente molte alternative per portarsi a Maroni, io ne propongo qui una che limita al minimo l’asfalto e ritengo (a mio parere) una delle più belle. Da Maroni prendere a dx una mulattiera/sentiero che taglia in costa (versante Squaranto) la montagna."),
     Itinerary(
         coverImage: "assets/images/colosseo.jpg",
         title: "Magna a Roma",
         duration: "1.50 ore",
         distance: "10 km",
+        priceRange: "0-32",
         longDescription: "asd"),
     Itinerary(
         coverImage: "assets/images/colosseo.jpg",
         title: "Fori tour",
         duration: "50 minuti",
         distance: "4 km",
+        priceRange: "0-1024",
         longDescription: "asd"),
   ];
 

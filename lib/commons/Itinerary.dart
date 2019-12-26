@@ -1,4 +1,5 @@
-import 'package:GuideMe/utils/review.dart';
+
+import 'package:GuideMe/commons/review.dart';
 import 'package:flutter/material.dart';
 
 class Itinerary {
@@ -7,6 +8,8 @@ class Itinerary {
   String duration;
   String distance;
   String coverImage;
+  String priceRange;
+  bool isFavourite;
   // Details section
   String longDescription;
   List<Review> _reviews;
@@ -16,7 +19,9 @@ class Itinerary {
       @required this.title,
       @required this.duration,
       @required this.longDescription,
-      @required this.distance});
+      @required this.distance,
+      @required this.priceRange,
+      this.isFavourite = false});
 
   List<Review> get reviews => _reviews;
 
