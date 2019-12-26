@@ -12,7 +12,7 @@ class ExploreCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 10, right: 10, bottom: 4),
+      margin: EdgeInsets.only(left: 10, right: 10, bottom: 6),
       child: Card(
         elevation: 5, //TODO: check if Android/iOS
         shape: RoundedRectangleBorder(
@@ -29,11 +29,12 @@ class ExploreCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(8.0),
-                    topRight: Radius.circular(8.0),
-                  ),
-                  child: Image(image: AssetImage(itinerary.coverImage))),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(8.0),
+                  topRight: Radius.circular(8.0),
+                ),
+                child: Image.asset(itinerary.coverImage, height: 150, fit: BoxFit.fitWidth,),
+              ),
               ListTile(
                 contentPadding: EdgeInsets.only(left: 10, top: 2),
                 title: Text(
