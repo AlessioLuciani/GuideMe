@@ -1,6 +1,5 @@
 import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/pages/details.dart';
-import 'package:GuideMe/pages/new_p.dart';
 import 'package:flutter/material.dart';
 
 class ExploreCard extends StatelessWidget {
@@ -96,8 +95,10 @@ Widget _getRating(String rating) {
     children: <Widget>[
       Text(
         rating,
+        style: TextStyle(fontSize: 17),
       ),
-      Icon(Icons.star, color: Colors.red,),
+      SizedBox(width: 2,),
+      Icon(Icons.star, color: Colors.red, size: 30,),
       SizedBox(
         width: 10,
       )

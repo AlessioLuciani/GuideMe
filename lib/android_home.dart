@@ -1,3 +1,5 @@
+import 'package:GuideMe/commons/user.dart';
+import 'package:GuideMe/utils/data.dart';
 import 'package:flutter/material.dart';
 
 import 'fragments/add_itinerary.dart';
@@ -62,7 +64,7 @@ class AndroidHomePageState extends State<AndroidHomePage> {
         onTap: () => _onSelectItem(i),
       ));
     }
-
+    User currentUser = Data.users[Data.currentUserIndex];
     return new Scaffold(
       appBar: new AppBar(
         title: new Text(widget.drawerItems[_selectedDrawerIndex].title),
@@ -71,11 +73,11 @@ class AndroidHomePageState extends State<AndroidHomePage> {
         child: new Column(
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountName: new Text("Name Surname"),
-              accountEmail: new Text("yourlongemail@gmail.com"),
+              accountName: new Text('${currentUser.name} ${currentUser.surname}'),
+              accountEmail: new Text(currentUser.email),
               currentAccountPicture: new CircleAvatar(
                 backgroundColor: Colors.white,
-                child: new Text("N"),
+                child: new Text(currentUser.name[0].toUpperCase()),
               ),
             ),
             new Column(children: drawerOptions)

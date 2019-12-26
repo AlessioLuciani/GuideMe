@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/commons/itinerary_stop.dart';
+import 'package:GuideMe/utils/data.dart';
+import 'package:GuideMe/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -30,6 +32,7 @@ class DetailsPageState extends State<DetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('${widget.itinerary.author.id}');
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(title: Text(widget.itinerary.title)),
@@ -84,7 +87,7 @@ class DetailsPageState extends State<DetailsPage> {
                 )
               ],
             ),
-            padding: EdgeInsets.only(left: 16),
+            padding: EdgeInsets.only(left: 18),
           ),
           Padding(
             child: Row(
@@ -99,7 +102,7 @@ class DetailsPageState extends State<DetailsPage> {
                 )
               ],
             ),
-            padding: EdgeInsets.only(left: 16, top: 4),
+            padding: EdgeInsets.only(left: 18, top: 4),
           ),
           Padding(
             child: Row(
@@ -114,7 +117,7 @@ class DetailsPageState extends State<DetailsPage> {
                 )
               ],
             ),
-            padding: EdgeInsets.only(left: 16, top: 4),
+            padding: EdgeInsets.only(left: 18, top: 4),
           ),
           Padding(
             child: Row(
@@ -129,7 +132,7 @@ class DetailsPageState extends State<DetailsPage> {
                 )
               ],
             ),
-            padding: EdgeInsets.only(left: 16, top: 4),
+            padding: EdgeInsets.only(left: 18, top: 4),
           ),
           Expanded(
             child: Align(
@@ -146,7 +149,10 @@ class DetailsPageState extends State<DetailsPage> {
                             : Icons.favorite_border,
                         size: 36,
                       ),
-                      onPressed: () => widget.itinerary.isFavourite = true,
+                      onPressed: () =>
+                          //setState(() => widget.itinerary.isFavourite = !widget.itinerary.isFavourite),
+                          setState(() => Utils.getItineraryRef(widget.itinerary)
+                              .toggleFavourite()),
                     ),
                   ),
                   SizedBox(

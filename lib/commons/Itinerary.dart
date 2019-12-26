@@ -34,4 +34,6 @@ class Itinerary {
   String get avgReview => "3.2";
 
   set addReview(Review review) => _reviews.add(review);
+
+  void toggleFavourite() => isFavourite = !isFavourite;
 }
