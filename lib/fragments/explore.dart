@@ -1,20 +1,45 @@
+import 'package:GuideMe/explore_card.dart';
+import 'package:GuideMe/utils/Itinerary.dart';
 import 'package:flutter/material.dart';
 
 class ExploreFragment extends StatelessWidget {
+  // Static list of itineraries uploaded by users
+  final List<Itinerary> itineraries = [
+    Itinerary(
+        coverImage: "assets/images/colosseo.jpg",
+        title: "Giro de Roma",
+        duration: "1.10 ore",
+        distance: "7 km",
+        longDescription: "asd"),
+    Itinerary(
+        coverImage: "assets/images/colosseo.jpg",
+        title: "Magna a Roma",
+        duration: "1.50 ore",
+        distance: "10 km",
+        longDescription: "asd"),
+    Itinerary(
+        coverImage: "assets/images/colosseo.jpg",
+        title: "Fori tour",
+        duration: "50 minuti",
+        distance: "4 km",
+        longDescription: "asd"),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return new Center(
-      child: ListView(
-        children: <Widget>[
-          SizedBox(
-            height: 10,
-          ), // insisible box
-          getCard(),
-          getCard(),
-          getCard(),
-          getCard(),
-          getCard(),
-        ],
+    return Padding(
+      padding: EdgeInsets.only(top: 8),
+      child: ListView.builder(
+        itemCount: itineraries.length,
+        itemBuilder: (_, index) => Container(
+            // Add padding to the last item of the list
+            padding: index == itineraries.length - 1
+                ? EdgeInsets.only(bottom: 10)
+                : null,
+            // Form a new card from the current itinerary information
+            child: ExploreCard(
+              itinerary: itineraries[index],
+            )),
       ),
     );
   }
@@ -57,28 +82,6 @@ Widget getCard() {
           ],
         ),
       ),
-    ),
-  );
-}
-
-Card _getCard() {
-  return Card(
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10.0),
-    ),
-    margin: EdgeInsets.only(left: 20, right: 20, top: 10),
-    semanticContainer: true,
-    clipBehavior: Clip.antiAliasWithSaveLayer,
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        _getImage(),
-        _getTitle(),
-        _getDuration(),
-        Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [_getDistance(), _getRating()]),
-      ],
     ),
   );
 }
@@ -132,14 +135,15 @@ Widget _getRating() {
         "3.2",
       ),
       Icon(Icons.star),
-      SizedBox(width: 10,)
+      SizedBox(
+        width: 10,
+      )
     ],
   );
 }
 
 Widget _getImage() {
-  return Container(
-      child: Image(image: AssetImage("assets/images/colosseo.jpg")));
+  return Image(image: AssetImage("assets/images/colosseo.jpg"));
 }
 
 Widget _getInfo() {
