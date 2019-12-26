@@ -1,3 +1,4 @@
+import 'package:GuideMe/pages/details.dart';
 import 'package:GuideMe/utils/Itinerary.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +18,13 @@ class ExploreCard extends StatelessWidget {
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(8.0))),
         child: InkWell(
-          onTap: () => print("ciao"),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DetailsPage(
+                      itinerary: itinerary,
+                    )),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
