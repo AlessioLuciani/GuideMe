@@ -6,15 +6,59 @@ class ExploreFragment extends StatelessWidget {
     return new Center(
       child: ListView(
         children: <Widget>[
-          _getCard(),
-          _getCard(),
-          _getCard(),
-          _getCard(),
-          _getCard(),
+          SizedBox(
+            height: 10,
+          ), // insisible box
+          getCard(),
+          getCard(),
+          getCard(),
+          getCard(),
+          getCard(),
         ],
       ),
     );
   }
+}
+
+Widget getCard() {
+  return Container(
+    margin: EdgeInsets.only(left: 10, right: 10, top: 4),
+    child: Card(
+      elevation: 5,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(8.0))),
+      child: InkWell(
+        onTap: () => print("ciao"),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(8.0),
+                  topRight: Radius.circular(8.0),
+                ),
+                child: _getImage()),
+            ListTile(
+              contentPadding: EdgeInsets.only(left: 10, top: 2),
+              title: Text(
+                "Giro de Roma",
+                style: TextStyle(fontSize: 22),
+              ),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  _getDuration(),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [_getDistance(), _getRating()])
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
 }
 
 Card _getCard() {
@@ -23,7 +67,6 @@ Card _getCard() {
       borderRadius: BorderRadius.circular(10.0),
     ),
     margin: EdgeInsets.only(left: 20, right: 20, top: 10),
-    color: Colors.orange,
     semanticContainer: true,
     clipBehavior: Clip.antiAliasWithSaveLayer,
     child: Column(
@@ -57,13 +100,12 @@ Widget _getTitle() {
 Widget _getDuration() {
   return Row(
     children: <Widget>[
-      Padding(
-        padding: EdgeInsets.only(left: 8),
-      ),
       Icon(Icons.access_time),
+      SizedBox(
+        width: 4,
+      ),
       Text(
         "1.30 ore",
-        style: TextStyle(fontSize: 17),
       ),
     ],
   );
@@ -72,13 +114,12 @@ Widget _getDuration() {
 Widget _getDistance() {
   return Row(
     children: <Widget>[
-      Padding(
-        padding: EdgeInsets.only(left: 8, top: 20),
-      ),
       Icon(Icons.directions_walk),
+      SizedBox(
+        width: 4,
+      ),
       Text(
         "7 km",
-        style: TextStyle(fontSize: 17),
       ),
     ],
   );
@@ -89,21 +130,16 @@ Widget _getRating() {
     children: <Widget>[
       Text(
         "3.2",
-        style: TextStyle(fontSize: 20),
       ),
       Icon(Icons.star),
-      Padding(
-        padding: EdgeInsets.only(left: 5, top: 20, bottom: 10, right: 8),
-      ),
+      SizedBox(width: 10,)
     ],
   );
 }
 
 Widget _getImage() {
   return Container(
-      child: Image.network(
-    'https://placeimg.com/1080/470/any',
-  ));
+      child: Image(image: AssetImage("assets/images/colosseo.jpg")));
 }
 
 Widget _getInfo() {

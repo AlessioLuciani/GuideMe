@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       title: 'GuideMe',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.orange
+        primarySwatch: Colors.blueGrey,
       ),
       home: HomePage(),
     ));
