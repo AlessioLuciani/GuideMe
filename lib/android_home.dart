@@ -1,4 +1,5 @@
 import 'package:GuideMe/commons/user.dart';
+import 'package:GuideMe/pages/login.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:flutter/material.dart';
 
@@ -35,15 +36,17 @@ class AndroidHomePageState extends State<AndroidHomePage> {
         return new AddItinearyFragment();
       case 2:
         return new ItinerariesFragment();
-      case 3:
-        // TODO: Logout from the app
-        break;
       default:
         return new Text("Some error occured.");
     }
   }
 
   _onSelectItem(int index) {
+    if (index == 3) {
+      Route route = MaterialPageRoute(builder: (context) => LoginPage());
+      Navigator.pushReplacement(context, route);
+      return;
+    }
     if (index != _selectedDrawerIndex) {
       // Avoid reloading the current fragment
       setState(() => _selectedDrawerIndex = index);
@@ -73,7 +76,8 @@ class AndroidHomePageState extends State<AndroidHomePage> {
         child: new Column(
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountName: new Text('${currentUser.name} ${currentUser.surname}'),
+              accountName:
+                  new Text('${currentUser.name} ${currentUser.surname}'),
               accountEmail: new Text(currentUser.email),
               currentAccountPicture: new CircleAvatar(
                 backgroundColor: Colors.white,

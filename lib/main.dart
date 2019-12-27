@@ -1,3 +1,4 @@
+import 'package:GuideMe/pages/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: HomePage(),
+      //home: HomePage(),
+      home: LoginPage(),
     ));
   }
 }

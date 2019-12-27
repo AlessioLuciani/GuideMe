@@ -4,7 +4,6 @@ import 'package:GuideMe/commons/user.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Data {
-
   static int currentUserIndex = 0;
 
   static List<User> users = [
@@ -12,6 +11,22 @@ class Data {
     User(name: "Luca", surname: "Rossi", email: "luca@rossi.com"),
     User(name: "Luigi", surname: "Bianchi", email: "luigi@bianchi.com"),
     User(name: "Chris", surname: "Milly", email: "chris@milly.com"),
+    User(
+        name: "Leonardo",
+        surname: "Emili",
+        email: "emili.1802989@studenti.uniroma1.it"),
+    User(
+        name: "Alessio",
+        surname: "Luciani",
+        email: "luciani.1797637@studenti.uniroma1.it"),
+    User(
+        name: "Giorgio",
+        surname: "Belli",
+        email: "belli.1797941@studenti.uniroma1.it"),
+    User(
+        name: "Giorgio",
+        surname: "Agosta",
+        email: "agosta.1795537@studenti.uniroma1.it"),
   ];
 
   // Static list of itineraries uploaded by users
