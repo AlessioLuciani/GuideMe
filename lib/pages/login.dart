@@ -160,7 +160,7 @@ class _LoginPageState extends State<LoginPage> {
         child: FlatButton(
           child: _isLoginPage
               ? Text(
-                  'Crea un nuovo Account',
+                  'Crea un nuovo account',
                   style: TextStyle(color: Colors.black54),
                 )
               : Text(
@@ -207,7 +207,8 @@ class _LoginPageState extends State<LoginPage> {
               _isLoginPage ? forgotLabel : SizedBox(),
               Expanded(
                 child: registerLabel,
-              )
+              ),
+              SizedBox(height: 10,)
             ],
           ),
         ),

@@ -28,4 +28,6 @@ class Utils {
       return true;
     }
   }
+
+  static List<Itinerary> get favouriteItineraries => Data.itineraries.where((it)=>it.isFavourite).toList();
 }

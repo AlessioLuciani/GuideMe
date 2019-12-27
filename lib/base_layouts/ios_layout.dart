@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:GuideMe/fragments/explore.dart';
 import 'package:GuideMe/fragments/add_itinerary.dart';
-import 'package:GuideMe/fragments/itineraries.dart';
+import 'package:GuideMe/fragments/favourites.dart';
+
 
 import '../fragments/add_itinerary.dart';
 import '../fragments/explore.dart';
@@ -48,10 +49,10 @@ class IOSLayoutState extends State<IOSLayout> {
       body: _getFragmentFrom(_tabIndex),
     );
   }
-_getFragmentFrom(int pos) {;
+_getFragmentFrom(int pos) {
     switch (pos) {
       case 0:
-        return new ItinerariesFragment();
+        return new FavouritesFragment();
       case 1:
       return new AddItinearyFragment();
       case 2:

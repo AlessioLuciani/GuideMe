@@ -52,7 +52,7 @@ class AddImageButtonPicker extends StatefulWidget{
 
 class AddImageButtonPickerState extends State<AddImageButtonPicker>{
 
-  File _image = null;
+  File _image;
 
   Future<bool> checkAndRequestCameraPermissions() async {
     PermissionStatus permission = await PermissionHandler().checkPermissionStatus(PermissionGroup.camera);
