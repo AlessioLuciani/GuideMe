@@ -33,6 +33,8 @@ class HomePage extends StatelessWidget {
       return AndroidHomePage();
     } else {
       return Scaffold(
+        // Avoid the Scaffold to resize himself when
+        resizeToAvoidBottomInset: false,
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: 0,
           items: [

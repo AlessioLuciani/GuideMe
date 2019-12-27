@@ -12,13 +12,44 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final _passwordKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _nameController = TextEditingController();
-  final _surnameController = TextEditingController();
   final _nameKey = GlobalKey<FormState>();
   final _surnameKey = GlobalKey<FormState>();
   final _emailKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _nameController = TextEditingController();
+  final _surnameController = TextEditingController();
+  final _passwordController = TextEditingController();
   bool _isLoginPage = true;
+
+  void _checkFields() {
+    int userIndex = Utils.userExists(_emailController.text);
+    if (!_isLoginPage) {
+      // Create a new account
+      User newUser = User(
+          name: _nameController.text,
+          surname: _surnameController.text,
+          email: _emailController.text);
+      if (_nameKey.currentState.validate() &&
+          _surnameKey.currentState.validate() &&
+          _emailKey.currentState.validate() &&
+          _passwordKey.currentState.validate() &&
+          Utils.addTempUser(newUser)) {
+        Data.currentUserIndex = Utils.userExists(_emailController.text);
+        Route route = MaterialPageRoute(builder: (context) => HomePage());
+        Navigator.pushReplacement(context, route);
+        // and go to the app
+      }
+      return;
+    }
+    // Login with your account
+    if (_emailKey.currentState.validate() &&
+        _passwordKey.currentState.validate() &&
+        userIndex >= 0) {
+      Data.currentUserIndex = userIndex;
+      Route route = MaterialPageRoute(builder: (context) => HomePage());
+      Navigator.pushReplacement(context, route);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
           autofocus: false,
           controller: _nameController,
           validator: (value) =>
-              !_isLoginPage && value.isEmpty ? "Inserisci nome" : null,
+              _isLoginPage || value.isEmpty ? "Inserisci nome" : null,
           decoration: InputDecoration(
             hintText: 'Nome',
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -54,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
           autofocus: false,
           controller: _surnameController,
           validator: (value) =>
-              !_isLoginPage && value.isEmpty ? "Inserisci cognome" : null,
+              _isLoginPage || value.isEmpty ? "Inserisci cognome" : null,
           decoration: InputDecoration(
             hintText: 'Cognome',
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -91,7 +122,16 @@ class _LoginPageState extends State<LoginPage> {
         child: TextFormField(
           autofocus: false,
           obscureText: true,
-          validator: (value) => value.isEmpty ? "Inserisci una password" : null,
+          validator: (value) {
+            if (value.isEmpty) {
+              return "Inserisci una password";
+            }
+            if (_isLoginPage && Utils.userExists(_emailController.text) < 0) {
+              return "I dati inseriti non sono corretti.";
+            }
+            return null;
+          },
+          controller: _passwordController,
           decoration: InputDecoration(
             hintText: 'Password',
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -106,39 +146,7 @@ class _LoginPageState extends State<LoginPage> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(24),
         ),
-        onPressed: () {
-          if (!_isLoginPage &&
-                  (!_nameKey.currentState.validate() ||
-                      !_surnameKey.currentState.validate() ||
-                      !_emailKey.currentState.validate()) ||
-              !_passwordKey.currentState.validate()) {
-            debugPrint('eheheh');
-            return;
-          }
-
-          if (!_isLoginPage) {
-            // Register page here
-            User newUser = User(
-                name: _nameController.text,
-                surname: _surnameController.text,
-                email: _emailController.text);
-            if (!Utils.addTempUser(newUser)) {
-              debugPrint("Already existing user.");
-              // TODO: display already existing user
-              return;
-            }
-          }
-
-          // Non empty password and correct email
-          int userIndex = Utils.userExists(_emailController.text);
-          if (userIndex >= 0 &&
-              _emailKey.currentState.validate() &&
-              _passwordKey.currentState.validate()) {
-            Data.currentUserIndex = userIndex;
-            Route route = MaterialPageRoute(builder: (context) => HomePage());
-            Navigator.pushReplacement(context, route);
-          }
-        },
+        onPressed: () => _checkFields(),
         padding: EdgeInsets.only(top: 12, bottom: 12, left: 36, right: 36),
         color: Colors.red,
         child: _isLoginPage
@@ -159,7 +167,13 @@ class _LoginPageState extends State<LoginPage> {
                   "Effettua l'accesso",
                   style: TextStyle(color: Colors.black54),
                 ),
-          onPressed: () => setState(() => _isLoginPage = !_isLoginPage),
+          onPressed: () => setState(() {
+            _isLoginPage = !_isLoginPage;
+            _nameController.clear();
+            _surnameController.clear();
+            _emailController.clear();
+            _passwordController.clear();
+          }),
         ));
 
     final forgotLabel = FlatButton(
