@@ -25,18 +25,13 @@ class ImageLoaderState extends State<ImageLoader>{
           borderRadius: BorderRadius.all(Radius.circular(5))
         ),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          Text("Aggiungi Immagini"),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              AddImageButtonPicker(),
-              AddImageButtonPicker(),
-              AddImageButtonPicker(),
-            ],
-          )
+          AddImageButtonPicker(),
+          AddImageButtonPicker(),
+          AddImageButtonPicker(),
         ],
-      ),
+      )
     );
   }
 }
@@ -52,7 +47,7 @@ class AddImageButtonPicker extends StatefulWidget{
 
 class AddImageButtonPickerState extends State<AddImageButtonPicker>{
 
-  File _image;
+  File _image = null;
 
   Future<bool> checkAndRequestCameraPermissions() async {
     PermissionStatus permission = await PermissionHandler().checkPermissionStatus(PermissionGroup.camera);

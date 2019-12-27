@@ -16,7 +16,12 @@ class FeedbackFragment extends StatelessWidget{
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Text("Quanto ti è piaciuto l'itinerario?"),
+                Text(
+                  "Quanto ti è piaciuto l'itinerario?",
+                  style: TextStyle(
+                    color: Colors.blue
+                  ),
+                ),
                 Rating(stars: Data.rating_stars,),
                 Container(
                   margin: EdgeInsets.only(top: 25, bottom: 5),
@@ -72,7 +77,28 @@ class FeedbackFragment extends StatelessWidget{
                     ] 
                   ),
                 ),
-                ImageLoader(),
+                Container(
+                  margin: EdgeInsets.only(top: 20),
+                  child: Column(
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Text(
+                            "Aggiungi Immagini",
+                            style: TextStyle(
+                              color: Colors.blue,
+                              fontSize: 25
+                            ),
+                          ),
+                        ],
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 10),
+                        child: ImageLoader()
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),

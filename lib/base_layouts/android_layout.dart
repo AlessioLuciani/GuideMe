@@ -1,4 +1,5 @@
 import 'package:GuideMe/commons/user.dart';
+import 'package:GuideMe/fragments/explore_visited.dart';
 import 'package:GuideMe/pages/feedback.dart';
 import 'package:GuideMe/fragments/add_itinerary.dart';
 import 'package:GuideMe/fragments/explore.dart';
@@ -38,7 +39,7 @@ class AndroidLayoutState extends State<AndroidLayout> {
       case 1:
         return new AddItinearyFragment();
       case 2:
-        return new FeedbackFragment();
+        return new ExploreVisitedFragment();
       case 3:
         return new FavouritesFragment();
       default:

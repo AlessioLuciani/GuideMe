@@ -1,5 +1,6 @@
 import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/commons/itinerary_stop.dart';
+import 'package:GuideMe/commons/itinerary_visit.dart';
 import 'package:GuideMe/commons/user.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -70,6 +71,17 @@ class Data {
         stops: [stops[2], stops[3], stops[1]],
         longDescription: "asd"),
   ];
+
+  static List<ItineraryVisit> visits = [
+    new ItineraryVisit(itineraries[0], users[0]),
+    new ItineraryVisit(itineraries[1], users[0]),
+    new ItineraryVisit(itineraries[2], users[0]),
+    new ItineraryVisit(itineraries[1], users[1]),
+    new ItineraryVisit(itineraries[2], users[2]),
+    new ItineraryVisit(itineraries[3], users[3]),
+  ];
+
+  // static List<ItineraryVisit> visits = [];
 
   //final List<ItineraryStop> = [name: ItineraryStop("Colosseo", coord: LatLng(3.0, 4.0))];
   static List<ItineraryStop> stops = [
