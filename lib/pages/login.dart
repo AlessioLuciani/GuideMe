@@ -58,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
         radius: 48.0,
-        child: Image.asset('assets/images/logo.png'),
+        child: Image.asset("assets/icon/logo.png"),
       ),
     );
 
@@ -185,6 +185,8 @@ class _LoginPageState extends State<LoginPage> {
     );
 
     return Scaffold(
+      // Avoid the Scaffold to resize himself when
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       body: Center(
         child: Padding(
@@ -208,7 +210,9 @@ class _LoginPageState extends State<LoginPage> {
               Expanded(
                 child: registerLabel,
               ),
-              SizedBox(height: 10,)
+              SizedBox(
+                height: 10,
+              )
             ],
           ),
         ),

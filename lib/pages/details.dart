@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/commons/itinerary_stop.dart';
-import 'package:GuideMe/utils/data.dart';
+import 'package:GuideMe/pages/itinerary_maps.dart';
 import 'package:GuideMe/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -32,7 +32,6 @@ class DetailsPageState extends State<DetailsPage> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('${widget.itinerary.author.id}');
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(title: Text(widget.itinerary.title)),
@@ -166,7 +165,12 @@ class DetailsPageState extends State<DetailsPage> {
                         color: Colors.black,
                         style: BorderStyle.solid,
                         width: 2),
-                    onPressed: () => {},
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ItineraryMaps(
+                                  itinerary: widget.itinerary,
+                                ))),
                     child: Text("AVVIA"),
                   ),
                   SizedBox(
@@ -208,30 +212,4 @@ class DetailsPageState extends State<DetailsPage> {
       ));
     });
   }
-}
-
-Widget _displayCard(String text, IconData icon) {
-  return Card(
-    shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(8.0)),
-        side: BorderSide(color: Colors.blueGrey, width: 1)),
-    child: SizedBox(
-      height: 50,
-      width: 130,
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Icon(icon),
-          SizedBox(
-            width: 4,
-          ),
-          Text(
-            text,
-            style: TextStyle(fontSize: 17),
-          ),
-        ],
-      ),
-    ),
-  );
 }

@@ -1,4 +1,4 @@
-import 'package:GuideMe/commons/imageLoader.dart';
+import 'package:GuideMe/commons/image_loader.dart';
 import 'package:GuideMe/commons/rating.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:flutter/material.dart';

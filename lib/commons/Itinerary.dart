@@ -35,5 +35,7 @@ class Itinerary {
 
   set addReview(Review review) => _reviews.add(review);
 
+  String authorName() => '${author.name} ${author.surname}';
+
   void toggleFavourite() => isFavourite = !isFavourite;
 }

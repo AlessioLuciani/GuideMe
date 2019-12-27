@@ -19,7 +19,7 @@ class IOSLayoutState extends State<IOSLayout> {
   Widget build(BuildContext context) {
     return Scaffold(
       // Avoid the Scaffold to resize himself when
-      //resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: false,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _tabIndex,
