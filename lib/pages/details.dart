@@ -19,16 +19,7 @@ class DetailsPage extends StatefulWidget {
 class DetailsPageState extends State<DetailsPage> {
   final Set<Marker> _markers = {};
   final Set<Polyline> _polyline = {};
-  List<LatLng> segment = [];
   GoogleMapController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    for (ItineraryStop stop in widget.itinerary.stops) {
-      segment.add(stop.coord);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +38,7 @@ class DetailsPageState extends State<DetailsPage> {
                 markers: _markers,
                 onMapCreated: _onMapCreated,
                 initialCameraPosition: CameraPosition(
-                  target: segment[0],
+                  target: widget.itinerary.stops[0].coord,
                   zoom: 13.0,
                 ),
               )),
@@ -191,13 +182,12 @@ class DetailsPageState extends State<DetailsPage> {
   void _onMapCreated(GoogleMapController controllerParam) {
     setState(() {
       controller = controllerParam;
-      for (int i = 0; i < segment.length; i++) {
+      for (int i = 0; i < widget.itinerary.stops.length; i++) {
         _markers.add(Marker(
-          markerId: MarkerId(segment[i].toString()),
-          position: segment[i],
+          markerId: MarkerId(widget.itinerary.stops[i].coord.toString()),
+          position: widget.itinerary.stops[i].coord,
           infoWindow: InfoWindow(
-            title: 'Awesome Polyline tutorial',
-            snippet: 'This is a snippet',
+            title: widget.itinerary.stops[i].name,
           ),
         ));
       }
@@ -206,7 +196,7 @@ class DetailsPageState extends State<DetailsPage> {
         polylineId: PolylineId('itinerary'),
         visible: true,
         //latlng is List<LatLng>
-        points: segment,
+        points: widget.itinerary.stops.map((ItineraryStop s)=>s.coord).toList(),
         width: 2,
         color: Colors.blue,
       ));
