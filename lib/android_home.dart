@@ -1,4 +1,5 @@
 import 'package:GuideMe/commons/user.dart';
+import 'package:GuideMe/pages/feedback.dart';
 import 'package:GuideMe/pages/login.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class AndroidHomePage extends StatefulWidget {
   final drawerItems = [
     new DrawerItem("Esplora", Icons.explore),
     new DrawerItem("Aggiungi itinerario", Icons.add_circle_outline),
+    new DrawerItem("Recensione", Icons.assistant),
     new DrawerItem("I miei itinerari", Icons.bookmark),
     new DrawerItem("Esci", Icons.exit_to_app),
   ];
@@ -35,6 +37,8 @@ class AndroidHomePageState extends State<AndroidHomePage> {
       case 1:
         return new AddItinearyFragment();
       case 2:
+        return new FeedbackFragment();
+      case 3:
         return new ItinerariesFragment();
       default:
         return new Text("Some error occured.");
