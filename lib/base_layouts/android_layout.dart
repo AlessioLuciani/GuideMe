@@ -1,4 +1,5 @@
 import 'package:GuideMe/commons/user.dart';
+import 'package:GuideMe/pages/feedback.dart';
 import 'package:GuideMe/fragments/add_itinerary.dart';
 import 'package:GuideMe/fragments/explore.dart';
 import 'package:GuideMe/fragments/itineraries.dart';
@@ -18,6 +19,7 @@ class AndroidLayout extends StatefulWidget {
   final drawerItems = [
     new DrawerItem("Esplora", Icons.explore),
     new DrawerItem("Aggiungi itinerario", Icons.add_circle_outline),
+    new DrawerItem("Recensione", Icons.assistant),
     new DrawerItem("I miei itinerari", Icons.bookmark),
     new DrawerItem("Esci", Icons.exit_to_app),
   ];
@@ -36,6 +38,8 @@ class AndroidLayoutState extends State<AndroidLayout> {
       case 1:
         return new AddItinearyFragment();
       case 2:
+        return new FeedbackFragment();
+      case 3:
         return new ItinerariesFragment();
       default:
         return new Text("Some error occured.");

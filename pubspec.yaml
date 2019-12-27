@@ -22,6 +22,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  
+  image_picker: ^0.6.2+3
+
+  permission_handler: '^4.0.0'
 
   google_maps_flutter: ^0.5.21+15
   google_map_polyline: ^0.2.0+1
