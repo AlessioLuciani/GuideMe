@@ -13,31 +13,10 @@ class FavouritesFragment extends StatelessWidget {
         alignment: Alignment.center,
         child: Padding(
           padding: EdgeInsets.all(40),
-          child: RichText(
-            textAlign: TextAlign.center,
-            text: new TextSpan(
-              // Note: Styles for TextSpans must be explicitly defined.
-              // Child text spans will inherit styles from parent
-              style: new TextStyle(
-                fontSize: 14.0,
-                color: Colors.black,
-              ),
-              children: <TextSpan>[
-                new TextSpan(
-                    text:
-                        "Non ci sono itinerari tra i tuoi preferiti. \nPuoi aggiungerne uno dalla sezione ",
-                    style: TextStyle(fontSize: 18)),
-                new TextSpan(
-                    text: 'Esplora',
-                    style: new TextStyle(
-                        fontWeight: FontWeight.bold, fontSize: 18)),
-                new TextSpan(
-                    text:
-                        ".",
-                    style: TextStyle(fontSize: 18)),
-              ],
-            ),
-          ),
+          child: Text(
+              "Non ci sono itinerari tra i tuoi preferiti. \nPuoi aggiungerne uno selezionandolo dalla sezione Esplora.",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 18)),
         ),
       );
     }

@@ -18,9 +18,9 @@ class DrawerItem {
 class AndroidLayout extends StatefulWidget {
   final drawerItems = [
     new DrawerItem("Esplora", Icons.explore),
-    new DrawerItem("Aggiungi itinerario", Icons.add_circle_outline),
-    new DrawerItem("I miei itinerari", Icons.rate_review),
-    new DrawerItem("Preferiti", Icons.bookmark),
+    new DrawerItem("Crea itinerario", Icons.add_circle_outline),
+    new DrawerItem("Itinerari seguiti", Icons.done_outline),
+    new DrawerItem("Preferiti", Icons.favorite),
     new DrawerItem("Esci", Icons.exit_to_app),
   ];
 

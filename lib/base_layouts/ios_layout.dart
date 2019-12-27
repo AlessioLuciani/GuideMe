@@ -41,8 +41,8 @@ class IOSLayoutState extends State<IOSLayout> {
             title: new Text('Esplora'),
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.rate_review),
-            title: new Text('I miei itinerari'),
+            icon: new Icon(Icons.done_outline),
+            title: new Text('Itinerari seguiti'),
           ),
         ],
       ),
