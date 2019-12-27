@@ -1,11 +1,12 @@
 import 'package:GuideMe/commons/user.dart';
+import 'package:GuideMe/fragments/add_itinerary.dart';
+import 'package:GuideMe/fragments/explore.dart';
+import 'package:GuideMe/fragments/itineraries.dart';
 import 'package:GuideMe/pages/login.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:flutter/material.dart';
 
-import 'fragments/add_itinerary.dart';
-import 'fragments/explore.dart';
-import 'fragments/itineraries.dart';
+
 
 class DrawerItem {
   String title;
@@ -13,7 +14,7 @@ class DrawerItem {
   DrawerItem(this.title, this.icon);
 }
 
-class AndroidHomePage extends StatefulWidget {
+class AndroidLayout extends StatefulWidget {
   final drawerItems = [
     new DrawerItem("Esplora", Icons.explore),
     new DrawerItem("Aggiungi itinerario", Icons.add_circle_outline),
@@ -22,10 +23,10 @@ class AndroidHomePage extends StatefulWidget {
   ];
 
   @override
-  State<StatefulWidget> createState() => new AndroidHomePageState();
+  State<StatefulWidget> createState() => new AndroidLayoutState();
 }
 
-class AndroidHomePageState extends State<AndroidHomePage> {
+class AndroidLayoutState extends State<AndroidLayout> {
   int _selectedDrawerIndex = 0;
 
   _getDrawerItemWidget(int pos) {
@@ -69,6 +70,8 @@ class AndroidHomePageState extends State<AndroidHomePage> {
     }
     User currentUser = Data.users[Data.currentUserIndex];
     return new Scaffold(
+      // Avoid the Scaffold to resize himself when
+      resizeToAvoidBottomInset: false,
       appBar: new AppBar(
         title: new Text(widget.drawerItems[_selectedDrawerIndex].title),
       ),

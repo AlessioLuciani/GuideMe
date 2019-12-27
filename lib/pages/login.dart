@@ -192,7 +192,6 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             children: <Widget>[
               logo,
-              //SizedBox(height: 40,),
               SizedBox(height: 48.0),
               !_isLoginPage ? name : SizedBox(),
               !_isLoginPage ? SizedBox(height: 8.0) : SizedBox(),

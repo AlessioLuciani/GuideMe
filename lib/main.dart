@@ -1,10 +1,12 @@
+import 'package:GuideMe/base_layouts/android_layout.dart';
+import 'package:GuideMe/base_layouts/ios_layout.dart';
 import 'package:GuideMe/pages/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:io';
 
-import 'android_home.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -30,27 +32,9 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (Platform.isAndroid) {
-      return AndroidHomePage();
+      return AndroidLayout();
     } else {
-      return Scaffold(
-        // Avoid the Scaffold to resize himself when
-        resizeToAvoidBottomInset: false,
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: 0,
-          items: [
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.home),
-              title: new Text('Home'),
-            ),
-            BottomNavigationBarItem(
-              icon: new Icon(Icons.mail),
-              title: new Text('Messages'),
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.person), title: Text('Profile'))
-          ],
-        ),
-      );
+      return IOSLayout();
     }
   }
 }
