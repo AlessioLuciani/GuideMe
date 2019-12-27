@@ -24,7 +24,12 @@ class IOSLayoutState extends State<IOSLayout> {
         onTap: (int index) => setState(() {
           _tabIndex = index;
         }),
+        
         items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.favorite),
+            title: new Text('Preferiti'),
+          ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.add_circle_outline),
             title: new Text('Aggiungi itinerario'),
@@ -34,8 +39,8 @@ class IOSLayoutState extends State<IOSLayout> {
             title: new Text('Esplora'),
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.favorite),
-            title: new Text('I miei itinerari'),
+            icon: new Icon(Icons.rate_review),
+            title: new Text('Recensioni'),
           ),
         ],
       ),

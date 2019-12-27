@@ -8,10 +8,16 @@ PODS:
   - GoogleMaps/Base (2.7.0)
   - GoogleMaps/Maps (2.7.0):
     - GoogleMaps/Base
+  - image_picker (0.0.1):
+    - Flutter
+  - permission_handler (4.0.0):
+    - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
   - google_maps_flutter (from `.symlinks/plugins/google_maps_flutter/ios`)
+  - image_picker (from `.symlinks/plugins/image_picker/ios`)
+  - permission_handler (from `.symlinks/plugins/permission_handler/ios`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -22,11 +28,17 @@ EXTERNAL SOURCES:
     :path: Flutter
   google_maps_flutter:
     :path: ".symlinks/plugins/google_maps_flutter/ios"
+  image_picker:
+    :path: ".symlinks/plugins/image_picker/ios"
+  permission_handler:
+    :path: ".symlinks/plugins/permission_handler/ios"
 
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   google_maps_flutter: d0dd62f5a7d39bae61057eb9f52dd778d99c7c6c
   GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
+  image_picker: e3eacd46b94694dde7cf2705955cece853aa1a8f
+  permission_handler: 0fb88b8a3c23e31e5de45b8f1bb8b7de28cf8941
 
 PODFILE CHECKSUM: 1b66dae606f75376c5f2135a8290850eeb09ae83
 
