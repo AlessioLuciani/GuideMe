@@ -1,3 +1,4 @@
+import 'package:GuideMe/pages/feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:GuideMe/fragments/explore.dart';
 import 'package:GuideMe/fragments/add_itinerary.dart';
@@ -13,7 +14,7 @@ class IOSLayout extends StatefulWidget {
 }
 
 class IOSLayoutState extends State<IOSLayout> {
-  int _tabIndex = 0;
+  int _tabIndex = 2;
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +58,8 @@ _getFragmentFrom(int pos) {
       return new AddItinearyFragment();
       case 2:
       return new ExploreFragment();
+      case 3:
+      return new FeedbackFragment();
       default:
         return new Text("Some error occured.");
     }
