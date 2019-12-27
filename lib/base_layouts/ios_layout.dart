@@ -20,6 +20,7 @@ class IOSLayoutState extends State<IOSLayout> {
       // Avoid the Scaffold to resize himself when
       //resizeToAvoidBottomInset: false,
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: _tabIndex,
         onTap: (int index) => setState(() {
           _tabIndex = index;
@@ -32,7 +33,7 @@ class IOSLayoutState extends State<IOSLayout> {
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.add_circle_outline),
-            title: new Text('Aggiungi itinerario'),
+            title: new Text('Crea itinerario'),
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.explore),
@@ -40,7 +41,7 @@ class IOSLayoutState extends State<IOSLayout> {
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.rate_review),
-            title: new Text('Recensioni'),
+            title: new Text('I miei itinerari'),
           ),
         ],
       ),
@@ -50,11 +51,11 @@ class IOSLayoutState extends State<IOSLayout> {
 _getFragmentFrom(int pos) {;
     switch (pos) {
       case 0:
-        return new AddItinearyFragment();
-      case 1:
-        return new ExploreFragment();
-      case 2:
         return new ItinerariesFragment();
+      case 1:
+      return new AddItinearyFragment();
+      case 2:
+      return new ExploreFragment();
       default:
         return new Text("Some error occured.");
     }
