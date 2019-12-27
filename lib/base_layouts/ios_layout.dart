@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:GuideMe/fragments/explore.dart';
+import 'package:GuideMe/fragments/add_itinerary.dart';
+import 'package:GuideMe/fragments/itineraries.dart';
+
+import '../fragments/add_itinerary.dart';
+import '../fragments/explore.dart';
 
 class IOSLayout extends StatefulWidget {
   @override
@@ -12,7 +18,7 @@ class IOSLayoutState extends State<IOSLayout> {
   Widget build(BuildContext context) {
     return Scaffold(
       // Avoid the Scaffold to resize himself when
-      resizeToAvoidBottomInset: false,
+      //resizeToAvoidBottomInset: false,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _tabIndex,
         onTap: (int index) => setState(() {
@@ -20,12 +26,12 @@ class IOSLayoutState extends State<IOSLayout> {
         }),
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: new Icon(Icons.explore),
-            title: new Text('Esplora'),
-          ),
-          BottomNavigationBarItem(
             icon: new Icon(Icons.add_circle_outline),
             title: new Text('Aggiungi itinerario'),
+          ),
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.explore),
+            title: new Text('Esplora'),
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.favorite),
@@ -33,6 +39,21 @@ class IOSLayoutState extends State<IOSLayout> {
           ),
         ],
       ),
+      body: _getFragmentFrom(_tabIndex),
     );
   }
+_getFragmentFrom(int pos) {;
+    switch (pos) {
+      case 0:
+        return new AddItinearyFragment();
+      case 1:
+        return new ExploreFragment();
+      case 2:
+        return new ItinerariesFragment();
+      default:
+        return new Text("Some error occured.");
+    }
+  }
+
+
 }
