@@ -13,24 +13,36 @@ import 'package:flutter/material.dart';
 class DrawerItem {
   String title;
   IconData icon;
-  DrawerItem(this.title, this.icon);
+  bool isMenuItem;
+  
+  DrawerItem(this.title, {this.icon=Icons.radio_button_unchecked, this.isMenuItem=true});
 }
 
 class AndroidLayout extends StatefulWidget {
   final drawerItems = [
-    new DrawerItem("Esplora", Icons.explore),
-    new DrawerItem("Crea itinerario", Icons.add_circle_outline),
-    new DrawerItem("Itinerari seguiti", Icons.done_outline),
-    new DrawerItem("Preferiti", Icons.favorite),
-    new DrawerItem("Esci", Icons.exit_to_app),
+    new DrawerItem("Esplora", icon: Icons.explore),
+    new DrawerItem("Crea itinerario", icon: Icons.add_circle_outline),
+    new DrawerItem("Itinerari seguiti", icon: Icons.done_outline),
+    new DrawerItem("Preferiti", icon: Icons.favorite),
+    new DrawerItem("Esci", icon: Icons.exit_to_app),
+    /* not in menù indexed pages */
+    new DrawerItem("Recensione", isMenuItem: false),
   ];
+
+
+  int _staticIndex;
+  int _title;
+
+  AndroidLayout({Key key, int staticIndex = 0}) : super(key: key){
+    this._staticIndex = staticIndex;
+  }
 
   @override
   State<StatefulWidget> createState() => new AndroidLayoutState();
 }
 
 class AndroidLayoutState extends State<AndroidLayout> {
-  int _selectedDrawerIndex = 0;
+  int _selectedDrawerIndex = null;
 
   _getDrawerItemWidget(int pos) {
     switch (pos) {
@@ -42,13 +54,15 @@ class AndroidLayoutState extends State<AndroidLayout> {
         return new ExploreVisitedFragment();
       case 3:
         return new FavouritesFragment();
+      case 5:
+        return new FeedbackFragment();
       default:
         return new Text("Some error occured.");
     }
   }
 
   _onSelectItem(int index) {
-    if (index == widget.drawerItems.length-1) {
+    if (index == this.widget.drawerItems.where((item)=> item.isMenuItem).length-1) {
       Route route = MaterialPageRoute(builder: (context) => LoginPage());
       Navigator.pushReplacement(context, route);
       return;
@@ -63,9 +77,12 @@ class AndroidLayoutState extends State<AndroidLayout> {
 
   @override
   Widget build(BuildContext context) {
+    if(this._selectedDrawerIndex==null) this._selectedDrawerIndex = this.widget._staticIndex;
+
     var drawerOptions = <Widget>[];
-    for (int i = 0; i < widget.drawerItems.length; i++) {
-      var d = widget.drawerItems[i];
+    var menuItems = this.widget.drawerItems.where((item)=> item.isMenuItem).toList();
+    for (int i = 0; i < menuItems.length; i++) {
+      var d = menuItems[i];
       drawerOptions.add(new ListTile(
         leading: new Icon(d.icon),
         title: new Text(d.title),

@@ -60,7 +60,6 @@ class AddImageButtonPickerState extends State<AddImageButtonPicker>{
   }
 
   Future getImage() async {
-    Map<PermissionGroup, PermissionStatus> permissions = await PermissionHandler().requestPermissions([PermissionGroup.camera]);
 
     if (await checkAndRequestCameraPermissions()) {
       var image = await ImagePicker.pickImage(source: ImageSource.gallery);

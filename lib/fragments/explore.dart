@@ -10,14 +10,14 @@ class ExploreFragment extends StatelessWidget {
       child: ListView.builder(
         itemCount: Data.itineraries.length,
         itemBuilder: (_, index) => Container(
-            // Add padding to the last item of the list
-            padding: index == Data.itineraries.length - 1
-                ? EdgeInsets.only(bottom: 10)
-                : null,
-            // Form a new card from the current itinerary information
-            child: ExploreCard(
-              itinerary: Data.itineraries[index],
-            )),
+          // Add padding to the last item of the list
+          padding: index == Data.itineraries.length - 1
+              ? EdgeInsets.only(bottom: 10)
+              : null,
+          // Form a new card from the current itinerary information
+          child: ExploreCard(
+            itinerary: Data.itineraries[index],
+          )),
       ),
     );
   }
