@@ -114,6 +114,14 @@ class AndroidLayoutState extends State<AndroidLayout> {
         ),
       ),
       body: _getDrawerItemWidget(_selectedDrawerIndex),
+
+      floatingActionButton: Visibility(
+        child: FloatingActionButton(
+          child: Icon(Icons.done),
+          onPressed: ()=> setState(() => _selectedDrawerIndex = 0),
+        ),
+        visible: (_selectedDrawerIndex == 1),
+      )
     );
   }
 }

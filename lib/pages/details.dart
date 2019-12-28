@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/commons/itinerary_stop.dart';
-import 'package:GuideMe/pages/itinerary_maps.dart';
+import 'package:GuideMe/pages/follow_itinerary_maps.dart';
 import 'package:GuideMe/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
