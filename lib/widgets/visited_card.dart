@@ -55,7 +55,7 @@ class VisitCard extends StatelessWidget {
                             height: 2,
                           ),
                           Text(
-                              "Visitato il ${this._visit.date.day}/${this._visit.date.month}/${this._visit.date.year}"),
+                              "Visitato il ${this._visit.date.day}/${this._visit.date.month}/${this._visit.date.year}", style: TextStyle(color: Colors.black54),),
                         ]),
                     Expanded(
                         child: Padding(
