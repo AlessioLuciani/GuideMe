@@ -1,6 +1,6 @@
 import 'package:GuideMe/commons/user.dart';
 import 'package:GuideMe/fragments/explore_visited.dart';
-import 'package:GuideMe/pages/feedback.dart';
+import 'package:GuideMe/pages/review_page.dart';
 import 'package:GuideMe/fragments/add_itinerary.dart';
 import 'package:GuideMe/fragments/explore.dart';
 import 'package:GuideMe/fragments/favourites.dart';
@@ -26,7 +26,6 @@ class AndroidLayout extends StatefulWidget {
     new DrawerItem("Preferiti", icon: Icons.favorite),
     new DrawerItem("Esci", icon: Icons.exit_to_app),
     /* not in menù indexed pages */
-    new DrawerItem("Recensione", isMenuItem: false),
   ];
 
 

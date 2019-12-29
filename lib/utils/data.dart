@@ -6,7 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class Data {
   static int currentUserIndex = 0;
-  static int rating_stars = 5;
+  static int RATING_STARS = 5;
 
   static List<User> users = [
     User(name: "John", surname: "Smith", email: "john@smith.com"),
