@@ -15,7 +15,7 @@ class DrawerItem {
   IconData icon;
   bool isMenuItem;
   
-  DrawerItem(this.title, {this.icon=Icons.radio_button_unchecked, this.isMenuItem=true});
+  DrawerItem(this.title, {this.icon=Icons.radio_button_unchecked,this.isMenuItem=true});
 }
 
 class AndroidLayout extends StatefulWidget {
@@ -30,11 +30,15 @@ class AndroidLayout extends StatefulWidget {
   ];
 
 
-  int _staticIndex;
+  int _staticIndex = 0;
   int _title;
+  Map<Symbol,dynamic> _dynamicParameters = {};
 
-  AndroidLayout({Key key, int staticIndex = 0}) : super(key: key){
+  AndroidLayout({Key key}) : super(key: key);
+
+  AndroidLayout.fromIndex(int staticIndex, Map<Symbol,dynamic> dynamicParameters,{Key key}) : super(key: key){
     this._staticIndex = staticIndex;
+    this._dynamicParameters = dynamicParameters;
   }
 
   @override
@@ -55,7 +59,8 @@ class AndroidLayoutState extends State<AndroidLayout> {
       case 3:
         return new FavouritesFragment();
       case 5:
-        return new FeedbackFragment();
+        print(this.widget._dynamicParameters);
+        return Function.apply(FeedbackFragment.instance ,[],this.widget._dynamicParameters);
       default:
         return new Text("Some error occured.");
     }
@@ -97,7 +102,8 @@ class AndroidLayoutState extends State<AndroidLayout> {
       appBar: new AppBar(
         title: new Text(widget.drawerItems[_selectedDrawerIndex].title),
       ),
-      drawer: new Drawer(
+      //remove the drawer if is not a menuPage
+      drawer: (!this.widget.drawerItems[_selectedDrawerIndex].isMenuItem) ? null : new Drawer(
         child: new Column(
           children: <Widget>[
             UserAccountsDrawerHeader(
@@ -114,6 +120,13 @@ class AndroidLayoutState extends State<AndroidLayout> {
         ),
       ),
       body: _getDrawerItemWidget(_selectedDrawerIndex),
+      floatingActionButton: Visibility(
+        child: FloatingActionButton(
+          child: Icon(Icons.done),
+          onPressed: () => setState(()=> {}),
+        ),
+        visible: (_selectedDrawerIndex == 1),
+      )
     );
   }
 }

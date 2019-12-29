@@ -1,4 +1,5 @@
 import 'package:GuideMe/base_layouts/android_layout.dart';
+import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/commons/itinerary_visit.dart';
 import 'package:GuideMe/pages/feedback.dart';
 import 'package:GuideMe/utils/data.dart';
@@ -56,7 +57,7 @@ class VisitCard extends StatelessWidget{
   }
 
   void navigateToReviewRoute(BuildContext context){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => AndroidLayout(staticIndex: 5,)));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => AndroidLayout.fromIndex(5, {#itinerary: this._visit.itinerary})));
   }
 
   @override

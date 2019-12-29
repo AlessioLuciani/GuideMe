@@ -1,3 +1,4 @@
+import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/commons/image_loader.dart';
 import 'package:GuideMe/commons/rating.dart';
 import 'package:GuideMe/utils/data.dart';
@@ -5,6 +6,12 @@ import 'package:flutter/material.dart';
 
 
 class FeedbackFragment extends StatelessWidget{
+
+  final Itinerary itinerary;
+
+  FeedbackFragment({Key key, @required this.itinerary}) : super(key:key);
+
+  static Function instance = ({Key key,Itinerary itinerary}) => new FeedbackFragment(key: key,itinerary: itinerary,);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +33,7 @@ class FeedbackFragment extends StatelessWidget{
                 Container(
                   margin: EdgeInsets.only(top: 25, bottom: 5),
                   child: Text(
-                    "Recensione",
+                    "Recensione per ${this.itinerary.title}",
                     style: TextStyle(
                     fontSize: 18
                     ),
