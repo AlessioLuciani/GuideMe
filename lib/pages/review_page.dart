@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:GuideMe/commons/Itinerary.dart';
-import 'package:GuideMe/pages/confirmation_review.dart';
 import 'package:GuideMe/utils/data.dart';
+import 'package:GuideMe/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -88,10 +88,7 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
             Builder(
               builder: (BuildContext context) => FlatButton(
                 textColor: Colors.white,
-                onPressed: () => Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ConfirmationReviewPage())),
+                onPressed: () => Utils.showReviewConfirm(context),
                 child: Text("Invia"),
                 shape:
                     CircleBorder(side: BorderSide(color: Colors.transparent)),

@@ -2,10 +2,11 @@ import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:flutter/material.dart';
 
-class ConfirmationReviewPage extends StatelessWidget {
+class ConfirmationPage extends StatelessWidget {
   final Itinerary itinerary;
+  final String confirmMsg;
 
-  const ConfirmationReviewPage({Key key, this.itinerary}) : super(key: key);
+  const ConfirmationPage({Key key, this.itinerary, this.confirmMsg}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class ConfirmationReviewPage extends StatelessWidget {
                   height: 20,
                 ),
                 Text(
-                  "Recensione inviata!",
+                  Data.confirmMsg,
                   style: TextStyle(fontSize: 28),
                 ),
               ],

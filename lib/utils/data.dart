@@ -310,4 +310,12 @@ class Data {
     ItineraryStop(
         name: "Mole antonelliana", coord: LatLng(41.906479, 12.453602)),
   ];
+
+  static int currentMsgIndex = 0;
+  static List<String> _confirmMsgs = [
+    "Recensione inviata!",
+    "Itinerario creato!"
+  ];
+
+  static String get confirmMsg => _confirmMsgs[currentMsgIndex];
 }

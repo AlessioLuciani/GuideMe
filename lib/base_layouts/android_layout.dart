@@ -6,6 +6,7 @@ import 'package:GuideMe/fragments/explore.dart';
 import 'package:GuideMe/fragments/favourites.dart';
 import 'package:GuideMe/pages/login.dart';
 import 'package:GuideMe/utils/data.dart';
+import 'package:GuideMe/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class DrawerItem {
@@ -129,7 +130,10 @@ class AndroidLayoutState extends State<AndroidLayout> {
         floatingActionButton: Visibility(
           child: FloatingActionButton(
             child: Icon(Icons.done),
-            onPressed: () => setState(() => {}),
+            onPressed: () {
+              Utils.showAdditionConfirm(context);
+              setState(() => _selectedDrawerIndex = 0);
+            },
           ),
           visible: (_selectedDrawerIndex == 1),
         ));

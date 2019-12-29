@@ -1,13 +1,15 @@
 import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/commons/user.dart';
+import 'package:GuideMe/pages/confirmation.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class Utils {
   // Function used to retrieve the corresponding index of '_itinerary' among itineraries list located in data
   static Itinerary getItineraryRef(Itinerary _itinerary) {
-    int index = Data.itineraries
-        .indexWhere((Itinerary it) => it.id == _itinerary.id);
+    int index =
+        Data.itineraries.indexWhere((Itinerary it) => it.id == _itinerary.id);
     debugPrint('$index');
     return Data.itineraries[index];
   }
@@ -29,7 +31,8 @@ class Utils {
     }
   }
 
-  static List<Itinerary> get favouriteItineraries => Data.itineraries.where((it)=>it.isFavourite).toList();
+  static List<Itinerary> get favouriteItineraries =>
+      Data.itineraries.where((it) => it.isFavourite).toList();
 
   static void createUserSession(int userIndex) {
     Data.currentUserIndex = userIndex;
@@ -38,5 +41,17 @@ class Utils {
 
   static void favourite(Itinerary itinerary) {
     Utils.getItineraryRef(itinerary).toggleFavourite();
+  }
+
+  static void showReviewConfirm(BuildContext context) {
+    Data.currentMsgIndex = 0;
+    Navigator.pushReplacement(context,
+        MaterialPageRoute(builder: (context) => ConfirmationPage()));
+  }
+
+  static void showAdditionConfirm(BuildContext context) {
+    Data.currentMsgIndex = 1;
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => ConfirmationPage()));
   }
 }
