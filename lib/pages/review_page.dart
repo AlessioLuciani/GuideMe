@@ -89,7 +89,7 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
               builder: (BuildContext context) => FlatButton(
                 textColor: Colors.white,
                 onPressed: () => Utils.showReviewConfirm(context),
-                child: Text("Invia"),
+                child: Text("Invia", style: TextStyle(fontSize: 17),),
                 shape:
                     CircleBorder(side: BorderSide(color: Colors.transparent)),
               ),

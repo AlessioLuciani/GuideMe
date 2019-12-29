@@ -22,7 +22,7 @@ class Itinerary {
   String longDescription;
   List<Review> _reviews = [];
   List<ItineraryStop> stops;
-  double _cachedAvgRating;
+  double _cachedAvgRating = 0;
 
   Itinerary(
       {@required this.stops,
@@ -42,7 +42,7 @@ class Itinerary {
 
   double _avgReview() {
     // Ideally would be the total rating of the itinerary divided by the number of reviews, but ..
-    if (_reviews.isEmpty) {
+    if (_cachedAvgRating == 0) {
       // Generate mock average rating value
       _cachedAvgRating = Random().nextInt(4) + Random().nextDouble() + 1;
     }

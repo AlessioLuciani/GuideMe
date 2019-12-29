@@ -15,6 +15,7 @@ class VisitCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(bottom: 4),
       child: Card(
+        elevation: 5,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(8.0)),
           ),

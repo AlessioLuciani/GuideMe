@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/pages/details.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +14,7 @@ class ExploreCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(left: 10, right: 10, bottom: 4),
       child: Card(
-        elevation: Platform.isAndroid ? 5 : 0, //TODO: check if Android/iOS
+        elevation: 5,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(8.0))),
         child: InkWell(
