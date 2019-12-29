@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:GuideMe/pages/choose_stops_maps.dart';
-
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class AddItinearyFragment extends StatefulWidget {
   @override
@@ -9,154 +9,254 @@ class AddItinearyFragment extends StatefulWidget {
 }
 
 class _AddItinearyFragmentState extends State<AddItinearyFragment> {
+  final List<Marker> _markers = List();
 
   @override
   Widget build(BuildContext context) {
+    debugPrint('${_markers.length}');
     return SafeArea(
-      child: Column(
-        children: <Widget>[
-          //Nome dell'itinerario
-          Padding(
-            padding: const EdgeInsets.only(right: 16, left: 16, top: 16, bottom: 8),
-            child: TextField(
-              minLines: 1,
-              maxLines: 1,
-              decoration: InputDecoration(
-                hintText: "Inserisci il nome dell'itinerario",
-                labelText: "Nome",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8))
+        child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 10,
                 ),
-              ),
-              style: TextStyle(
-                fontSize: 19,
-              ),
-            ),
-          ),
-
-          //Descrizione dell'itinerario
-          Padding(
-            padding: const EdgeInsets.only(right: 16, left: 16, top: 16, bottom: 8),
-            child: TextField(
-              minLines: 1,
-              maxLines: 5,
-              decoration: InputDecoration(
-                hintText: "Inserisci una descrizione dell'itinerario",
-                labelText: "Descrizione",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(8))
-                ),
-              ),
-              style: TextStyle( fontSize: 19, ),
-            ),
-          ),
-
-          //Durata dell'itinerario
-          Padding(
-            padding: const EdgeInsets.only(right: 16, left: 16, top: 16, bottom: 8),
-            
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.all(Radius.circular(8))
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 8.0),
-                      child: Text("Durata", style: TextStyle( fontSize: 19, color: Colors.black54,)),
+                    SizedBox(height: 10),
+                    Text(
+                      "Titolo",
+                      style: TextStyle(fontSize: 20),
                     ),
+                    SizedBox(height: 10),
+                    _getTextfield("Il nome che vuoi dare all'itinerario.",
+                        "L'itinerario in non più di 20 caratteri.", 1, 20),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(height: 10),
+                    Text(
+                      "Descrizione",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    SizedBox(height: 10),
+                    _getTextfield(
+                        "Cosa è possibile vedere durante l'itinerario? Cosa consigli da non perdere e dove consigli effettuare delle soste?",
+                        "La tua esperienza in non più di 200 caratteri.",
+                        4,
+                        200),
+                  ],
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    SizedBox(height: 10),
+                    Text(
+                      "Durata",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                    SizedBox(height: 20),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
                         Expanded(
-                          flex: 2,
-                          child: TextField( 
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    hintText: "0",
-                                    labelText: "Giorni",
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(Radius.circular(8))
-                                    ),
-                                  ),
-                                )
+                          child: Text(""),
+                          flex: 1,
                         ),
-
-                        Expanded(child: Text(""), flex: 1,),
-
                         Expanded(
-                          flex: 2,
-                          child: TextField( 
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    hintText: "0-24",
-                                    labelText: "Ore",
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(Radius.circular(8))
-                                    ),
-                                  ),
-                                )
-                        ),
-
-                        Expanded(child: Text(""), flex: 1,),
-
+                            flex: 1,
+                            child: TextField(
+                              textAlign: TextAlign.center,
+                              keyboardType: TextInputType.number,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(2)
+                              ],
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.all(5),
+                                hintText: "0-24",
+                                labelText: "    Ore",
+                                border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8))),
+                              ),
+                            )),
                         Expanded(
-                          flex: 2, 
-                          child: TextField( 
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    hintText: "0-60",
-                                    labelText: "Minuti",
-                                    border: OutlineInputBorder(
-                                      borderRadius: BorderRadius.all(Radius.circular(8))
-                                    ),
-                                  ),
-                                )
+                          child: Text(""),
+                          flex: 1,
                         ),
-
-                        Expanded(child: Text(""), flex: 1,),
-                        
+                        Expanded(
+                            flex: 1,
+                            child: TextField(
+                              textAlign: TextAlign.center,
+                              inputFormatters: [
+                                LengthLimitingTextInputFormatter(2)
+                              ],
+                              keyboardType: TextInputType.number,
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.all(5),
+                                hintText: "0-60",
+                                labelText: "  Minuti",
+                                border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8))),
+                              ),
+                            )),
+                        Expanded(
+                          child: Text(""),
+                          flex: 1,
+                        ),
                       ],
                     ),
                   ],
                 ),
-              ),
-            ),
+                SizedBox(
+                  height: 20,
+                ),
+                Container(
+                  child: Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.spaceBetween, //NOT WORKING!
 
-
-          ),
-
-          //Tappe
-          Padding(
-            padding: const EdgeInsets.only(right: 16, left: 16, top: 16, bottom: 8),
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.grey),
-                borderRadius: BorderRadius.all(Radius.circular(8))
-              ),
-              child:Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8, top: 8, bottom: 8),
-                    child: Text("Tappe", style: TextStyle( fontSize: 19, color: Colors.black54,)),
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.format_list_bulleted,
+                            size: 30,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Tappe",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: <Widget>[
+                          IconButton(
+                            iconSize: 36,
+                            icon: Icon(Icons.add),
+                            onPressed: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ChooseStopsMaps(
+                                        addMarker: _addMarker,
+                                        removeLastMarker: _removeLastMarker,
+                                        initMarkers: _markers))),
+                          ),
+                          IconButton(
+                            iconSize: 36,
+                            color:
+                                _markers.isEmpty ? Colors.grey : Colors.black,
+                            icon: Icon(Icons.clear_all),
+                            onPressed: () => setState(() => _markers.clear()),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
-                  FlatButton.icon(
-                    onPressed: () => Navigator.push( context, MaterialPageRoute( builder: (context) => ChooseStopsMaps())), 
-                    icon: Icon(Icons.map), 
-                    label: Text("Aggiungi Tappe", style: TextStyle( fontSize: 19, )),
-                  ),
-                ],
-              ),
-              )
-          ),
-          
-        ],
-      )
-    );
+                ),
+                SizedBox(height: 10),
+                Flexible(
+                    child: ListView.builder(
+                  itemCount: _markers.length,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    final textController = TextEditingController(
+                        text: 'Tappa ${_markers[index].infoWindow.title}');
+                    return Padding(
+                        padding: EdgeInsets.only(bottom: 4),
+                        child: Row(
+                          children: <Widget>[
+                            Icon(
+                              Icons.label,
+                              size: 30,
+                              color: Colors.redAccent,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Flexible(
+                                child: TextField(
+                                    decoration: InputDecoration(
+                                        border: InputBorder.none),
+                                    minLines: 1,
+                                    maxLines: 1,
+                                    controller: textController,
+                                    style: TextStyle(fontSize: 18))),
+                            SizedBox(
+                              width: 100,
+                            )
+                          ],
+                        ));
+                  },
+                )),
+              ],
+            )));
   }
+
+  void _addMarker(Marker marker) => _markers.add(marker);
+  void _removeLastMarker() => _markers.removeLast();
+
+  Widget _newStopsButton() => Padding(
+        padding: EdgeInsets.symmetric(vertical: 10),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            Icon(
+              Icons.map,
+              size: 30,
+              color: Colors.redAccent,
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            InkWell(
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: Text(
+                  "Aggiungi Tappe",
+                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                ),
+              ),
+              onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ChooseStopsMaps(
+                          addMarker: _addMarker,
+                          removeLastMarker: _removeLastMarker,
+                          initMarkers: _markers))),
+            )
+          ],
+        ),
+      );
+}
+
+Widget _getTextfield(
+    String hintText, String helperText, int lines, int maxChars) {
+  return Theme(
+    data: new ThemeData(
+      primaryColor: Colors.grey,
+      primaryColorDark: Colors.grey,
+    ),
+    child: Container(
+        child: TextField(
+      minLines: lines,
+      maxLines: lines,
+      maxLength: maxChars,
+      decoration: new InputDecoration(
+        contentPadding: EdgeInsets.all(9),
+        border: new OutlineInputBorder(
+            borderSide: new BorderSide(color: Colors.teal)),
+        hintText: hintText,
+        helperText: helperText,
+      ),
+    )),
+  );
 }
