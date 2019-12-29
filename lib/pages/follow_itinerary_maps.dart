@@ -2,7 +2,6 @@ import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/commons/itinerary_stop.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:GuideMe/widgets/maps.dart';
 
 class ItineraryMaps extends StatefulWidget {
   final Itinerary itinerary;
@@ -45,12 +44,15 @@ class ItineraryMapsState extends State<ItineraryMaps> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
 
-          MyMaps(
-            polyline: _polyline,
-            markers: _markers,
-            onMapCreated: _onMapCreated,
-            target: widget.itinerary.stops[0].coord,
-            zoom: 13.0,
+          Expanded(
+            child: GoogleMap(
+              mapType: MapType.terrain,
+              //that needs a list<Polyline>
+              polylines: _polyline,
+              markers: _markers,
+              onMapCreated: _onMapCreated,
+              initialCameraPosition: CameraPosition(target: widget.itinerary.stops[0].coord, zoom: 13.0),
+            )
           ),
 
           Container(
