@@ -39,21 +39,22 @@ class ItineraryMapsState extends State<ItineraryMaps> {
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
+      
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+
           Expanded(
-              child: GoogleMap(
-            mapType: MapType.terrain,
-            //that needs a list<Polyline>
-            polylines: _polyline,
-            markers: _markers,
-            onMapCreated: _onMapCreated,
-            initialCameraPosition: CameraPosition(
-              target: widget.itinerary.stops[0].coord,
-              zoom: 13.0,
-            ),
-          )),
+            child: GoogleMap(
+              mapType: MapType.terrain,
+              //that needs a list<Polyline>
+              polylines: _polyline,
+              markers: _markers,
+              onMapCreated: _onMapCreated,
+              initialCameraPosition: CameraPosition(target: widget.itinerary.stops[0].coord, zoom: 13.0),
+            )
+          ),
+
           Container(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
