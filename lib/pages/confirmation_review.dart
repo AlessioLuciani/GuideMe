@@ -60,7 +60,9 @@ class ConfirmationReviewPage extends StatelessWidget {
                   size: 100,
                   color: Colors.redAccent,
                 ),
-                SizedBox(height: 20,),
+                SizedBox(
+                  height: 20,
+                ),
                 Text(
                   "Recensione inviata!",
                   style: TextStyle(fontSize: 28),
@@ -69,11 +71,15 @@ class ConfirmationReviewPage extends StatelessWidget {
             ),
           ))),
           FlatButton(
-            child: Text("Chiudi", style: TextStyle(fontSize: 20),),
-            //onPressed: () => Navigator.of(context).popUntil(ModalRoute.withName('/')),
-            onPressed: () {},
+            child: Text(
+              "Chiudi",
+              style: TextStyle(fontSize: 20),
+            ),
+            onPressed: () => Navigator.of(context).pop(),
           ),
-          SizedBox(height: 10,)
+          SizedBox(
+            height: 10,
+          )
         ],
       ),
     );

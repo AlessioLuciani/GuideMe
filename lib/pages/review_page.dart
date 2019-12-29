@@ -88,12 +88,10 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
             Builder(
               builder: (BuildContext context) => FlatButton(
                 textColor: Colors.white,
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ConfirmationReviewPage()),
-                  //builder: (context) => TestMapPolyline()),
-                ),
+                onPressed: () => Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ConfirmationReviewPage())),
                 child: Text("Invia"),
                 shape:
                     CircleBorder(side: BorderSide(color: Colors.transparent)),
