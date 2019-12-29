@@ -12,10 +12,9 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return SafeArea(
       child: Column(
         children: <Widget>[
-
           //Nome dell'itinerario
           Padding(
             padding: const EdgeInsets.only(right: 16, left: 16, top: 16, bottom: 8),

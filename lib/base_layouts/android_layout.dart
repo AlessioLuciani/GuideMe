@@ -1,7 +1,7 @@
 import 'package:GuideMe/commons/user.dart';
 import 'package:GuideMe/fragments/explore_visited.dart';
 import 'package:GuideMe/pages/review_page.dart';
-import 'package:GuideMe/fragments/add_itinerary.dart';
+import 'package:GuideMe/fragments/create_itinerary.dart';
 import 'package:GuideMe/fragments/explore.dart';
 import 'package:GuideMe/fragments/favourites.dart';
 import 'package:GuideMe/pages/login.dart';
