@@ -1,48 +1,11 @@
+import 'package:GuideMe/commons/Itinerary.dart';
+import 'package:GuideMe/utils/data.dart';
 import 'package:flutter/material.dart';
 
 class ConfirmationReviewPage extends StatelessWidget {
-  @override
-  Widget builda(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Align(
-            alignment: Alignment.center,
-            child: Column(
-              children: <Widget>[
-                Icon(
-                  Icons.check_circle_outline,
-                  size: 100,
-                  color: Colors.green,
-                ),
-                Text(
-                  "Recensione inviata!",
-                  style: TextStyle(fontSize: 28),
-                ),
-                SizedBox(
-                  height: 100,
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            child: Align(
-              alignment: FractionalOffset.bottomCenter,
-              child: FlatButton(
-                child: Text("Chiudi"),
-                onPressed: () {},
-              ),
-            ),
-          ),
-          SizedBox(
-            height: 10,
-          ),
-        ],
-      ),
-    );
-  }
+  final Itinerary itinerary;
+
+  const ConfirmationReviewPage({Key key, this.itinerary}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +38,10 @@ class ConfirmationReviewPage extends StatelessWidget {
               "Chiudi",
               style: TextStyle(fontSize: 20),
             ),
-            onPressed: () => Navigator.of(context).pop(),
+            onPressed: () {
+              Data.reviewItinerary(itinerary);
+              Navigator.of(context).pop();
+            },
           ),
           SizedBox(
             height: 10,

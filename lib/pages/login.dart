@@ -34,7 +34,8 @@ class _LoginPageState extends State<LoginPage> {
           _emailKey.currentState.validate() &&
           _passwordKey.currentState.validate() &&
           Utils.addTempUser(newUser)) {
-        Data.currentUserIndex = Utils.userExists(_emailController.text);
+        userIndex = Utils.userExists(_emailController.text);
+        Utils.createUserSession(userIndex);
         Route route = MaterialPageRoute(builder: (context) => HomePage());
         Navigator.pushReplacement(context, route);
         // and go to the app
@@ -45,7 +46,7 @@ class _LoginPageState extends State<LoginPage> {
     if (_emailKey.currentState.validate() &&
         _passwordKey.currentState.validate() &&
         userIndex >= 0) {
-      Data.currentUserIndex = userIndex;
+      Utils.createUserSession(userIndex);
       Route route = MaterialPageRoute(builder: (context) => HomePage());
       Navigator.pushReplacement(context, route);
     }

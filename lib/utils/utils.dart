@@ -30,4 +30,9 @@ class Utils {
   }
 
   static List<Itinerary> get favouriteItineraries => Data.itineraries.where((it)=>it.isFavourite).toList();
+
+  static void createUserSession(int userIndex) {
+    Data.currentUserIndex = userIndex;
+    Data.resetUserVisits();
+  }
 }

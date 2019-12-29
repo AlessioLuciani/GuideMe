@@ -12,7 +12,7 @@ class ExploreCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(left: 10, right: 10, bottom: 6),
+      margin: EdgeInsets.only(left: 10, right: 10, bottom: 4),
       child: Card(
         
         elevation: 5, //TODO: check if Android/iOS
@@ -23,7 +23,6 @@ class ExploreCard extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => DetailsPage(itinerary: itinerary,)),
-                //builder: (context) => TestMapPolyline()),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -33,13 +32,13 @@ class ExploreCard extends StatelessWidget {
                   topLeft: Radius.circular(8.0),
                   topRight: Radius.circular(8.0),
                 ),
-                child: Image.asset(itinerary.coverImage, height: 150, fit: BoxFit.fitWidth,),
+                child: Image.asset(itinerary.coverImage, height: 150, fit: BoxFit.cover,),
               ),
               ListTile(
                 contentPadding: EdgeInsets.only(left: 10, top: 2),
                 title: Text(
                   itinerary.title,
-                  style: TextStyle(fontSize: 22),
+                  style: TextStyle(fontSize: 21),
                 ),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,

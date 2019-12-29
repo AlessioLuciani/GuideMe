@@ -30,7 +30,7 @@ class DetailsPageState extends State<DetailsPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-              height: 160,
+              height: 200,
               child: GoogleMap(
                 mapType: MapType.terrain,
                 //that needs a list<Polyline>
