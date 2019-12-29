@@ -47,7 +47,7 @@ class AddImageButtonPicker extends StatefulWidget{
 
 class AddImageButtonPickerState extends State<AddImageButtonPicker>{
 
-  File _image = null;
+  File _image;
 
   Future<bool> checkAndRequestCameraPermissions() async {
     PermissionStatus permission = await PermissionHandler().checkPermissionStatus(PermissionGroup.camera);
@@ -62,8 +62,12 @@ class AddImageButtonPickerState extends State<AddImageButtonPicker>{
   Future getImage() async {
 
     if (await checkAndRequestCameraPermissions()) {
-      var image = await ImagePicker.pickImage(source: ImageSource.gallery);
-      
+      //var image = await ImagePicker.pickImage(source: ImageSource.gallery, maxHeight: 480, maxWidth: 640);
+      //var image = await ImagePicker.pickImage(source: ImageSource.gallery, maxWidth: 100, maxHeight: 100);
+      var image = await ImagePicker.pickImage(
+          source: ImageSource.gallery, 
+          maxHeight: 120, 
+          maxWidth: 120);
       setState(() {
         _image = image;
       });
@@ -84,12 +88,14 @@ class AddImageButtonPickerState extends State<AddImageButtonPicker>{
     }
 
     return Container(
+      height: 200,
+      width: 200,
       margin: EdgeInsets.only(top:5,bottom: 5),
       child: GestureDetector(
         onTap: getImage,
         child: Image.file(
           this._image,
-          fit: BoxFit.scaleDown,
+          
           width: MediaQuery.of(context).size.width/2,
 
         ),

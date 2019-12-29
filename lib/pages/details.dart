@@ -30,7 +30,7 @@ class DetailsPageState extends State<DetailsPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-              height: 160,
+              height: 200,
               child: GoogleMap(
                 mapType: MapType.terrain,
                 //that needs a list<Polyline>
@@ -140,9 +140,7 @@ class DetailsPageState extends State<DetailsPage> {
                         size: 36,
                       ),
                       onPressed: () =>
-                          //setState(() => widget.itinerary.isFavourite = !widget.itinerary.isFavourite),
-                          setState(() => Utils.getItineraryRef(widget.itinerary)
-                              .toggleFavourite()),
+                          setState(() => Utils.favourite(widget.itinerary)),
                     ),
                   ),
                   SizedBox(

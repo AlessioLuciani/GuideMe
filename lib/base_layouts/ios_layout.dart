@@ -1,4 +1,4 @@
-import 'package:GuideMe/pages/feedback.dart';
+import 'package:GuideMe/pages/review_page.dart';
 import 'package:flutter/material.dart';
 import 'package:GuideMe/fragments/explore.dart';
 import 'package:GuideMe/fragments/add_itinerary.dart';
@@ -59,6 +59,7 @@ _getFragmentFrom(int pos) {
       case 2:
       return new ExploreFragment();
       case 3:
+      // TODO: pass itinerary here
       return new FeedbackFragment();
       default:
         return new Text("Some error occured.");
