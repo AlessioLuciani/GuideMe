@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class User {
   // Dirty id of the class
   static int _id = 0;
-  // The id below is the one reffering to the user
+  // User id
   int id;
   String name;
   String surname;

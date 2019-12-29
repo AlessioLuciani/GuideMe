@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/pages/details.dart';
 import 'package:flutter/material.dart';
@@ -14,15 +16,16 @@ class ExploreCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(left: 10, right: 10, bottom: 4),
       child: Card(
-        
-        elevation: 5, //TODO: check if Android/iOS
+        elevation: Platform.isAndroid ? 5 : 0, //TODO: check if Android/iOS
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(8.0))),
         child: InkWell(
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => DetailsPage(itinerary: itinerary,)),
+                builder: (context) => DetailsPage(
+                      itinerary: itinerary,
+                    )),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -32,7 +35,11 @@ class ExploreCard extends StatelessWidget {
                   topLeft: Radius.circular(8.0),
                   topRight: Radius.circular(8.0),
                 ),
-                child: Image.asset(itinerary.coverImage, height: 150, fit: BoxFit.cover,),
+                child: Image.asset(
+                  itinerary.coverImage,
+                  height: 150,
+                  fit: BoxFit.cover,
+                ),
               ),
               ListTile(
                 contentPadding: EdgeInsets.only(left: 10, top: 2),
@@ -78,7 +85,9 @@ Widget _getDuration(String duration) {
 Widget _getDistance(String distance) {
   return Row(
     children: <Widget>[
-      Icon(Icons.directions_walk,),
+      Icon(
+        Icons.directions_walk,
+      ),
       SizedBox(
         width: 4,
       ),
@@ -96,8 +105,14 @@ Widget _getRating(String rating) {
         rating,
         style: TextStyle(fontSize: 17),
       ),
-      SizedBox(width: 2,),
-      Icon(Icons.star, color: Colors.red, size: 30,),
+      SizedBox(
+        width: 2,
+      ),
+      Icon(
+        Icons.star,
+        color: Colors.red,
+        size: 30,
+      ),
       SizedBox(
         width: 10,
       )

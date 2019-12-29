@@ -7,7 +7,7 @@ class Utils {
   // Function used to retrieve the corresponding index of '_itinerary' among itineraries list located in data
   static Itinerary getItineraryRef(Itinerary _itinerary) {
     int index = Data.itineraries
-        .indexWhere((Itinerary it) => it.author.id == _itinerary.author.id);
+        .indexWhere((Itinerary it) => it.id == _itinerary.id);
     debugPrint('$index');
     return Data.itineraries[index];
   }
@@ -34,5 +34,9 @@ class Utils {
   static void createUserSession(int userIndex) {
     Data.currentUserIndex = userIndex;
     Data.resetUserVisits();
+  }
+
+  static void favourite(Itinerary itinerary) {
+    Utils.getItineraryRef(itinerary).toggleFavourite();
   }
 }
