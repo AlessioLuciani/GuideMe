@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:GuideMe/commons/Itinerary.dart';
+import 'package:GuideMe/pages/confirmation_review.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -81,7 +82,25 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(title: Text(widget.itinerary.title)),
+        appBar: AppBar(
+          title: Text(widget.itinerary.title),
+          actions: <Widget>[
+            Builder(
+              builder: (BuildContext context) => FlatButton(
+                textColor: Colors.white,
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ConfirmationReviewPage()),
+                  //builder: (context) => TestMapPolyline()),
+                ),
+                child: Text("Invia"),
+                shape:
+                    CircleBorder(side: BorderSide(color: Colors.transparent)),
+              ),
+            ),
+          ],
+        ),
         body: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Column(
@@ -112,8 +131,8 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
                     style: TextStyle(fontSize: 20),
                   ),
                   SizedBox(height: 10),
-                  _getTextfield("Cose più importanti da condividere",
-                      "Non scrivere più di 50 parole. TODO", 2),
+                  _getTextfield("Le cose più importanti che vuoi condividere.",
+                      "La tua esperienza in non più di 50 caratteri.", 2, 50),
                 ],
               ),
               Column(
@@ -127,8 +146,9 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
                   SizedBox(height: 10),
                   _getTextfield(
                       "Cosa ti è piaciuto e cosa non ti è piaciuto? A chi lo consiglieresti?",
-                      "Non scrivere più di 50000 parole. TODO",
-                      4),
+                      "La tua esperienza in non più di 300 caratteri.",
+                      4,
+                      300),
                 ],
               ),
               SizedBox(height: 10),
@@ -154,11 +174,11 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
             return Padding(
               padding: EdgeInsets.only(right: 0),
               child: IconButton(
-                iconSize: 70,
+                iconSize: 60,
                 alignment: Alignment.center,
                 icon: Icon(
                   Icons.add_photo_alternate,
-                  size: 80,
+                  size: 70,
                   color: Colors.black87,
                 ),
                 onPressed: () => _getImage(index),
@@ -179,7 +199,8 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
     );
   }
 
-  Widget _getTextfield(String hintText, String helperText, int lines) {
+  Widget _getTextfield(
+      String hintText, String helperText, int lines, int maxChars) {
     return Theme(
       data: new ThemeData(
         primaryColor: Colors.grey,
@@ -189,6 +210,7 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
           child: TextField(
         minLines: lines,
         maxLines: lines,
+        maxLength: maxChars,
         decoration: new InputDecoration(
           border: new OutlineInputBorder(
               borderSide: new BorderSide(color: Colors.teal)),

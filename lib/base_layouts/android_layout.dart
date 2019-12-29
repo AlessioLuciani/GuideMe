@@ -45,7 +45,7 @@ class AndroidLayout extends StatefulWidget {
 }
 
 class AndroidLayoutState extends State<AndroidLayout> {
-  int _selectedDrawerIndex = null;
+  int _selectedDrawerIndex;
 
   _getDrawerItemWidget(int pos) {
     switch (pos) {

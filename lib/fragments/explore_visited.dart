@@ -21,7 +21,6 @@ class ExploreVisitedFragment extends StatelessWidget{
         "Sembra che tu non abbia ancora seguito nessun itinerario.\nChe aspetti!!",
         textAlign: TextAlign.center,
         style: TextStyle(
-          color: Colors.blue, //constant
           fontSize: 18,
         ),
       ));
