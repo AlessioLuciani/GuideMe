@@ -59,10 +59,6 @@ class AndroidLayoutState extends State<AndroidLayout> {
         return new ExploreVisitedFragment();
       case 3:
         return new FavouritesFragment();
-      case 5:
-        print(this.widget._dynamicParameters);
-        return Function.apply(
-            FeedbackFragment.instance, [], this.widget._dynamicParameters);
       default:
         return new Text("Some error occured.");
     }
