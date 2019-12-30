@@ -1,4 +1,5 @@
 import 'package:GuideMe/commons/user.dart';
+import 'package:GuideMe/fragments/about.dart';
 import 'package:GuideMe/fragments/explore_visited.dart';
 import 'package:GuideMe/pages/review_page.dart';
 import 'package:GuideMe/fragments/create_itinerary.dart';
@@ -24,6 +25,7 @@ class AndroidLayout extends StatefulWidget {
     new DrawerItem("Crea itinerario", icon: Icons.add_circle_outline),
     new DrawerItem("Itinerari seguiti", icon: Icons.done_outline),
     new DrawerItem("Preferiti", icon: Icons.favorite),
+    new DrawerItem("About", icon: Icons.info),
     new DrawerItem("Esci", icon: Icons.exit_to_app),
     /* not in menù indexed pages */
   ];
@@ -59,6 +61,8 @@ class AndroidLayoutState extends State<AndroidLayout> {
         return new ExploreVisitedFragment();
       case 3:
         return new FavouritesFragment();
+      case 4:
+        return new AboutFragment();
       default:
         return new Text("Some error occured.");
     }

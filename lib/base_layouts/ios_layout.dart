@@ -41,6 +41,10 @@ class IOSLayoutState extends State<IOSLayout> {
             icon: new Icon(Icons.done_outline),
             title: new Text('Itinerari seguiti'),
           ),
+          BottomNavigationBarItem(
+            icon: new Icon(Icons.info),
+            title: new Text('About'),
+          ),
         ],
       ),
       body: _getFragmentFrom(_tabIndex),

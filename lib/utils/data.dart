@@ -7,22 +7,7 @@ import 'dart:math';
 
 class Data {
   static int currentUserIndex = 0;
-  static int RATING_STARS = 5;
-
-  static List<String> months = [
-    "Gennaio",
-    "Febbraio",
-    "Marzo",
-    "Aprile",
-    "Maggio",
-    "Giugno",
-    "Luglio",
-    "Agosto",
-    "Settembre",
-    "Ottobre",
-    "Novembre",
-    "Dicembre"
-  ];
+  static const int RATING_STARS = 5;
 
   static int get currentMonth => DateTime.now().month;
 
