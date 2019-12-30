@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:GuideMe/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -39,6 +42,11 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text("Aggiungi tappe all'itinerario"),
+                  actions: <Widget>[
+          Platform.isAndroid ? Text("") : IconButton(icon: Icon(Icons.undo, color: _markers.isEmpty ? Colors.grey : Colors.white,),onPressed: () => _undoLastMarker(),)
+                              
+                        
+        ],
         ),
         body: Stack(
           children: <Widget>[
@@ -70,6 +78,7 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
               onMapCreated: _onMapCreated,
               mapType: MapType.terrain,
             ),
+            Platform.isIOS ? Text("") :
             Align(
                 alignment: Alignment.topRight,
                 child: Padding(
@@ -79,8 +88,15 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
                         _markers.isEmpty ? Colors.grey : Colors.redAccent,
                     heroTag: "btn1",
                     child: Icon(Icons.undo),
-                    onPressed: () {
-                      if (_markers.isNotEmpty) {
+                    onPressed: () => _undoLastMarker,
+                  ),
+                )),
+          ],
+        ));
+  }
+
+  void _undoLastMarker() {
+if (_markers.isNotEmpty) {
                         setState(() {
                           _polyline.clear();
                           _markers.removeLast();
@@ -96,11 +112,6 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
                           ));
                         });
                       }
-                    },
-                  ),
-                )),
-          ],
-        ));
   }
 
   void _onMapCreated(GoogleMapController controllerParam) {

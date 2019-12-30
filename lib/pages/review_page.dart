@@ -84,6 +84,9 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(widget.itinerary.title),
+        actions: <Widget>[
+          Platform.isAndroid ? Text("") : IconButton(icon: Icon(Icons.send),onPressed: () => Utils.showReviewConfirm(context),)
+        ],
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20),
@@ -144,7 +147,7 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
           ],
         ),
       ),
-      floatingActionButton: Padding(
+      floatingActionButton: Platform.isIOS ? Text("") : Padding(
           padding: EdgeInsets.all(5),
           child: FloatingActionButton(
             child: Icon(Icons.send),
