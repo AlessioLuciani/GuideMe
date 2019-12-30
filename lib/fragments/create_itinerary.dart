@@ -65,10 +65,10 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                       children: <Widget>[
                         Expanded(
                           child: Text(""),
-                          flex: 1,
+                          flex: 3,
                         ),
                         Expanded(
-                            flex: 1,
+                            flex: 2,
                             child: TextField(
                               textAlign: TextAlign.center,
                               keyboardType: TextInputType.number,
@@ -78,7 +78,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.all(5),
                                 hintText: "0-24",
-                                labelText: "    Ore",
+                                labelText: "   Ore",
                                 border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(8))),
@@ -89,7 +89,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                           flex: 1,
                         ),
                         Expanded(
-                            flex: 1,
+                            flex: 2,
                             child: TextField(
                               textAlign: TextAlign.center,
                               inputFormatters: [
@@ -99,7 +99,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                               decoration: InputDecoration(
                                 contentPadding: EdgeInsets.all(5),
                                 hintText: "0-60",
-                                labelText: "  Minuti",
+                                labelText: " Minuti",
                                 border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(8))),
@@ -107,7 +107,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                             )),
                         Expanded(
                           child: Text(""),
-                          flex: 1,
+                          flex: 3,
                         ),
                       ],
                     ),
