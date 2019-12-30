@@ -25,7 +25,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     SizedBox(height: 20,),
-                    Text("Crea", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
+                    Platform.isAndroid ? null : Text("Crea", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
                     SizedBox(height: Platform.isAndroid ? 10 : 20),
                     Text(
                       "Titolo",
