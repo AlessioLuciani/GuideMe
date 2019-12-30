@@ -23,7 +23,7 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
   final List<Marker> _markers = List();
 
   String nextMarkerId() {
-    int currentMax = _markers.length + 1;
+    int currentMax = 0;
     for (Marker marker in _markers) {
       int markerId = int.parse(marker.infoWindow.title.substring(1));
       if (markerId > currentMax) {
@@ -38,7 +38,7 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text("Cerca i posti da visitare"),
+          title: Text("Aggiungi luoghi all'itinerario"),
           leading: new IconButton(
             icon: new Icon(Icons.close),
             onPressed: () => Navigator.of(context).pop(),

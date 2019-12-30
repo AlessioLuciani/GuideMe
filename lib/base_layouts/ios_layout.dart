@@ -1,3 +1,4 @@
+import 'package:GuideMe/fragments/about.dart';
 import 'package:GuideMe/fragments/explore_visited.dart';
 import 'package:flutter/material.dart';
 import 'package:GuideMe/fragments/explore.dart';
@@ -20,9 +21,7 @@ class IOSLayoutState extends State<IOSLayout> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _tabIndex,
-        onTap: (int index) => setState(() {
-          _tabIndex = index;
-        }),
+        onTap: (int index) => setState(() => _tabIndex = index),
         
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
@@ -31,7 +30,7 @@ class IOSLayoutState extends State<IOSLayout> {
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.add_circle_outline),
-            title: new Text('Crea itinerario'),
+            title: new Text('Crea'),
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.explore),
@@ -39,7 +38,7 @@ class IOSLayoutState extends State<IOSLayout> {
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.done_outline),
-            title: new Text('Itinerari seguiti'),
+            title: new Text('Seguiti'),
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.info),
@@ -60,6 +59,8 @@ _getFragmentFrom(int pos) {
       return new ExploreFragment();
       case 3:
       return new ExploreVisitedFragment();
+      case 4:
+      return new AboutFragment();
       default:
         return new Text("Some error occured.");
     }
