@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter/services.dart';
+import 'package:location_permissions/location_permissions.dart';
 
 class ChooseStopsMaps extends StatefulWidget {
   final void Function(Marker marker) addMarker;
@@ -35,23 +37,39 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
     return '#${currentMax + 1}';
   }
 
+  void initState() {
+    super.initState();
+    askPermissions();
+  }
+
+  Future<void> askPermissions() async {
+    await LocationPermissions().requestPermissions();
+  } 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text("Aggiungi tappe all'itinerario"),
-                  actions: <Widget>[
-          Platform.isAndroid ? Text("") : IconButton(icon: Icon(Icons.undo, color: _markers.isEmpty ? Colors.grey : Colors.white,),onPressed: () => _undoLastMarker(),)
-                              
-                        
-        ],
+          actions: <Widget>[
+            Platform.isAndroid
+                ? Text("")
+                : IconButton(
+                    icon: Icon(
+                      Icons.undo,
+                      color: _markers.isEmpty ? Colors.grey : Colors.white,
+                    ),
+                    onPressed: () => _undoLastMarker(),
+                  )
+          ],
         ),
         body: Stack(
           children: <Widget>[
             GoogleMap(
               initialCameraPosition: _myLocation,
               myLocationEnabled: true,
+              myLocationButtonEnabled: true,
               polylines: _polyline,
               markers: _markers.toSet(),
               onTap: (LatLng point) => setState(() {
@@ -77,40 +95,39 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
               onMapCreated: _onMapCreated,
               mapType: MapType.terrain,
             ),
-            Platform.isIOS ? Text("") :
-            Align(
-                alignment: Alignment.topRight,
-                child: Padding(
-                  padding: EdgeInsets.all(20),
-                  child: FloatingActionButton(
-                    backgroundColor:
-                        _markers.isEmpty ? Colors.grey : Colors.redAccent,
-                    heroTag: "btn1",
-                    child: Icon(Icons.undo),
-                    onPressed: () => _undoLastMarker,
-                  ),
-                )),
+            Platform.isIOS
+                ? Text("")
+                : Align(
+                    alignment: Alignment.topRight,
+                    child: Padding(
+                      padding: EdgeInsets.all(20),
+                      child: FloatingActionButton(
+                        backgroundColor:
+                            _markers.isEmpty ? Colors.grey : Colors.redAccent,
+                        heroTag: "btn1",
+                        child: Icon(Icons.undo),
+                        onPressed: () => _undoLastMarker,
+                      ),
+                    )),
           ],
         ));
   }
 
   void _undoLastMarker() {
-if (_markers.isNotEmpty) {
-                        setState(() {
-                          _polyline.clear();
-                          _markers.removeLast();
-                          widget.removeLastMarker();
-                          _polyline.add(Polyline(
-                            polylineId: PolylineId("Il tuo itinerario"),
-                            visible: true,
-                            points: _markers
-                                .map((marker) => marker.position)
-                                .toList(),
-                            width: 3,
-                            color: Colors.green,
-                          ));
-                        });
-                      }
+    if (_markers.isNotEmpty) {
+      setState(() {
+        _polyline.clear();
+        _markers.removeLast();
+        widget.removeLastMarker();
+        _polyline.add(Polyline(
+          polylineId: PolylineId("Il tuo itinerario"),
+          visible: true,
+          points: _markers.map((marker) => marker.position).toList(),
+          width: 3,
+          color: Colors.green,
+        ));
+      });
+    }
   }
 
   void _onMapCreated(GoogleMapController controllerParam) {

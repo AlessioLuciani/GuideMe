@@ -8,6 +8,8 @@
          FlutterApplication and put your custom class here. -->
 
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name="io.flutter.app.FlutterApplication"
@@ -17,7 +19,7 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyACvxWLDFT4vUP_f8975zOnAbBcVoPN0PE"/>
+            android:value="AIzaSyA2AR0ep1ByCE4aX_vsOB2GOuo350WIR7c"/>
         
         <activity
             android:name=".MainActivity"
