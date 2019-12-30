@@ -13,8 +13,8 @@ class ItineraryMaps extends StatefulWidget {
 }
 
 class ItineraryMapsState extends State<ItineraryMaps> {
-  final Set<Marker> _markers = {};
-  final Set<Polyline> _polyline = {};
+  final Set<Marker> _markers =Set();
+  final Set<Polyline> _polyline = Set();
   GoogleMapController controller;
 
   @override

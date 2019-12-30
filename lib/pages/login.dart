@@ -1,6 +1,5 @@
 import 'package:GuideMe/commons/user.dart';
 import 'package:GuideMe/main.dart';
-import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/utils/utils.dart';
 import 'package:flutter/material.dart';
 

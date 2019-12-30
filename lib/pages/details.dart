@@ -17,8 +17,8 @@ class DetailsPage extends StatefulWidget {
 }
 
 class DetailsPageState extends State<DetailsPage> {
-  final Set<Marker> _markers = {};
-  final Set<Polyline> _polyline = {};
+  final Set<Marker> _markers = Set();
+  final Set<Polyline> _polyline = Set();
   GoogleMapController controller;
 
   @override

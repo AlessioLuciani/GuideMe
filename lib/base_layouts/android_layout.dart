@@ -1,7 +1,6 @@
 import 'package:GuideMe/commons/user.dart';
 import 'package:GuideMe/fragments/about.dart';
 import 'package:GuideMe/fragments/explore_visited.dart';
-import 'package:GuideMe/pages/review_page.dart';
 import 'package:GuideMe/fragments/create_itinerary.dart';
 import 'package:GuideMe/fragments/explore.dart';
 import 'package:GuideMe/fragments/favourites.dart';
@@ -29,20 +28,6 @@ class AndroidLayout extends StatefulWidget {
     new DrawerItem("Esci", icon: Icons.exit_to_app),
     /* not in menù indexed pages */
   ];
-
-  int _staticIndex = 0;
-  int _title;
-  Map<Symbol, dynamic> _dynamicParameters = {};
-
-  AndroidLayout({Key key}) : super(key: key);
-
-  AndroidLayout.fromIndex(
-      int staticIndex, Map<Symbol, dynamic> dynamicParameters,
-      {Key key})
-      : super(key: key) {
-    this._staticIndex = staticIndex;
-    this._dynamicParameters = dynamicParameters;
-  }
 
   @override
   State<StatefulWidget> createState() => new AndroidLayoutState();
@@ -85,9 +70,6 @@ class AndroidLayoutState extends State<AndroidLayout> {
 
   @override
   Widget build(BuildContext context) {
-    if (this._selectedDrawerIndex == null)
-      this._selectedDrawerIndex = this.widget._staticIndex;
-
     var drawerOptions = <Widget>[];
     var menuItems =
         this.widget.drawerItems.where((item) => item.isMenuItem).toList();
