@@ -24,9 +24,15 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    SizedBox(height: 20,),
-                    Platform.isAndroid ? null : Text("Crea", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
-                    SizedBox(height: Platform.isAndroid ? 10 : 20),
+                    SizedBox(
+                      height: Platform.isIOS ? 20 : 4,
+                    ),
+                    Platform.isAndroid
+                        ? Text("")
+                        : Text("Crea",
+                            style: TextStyle(
+                                fontSize: 40, fontWeight: FontWeight.bold)),
+                    SizedBox(height: Platform.isAndroid ? 0 : 20),
                     Text(
                       "Titolo",
                       style: TextStyle(fontSize: 20),
@@ -119,14 +125,12 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                 ),
                 Container(
                   child: Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween,
-
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Text(
-                            "Tappe",
-                            style: TextStyle(fontSize: 20),
-                          ),
+                        "Tappe",
+                        style: TextStyle(fontSize: 20),
+                      ),
                       Row(
                         children: <Widget>[
                           IconButton(
@@ -161,7 +165,8 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                     final textController = TextEditingController(
                         text: _markers[index].infoWindow.title);
                     return Padding(
-                        padding: EdgeInsets.only(bottom: index == _markers.length-1 ? 90 : 4),
+                        padding: EdgeInsets.only(
+                            bottom: index == _markers.length - 1 ? 90 : 4),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
@@ -197,9 +202,11 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                             ),
                             IconButton(
                                 icon: Icon(
-                              Icons.cancel,
-                              color: Colors.redAccent,
-                            ), onPressed: () => setState(() => _markers.removeAt(index))),
+                                  Icons.cancel,
+                                  color: Colors.redAccent,
+                                ),
+                                onPressed: () =>
+                                    setState(() => _markers.removeAt(index))),
                           ],
                         ));
                   },

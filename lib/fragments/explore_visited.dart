@@ -17,26 +17,36 @@ class ExploreVisitedFragment extends StatelessWidget {
         ),
       ));
 
-    return //Padding(
-      //padding: const EdgeInsets.only(left: 10, right: 10, bottom: 6, top: 8),
-      //child: Center(
-        SafeArea(child:
-        Column(crossAxisAlignment: CrossAxisAlignment.start, children: <Widget>[
-          Column(children: <Widget>[                    SizedBox(height: 20,),
-                    Platform.isAndroid ? null : Padding(padding: EdgeInsets.only(left:20, bottom: 10),child: Text("Seguiti", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)))]),
-          Expanded(child:
-          Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10, bottom: 6, top: 8),
-            child:
-        ListView.builder(
-          itemCount: Data.userVisits.length,
-          itemBuilder: (BuildContext ctxt, int index) {
-            return VisitCard(
-              visit: Data.userVisits.elementAt(index),
-            );
-          },
-        //),
-      //),
-        )))]));
+    return SafeArea(
+        child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+          Column(children: <Widget>[
+            SizedBox(
+              height: Platform.isIOS ? 20 : 0,
+            ),
+            Platform.isAndroid
+                ? Text("")
+                : Padding(
+                    padding: EdgeInsets.only(left: 20, bottom: 10),
+                    child: Text("Seguiti",
+                        style: TextStyle(
+                            fontSize: 40, fontWeight: FontWeight.bold)))
+          ]),
+          Expanded(
+              child: Padding(
+                  padding: const EdgeInsets.only(
+                      left: 10, right: 10, bottom: 6, top: 0), // it was top: 8 for iOS
+                  child: ListView.builder(
+                    itemCount: Data.userVisits.length,
+                    itemBuilder: (BuildContext ctxt, int index) {
+                      return VisitCard(
+                        visit: Data.userVisits.elementAt(index),
+                      );
+                    },
+                    //),
+                    //),
+                  )))
+        ]));
   }
 }

@@ -14,105 +14,116 @@ class AboutFragment extends StatelessWidget {
     return SafeArea(
       child: Column(
         children: <Widget>[
-          SizedBox(height: 20,),
-                    Align(alignment: Alignment.centerLeft, child: 
-                    Platform.isAndroid ? null : Padding(padding: EdgeInsets.only(left: 20),child: 
-                    Text("About", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)))),
-                    Expanded(child:
-          Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: <Widget>[
-          GestureDetector(
-              onTap: () => _launchURL(_gioAUrl),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  CircleAvatar(
-                    radius: 45,
-                    backgroundColor: Colors.blue,
-                    foregroundColor: Colors.white,
-                    child: Icon(
-                      Icons.person,
-                      size: 50,
-                    ),
+          SizedBox(
+            height: Platform.isIOS ? 20 : 0,
+          ),
+          Align(
+              alignment: Alignment.centerLeft,
+              child: Platform.isAndroid
+                  ? Text("")
+                  : Padding(
+                      padding: EdgeInsets.only(left: 20),
+                      child: Text("About",
+                          style: TextStyle(
+                              fontSize: 40, fontWeight: FontWeight.bold)))),
+          Expanded(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                GestureDetector(
+                    onTap: () => _launchURL(_gioAUrl),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        CircleAvatar(
+                          radius: 45,
+                          backgroundColor: Colors.blue,
+                          foregroundColor: Colors.white,
+                          child: Icon(
+                            Icons.person,
+                            size: 50,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        Text(
+                          "Giorgio Agosta",
+                          style: TextStyle(fontSize: 22),
+                        ),
+                      ],
+                    )),
+                GestureDetector(
+                    onTap: () => _launchURL(_gioBUrl),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Giorgio Belli",
+                          style: TextStyle(fontSize: 22),
+                        ),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        CircleAvatar(
+                          radius: 45,
+                          backgroundColor: Colors.yellow,
+                          foregroundColor: Colors.white,
+                          child: Icon(
+                            Icons.person,
+                            size: 50,
+                          ),
+                        ),
+                      ],
+                    )),
+                GestureDetector(
+                    onTap: () => _launchURL(_leoUrl),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        CircleAvatar(
+                          radius: 45,
+                          backgroundColor: Colors.green,
+                          foregroundColor: Colors.white,
+                          child: Icon(
+                            Icons.person,
+                            size: 50,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 30,
+                        ),
+                        Text(
+                          "Leonardo Emili",
+                          style: TextStyle(fontSize: 22),
+                        ),
+                      ],
+                    )),
+                GestureDetector(
+                  onTap: () => _launchURL(_aleUrl),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "Alessio Luciani",
+                        style: TextStyle(fontSize: 22),
+                      ),
+                      SizedBox(
+                        width: 30,
+                      ),
+                      CircleAvatar(
+                        radius: 45,
+                        backgroundColor: Colors.red,
+                        foregroundColor: Colors.white,
+                        child: Icon(
+                          Icons.person,
+                          size: 50,
+                        ),
+                      ),
+                    ],
                   ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  Text(
-                    "Giorgio Agosta",
-                    style: TextStyle(fontSize: 22),
-                  ),
-                ],
-              )),
-          GestureDetector(
-              onTap: () => _launchURL(_gioBUrl),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    "Giorgio Belli",
-                    style: TextStyle(fontSize: 22),
-                  ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  CircleAvatar(
-                    radius: 45,
-                    backgroundColor: Colors.yellow,
-                    foregroundColor: Colors.white,
-                    child: Icon(
-                      Icons.person,
-                      size: 50,
-                    ),
-                  ),
-                ],
-              )),
-          GestureDetector(
-              onTap: () => _launchURL(_leoUrl),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  CircleAvatar(
-                    radius: 45,
-                    backgroundColor: Colors.green,
-                    foregroundColor: Colors.white,
-                    child: Icon(
-                      Icons.person,
-                      size: 50,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 30,
-                  ),
-                  Text(
-                    "Leonardo Emili",
-                    style: TextStyle(fontSize: 22),
-                  ),
-                ],
-              )),
-          GestureDetector(
-            onTap: () => _launchURL(_aleUrl),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  "Alessio Luciani",
-                  style: TextStyle(fontSize: 22),
                 ),
-                SizedBox(
-                  width: 30,
-                ),
-                CircleAvatar(
-                  radius: 45,
-                  backgroundColor: Colors.red,
-                  foregroundColor: Colors.white,
-                  child: Icon(
-                    Icons.person,
-                    size: 50,
-                  ),
-                ),
-              ],
-            ),
-          ),])),
+              ])),
           SizedBox(
             height: 20,
           ),

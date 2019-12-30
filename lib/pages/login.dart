@@ -100,13 +100,14 @@ class _LoginPageState extends State<LoginPage> {
           keyboardType: TextInputType.emailAddress,
           autofocus: false,
           validator: (value) {
+            String returnValue;
             if (value.isEmpty) {
-              return "Inserisci una email";
+              returnValue = "Inserisci una email";
             } else if (!_isLoginPage &&
                 Utils.userExists(_emailController.text) >= 0) {
-              return "Utente già esistente";
+              returnValue = "Utente già esistente";
             }
-            return null;
+            return returnValue;
           },
           controller: _emailController,
           decoration: InputDecoration(
@@ -123,13 +124,14 @@ class _LoginPageState extends State<LoginPage> {
           autofocus: false,
           obscureText: true,
           validator: (value) {
+            String returnValue;
             if (value.isEmpty) {
-              return "Inserisci una password";
+              returnValue = "Inserisci una password";
             }
             if (_isLoginPage && Utils.userExists(_emailController.text) < 0) {
-              return "I dati inseriti non sono corretti.";
+              returnValue = "I dati inseriti non sono corretti.";
             }
-            return null;
+            return returnValue;
           },
           controller: _passwordController,
           decoration: InputDecoration(

@@ -38,7 +38,7 @@ class FeedbackFragment extends StatefulWidget {
 
 class FeedbackFragmentState extends State<FeedbackFragment> {
   int _currentStars = -1;
-  List<File> images = [null, null, null, null];
+  List<File> images = [null];
 
   _getStars() {
     List<Star> stars = [];
@@ -71,8 +71,8 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
 
   Future _getImage(int index) async {
     var image = await ImagePicker.pickImage(
-        source: ImageSource.gallery, maxHeight: 120);
-
+        source: ImageSource.gallery, maxHeight: 120, maxWidth: 80);
+    images.add(null);
     setState(() {
       images[index] = image;
     });
@@ -85,7 +85,12 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
       appBar: AppBar(
         title: Text(widget.itinerary.title),
         actions: <Widget>[
-          Platform.isAndroid ? Text("") : IconButton(icon: Icon(Icons.send),onPressed: () => Utils.showReviewConfirm(context),)
+          Platform.isAndroid
+              ? Text("")
+              : IconButton(
+                  icon: Icon(Icons.send),
+                  onPressed: () => Utils.showReviewConfirm(context),
+                )
         ],
       ),
       body: Padding(
@@ -147,12 +152,14 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
           ],
         ),
       ),
-      floatingActionButton: Platform.isIOS ? Text("") : Padding(
-          padding: EdgeInsets.all(5),
-          child: FloatingActionButton(
-            child: Icon(Icons.send),
-            onPressed: () => Utils.showReviewConfirm(context),
-          )),
+      floatingActionButton: Platform.isIOS
+          ? Text("")
+          : Padding(
+              padding: EdgeInsets.all(5),
+              child: FloatingActionButton(
+                child: Icon(Icons.send),
+                onPressed: () => Utils.showReviewConfirm(context),
+              )),
     );
   }
 
@@ -166,25 +173,47 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
         itemBuilder: (BuildContext context, int index) {
           if (images[index] == null) {
             return Padding(
-              padding: EdgeInsets.only(right: 0),
-              child: IconButton(
-                iconSize: 60,
-                alignment: Alignment.center,
-                icon: Icon(
-                  Icons.add_photo_alternate,
-                  size: 70,
-                  color: Colors.black87,
+                padding: EdgeInsets.only(
+                  bottom: 20,
                 ),
-                onPressed: () => _getImage(index),
-              ),
-            );
+                child: InkWell(
+                  child: Icon(
+                    Icons.add_box,
+                    size: 80,
+                    color: Color(0xFF616161),
+                  ),
+                  onTap: () => _getImage(index),
+                ));
           } else {
             return Padding(
-              padding: EdgeInsets.only(top: 10),
+              padding: EdgeInsets.only(top: 20, left: 8, right: 8),
               child: Container(
-                height: 100,
-                width: 100,
-                child: Image.file(images[index]),
+                decoration:
+                    BoxDecoration(border: Border.all(color: Colors.black26)),
+                constraints: BoxConstraints(
+                  maxWidth: 70,
+                ),
+                child: Stack(
+                  children: <Widget>[
+                    Stack(
+                      alignment: Alignment.center,
+                      children: <Widget>[
+                        Image.file(images[index]),
+                        Align(
+                          child: IconButton(
+                            icon: Icon(
+                              Icons.cancel,
+                              size: 32,
+                              color: Colors.redAccent,
+                            ),
+                            onPressed: () => setState(() => images.removeAt(index)),
+                          ),
+                          alignment: Alignment.topRight,
+                        )
+                      ],
+                    )
+                  ],
+                ),
               ),
             );
           }
