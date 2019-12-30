@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 class FavouritesFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    List<Itinerary> data = Utils.favouriteItineraries;
+    List<Itinerary> data = favouriteItineraries;
 
     if (data.length == 0) {
       return SafeArea(

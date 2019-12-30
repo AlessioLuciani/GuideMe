@@ -89,7 +89,7 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
               ? Text("")
               : IconButton(
                   icon: Icon(Icons.send),
-                  onPressed: () => Utils.showReviewConfirm(context),
+                  onPressed: () => showReviewConfirm(context),
                 )
         ],
       ),
@@ -158,7 +158,7 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
               padding: EdgeInsets.all(5),
               child: FloatingActionButton(
                 child: Icon(Icons.send),
-                onPressed: () => Utils.showReviewConfirm(context),
+                onPressed: () => showReviewConfirm(context),
               )),
     );
   }

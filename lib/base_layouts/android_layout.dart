@@ -105,7 +105,7 @@ class AndroidLayoutState extends State<AndroidLayout> {
               child: FloatingActionButton(
                 child: Icon(Icons.send),
                 onPressed: () {
-                  Utils.showAdditionConfirm(context);
+                  showAdditionConfirm(context);
                   setState(() => _selectedDrawerIndex = 0);
                 },
               )),

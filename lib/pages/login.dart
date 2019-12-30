@@ -21,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   bool _isLoginPage = true;
 
   void _checkFields() {
-    int userIndex = Utils.userExists(_emailController.text);
+    int userIndex = userExists(_emailController.text);
     if (!_isLoginPage) {
       // Create a new account
       User newUser = User(
@@ -32,9 +32,9 @@ class _LoginPageState extends State<LoginPage> {
           _surnameKey.currentState.validate() &&
           _emailKey.currentState.validate() &&
           _passwordKey.currentState.validate() &&
-          Utils.addTempUser(newUser)) {
-        userIndex = Utils.userExists(_emailController.text);
-        Utils.createUserSession(userIndex);
+          addTempUser(newUser)) {
+        userIndex = userExists(_emailController.text);
+        createUserSession(userIndex);
         Route route = MaterialPageRoute(builder: (context) => HomePage());
         Navigator.pushReplacement(context, route);
         // and go to the app
@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
     if (_emailKey.currentState.validate() &&
         _passwordKey.currentState.validate() &&
         userIndex >= 0) {
-      Utils.createUserSession(userIndex);
+      createUserSession(userIndex);
       Route route = MaterialPageRoute(builder: (context) => HomePage());
       Navigator.pushReplacement(context, route);
     }
@@ -104,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
             if (value.isEmpty) {
               returnValue = "Inserisci una email";
             } else if (!_isLoginPage &&
-                Utils.userExists(_emailController.text) >= 0) {
+                userExists(_emailController.text) >= 0) {
               returnValue = "Utente già esistente";
             }
             return returnValue;
@@ -128,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
             if (value.isEmpty) {
               returnValue = "Inserisci una password";
             }
-            if (_isLoginPage && Utils.userExists(_emailController.text) < 0) {
+            if (_isLoginPage && userExists(_emailController.text) < 0) {
               returnValue = "I dati inseriti non sono corretti.";
             }
             return returnValue;

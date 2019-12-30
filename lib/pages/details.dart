@@ -140,7 +140,7 @@ class DetailsPageState extends State<DetailsPage> {
                         size: 36,
                       ),
                       onPressed: () =>
-                          setState(() => Utils.favourite(widget.itinerary)),
+                          setState(() => favourite(widget.itinerary)),
                     ),
                   ),
                   SizedBox(
