@@ -120,7 +120,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                 Container(
                   child: Row(
                     mainAxisAlignment:
-                        MainAxisAlignment.spaceBetween, //NOT WORKING!
+                        MainAxisAlignment.spaceBetween,
 
                     children: <Widget>[
                       Text(
