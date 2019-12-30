@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:GuideMe/pages/choose_stops_maps.dart';
@@ -19,13 +21,12 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               children: <Widget>[
-                SizedBox(
-                  height: 10,
-                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    SizedBox(height: 10),
+                    SizedBox(height: 20,),
+                    Text("Crea", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
+                    SizedBox(height: Platform.isAndroid ? 10 : 20),
                     Text(
                       "Titolo",
                       style: TextStyle(fontSize: 20),
@@ -124,10 +125,6 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                     children: <Widget>[
                       Row(
                         children: <Widget>[
-                          Icon(
-                            Icons.format_list_bulleted,
-                            size: 30,
-                          ),
                           SizedBox(
                             width: 10,
                           ),
@@ -141,7 +138,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                         children: <Widget>[
                           IconButton(
                             iconSize: 36,
-                            icon: Icon(Icons.map, color: Colors.black87),
+                            icon: Icon(Icons.pin_drop, color: Colors.black87),
                             onPressed: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(

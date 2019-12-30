@@ -38,11 +38,7 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text("Aggiungi luoghi all'itinerario"),
-          leading: new IconButton(
-            icon: new Icon(Icons.close),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
+          title: Text("Aggiungi tappe all'itinerario"),
         ),
         body: Stack(
           children: <Widget>[
@@ -101,16 +97,6 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
                         });
                       }
                     },
-                  ),
-                )),
-            Align(
-                alignment: Alignment.bottomRight,
-                child: Padding(
-                  padding: EdgeInsets.all(20),
-                  child: FloatingActionButton(
-                    heroTag: "btn2",
-                    child: Icon(Icons.done),
-                    onPressed: () => Navigator.of(context).pop(),
                   ),
                 )),
           ],
