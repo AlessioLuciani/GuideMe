@@ -2,11 +2,20 @@ import 'dart:io';
 
 import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/widgets/visited_card.dart';
+import 'package:GuideMe/utils/utils.dart';
+
 import 'package:flutter/material.dart';
 
-class ExploreVisitedFragment extends StatelessWidget {
+class ExploreVisitedFragment extends StatefulWidget {
+  @override
+  _ExploreVisitedFragmentState createState() => _ExploreVisitedFragmentState();
+}
+
+class _ExploreVisitedFragmentState extends State<ExploreVisitedFragment> {
+  
   @override
   Widget build(BuildContext context) {
+    setStatusBarDarkColor();
     if (Data.userVisits.isEmpty)
       return Center(
           child: Text(

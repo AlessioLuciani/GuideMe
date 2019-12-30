@@ -4,6 +4,7 @@ import 'package:GuideMe/pages/confirmation.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 
   // Function used to retrieve the corresponding index of '_itinerary' among itineraries list located in data
@@ -54,3 +55,10 @@ import 'package:flutter/material.dart';
     Navigator.push(context,
         MaterialPageRoute(builder: (context) => ConfirmationPage()));
   }
+
+  void setStatusBarDarkColor() {
+   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
+   statusBarColor: Colors.black, // Color for Android
+   statusBarBrightness: Brightness.light // Dark == white status bar -- for IOS.
+));
+}

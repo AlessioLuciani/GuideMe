@@ -5,9 +5,17 @@ import 'package:GuideMe/utils/utils.dart';
 import 'package:GuideMe/widgets/explore_card.dart';
 import 'package:flutter/material.dart';
 
-class FavouritesFragment extends StatelessWidget {
+class FavouritesFragment extends StatefulWidget {
+  @override
+  _FavouritesFragmentState createState() => _FavouritesFragmentState();
+}
+
+class _FavouritesFragmentState extends State<FavouritesFragment>{
+
+
   @override
   Widget build(BuildContext context) {
+    setStatusBarDarkColor();
     List<Itinerary> data = favouriteItineraries;
 
     if (data.length == 0) {
@@ -75,4 +83,5 @@ class FavouritesFragment extends StatelessWidget {
       ),
     );
   }
+
 }

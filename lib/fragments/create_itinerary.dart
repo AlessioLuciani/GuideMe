@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:GuideMe/utils/utils.dart';
+
 import 'package:GuideMe/pages/choose_stops_maps.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -13,8 +15,11 @@ class AddItinearyFragment extends StatefulWidget {
 class _AddItinearyFragmentState extends State<AddItinearyFragment> {
   final List<Marker> _markers = List();
 
+
+
   @override
   Widget build(BuildContext context) {
+    setStatusBarDarkColor();
     debugPrint('${_markers.length}');
     return SafeArea(
         child: Padding(

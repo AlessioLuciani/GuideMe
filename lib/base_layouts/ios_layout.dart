@@ -10,9 +10,9 @@ class IOSLayout extends StatefulWidget {
   State<StatefulWidget> createState() => IOSLayoutState();
 }
 
-class IOSLayoutState extends State<IOSLayout> {
+class IOSLayoutState extends State<IOSLayout>{
   int _tabIndex = 2;
-
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,6 +65,5 @@ _getFragmentFrom(int pos) {
         return new Text("Some error occured.");
     }
   }
-
 
 }

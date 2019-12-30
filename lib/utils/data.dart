@@ -12,6 +12,7 @@ class Data {
   static int get currentMonth => DateTime.now().month;
 
   static List<User> users = [
+    User(name: "Test", surname: "Test", email: "test"),
     User(name: "John", surname: "Smith", email: "john@smith.com"),
     User(name: "Luca", surname: "Rossi", email: "luca@rossi.com"),
     User(name: "Luigi", surname: "Bianchi", email: "luigi@bianchi.com"),
