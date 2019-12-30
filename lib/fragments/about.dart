@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -11,11 +13,13 @@ class AboutFragment extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          SizedBox(
-            height: 20,
-          ),
+          SizedBox(height: 20,),
+                    Align(alignment: Alignment.centerLeft, child: 
+                    Platform.isAndroid ? null : Padding(padding: EdgeInsets.only(left: 20),child: 
+                    Text("About", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)))),
+                    Expanded(child:
+          Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly,children: <Widget>[
           GestureDetector(
               onTap: () => _launchURL(_gioAUrl),
               child: Row(
@@ -63,7 +67,7 @@ class AboutFragment extends StatelessWidget {
                 ],
               )),
           GestureDetector(
-              onTap: () => _launchURL(_aleUrl),
+              onTap: () => _launchURL(_leoUrl),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -80,18 +84,18 @@ class AboutFragment extends StatelessWidget {
                     width: 30,
                   ),
                   Text(
-                    "Alessio Luciani",
+                    "Leonardo Emili",
                     style: TextStyle(fontSize: 22),
                   ),
                 ],
               )),
           GestureDetector(
-            onTap: () => _launchURL(_leoUrl),
+            onTap: () => _launchURL(_aleUrl),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text(
-                  "Leonardo Emili",
+                  "Alessio Luciani",
                   style: TextStyle(fontSize: 22),
                 ),
                 SizedBox(
@@ -108,7 +112,7 @@ class AboutFragment extends StatelessWidget {
                 ),
               ],
             ),
-          ),
+          ),])),
           SizedBox(
             height: 20,
           ),

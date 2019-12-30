@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/widgets/explore_card.dart';
 import 'package:flutter/material.dart';
@@ -5,9 +7,14 @@ import 'package:flutter/material.dart';
 class ExploreFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 8),
-      child: ListView.builder(
+    return SafeArea(child:Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Padding(padding: EdgeInsets.only(left: 20, top: 20),
+        child: Platform.isAndroid ? null : Text("Esplora", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold))),
+      SizedBox(height: Platform.isAndroid ? 10 : 20),
+      Expanded(child:
+      ListView.builder(
         itemCount: Data.itineraries.length,
         itemBuilder: (_, index) => Container(
           // Add padding to the last item of the list
@@ -18,7 +25,6 @@ class ExploreFragment extends StatelessWidget {
           child: ExploreCard(
             itinerary: Data.itineraries[index],
           )),
-      ),
-    );
+      )),]));
   }
 }

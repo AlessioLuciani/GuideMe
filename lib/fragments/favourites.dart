@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/utils/utils.dart';
 import 'package:GuideMe/widgets/explore_card.dart';
@@ -9,7 +11,14 @@ class FavouritesFragment extends StatelessWidget {
     List<Itinerary> data = Utils.favouriteItineraries;
 
     if (data.length == 0) {
-      return Align(
+    return SafeArea(child: Column(children: <Widget>[
+                    SizedBox(height: 20,),
+                    Align(alignment: Alignment.centerLeft, child: 
+                    Platform.isAndroid ? null : Padding(padding: EdgeInsets.only(left: 20),child: 
+                    Text("Preferiti", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)))),
+                    SizedBox(height: Platform.isAndroid ? 10 : 20),
+                    Expanded(child:
+                    Align(
         alignment: Alignment.center,
         child: Padding(
           padding: EdgeInsets.all(40),
@@ -18,12 +27,17 @@ class FavouritesFragment extends StatelessWidget {
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 18)),
         ),
-      );
+      ))]));
     }
 
-    return Padding(
-      padding: EdgeInsets.only(top: 8),
-      child: ListView.builder(
+    return SafeArea(child: Column(crossAxisAlignment: CrossAxisAlignment.start,children: <Widget>[
+                    SizedBox(height: 20,),
+                    Align(alignment: Alignment.centerLeft, child: 
+                    Platform.isAndroid ? null : Padding(padding: EdgeInsets.only(left: 20),child: 
+                    Text("Preferiti", style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold)))),
+                    SizedBox(height: Platform.isAndroid ? 10 : 20),
+      Expanded(child: 
+    ListView.builder(
         itemCount: data.length,
         itemBuilder: (_, index) => Container(
             // Add padding to the last item of the list
@@ -34,6 +48,7 @@ class FavouritesFragment extends StatelessWidget {
               itinerary: data[index],
             )),
       ),
-    );
+    )
+    ],),);
   }
 }

@@ -123,17 +123,10 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                         MainAxisAlignment.spaceBetween, //NOT WORKING!
 
                     children: <Widget>[
-                      Row(
-                        children: <Widget>[
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
+                      Text(
                             "Tappe",
                             style: TextStyle(fontSize: 20),
                           ),
-                        ],
-                      ),
                       Row(
                         children: <Widget>[
                           IconButton(
