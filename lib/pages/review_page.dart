@@ -81,80 +81,76 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Text(widget.itinerary.title),
-          actions: <Widget>[
-            Builder(
-              builder: (BuildContext context) => FlatButton(
-                textColor: Colors.white,
-                onPressed: () => Utils.showReviewConfirm(context),
-                child: Text("Invia", style: TextStyle(fontSize: 17),),
-                shape:
-                    CircleBorder(side: BorderSide(color: Colors.transparent)),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text(widget.itinerary.title),
+      ),
+      body: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(
+              height: 20,
+            ),
+            Center(
+              child: Text(
+                widget.msgs[_currentStars >= 0 && _currentStars <= 4
+                    ? _currentStars + 1
+                    : 0],
+                style: TextStyle(color: Colors.grey),
               ),
             ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 10),
+              child: _getStars(),
+            ),
+            Divider(),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(height: 10),
+                Text(
+                  "Titolo",
+                  style: TextStyle(fontSize: 20),
+                ),
+                SizedBox(height: 10),
+                _getTextfield("Le cose più importanti che vuoi condividere.",
+                    "La tua esperienza in non più di 50 caratteri.", 2, 50),
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                SizedBox(height: 10),
+                Text(
+                  "Descrizione",
+                  style: TextStyle(fontSize: 20),
+                ),
+                SizedBox(height: 10),
+                _getTextfield(
+                    "Cosa ti è piaciuto e cosa non ti è piaciuto? A chi lo consiglieresti?",
+                    "La tua esperienza in non più di 300 caratteri.",
+                    4,
+                    300),
+              ],
+            ),
+            SizedBox(height: 10),
+            Text(
+              "Foto",
+              style: TextStyle(fontSize: 20),
+            ),
+            _getGalleryPickers(),
           ],
         ),
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              SizedBox(
-                height: 20,
-              ),
-              Center(
-                child: Text(
-                  widget.msgs[_currentStars >= 0 && _currentStars <= 4
-                      ? _currentStars + 1
-                      : 0],
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: _getStars(),
-              ),
-              Divider(),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(height: 10),
-                  Text(
-                    "Titolo",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  SizedBox(height: 10),
-                  _getTextfield("Le cose più importanti che vuoi condividere.",
-                      "La tua esperienza in non più di 50 caratteri.", 2, 50),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SizedBox(height: 10),
-                  Text(
-                    "Descrizione",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  SizedBox(height: 10),
-                  _getTextfield(
-                      "Cosa ti è piaciuto e cosa non ti è piaciuto? A chi lo consiglieresti?",
-                      "La tua esperienza in non più di 300 caratteri.",
-                      4,
-                      300),
-                ],
-              ),
-              SizedBox(height: 10),
-              Text(
-                "Foto",
-                style: TextStyle(fontSize: 20),
-              ),
-              _getGalleryPickers(),
-            ],
-          ),
-        ));
+      ),
+      floatingActionButton: Padding(
+          padding: EdgeInsets.all(5),
+          child: FloatingActionButton(
+            child: Icon(Icons.send),
+            onPressed: () => Utils.showReviewConfirm(context),
+          )),
+    );
   }
 
   Widget _getGalleryPickers() {

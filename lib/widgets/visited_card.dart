@@ -4,16 +4,14 @@ import 'package:GuideMe/pages/review_page.dart';
 import 'package:flutter/material.dart';
 
 class VisitCard extends StatelessWidget {
-  ItineraryVisit _visit;
+  final ItineraryVisit visit;
 
-  VisitCard({Key key, @required ItineraryVisit visit}) : super(key: key) {
-    this._visit = visit;
-  }
+  const VisitCard({Key key, this.visit}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 4),
+      padding: EdgeInsets.only(bottom: 6),
       child: Card(
         elevation: 5,
           shape: RoundedRectangleBorder(
@@ -29,7 +27,7 @@ class VisitCard extends StatelessWidget {
                       topRight: Radius.circular(8.0),
                     ),
                     child: Image.asset(
-                      this._visit.itinerary.coverImage,
+                      visit.itinerary.coverImage,
                       height: 150,
                       fit: BoxFit.cover,
                     )),
@@ -37,7 +35,7 @@ class VisitCard extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) => DetailsPage(
-                            itinerary: _visit.itinerary,
+                            itinerary: visit.itinerary,
                           )),
                 ),
               ),
@@ -49,14 +47,14 @@ class VisitCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Text(
-                            this._visit.itinerary.title,
+                            visit.itinerary.title,
                             style: TextStyle(fontSize: 20),
                           ),
                           SizedBox(
                             height: 2,
                           ),
                           Text(
-                              "Visitato il ${this._visit.date.day}/${this._visit.date.month}/${this._visit.date.year}", style: TextStyle(color: Colors.black54),),
+                              "Visitato il ${visit.date.day}/${visit.date.month}/${visit.date.year}", style: TextStyle(color: Colors.black54),),
                         ]),
                     Expanded(
                         child: Padding(
@@ -74,7 +72,7 @@ class VisitCard extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => FeedbackFragment(
-                                        itinerary: _visit.itinerary,
+                                        itinerary: visit.itinerary,
                                       )),
                             ),
                             color: Colors.redAccent,

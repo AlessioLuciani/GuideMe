@@ -22,6 +22,17 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
 
   final List<Marker> _markers = List();
 
+  String nextMarkerId() {
+    int currentMax = _markers.length + 1;
+    for (Marker marker in _markers) {
+      int markerId = int.parse(marker.infoWindow.title.substring(1));
+      if (markerId > currentMax) {
+        currentMax = markerId;
+      }
+    }
+    return '#${currentMax + 1}';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +56,7 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
                   markerId: MarkerId(point.toString()),
                   position: point,
                   infoWindow: InfoWindow(
-                    title: '#${_markers.length + 1}',
+                    title: nextMarkerId(),
                   ),
                   icon: BitmapDescriptor.defaultMarkerWithHue(
                       BitmapDescriptor.hueRed),
@@ -66,7 +77,7 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
             Align(
                 alignment: Alignment.topRight,
                 child: Padding(
-                  padding: EdgeInsets.all(30),
+                  padding: EdgeInsets.all(20),
                   child: FloatingActionButton(
                     backgroundColor:
                         _markers.isEmpty ? Colors.grey : Colors.redAccent,
@@ -95,7 +106,7 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
             Align(
                 alignment: Alignment.bottomRight,
                 child: Padding(
-                  padding: EdgeInsets.all(30),
+                  padding: EdgeInsets.all(20),
                   child: FloatingActionButton(
                     heroTag: "btn2",
                     child: Icon(Icons.done),

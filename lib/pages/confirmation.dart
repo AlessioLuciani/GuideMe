@@ -29,7 +29,7 @@ class ConfirmationPage extends StatelessWidget {
                 ),
                 Text(
                   Data.confirmMsg,
-                  style: TextStyle(fontSize: 28),
+                  style: TextStyle(fontSize: 24),
                 ),
               ],
             ),
@@ -37,7 +37,7 @@ class ConfirmationPage extends StatelessWidget {
           FlatButton(
             child: Text(
               "Chiudi",
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 18),
             ),
             onPressed: () {
               Data.reviewItinerary(itinerary);

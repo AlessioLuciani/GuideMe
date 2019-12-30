@@ -141,7 +141,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                         children: <Widget>[
                           IconButton(
                             iconSize: 36,
-                            icon: Icon(Icons.add),
+                            icon: Icon(Icons.map, color: Colors.black87),
                             onPressed: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -169,14 +169,15 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                   shrinkWrap: true,
                   itemBuilder: (BuildContext context, int index) {
                     final textController = TextEditingController(
-                        text: 'Tappa ${_markers[index].infoWindow.title}');
+                        text: _markers[index].infoWindow.title);
                     return Padding(
-                        padding: EdgeInsets.only(bottom: 4),
+                        padding: EdgeInsets.only(bottom: index == _markers.length-1 ? 90 : 4),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
                             Icon(
-                              Icons.label,
-                              size: 30,
+                              Icons.fiber_manual_record,
+                              size: 20,
                               color: Colors.redAccent,
                             ),
                             SizedBox(
@@ -184,6 +185,17 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                             ),
                             Flexible(
                                 child: TextField(
+                                    onChanged: (text) =>
+                                        _markers[index] = Marker(
+                                          markerId: _markers[index].markerId,
+                                          position: _markers[index].position,
+                                          infoWindow: InfoWindow(
+                                            title: text,
+                                          ),
+                                          icon: BitmapDescriptor
+                                              .defaultMarkerWithHue(
+                                                  BitmapDescriptor.hueRed),
+                                        ),
                                     decoration: InputDecoration(
                                         border: InputBorder.none),
                                     minLines: 1,
@@ -192,7 +204,12 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                                     style: TextStyle(fontSize: 18))),
                             SizedBox(
                               width: 100,
-                            )
+                            ),
+                            IconButton(
+                                icon: Icon(
+                              Icons.cancel,
+                              color: Colors.redAccent,
+                            ), onPressed: () => setState(() => _markers.removeAt(index))),
                           ],
                         ));
                   },
@@ -204,59 +221,26 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
   void _addMarker(Marker marker) => _markers.add(marker);
   void _removeLastMarker() => _markers.removeLast();
 
-  Widget _newStopsButton() => Padding(
-        padding: EdgeInsets.symmetric(vertical: 10),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            Icon(
-              Icons.map,
-              size: 30,
-              color: Colors.redAccent,
-            ),
-            SizedBox(
-              width: 10,
-            ),
-            InkWell(
-              child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 10),
-                child: Text(
-                  "Aggiungi Tappe",
-                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
-                ),
-              ),
-              onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => ChooseStopsMaps(
-                          addMarker: _addMarker,
-                          removeLastMarker: _removeLastMarker,
-                          initMarkers: _markers))),
-            )
-          ],
-        ),
-      );
-}
-
-Widget _getTextfield(
-    String hintText, String helperText, int lines, int maxChars) {
-  return Theme(
-    data: new ThemeData(
-      primaryColor: Colors.grey,
-      primaryColorDark: Colors.grey,
-    ),
-    child: Container(
-        child: TextField(
-      minLines: lines,
-      maxLines: lines,
-      maxLength: maxChars,
-      decoration: new InputDecoration(
-        contentPadding: EdgeInsets.all(9),
-        border: new OutlineInputBorder(
-            borderSide: new BorderSide(color: Colors.teal)),
-        hintText: hintText,
-        helperText: helperText,
+  Widget _getTextfield(
+      String hintText, String helperText, int lines, int maxChars) {
+    return Theme(
+      data: new ThemeData(
+        primaryColor: Colors.grey,
+        primaryColorDark: Colors.grey,
       ),
-    )),
-  );
+      child: Container(
+          child: TextField(
+        minLines: lines,
+        maxLines: lines,
+        maxLength: maxChars,
+        decoration: new InputDecoration(
+          contentPadding: EdgeInsets.all(9),
+          border: new OutlineInputBorder(
+              borderSide: new BorderSide(color: Colors.teal)),
+          hintText: hintText,
+          helperText: helperText,
+        ),
+      )),
+    );
+  }
 }
