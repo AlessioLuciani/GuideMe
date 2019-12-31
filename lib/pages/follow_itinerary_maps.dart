@@ -16,6 +16,7 @@ class ItineraryMapsState extends State<ItineraryMaps> {
   final Set<Marker> _markers =Set();
   final Set<Polyline> _polyline = Set();
   GoogleMapController controller;
+  int currentStop = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -59,12 +60,66 @@ class ItineraryMapsState extends State<ItineraryMaps> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                SizedBox(
-                  height: 70,
-                ),
-                Text(
-                  "Barra di informazioni",
-                ),
+                IconButton(
+                    icon: Icon(Icons.navigate_before,) ,
+                    onPressed: () {},
+                  ),
+                Container(
+                  height: 140,
+                  child: Row(
+                    children: <Widget>[
+                      Image.asset(
+                        widget.itinerary.coverImage,
+                        height: 80,
+                        width: 100,
+                        fit: BoxFit.fitHeight
+                      ),
+                      SizedBox(width: 10,),
+                      Column(
+                        children: <Widget>[
+                          SizedBox(height: 30,),
+                            Text(
+                              widget.itinerary.stops[currentStop].name,
+                              style: new TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold
+                              ),
+                            ),
+                            SizedBox(height: 20,),
+                            Text(
+                              (currentStop+1).toString() + "/" + (widget.itinerary.stops.length).toString(),
+                              style: new TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold
+                              ),
+                            ),
+                        ],
+                        
+                      ),
+                      SizedBox(width: 10,),
+                      IconButton(
+                        icon: Icon(
+                          Icons.record_voice_over,
+                          color: Colors.redAccent,
+                          size: 40.0,
+                        ),
+                        onPressed: () {},
+                      ),
+                      SizedBox(width: 10,),
+                      IconButton(
+                        icon: Icon(
+                            Icons.description,
+                            size: 40.0,
+                          ),
+                          onPressed: () {},
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.navigate_next) ,
+                        onPressed: () {},
+                      ),
+                    ],
+                    ),
+                  )
               ],
             ),
           ),
