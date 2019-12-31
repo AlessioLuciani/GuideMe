@@ -21,7 +21,7 @@ class FeedbackFragment extends StatefulWidget {
     "Scarso",
     "Medio",
     "Buono",
-    "Eccellente"
+    "Eccellente",
   ];
 
   FeedbackFragment({Key key, @required this.itinerary}) : super(key: key);
@@ -38,6 +38,10 @@ class FeedbackFragment extends StatefulWidget {
 
 class FeedbackFragmentState extends State<FeedbackFragment> {
   int _currentStars = -1;
+  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  bool _requireRating = false;
+  bool _validateTitle = false, _validateDescription = false;
   List<File> images = [null];
 
   _getStars() {
@@ -46,7 +50,10 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
     for (var i = 0; i < Data.RATING_STARS; i++) {
       stars.add(new Star(
         color: (i <= _currentStars) ? Colors.yellow : Colors.grey[300],
-        onTap: () => setState(() => _currentStars = i),
+        onTap: () => setState(() {
+          _requireRating = false;
+          _currentStars = i;
+        }),
       ));
     }
 
@@ -103,10 +110,13 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
             ),
             Center(
               child: Text(
-                widget.msgs[_currentStars >= 0 && _currentStars <= 4
-                    ? _currentStars + 1
-                    : 0],
-                style: TextStyle(color: Colors.grey),
+                _requireRating
+                    ? "Seleziona una stella per la recensione"
+                    : widget.msgs[_currentStars >= 0 && _currentStars <= 4
+                        ? _currentStars + 1
+                        : 0],
+                style:
+                    TextStyle(color: _requireRating ? Colors.red : Colors.grey),
               ),
             ),
             Padding(
@@ -123,8 +133,31 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
                   style: TextStyle(fontSize: 20),
                 ),
                 SizedBox(height: 10),
-                _getTextfield("Le cose più importanti che vuoi condividere.",
-                    "La tua esperienza in non più di 50 caratteri.", 2, 50),
+                Theme(
+                  data: new ThemeData(
+                    primaryColor: Colors.grey,
+                    primaryColorDark: Colors.grey,
+                  ),
+                  child: Container(
+                      child: TextField(
+                    controller: _titleController,
+                    onChanged: (value) =>
+                        setState(() => _validateTitle = value.isEmpty),
+                    minLines: 2,
+                    maxLines: 2,
+                    maxLength: 50,
+                    decoration: new InputDecoration(
+                      errorText: _validateTitle
+                          ? "Questo campo non puó essere lasciato vuoto"
+                          : null,
+                      border: new OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.teal)),
+                      hintText: "Le cose più importanti che vuoi condividere.",
+                      helperText:
+                          "La tua esperienza in non più di 50 caratteri.",
+                    ),
+                  )),
+                ),
               ],
             ),
             Column(
@@ -136,11 +169,32 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
                   style: TextStyle(fontSize: 20),
                 ),
                 SizedBox(height: 10),
-                _getTextfield(
-                    "Cosa ti è piaciuto e cosa non ti è piaciuto? A chi lo consiglieresti?",
-                    "La tua esperienza in non più di 300 caratteri.",
-                    4,
-                    300),
+                Theme(
+                  data: new ThemeData(
+                    primaryColor: Colors.grey,
+                    primaryColorDark: Colors.grey,
+                  ),
+                  child: Container(
+                      child: TextField(
+                    controller: _descriptionController,
+                    onChanged: (value) =>
+                        setState(() => _validateDescription = value.isEmpty),
+                    minLines: 4,
+                    maxLines: 4,
+                    maxLength: 300,
+                    decoration: new InputDecoration(
+                      errorText: _validateDescription
+                          ? "Questo campo non puó essere lasciato vuoto"
+                          : null,
+                      border: new OutlineInputBorder(
+                          borderSide: new BorderSide(color: Colors.teal)),
+                      hintText:
+                          "Cosa ti è piaciuto e cosa non ti è piaciuto? A chi lo consiglieresti?",
+                      helperText:
+                          "La tua esperienza in non più di 300 caratteri.",
+                    ),
+                  )),
+                ),
               ],
             ),
             SizedBox(height: 10),
@@ -158,7 +212,19 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
               padding: EdgeInsets.all(5),
               child: FloatingActionButton(
                 child: Icon(Icons.send),
-                onPressed: () => showReviewConfirm(context),
+                onPressed: () {
+                  if (_currentStars > -1 &&
+                      _titleController.text.isNotEmpty &&
+                      _descriptionController.text.isNotEmpty) {
+                    showReviewConfirm(context);
+                  } else {
+                    _requireRating = (_currentStars == -1);
+                    _validateTitle = (_titleController.text.isEmpty);
+                    _validateDescription =
+                        (_descriptionController.text.isEmpty);
+                    setState(() {});
+                  }
+                },
               )),
     );
   }
@@ -206,7 +272,8 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
                               size: 32,
                               color: Colors.redAccent,
                             ),
-                            onPressed: () => setState(() => images.removeAt(index)),
+                            onPressed: () =>
+                                setState(() => images.removeAt(index)),
                           ),
                           alignment: Alignment.topRight,
                         )
@@ -219,28 +286,6 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
           }
         },
       ),
-    );
-  }
-
-  Widget _getTextfield(
-      String hintText, String helperText, int lines, int maxChars) {
-    return Theme(
-      data: new ThemeData(
-        primaryColor: Colors.grey,
-        primaryColorDark: Colors.grey,
-      ),
-      child: Container(
-          child: TextField(
-        minLines: lines,
-        maxLines: lines,
-        maxLength: maxChars,
-        decoration: new InputDecoration(
-          border: new OutlineInputBorder(
-              borderSide: new BorderSide(color: Colors.teal)),
-          hintText: hintText,
-          helperText: helperText,
-        ),
-      )),
     );
   }
 }

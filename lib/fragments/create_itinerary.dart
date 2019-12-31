@@ -20,7 +20,6 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
   @override
   Widget build(BuildContext context) {
     //setStatusBarDarkColor();
-    debugPrint('${_markers.length}');
     return AnnotatedRegion<SystemUiOverlayStyle>(
     value: SystemUiOverlayStyle.dark.copyWith(
    statusBarColor: Colors.black, // Color for Android

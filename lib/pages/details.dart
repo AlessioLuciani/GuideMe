@@ -137,6 +137,7 @@ class DetailsPageState extends State<DetailsPage> {
                         widget.itinerary.isFavourite
                             ? Icons.favorite
                             : Icons.favorite_border,
+                            color: Colors.redAccent,
                         size: 36,
                       ),
                       onPressed: () =>
@@ -146,21 +147,20 @@ class DetailsPageState extends State<DetailsPage> {
                   SizedBox(
                     width: 16,
                   ),
-                  OutlineButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: new BorderRadius.circular(8.0),
-                        side: BorderSide(color: Colors.red)),
-                    borderSide: BorderSide(
-                        color: Colors.black,
-                        style: BorderStyle.solid,
-                        width: 2),
+                  FlatButton(
+                    child: Text(
+                      "Avvia",
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
                     onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => ItineraryMaps(
                                   itinerary: widget.itinerary,
                                 ))),
-                    child: Text("AVVIA"),
+                    color: Colors.redAccent,
+                    textColor: Colors.white,
                   ),
                   SizedBox(
                     width: 30,
@@ -194,7 +194,8 @@ class DetailsPageState extends State<DetailsPage> {
         polylineId: PolylineId('itinerary'),
         visible: true,
         //latlng is List<LatLng>
-        points: widget.itinerary.stops.map((ItineraryStop s)=>s.coord).toList(),
+        points:
+            widget.itinerary.stops.map((ItineraryStop s) => s.coord).toList(),
         width: 2,
         color: Colors.blue,
       ));
