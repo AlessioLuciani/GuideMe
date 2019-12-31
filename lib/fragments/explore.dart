@@ -4,6 +4,7 @@ import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/utils/utils.dart';
 import 'package:GuideMe/widgets/explore_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ExploreFragment extends StatefulWidget {
   @override
@@ -14,8 +15,13 @@ class _ExploreFragmentState extends State<ExploreFragment> {
 
   @override
   Widget build(BuildContext context) {
-    setStatusBarDarkColor();
-    return SafeArea(
+    //setStatusBarDarkColor();
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+    value: SystemUiOverlayStyle.dark.copyWith(
+   statusBarColor: Colors.black, // Color for Android
+   statusBarBrightness: Brightness.light // Dark == white status bar -- for IOS.
+),
+    child: SafeArea(
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -40,6 +46,6 @@ class _ExploreFragmentState extends State<ExploreFragment> {
                   itinerary: Data.itineraries[index],
                 )),
           )),
-        ]));
+        ])));
   }
 }

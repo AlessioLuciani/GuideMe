@@ -19,9 +19,13 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
 
   @override
   Widget build(BuildContext context) {
-    setStatusBarDarkColor();
+    //setStatusBarDarkColor();
     debugPrint('${_markers.length}');
-    return SafeArea(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+    value: SystemUiOverlayStyle.dark.copyWith(
+   statusBarColor: Colors.black, // Color for Android
+   statusBarBrightness: Brightness.light // Dark == white status bar -- for IOS.
+), child: SafeArea(
         child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Column(
@@ -217,7 +221,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                   },
                 )),
               ],
-            )));
+            ))));
   }
 
   void _addMarker(Marker marker) => _markers.add(marker);
