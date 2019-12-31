@@ -96,7 +96,7 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
               ? Text("")
               : IconButton(
                   icon: Icon(Icons.send),
-                  onPressed: () => showReviewConfirm(context),
+                  onPressed: () => _handleReviewButton(context),
                 )
         ],
       ),
@@ -212,21 +212,22 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
               padding: EdgeInsets.all(5),
               child: FloatingActionButton(
                 child: Icon(Icons.send),
-                onPressed: () {
-                  if (_currentStars > -1 &&
-                      _titleController.text.isNotEmpty &&
-                      _descriptionController.text.isNotEmpty) {
-                    showReviewConfirm(context);
-                  } else {
-                    _requireRating = (_currentStars == -1);
-                    _validateTitle = (_titleController.text.isEmpty);
-                    _validateDescription =
-                        (_descriptionController.text.isEmpty);
-                    setState(() {});
-                  }
-                },
+                onPressed: () => _handleReviewButton(context),
               )),
     );
+  }
+
+  void _handleReviewButton(BuildContext context) {
+    if (_currentStars > -1 &&
+        _titleController.text.isNotEmpty &&
+        _descriptionController.text.isNotEmpty) {
+      showReviewConfirm(context);
+    } else {
+      _requireRating = (_currentStars == -1);
+      _validateTitle = (_titleController.text.isEmpty);
+      _validateDescription = (_descriptionController.text.isEmpty);
+      setState(() {});
+    }
   }
 
   Widget _getGalleryPickers() {
