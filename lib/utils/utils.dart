@@ -2,7 +2,6 @@ import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/commons/user.dart';
 import 'package:GuideMe/pages/confirmation.dart';
 import 'package:GuideMe/utils/data.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -11,7 +10,6 @@ import 'package:flutter/services.dart';
   Itinerary getItineraryRef(Itinerary _itinerary) {
     int index =
         Data.itineraries.indexWhere((Itinerary it) => it.id == _itinerary.id);
-    debugPrint('$index');
     return Data.itineraries[index];
   }
 

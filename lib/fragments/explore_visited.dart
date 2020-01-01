@@ -5,6 +5,7 @@ import 'package:GuideMe/widgets/visited_card.dart';
 import 'package:GuideMe/utils/utils.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class ExploreVisitedFragment extends StatefulWidget {
   @override
@@ -15,18 +16,28 @@ class _ExploreVisitedFragmentState extends State<ExploreVisitedFragment> {
   
   @override
   Widget build(BuildContext context) {
-    setStatusBarDarkColor();
+    //setStatusBarDarkColor();
     if (Data.userVisits.isEmpty)
-      return Center(
+      return AnnotatedRegion<SystemUiOverlayStyle>(
+    value: SystemUiOverlayStyle.dark.copyWith(
+   statusBarColor: Colors.black, // Color for Android
+   statusBarBrightness: Brightness.light // Dark == white status bar -- for IOS.
+), child:
+      Center(
           child: Text(
         "Sembra che tu non abbia ancora seguito nessun itinerario.\nChe aspetti!!",
         textAlign: TextAlign.center,
         style: TextStyle(
           fontSize: 18,
         ),
-      ));
+      )));
 
-    return SafeArea(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+    value: SystemUiOverlayStyle.dark.copyWith(
+   statusBarColor: Colors.black, // Color for Android
+   statusBarBrightness: Brightness.light // Dark == white status bar -- for IOS.
+), child:
+    SafeArea(
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -56,6 +67,6 @@ class _ExploreVisitedFragmentState extends State<ExploreVisitedFragment> {
                     //),
                     //),
                   )))
-        ]));
+        ])));
   }
 }

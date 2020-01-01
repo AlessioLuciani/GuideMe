@@ -4,6 +4,7 @@ import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/utils/utils.dart';
 import 'package:GuideMe/widgets/explore_card.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class FavouritesFragment extends StatefulWidget {
   @override
@@ -15,11 +16,16 @@ class _FavouritesFragmentState extends State<FavouritesFragment>{
 
   @override
   Widget build(BuildContext context) {
-    setStatusBarDarkColor();
+    //setStatusBarDarkColor();
     List<Itinerary> data = favouriteItineraries;
 
     if (data.length == 0) {
-      return SafeArea(
+      return AnnotatedRegion<SystemUiOverlayStyle>(
+    value: SystemUiOverlayStyle.dark.copyWith(
+   statusBarColor: Colors.black, // Color for Android
+   statusBarBrightness: Brightness.light // Dark == white status bar -- for IOS.
+), child:
+      SafeArea(
           child: Column(children: <Widget>[
         SizedBox(
           height: 20,
@@ -45,10 +51,15 @@ class _FavouritesFragmentState extends State<FavouritesFragment>{
                 style: TextStyle(fontSize: 18)),
           ),
         ))
-      ]));
+      ])));
     }
 
-    return SafeArea(
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+    value: SystemUiOverlayStyle.dark.copyWith(
+   statusBarColor: Colors.black, // Color for Android
+   statusBarBrightness: Brightness.light // Dark == white status bar -- for IOS.
+), child:
+    SafeArea(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
@@ -81,7 +92,7 @@ class _FavouritesFragmentState extends State<FavouritesFragment>{
           )
         ],
       ),
-    );
+    ));
   }
 
 }
