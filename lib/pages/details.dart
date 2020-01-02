@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/commons/itinerary_stop.dart';
-import 'package:GuideMe/pages/follow_itinerary_maps.dart';
+import 'package:GuideMe/pages/navigation_maps.dart';
 import 'package:GuideMe/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -34,6 +34,8 @@ class DetailsPageState extends State<DetailsPage> {
               child: GoogleMap(
                 mapType: MapType.terrain,
                 //that needs a list<Polyline>
+                myLocationEnabled: true,
+                myLocationButtonEnabled: false,
                 polylines: _polyline,
                 markers: _markers,
                 onMapCreated: _onMapCreated,
@@ -153,12 +155,27 @@ class DetailsPageState extends State<DetailsPage> {
                       style: TextStyle(fontSize: 15),
                     ),
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                    onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ItineraryMaps(
-                                  itinerary: widget.itinerary,
-                                ))),
+                    onPressed: () => Navigator.push(context, PageRouteBuilder(
+                      pageBuilder: (
+                          BuildContext context,
+                          Animation<double> animation,
+                          Animation<double> secondaryAnimation,
+                        ) =>
+                            NavigationMapsPage(itinerary: widget.itinerary,),
+                        transitionsBuilder: (
+                          BuildContext context,
+                          Animation<double> animation,
+                          Animation<double> secondaryAnimation,
+                          Widget child,
+                        ) =>
+                            SlideTransition(
+                              position: Tween<Offset>(
+                                begin: const Offset(0, 1),
+                                end: Offset.zero,
+                              ).animate(animation),
+                              child: child,
+                            ),
+                      )),
                     color: Colors.redAccent,
                     textColor: Colors.white,
                   ),

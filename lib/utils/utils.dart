@@ -4,6 +4,7 @@ import 'package:GuideMe/pages/confirmation.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 
   // Function used to retrieve the corresponding index of '_itinerary' among itineraries list located in data
@@ -59,4 +60,24 @@ import 'package:flutter/services.dart';
    statusBarColor: Colors.black, // Color for Android
    statusBarBrightness: Brightness.light // Dark == white status bar -- for IOS.
 ));
+}
+
+Future<FlutterTts> playTextToSpeech(String text) async {
+
+  FlutterTts tts = FlutterTts();
+  await tts.setLanguage("it-IT");
+  await tts.speak(text);
+
+  return tts;
+}
+
+Future stopTextToSpeech(Future<FlutterTts> tts) async {
+  if (tts == null) {
+    return;
+  }
+  tts.then((val) => {
+    val.stop()
+  });
+
+
 }

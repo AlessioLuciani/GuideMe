@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'dart:io';
 
+import 'package:permission_handler/permission_handler.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -29,6 +31,11 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    PermissionHandler().checkPermissionStatus(PermissionGroup.location).then((perm) {
+      if (perm != PermissionStatus.granted ) {
+        PermissionHandler().requestPermissions([PermissionGroup.location]);
+      }
+    });
     if (Platform.isAndroid) {
       return AndroidLayout();
     } else {
