@@ -1,23 +1,36 @@
 import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/commons/itinerary_stop.dart';
+import 'package:GuideMe/pages/navigation_description.dart';
+import 'package:GuideMe/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-class NavigationMaps extends StatefulWidget {
+class NavigationMapsPage extends StatefulWidget {
   final Itinerary itinerary;
 
-  const NavigationMaps({Key key, this.itinerary}) : super(key: key);
+  const NavigationMapsPage({Key key, this.itinerary}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => NavigationMapsState();
+  State<StatefulWidget> createState() => NavigationMapsPageState();
 }
 
-class NavigationMapsState extends State<NavigationMaps> {
+class NavigationMapsPageState extends State<NavigationMapsPage> {
+  
    Set<Marker> _markers =Set();
   final Set<Polyline> _polyline = Set();
   GoogleMapController controller;
-  int currentStop = 0;
+  NavigationData navigationData;
+  GoogleMapController mapController;
 
+  
+  @override
+  void initState() {
+    
+   navigationData = 
+    NavigationData(itinerary: widget.itinerary, currentStop: 0, playingAudio: false);
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     _generateMarkers();
@@ -39,7 +52,10 @@ class NavigationMapsState extends State<NavigationMaps> {
         ),
         leading: new IconButton(
           icon: new Icon(Icons.close),
-          onPressed: () => Navigator.of(context).pop(),
+          onPressed: () {
+              stopTextToSpeech(navigationData.tts);
+              Navigator.of(context).pop();
+            },
         ),
       ),
       
@@ -53,6 +69,8 @@ class NavigationMapsState extends State<NavigationMaps> {
               //that needs a list<Polyline>
               polylines: _polyline,
               markers: _markers,
+              myLocationEnabled: true,
+              myLocationButtonEnabled: false,
               onMapCreated: _onMapCreated,
               initialCameraPosition: CameraPosition(target: widget.itinerary.stops[0].coord, zoom: 13.0),
             )
@@ -68,14 +86,18 @@ class NavigationMapsState extends State<NavigationMaps> {
                     top: 30,
                     child: IconButton(
                       icon: Icon(Icons.navigate_before,) ,
-                      onPressed: _previousStop,
+                      onPressed: () {
+                        setState(() {
+                          navigationData.previousStop();
+                        });
+                      },
                     ),
                   ),
                   Positioned(
                     left: 60,
                     top: 30,
                     child: Text(
-                      widget.itinerary.stops[currentStop].name,
+                      widget.itinerary.stops[navigationData.currentStop].name,
                       style: new TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold
@@ -86,7 +108,7 @@ class NavigationMapsState extends State<NavigationMaps> {
                     left: 60,
                     top: 60,
                     child: Text(
-                      (currentStop+1).toString() + "/" + (widget.itinerary.stops.length).toString(),
+                      (navigationData.currentStop+1).toString() + "/" + (widget.itinerary.stops.length).toString(),
                       style: new TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.bold
@@ -98,11 +120,15 @@ class NavigationMapsState extends State<NavigationMaps> {
                     top: 25,
                     child: IconButton(
                       icon: Icon(
-                        Icons.record_voice_over,
+                        navigationData.playingAudio
+                        ? Icons.volume_off
+                        : Icons.record_voice_over,
                         color: Colors.redAccent,
                         size: 40.0,
                       ),
-                      onPressed: () {},
+                      onPressed:() =>
+                        navigationData.toggleAudio(this)
+                      ,
                     ),
                   ),
                   Positioned(
@@ -113,7 +139,29 @@ class NavigationMapsState extends State<NavigationMaps> {
                           Icons.description,
                           size: 40.0,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(context, PageRouteBuilder(
+                            pageBuilder: (
+                                BuildContext context,
+                                Animation<double> animation,
+                                Animation<double> secondaryAnimation,
+                              ) =>
+                                  NavigationDescriptionPage(navigationData: navigationData,),
+                              transitionsBuilder: (
+                                BuildContext context,
+                                Animation<double> animation,
+                                Animation<double> secondaryAnimation,
+                                Widget child,
+                              ) =>
+                                  SlideTransition(
+                                    position: Tween<Offset>(
+                                      begin: const Offset(0, 1),
+                                      end: Offset.zero,
+                                    ).animate(animation),
+                                    child: child,
+                                  ),
+                            ));
+                        },
                     ),
                   ),
                   Positioned(
@@ -121,7 +169,11 @@ class NavigationMapsState extends State<NavigationMaps> {
                     top: 30,
                     child: IconButton(
                       icon: Icon(Icons.navigate_next) ,
-                      onPressed: _nextStop,
+                      onPressed: () {
+                        setState(() {
+                          navigationData.nextStop();
+                        });
+                      },
                     ),
                   )
                   
@@ -136,10 +188,9 @@ class NavigationMapsState extends State<NavigationMaps> {
 
   void _onMapCreated(GoogleMapController controllerParam) {
 
+    mapController = controllerParam;
     
     setState(() {
-      controller = controllerParam;
-
       _polyline.add(Polyline(
         polylineId: PolylineId('itinerary'),
         visible: true,
@@ -153,25 +204,7 @@ class NavigationMapsState extends State<NavigationMaps> {
 
   }
 
-  // Goes to the next stop
-  void _nextStop() {
-    if (currentStop == widget.itinerary.stops.length - 1) {
-      return;
-    }
-    setState(() {
-      currentStop++;
-    });
-  }
-
-// Goes to the previous stop
-  void _previousStop() {
-    if (currentStop == 0) {
-      return;
-    }
-    setState(() {
-      currentStop--;
-    });
-  }
+  
 
   /// Generates a marker for every pin.
     void _generateMarkers() {
@@ -179,13 +212,13 @@ class NavigationMapsState extends State<NavigationMaps> {
       for (int i = 0; i < widget.itinerary.stops.length; i++) {
         _markers.add(Marker(
           markerId: MarkerId(widget.itinerary.stops[i].coord.toString()),
-          icon: i == currentStop
+          icon: i == navigationData.currentStop
             ? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed)
             : BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure), 
           position: widget.itinerary.stops[i].coord,
           onTap: () {
             setState(() {
-              currentStop = i;
+              navigationData.currentStop = i;
             });
           },
           infoWindow: InfoWindow(
@@ -198,3 +231,51 @@ class NavigationMapsState extends State<NavigationMaps> {
 
   }
   }
+
+  /// Class that contains data for the current navigation.
+  /// */
+  class NavigationData {
+
+    Itinerary itinerary;
+    int currentStop;
+    bool playingAudio;
+    Future<FlutterTts> tts;
+
+    NavigationData ({this.itinerary, this.currentStop, this.playingAudio});
+
+    // Goes to the next stop
+  void nextStop() {
+    if (currentStop == itinerary.stops.length - 1) {
+      return;
+    }
+      currentStop++;
+  }
+
+// Goes to the previous stop
+  void previousStop() {
+    if (currentStop == 0) {
+      return;
+    }
+      currentStop--;
+  }
+
+// Toggle the audio
+  void toggleAudio(State state) {
+    if (playingAudio) {
+      stopTextToSpeech(tts);
+    } else {
+      tts = playTextToSpeech(itinerary.stops[currentStop].description);                        
+    }
+    tts.then((val) => {
+      val.setCompletionHandler(() {
+        state.setState(() {
+          playingAudio = false;
+        });
+      })
+    });
+    state.setState(() {
+      playingAudio = !playingAudio;
+    });
+  }
+  }
+
