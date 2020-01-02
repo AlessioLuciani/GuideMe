@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:flutter/services.dart';
 
 class ChooseStopsMaps extends StatefulWidget {
   final void Function(Marker marker) addMarker;

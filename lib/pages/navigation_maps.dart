@@ -1,3 +1,6 @@
+import 'dart:io';
+import 'dart:math';
+
 import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/commons/itinerary_stop.dart';
 import 'package:GuideMe/pages/navigation_description.dart';
@@ -5,6 +8,9 @@ import 'package:GuideMe/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:location/location.dart';
+
 
 class NavigationMapsPage extends StatefulWidget {
   final Itinerary itinerary;
@@ -57,6 +63,14 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
               Navigator.of(context).pop();
             },
         ),
+        actions: <Widget>[
+          Platform.isIOS
+              ? IconButton(
+                  icon: Icon(Icons.near_me),
+                  onPressed: moveCamToClosestStop,
+                )
+              : Text("")
+        ],
       ),
       
       body: Column(
@@ -64,15 +78,31 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
         children: <Widget>[
 
           Expanded(
-            child: GoogleMap(
-              mapType: MapType.terrain,
-              //that needs a list<Polyline>
-              polylines: _polyline,
-              markers: _markers,
-              myLocationEnabled: true,
-              myLocationButtonEnabled: false,
-              onMapCreated: _onMapCreated,
-              initialCameraPosition: CameraPosition(target: widget.itinerary.stops[0].coord, zoom: 13.0),
+            child: Stack(children: <Widget>[
+                GoogleMap(
+                  mapType: MapType.terrain,
+                  //that needs a list<Polyline>
+                  polylines: _polyline,
+                  markers: _markers,
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: false,
+                  onMapCreated: _onMapCreated,
+                  initialCameraPosition: CameraPosition(target: widget.itinerary.stops[0].coord, zoom: 13.0),
+                ),
+                Positioned(bottom: 20, right: 16, child: () {
+                if (Platform.isAndroid) {
+                  return FloatingActionButton(
+                    onPressed: moveCamToClosestStop,
+                    child: Icon(
+                      Icons.my_location
+                    ),
+                  );
+                } else {
+                  return Text("");
+                }
+              }(),)
+                
+              ],
             )
           ),
 
@@ -183,6 +213,7 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
           )
         ],
       ),
+
     );
   }
 
@@ -225,15 +256,43 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
             title: widget.itinerary.stops[i].name,
           ),
         ));
-   }
+      }
+    }
 
-  
+    /// Moves the camera to the user's closest stop.
+    void moveCamToClosestStop() async {
+      var perm = await PermissionHandler().checkPermissionStatus(PermissionGroup.location);
+      if (perm != PermissionStatus.granted) {
+        return;
+      }
+      var location = new Location();
+      var curLocation = await location.getLocation();
 
-  }
+      double minDist = 10000000000; // Smallest distance found between user's location and a stop
+      int closestStop = 0;
+
+      for (int i = 0; i < widget.itinerary.stops.length; i++) {
+        var stop = widget.itinerary.stops[i];
+        double curDist;
+        if ((curDist = distanceInKmBetweenEarthCoordinates(curLocation.latitude, curLocation.longitude,
+          stop.coord.latitude, stop.coord.longitude)) < minDist) {
+            minDist = curDist;
+            closestStop = i;
+        }
+      }
+
+      mapController.moveCamera(CameraUpdate.newLatLngZoom(
+        LatLng(widget.itinerary.stops[closestStop].coord.latitude,
+          widget.itinerary.stops[closestStop].coord.longitude), 14.0));
+      setState(() {
+      navigationData.currentStop = closestStop;
+      });
+
+    }
+
   }
 
   /// Class that contains data for the current navigation.
-  /// */
   class NavigationData {
 
     Itinerary itinerary;
