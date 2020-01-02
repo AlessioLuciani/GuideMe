@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart';
-import 'package:location_permissions/location_permissions.dart';
 
 class ChooseStopsMaps extends StatefulWidget {
   final void Function(Marker marker) addMarker;
@@ -39,13 +38,7 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
 
   void initState() {
     super.initState();
-    askPermissions();
   }
-
-  Future<void> askPermissions() async {
-    await LocationPermissions().requestPermissions();
-  } 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

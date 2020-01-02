@@ -135,13 +135,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.2+3"
-  location_permissions:
-    dependency: "direct main"
-    description:
-      name: location_permissions
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.3"
   matcher:
     dependency: transitive
     description:
