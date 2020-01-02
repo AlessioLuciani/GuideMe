@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:GuideMe/utils/utils.dart';
@@ -164,6 +165,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                     ],
                   ),
                 ),
+
                 SizedBox(height: 10),
                 Flexible(
                     child: ListView.builder(
@@ -219,6 +221,37 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                         ));
                   },
                 )),
+                () {
+                  if (Platform.isIOS) {
+                    return Row(children: <Widget>[
+                  Expanded(child: Text(""),
+
+                  ),
+                  FlatButton(
+                      child: Text(
+                        "Fatto",
+
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                      color: Colors.redAccent,
+                    textColor: Colors.white,
+                      onPressed: () {
+                        showAdditionConfirm(context);
+                      },
+                    ),
+                ]);
+                  } else {
+                    return Text("");
+                  }
+                }(),
+                
+                    
+                    SizedBox(
+                              height: 10,
+                            ),
               ],
             ))));
   }

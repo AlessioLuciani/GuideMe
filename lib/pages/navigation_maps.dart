@@ -63,14 +63,6 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
               Navigator.of(context).pop();
             },
         ),
-        actions: <Widget>[
-          Platform.isIOS
-              ? IconButton(
-                  icon: Icon(Icons.near_me),
-                  onPressed: moveCamToClosestStop,
-                )
-              : Text("")
-        ],
       ),
       
       body: Column(
@@ -89,18 +81,13 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                   onMapCreated: _onMapCreated,
                   initialCameraPosition: CameraPosition(target: widget.itinerary.stops[0].coord, zoom: 13.0),
                 ),
-                Positioned(bottom: 20, right: 16, child: () {
-                if (Platform.isAndroid) {
-                  return FloatingActionButton(
+                Positioned(bottom: 20, right: 16, child: FloatingActionButton.extended(
                     onPressed: moveCamToClosestStop,
-                    child: Icon(
-                      Icons.my_location
+                    icon: Icon(Icons.nature_people),
+                    label: Text(
+                      "Next stop"
                     ),
-                  );
-                } else {
-                  return Text("");
-                }
-              }(),)
+                  )),
                 
               ],
             )
@@ -108,12 +95,12 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
 
           SafeArea(
             child: Container(
-              height: 100,
+              height: 80,
               child: Stack(
                 children: <Widget>[
                   Positioned(
                     left: 0,
-                    top: 30,
+                    top: 20,
                     child: IconButton(
                       icon: Icon(Icons.navigate_before,) ,
                       onPressed: () {
@@ -125,7 +112,7 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                   ),
                   Positioned(
                     left: 60,
-                    top: 30,
+                    top: 20,
                     child: Text(
                       widget.itinerary.stops[navigationData.currentStop].name,
                       style: new TextStyle(
@@ -136,7 +123,7 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                   ),
                    Positioned(
                     left: 60,
-                    top: 60,
+                    top: 50,
                     child: Text(
                       (navigationData.currentStop+1).toString() + "/" + (widget.itinerary.stops.length).toString(),
                       style: new TextStyle(
@@ -147,11 +134,11 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                   ),
                   Positioned(
                     right: 110,
-                    top: 25,
+                    top: 15,
                     child: IconButton(
                       icon: Icon(
                         navigationData.playingAudio
-                        ? Icons.volume_off
+                        ? Icons.stop
                         : Icons.record_voice_over,
                         color: Colors.redAccent,
                         size: 40.0,
@@ -163,7 +150,7 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                   ),
                   Positioned(
                     right: 50,
-                    top: 25,
+                    top: 15,
                     child: IconButton(
                       icon: Icon(
                           Icons.description,
@@ -196,7 +183,7 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                   ),
                   Positioned(
                     right: 0,
-                    top: 30,
+                    top: 20,
                     child: IconButton(
                       icon: Icon(Icons.navigate_next) ,
                       onPressed: () {

@@ -61,7 +61,7 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
             GoogleMap(
               initialCameraPosition: _myLocation,
               myLocationEnabled: true,
-              myLocationButtonEnabled: true,
+              myLocationButtonEnabled: false,
               polylines: _polyline,
               markers: _markers.toSet(),
               onTap: (LatLng point) => setState(() {

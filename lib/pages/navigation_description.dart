@@ -42,12 +42,12 @@ class NavigationDescriptionPageState extends State<NavigationDescriptionPage> {
         children: <Widget>[
           Image.asset(widget.navigationData.itinerary.coverImage),
           Container(
-              height: 100,
+              height: 80,
               child: Stack(
                 children: <Widget>[   
                   Positioned(
                     left: 0,
-                    top: 30,
+                    top: 20,
                     child: IconButton(
                       icon: Icon(Icons.navigate_before,) ,
                       onPressed: () {
@@ -59,7 +59,7 @@ class NavigationDescriptionPageState extends State<NavigationDescriptionPage> {
                   ),      
                   Positioned(
                     left: 60,
-                    top: 30,
+                    top: 20,
                     child: Text(
                       widget.navigationData.itinerary.stops[widget.navigationData.currentStop].name,
                       style: new TextStyle(
@@ -70,7 +70,7 @@ class NavigationDescriptionPageState extends State<NavigationDescriptionPage> {
                   ),
                    Positioned(
                     left: 60,
-                    top: 60,
+                    top: 50,
                     child: Text(
                       (widget.navigationData.currentStop+1).toString() + "/" + (widget.navigationData.itinerary.stops.length).toString(),
                       style: new TextStyle(
@@ -81,7 +81,7 @@ class NavigationDescriptionPageState extends State<NavigationDescriptionPage> {
                   ),
                   Positioned(
                     right: 50,
-                    top: 25,
+                    top: 15,
                     child: IconButton(
                       icon: Icon(
                         widget.navigationData.playingAudio
@@ -97,7 +97,7 @@ class NavigationDescriptionPageState extends State<NavigationDescriptionPage> {
                   ),
                   Positioned(
                     right: 0,
-                    top: 30,
+                    top: 20,
                     child: IconButton(
                       icon: Icon(Icons.navigate_next) ,
                       onPressed: () {
