@@ -139,7 +139,7 @@ class DetailsPageState extends State<DetailsPage> {
                         widget.itinerary.isFavourite
                             ? Icons.favorite
                             : Icons.favorite_border,
-                            color: Colors.redAccent,
+                        color: Colors.redAccent,
                         size: 36,
                       ),
                       onPressed: () =>
