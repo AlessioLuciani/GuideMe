@@ -100,110 +100,113 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
                 )
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: Text(
-                _requireRating
-                    ? "Seleziona una stella per la recensione"
-                    : widget.msgs[_currentStars >= 0 && _currentStars <= 4
-                        ? _currentStars + 1
-                        : 0],
-                style:
-                    TextStyle(color: _requireRating ? Colors.red : Colors.grey),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(
+                height: 20,
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 10),
-              child: _getStars(),
-            ),
-            Divider(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(height: 10),
-                Text(
-                  "Titolo",
-                  style: TextStyle(fontSize: 20),
+              Center(
+                child: Text(
+                  _requireRating
+                      ? "Seleziona una stella per la recensione"
+                      : widget.msgs[_currentStars >= 0 && _currentStars <= 4
+                          ? _currentStars + 1
+                          : 0],
+                  style: TextStyle(
+                      color: _requireRating ? Colors.red : Colors.grey),
                 ),
-                SizedBox(height: 10),
-                Theme(
-                  data: new ThemeData(
-                    primaryColor: Colors.grey,
-                    primaryColorDark: Colors.grey,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                child: _getStars(),
+              ),
+              Divider(),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(height: 10),
+                  Text(
+                    "Titolo",
+                    style: TextStyle(fontSize: 20),
                   ),
-                  child: Container(
-                      child: TextField(
-                    controller: _titleController,
-                    onChanged: (value) =>
-                        setState(() => _validateTitle = value.isEmpty),
-                    minLines: 2,
-                    maxLines: 2,
-                    maxLength: 50,
-                    decoration: new InputDecoration(
-                      errorText: _validateTitle
-                          ? "Questo campo non puó essere lasciato vuoto"
-                          : null,
-                      border: new OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.teal)),
-                      hintText: "Le cose più importanti che vuoi condividere.",
-                      helperText:
-                          "La tua esperienza in non più di 50 caratteri.",
+                  SizedBox(height: 10),
+                  Theme(
+                    data: new ThemeData(
+                      primaryColor: Colors.grey,
+                      primaryColorDark: Colors.grey,
                     ),
-                  )),
-                ),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                SizedBox(height: 10),
-                Text(
-                  "Descrizione",
-                  style: TextStyle(fontSize: 20),
-                ),
-                SizedBox(height: 10),
-                Theme(
-                  data: new ThemeData(
-                    primaryColor: Colors.grey,
-                    primaryColorDark: Colors.grey,
+                    child: Container(
+                        child: TextField(
+                      controller: _titleController,
+                      onChanged: (value) =>
+                          setState(() => _validateTitle = value.isEmpty),
+                      minLines: 2,
+                      maxLines: 2,
+                      maxLength: 50,
+                      decoration: new InputDecoration(
+                        errorText: _validateTitle
+                            ? "Questo campo non puó essere lasciato vuoto"
+                            : null,
+                        border: new OutlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.teal)),
+                        hintText:
+                            "Le cose più importanti che vuoi condividere.",
+                        helperText:
+                            "La tua esperienza in non più di 50 caratteri.",
+                      ),
+                    )),
                   ),
-                  child: Container(
-                      child: TextField(
-                    controller: _descriptionController,
-                    onChanged: (value) =>
-                        setState(() => _validateDescription = value.isEmpty),
-                    minLines: 4,
-                    maxLines: 4,
-                    maxLength: 300,
-                    decoration: new InputDecoration(
-                      errorText: _validateDescription
-                          ? "Questo campo non puó essere lasciato vuoto"
-                          : null,
-                      border: new OutlineInputBorder(
-                          borderSide: new BorderSide(color: Colors.teal)),
-                      hintText:
-                          "Cosa ti è piaciuto e cosa non ti è piaciuto? A chi lo consiglieresti?",
-                      helperText:
-                          "La tua esperienza in non più di 300 caratteri.",
+                ],
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  SizedBox(height: 10),
+                  Text(
+                    "Descrizione",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  SizedBox(height: 10),
+                  Theme(
+                    data: new ThemeData(
+                      primaryColor: Colors.grey,
+                      primaryColorDark: Colors.grey,
                     ),
-                  )),
-                ),
-              ],
-            ),
-            SizedBox(height: 10),
-            Text(
-              "Foto",
-              style: TextStyle(fontSize: 20),
-            ),
-            _getGalleryPickers(),
-          ],
+                    child: Container(
+                        child: TextField(
+                      controller: _descriptionController,
+                      onChanged: (value) =>
+                          setState(() => _validateDescription = value.isEmpty),
+                      minLines: 4,
+                      maxLines: 4,
+                      maxLength: 300,
+                      decoration: new InputDecoration(
+                        errorText: _validateDescription
+                            ? "Questo campo non puó essere lasciato vuoto"
+                            : null,
+                        border: new OutlineInputBorder(
+                            borderSide: new BorderSide(color: Colors.teal)),
+                        hintText:
+                            "Cosa ti è piaciuto e cosa non ti è piaciuto? A chi lo consiglieresti?",
+                        helperText:
+                            "La tua esperienza in non più di 300 caratteri.",
+                      ),
+                    )),
+                  ),
+                ],
+              ),
+              SizedBox(height: 10),
+              Text(
+                "Foto",
+                style: TextStyle(fontSize: 20),
+              ),
+              _getGalleryPickers(),
+            ],
+          ),
         ),
       ),
       floatingActionButton: Platform.isIOS
