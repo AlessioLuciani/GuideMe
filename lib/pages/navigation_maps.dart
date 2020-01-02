@@ -285,7 +285,7 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
         LatLng(widget.itinerary.stops[closestStop].coord.latitude,
           widget.itinerary.stops[closestStop].coord.longitude), 14.0));
       setState(() {
-      navigationData.currentStop = closestStop;
+        navigationData.currentStop = closestStop;
       });
 
     }
