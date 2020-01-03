@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/widgets/explore_card.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,8 @@ class ExploreFragment extends StatefulWidget {
 class _ExploreFragmentState extends State<ExploreFragment> {
   final GlobalKey<RefreshIndicatorState> _refreshKey =
       GlobalKey<RefreshIndicatorState>();
+
+  List<Itinerary> _itineraries = shuffledItineraries;
 
   @override
   Widget build(BuildContext context) {
@@ -41,21 +44,22 @@ class _ExploreFragmentState extends State<ExploreFragment> {
                       key: _refreshKey,
                       onRefresh: () => refreshList(),
                       child: ListView.builder(
-                        itemCount: itineraries.length,
+                        itemCount: _itineraries.length,
                         itemBuilder: (_, index) => Container(
                             // Add padding to the last item of the list
-                            padding: index == itineraries.length - 1
+                            padding: index == _itineraries.length - 1
                                 ? EdgeInsets.only(bottom: 10)
                                 : EdgeInsets.only(bottom: 0),
                             // Form a new card from the current itinerary information
                             child: ExploreCard(
-                              itinerary: itineraries[index],
+                              itinerary: _itineraries[index],
                             )),
                       ))),
             ])));
   }
 
   Future<Null> refreshList() async {
+    _itineraries = shuffledItineraries;
     await Future.delayed(Duration(seconds: 1));
     setState(() {});
     return null;

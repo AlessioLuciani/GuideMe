@@ -257,10 +257,12 @@ List<ItineraryVisit> _visits = [
   new ItineraryVisit(_itineraries[13], users[3], _getRandomDate),
 ];
 
-List<Itinerary> get itineraries {
+List<Itinerary> get shuffledItineraries {
   _itineraries.shuffle();
   return _itineraries;
 }
+
+List<Itinerary> get itineraries => _itineraries;
 
 DateTime get _getRandomDate =>
     DateTime.now().subtract(new Duration(days: _generator.nextInt(365)));
