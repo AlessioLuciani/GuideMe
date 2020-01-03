@@ -328,7 +328,7 @@ class NavigationData {
       tts = playTextToSpeech(itinerary.stops[currentStop].description);
     }
     tts.then((val) => val.setCompletionHandler(
-        () => state.setState(() => playingAudio = false)));
-    state.setState(() => playingAudio = !playingAudio);
+        () => playingAudio = false));
+    playingAudio = !playingAudio;
   }
 }
