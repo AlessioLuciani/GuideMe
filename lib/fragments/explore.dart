@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/widgets/explore_card.dart';
+import 'package:GuideMe/widgets/refresh_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -12,8 +13,8 @@ class ExploreFragment extends StatefulWidget {
 }
 
 class _ExploreFragmentState extends State<ExploreFragment> {
-  final GlobalKey<RefreshIndicatorState> _refreshKey =
-      GlobalKey<RefreshIndicatorState>();
+  //final GlobalKey<RefreshIndicatorState> _refreshKey =
+  //  GlobalKey<RefreshIndicatorState>();
 
   List<Itinerary> _itineraries = shuffledItineraries;
 
@@ -40,9 +41,8 @@ class _ExploreFragmentState extends State<ExploreFragment> {
                               fontSize: 40, fontWeight: FontWeight.bold))),
               SizedBox(height: Platform.isAndroid ? 0 : 20),
               Expanded(
-                  child: RefreshIndicator(
-                      key: _refreshKey,
-                      onRefresh: () => refreshList(),
+                  child: MyRefreshIndicator(
+                      onRefresh: _refreshList,
                       child: ListView.builder(
                         itemCount: _itineraries.length,
                         itemBuilder: (_, index) => Container(
@@ -58,7 +58,7 @@ class _ExploreFragmentState extends State<ExploreFragment> {
             ])));
   }
 
-  Future<Null> refreshList() async {
+  Future<Null> _refreshList() async {
     _itineraries = shuffledItineraries;
     await Future.delayed(Duration(seconds: 1));
     setState(() {});

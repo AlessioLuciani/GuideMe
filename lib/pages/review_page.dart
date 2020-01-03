@@ -224,7 +224,7 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
     if (_currentStars > -1 &&
         _titleController.text.isNotEmpty &&
         _descriptionController.text.isNotEmpty) {
-      showReviewConfirm(context);
+      showReviewConfirm(context, widget.itinerary);
     } else {
       _requireRating = (_currentStars == -1);
       _validateTitle = (_titleController.text.isEmpty);

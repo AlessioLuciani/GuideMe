@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 
 class ConfirmationPage extends StatelessWidget {
   final Itinerary itinerary;
-  final String confirmMsg;
 
-  const ConfirmationPage({Key key, this.itinerary, this.confirmMsg}) : super(key: key);
+  const ConfirmationPage({Key key, this.itinerary}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +39,10 @@ class ConfirmationPage extends StatelessWidget {
               style: TextStyle(fontSize: 18),
             ),
             onPressed: () {
-              reviewItinerary(itinerary);
+              if (itinerary != null) {
+                // In case this is a confirmation of a sent review
+                reviewItinerary(itinerary);
+              }
               Navigator.of(context).pop();
             },
           ),

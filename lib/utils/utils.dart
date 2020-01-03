@@ -42,10 +42,10 @@ void favourite(Itinerary itinerary) {
   getItineraryRef(itinerary).toggleFavourite();
 }
 
-void showReviewConfirm(BuildContext context) {
+void showReviewConfirm(BuildContext context, Itinerary itinerary) {
   currentMsgIndex = 0;
   Navigator.pushReplacement(
-      context, MaterialPageRoute(builder: (context) => ConfirmationPage()));
+      context, MaterialPageRoute(builder: (context) => ConfirmationPage(itinerary: itinerary,)));
 }
 
 void showAdditionConfirm(BuildContext context) {
