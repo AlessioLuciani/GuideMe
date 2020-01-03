@@ -75,7 +75,7 @@ class AndroidLayoutState extends State<AndroidLayout> {
         onTap: () => _onSelectItem(i),
       ));
     }
-    User currentUser = Data.users[Data.currentUserIndex];
+    User currentUser = users[currentUserIndex];
     return new Scaffold(
         // Avoid the Scaffold to resize himself when
         resizeToAvoidBottomInset: false,

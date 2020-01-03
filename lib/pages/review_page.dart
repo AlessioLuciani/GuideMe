@@ -47,7 +47,7 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
   _getStars() {
     List<Star> stars = [];
 
-    for (var i = 0; i < Data.RATING_STARS; i++) {
+    for (var i = 0; i < RATING_STARS; i++) {
       stars.add(new Star(
         color: (i <= _currentStars) ? Colors.yellow : Colors.grey[300],
         onTap: () => setState(() {

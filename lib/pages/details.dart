@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/commons/itinerary_stop.dart';
 import 'package:GuideMe/pages/navigation_maps.dart';
+import 'package:GuideMe/pages/review_list.dart';
 import 'package:GuideMe/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -45,17 +46,7 @@ class DetailsPageState extends State<DetailsPage> {
                 ),
               )),
           Padding(
-            padding: EdgeInsets.only(left: 20, top: 20),
-            child: Text(
-              "Descrizione",
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: 20, right: 20, top: 16),
+            padding: EdgeInsets.only(left: 20, right: 20, top: 20),
             child: Text(
               widget.itinerary.longDescription,
               style: TextStyle(
@@ -130,58 +121,96 @@ class DetailsPageState extends State<DetailsPage> {
             child: Align(
               alignment: FractionalOffset.bottomCenter,
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.only(bottom: 8),
-                    child: IconButton(
-                      icon: new Icon(
-                        widget.itinerary.isFavourite
-                            ? Icons.favorite
-                            : Icons.favorite_border,
-                        color: Colors.redAccent,
-                        size: 36,
+                    padding: EdgeInsets.only(left: 30),
+                    child: InkWell(
+                      onTap: () => _goToList(context),
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            widget.itinerary.avgReview,
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          SizedBox(
+                            width: 2,
+                          ),
+                          Icon(
+                            Icons.star,
+                            color: Colors.redAccent,
+                            size: 36,
+                          ),
+                          SizedBox(
+                            width: 6,
+                          ),
+                          Icon(
+                            Icons.arrow_drop_down,
+                            size: 36,
+                          ),
+                        ],
                       ),
-                      onPressed: () =>
-                          setState(() => favourite(widget.itinerary)),
                     ),
                   ),
-                  SizedBox(
-                    width: 16,
+                  Row(
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.only(bottom: 8),
+                        child: IconButton(
+                          icon: new Icon(
+                            widget.itinerary.isFavourite
+                                ? Icons.favorite
+                                : Icons.favorite_border,
+                            color: Colors.redAccent,
+                            size: 36,
+                          ),
+                          onPressed: () =>
+                              setState(() => favourite(widget.itinerary)),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 16,
+                      ),
+                      FlatButton(
+                        child: Text(
+                          "Avvia",
+                          style: TextStyle(fontSize: 15),
+                        ),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0)),
+                        onPressed: () => Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              pageBuilder: (
+                                BuildContext context,
+                                Animation<double> animation,
+                                Animation<double> secondaryAnimation,
+                              ) =>
+                                  NavigationMapsPage(
+                                itinerary: widget.itinerary,
+                              ),
+                              transitionsBuilder: (
+                                BuildContext context,
+                                Animation<double> animation,
+                                Animation<double> secondaryAnimation,
+                                Widget child,
+                              ) =>
+                                  SlideTransition(
+                                position: Tween<Offset>(
+                                  begin: const Offset(0, 1),
+                                  end: Offset.zero,
+                                ).animate(animation),
+                                child: child,
+                              ),
+                            )),
+                        color: Colors.redAccent,
+                        textColor: Colors.white,
+                      ),
+                      SizedBox(
+                        width: 30,
+                      )
+                    ],
                   ),
-                  FlatButton(
-                    child: Text(
-                      "Avvia",
-                      style: TextStyle(fontSize: 15),
-                    ),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                    onPressed: () => Navigator.push(context, PageRouteBuilder(
-                      pageBuilder: (
-                          BuildContext context,
-                          Animation<double> animation,
-                          Animation<double> secondaryAnimation,
-                        ) =>
-                            NavigationMapsPage(itinerary: widget.itinerary,),
-                        transitionsBuilder: (
-                          BuildContext context,
-                          Animation<double> animation,
-                          Animation<double> secondaryAnimation,
-                          Widget child,
-                        ) =>
-                            SlideTransition(
-                              position: Tween<Offset>(
-                                begin: const Offset(0, 1),
-                                end: Offset.zero,
-                              ).animate(animation),
-                              child: child,
-                            ),
-                      )),
-                    color: Colors.redAccent,
-                    textColor: Colors.white,
-                  ),
-                  SizedBox(
-                    width: 30,
-                  )
                 ],
               ),
             ),
@@ -217,5 +246,33 @@ class DetailsPageState extends State<DetailsPage> {
         color: Colors.blue,
       ));
     });
+  }
+
+  void _goToList(BuildContext context) {
+    Navigator.push(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) =>
+              ReviewListPage(
+            itinerary: widget.itinerary,
+          ),
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) =>
+              SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(0, 1),
+              end: Offset.zero,
+            ).animate(animation),
+            child: child,
+          ),
+        ));
   }
 }

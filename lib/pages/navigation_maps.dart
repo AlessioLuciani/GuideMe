@@ -1,6 +1,3 @@
-import 'dart:io';
-import 'dart:math';
-
 import 'package:GuideMe/commons/Itinerary.dart';
 import 'package:GuideMe/commons/itinerary_stop.dart';
 import 'package:GuideMe/pages/navigation_description.dart';
@@ -10,7 +7,6 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:location/location.dart';
-
 
 class NavigationMapsPage extends StatefulWidget {
   final Itinerary itinerary;
@@ -22,21 +18,19 @@ class NavigationMapsPage extends StatefulWidget {
 }
 
 class NavigationMapsPageState extends State<NavigationMapsPage> {
-  
-   Set<Marker> _markers =Set();
+  Set<Marker> _markers = Set();
   final Set<Polyline> _polyline = Set();
   GoogleMapController controller;
   NavigationData navigationData;
   GoogleMapController mapController;
 
-  
   @override
   void initState() {
-    
-   navigationData = 
-    NavigationData(itinerary: widget.itinerary, currentStop: 0, playingAudio: false);
+    navigationData = NavigationData(
+        itinerary: widget.itinerary, currentStop: 0, playingAudio: false);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     _generateMarkers();
@@ -48,7 +42,9 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(widget.itinerary.title),
-            SizedBox(height: 2,),
+            SizedBox(
+              height: 2,
+            ),
             Text(
               'Creato da ${widget.itinerary.authorName()}',
               style: TextStyle(fontSize: 13, color: Colors.white70),
@@ -59,242 +55,239 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
         leading: new IconButton(
           icon: new Icon(Icons.close),
           onPressed: () {
-              stopTextToSpeech(navigationData.tts);
-              Navigator.of(context).pop();
-            },
+            stopTextToSpeech(navigationData.tts);
+            Navigator.of(context).pop();
+          },
         ),
       ),
-      
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-
           Expanded(
-            child: Stack(children: <Widget>[
-                GoogleMap(
-                  mapType: MapType.terrain,
-                  //that needs a list<Polyline>
-                  polylines: _polyline,
-                  markers: _markers,
-                  myLocationEnabled: true,
-                  myLocationButtonEnabled: false,
-                  onMapCreated: _onMapCreated,
-                  initialCameraPosition: CameraPosition(target: widget.itinerary.stops[0].coord, zoom: 13.0),
-                ),
-                Positioned(bottom: 20, right: 16, child: FloatingActionButton.extended(
+              child: Stack(
+            children: <Widget>[
+              GoogleMap(
+                mapType: MapType.terrain,
+                //that needs a list<Polyline>
+                polylines: _polyline,
+                markers: _markers,
+                myLocationEnabled: true,
+                myLocationButtonEnabled: false,
+                onMapCreated: _onMapCreated,
+                initialCameraPosition: CameraPosition(
+                    target: widget.itinerary.stops[0].coord, zoom: 14.0),
+              ),
+              Positioned(
+                  bottom: 20,
+                  right: 16,
+                  child: FloatingActionButton.extended(
                     onPressed: moveCamToClosestStop,
                     icon: Icon(Icons.nature_people),
-                    label: Text(
-                      "Next stop"
-                    ),
+                    label: Text("Next stop"),
                   )),
-                
-              ],
-            )
-          ),
-
+            ],
+          )),
           SafeArea(
-            child: Container(
-              height: 80,
-              child: Stack(
-                children: <Widget>[
-                  Positioned(
-                    left: 0,
-                    top: 20,
-                    child: IconButton(
-                      icon: Icon(Icons.navigate_before,) ,
+            child: Stack(
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    IconButton(
+                      icon: Icon(
+                        Icons.navigate_before,
+                        size: 30,
+                      ),
                       onPressed: () {
                         setState(() {
                           navigationData.previousStop();
                         });
                       },
                     ),
-                  ),
-                  Positioned(
-                    left: 60,
-                    top: 20,
-                    child: Text(
-                      widget.itinerary.stops[navigationData.currentStop].name,
-                      style: new TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold
-                      ),
-                    ),
-                  ),
-                   Positioned(
-                    left: 60,
-                    top: 50,
-                    child: Text(
-                      (navigationData.currentStop+1).toString() + "/" + (widget.itinerary.stops.length).toString(),
-                      style: new TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    right: 110,
-                    top: 15,
-                    child: IconButton(
-                      icon: Icon(
-                        navigationData.playingAudio
-                        ? Icons.stop
-                        : Icons.record_voice_over,
-                        color: Colors.redAccent,
-                        size: 40.0,
-                      ),
-                      onPressed:() =>
-                        navigationData.toggleAudio(this)
-                      ,
-                    ),
-                  ),
-                  Positioned(
-                    right: 50,
-                    top: 15,
-                    child: IconButton(
-                      icon: Icon(
-                          Icons.description,
-                          size: 40.0,
-                        ),
-                        onPressed: () {
-                          Navigator.push(context, PageRouteBuilder(
-                            pageBuilder: (
-                                BuildContext context,
-                                Animation<double> animation,
-                                Animation<double> secondaryAnimation,
-                              ) =>
-                                  NavigationDescriptionPage(navigationData: navigationData,),
-                              transitionsBuilder: (
-                                BuildContext context,
-                                Animation<double> animation,
-                                Animation<double> secondaryAnimation,
-                                Widget child,
-                              ) =>
-                                  SlideTransition(
-                                    position: Tween<Offset>(
-                                      begin: const Offset(0, 1),
-                                      end: Offset.zero,
-                                    ).animate(animation),
-                                    child: child,
-                                  ),
-                            ));
-                        },
-                    ),
-                  ),
-                  Positioned(
-                    right: 0,
-                    top: 20,
-                    child: IconButton(
-                      icon: Icon(Icons.navigate_next) ,
+                    Expanded(
+                        child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: <Widget>[
+                        Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Text(
+                                widget.itinerary
+                                    .stops[navigationData.currentStop].name,
+                                style: new TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                (navigationData.currentStop + 1).toString() +
+                                    "/" +
+                                    (widget.itinerary.stops.length).toString(),
+                                style: new TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(height: 0,),
+                            ]),
+                        Padding(
+                            padding: EdgeInsets.only(bottom: 10),
+                            child: IconButton(
+                              icon: Icon(
+                                navigationData.playingAudio
+                                    ? Icons.stop
+                                    : Icons.record_voice_over,
+                                color: Colors.redAccent,
+                                size: 40.0,
+                              ),
+                              onPressed: () => navigationData.toggleAudio(this),
+                            )),
+                        Padding(
+                            padding: EdgeInsets.only(bottom: 10),
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.description,
+                                size: 40.0,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    PageRouteBuilder(
+                                      pageBuilder: (
+                                        BuildContext context,
+                                        Animation<double> animation,
+                                        Animation<double> secondaryAnimation,
+                                      ) =>
+                                          NavigationDescriptionPage(
+                                        navigationData: navigationData,
+                                      ),
+                                      transitionsBuilder: (
+                                        BuildContext context,
+                                        Animation<double> animation,
+                                        Animation<double> secondaryAnimation,
+                                        Widget child,
+                                      ) =>
+                                          SlideTransition(
+                                        position: Tween<Offset>(
+                                          begin: const Offset(0, 1),
+                                          end: Offset.zero,
+                                        ).animate(animation),
+                                        child: child,
+                                      ),
+                                    ));
+                              },
+                            )),
+                      ],
+                    )),
+                    IconButton(
+                      icon: Icon(Icons.navigate_next, size: 30,),
                       onPressed: () {
                         setState(() {
                           navigationData.nextStop();
                         });
                       },
-                    ),
-                  )
-                  
-                ],
-              ),
+                    )
+                  ],
+                ),
+              ],
             ),
-          )
+          ),
         ],
       ),
-
     );
   }
 
   void _onMapCreated(GoogleMapController controllerParam) {
-
     mapController = controllerParam;
-    
+
     setState(() {
       _polyline.add(Polyline(
         polylineId: PolylineId('itinerary'),
         visible: true,
         //latlng is List<LatLng>
-        points: widget.itinerary.stops.map((ItineraryStop s)=>s.coord).toList(),
+        points:
+            widget.itinerary.stops.map((ItineraryStop s) => s.coord).toList(),
         width: 2,
         color: Colors.blue,
       ));
     });
-
-
   }
-
-  
 
   /// Generates a marker for every pin.
-    void _generateMarkers() {
-      _markers = Set();
-      for (int i = 0; i < widget.itinerary.stops.length; i++) {
-        _markers.add(Marker(
-          markerId: MarkerId(widget.itinerary.stops[i].coord.toString()),
-          icon: i == navigationData.currentStop
+  void _generateMarkers() {
+    _markers = Set();
+    for (int i = 0; i < widget.itinerary.stops.length; i++) {
+      _markers.add(Marker(
+        markerId: MarkerId(widget.itinerary.stops[i].coord.toString()),
+        icon: i == navigationData.currentStop
             ? BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueRed)
-            : BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure), 
-          position: widget.itinerary.stops[i].coord,
-          onTap: () {
-            setState(() {
-              navigationData.currentStop = i;
-            });
-          },
-          infoWindow: InfoWindow(
-            title: widget.itinerary.stops[i].name,
-          ),
-        ));
-      }
+            : BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueAzure),
+        position: widget.itinerary.stops[i].coord,
+        onTap: () {
+          setState(() {
+            navigationData.currentStop = i;
+          });
+        },
+        infoWindow: InfoWindow(
+          title: widget.itinerary.stops[i].name,
+        ),
+      ));
     }
-
-    /// Moves the camera to the user's closest stop.
-    void moveCamToClosestStop() async {
-      var perm = await PermissionHandler().checkPermissionStatus(PermissionGroup.location);
-      if (perm != PermissionStatus.granted) {
-        return;
-      }
-      var location = new Location();
-      var curLocation = await location.getLocation();
-
-      double minDist = 10000000000; // Smallest distance found between user's location and a stop
-      int closestStop = 0;
-
-      for (int i = 0; i < widget.itinerary.stops.length; i++) {
-        var stop = widget.itinerary.stops[i];
-        double curDist;
-        if ((curDist = distanceInKmBetweenEarthCoordinates(curLocation.latitude, curLocation.longitude,
-          stop.coord.latitude, stop.coord.longitude)) < minDist) {
-            minDist = curDist;
-            closestStop = i;
-        }
-      }
-
-      mapController.moveCamera(CameraUpdate.newLatLngZoom(
-        LatLng(widget.itinerary.stops[closestStop].coord.latitude,
-          widget.itinerary.stops[closestStop].coord.longitude), 14.0));
-      setState(() {
-        navigationData.currentStop = closestStop;
-      });
-
-    }
-
   }
 
-  /// Class that contains data for the current navigation.
-  class NavigationData {
+  /// Moves the camera to the user's closest stop.
+  void moveCamToClosestStop() async {
+    var perm = await PermissionHandler()
+        .checkPermissionStatus(PermissionGroup.location);
+    if (perm != PermissionStatus.granted) {
+      return;
+    }
+    var location = new Location();
+    var curLocation = await location.getLocation();
 
-    Itinerary itinerary;
-    int currentStop;
-    bool playingAudio;
-    Future<FlutterTts> tts;
+    double minDist =
+        10000000000; // Smallest distance found between user's location and a stop
+    int closestStop = 0;
 
-    NavigationData ({this.itinerary, this.currentStop, this.playingAudio});
+    for (int i = 0; i < widget.itinerary.stops.length; i++) {
+      var stop = widget.itinerary.stops[i];
+      double curDist;
+      if ((curDist = distanceInKmBetweenEarthCoordinates(
+              curLocation.latitude,
+              curLocation.longitude,
+              stop.coord.latitude,
+              stop.coord.longitude)) <
+          minDist) {
+        minDist = curDist;
+        closestStop = i;
+      }
+    }
 
-    // Goes to the next stop
+    mapController.moveCamera(CameraUpdate.newLatLngZoom(
+        LatLng(widget.itinerary.stops[closestStop].coord.latitude,
+            widget.itinerary.stops[closestStop].coord.longitude),
+        14.0));
+    setState(() {
+      navigationData.currentStop = closestStop;
+    });
+  }
+}
+
+/// Class that contains data for the current navigation.
+class NavigationData {
+  Itinerary itinerary;
+  int currentStop;
+  bool playingAudio;
+  Future<FlutterTts> tts;
+
+  NavigationData({this.itinerary, this.currentStop, this.playingAudio});
+
+  // Goes to the next stop
   void nextStop() {
     if (currentStop == itinerary.stops.length - 1) {
       return;
     }
-      currentStop++;
+    currentStop++;
   }
 
 // Goes to the previous stop
@@ -302,7 +295,7 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
     if (currentStop == 0) {
       return;
     }
-      currentStop--;
+    currentStop--;
   }
 
 // Toggle the audio
@@ -310,18 +303,13 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
     if (playingAudio) {
       stopTextToSpeech(tts);
     } else {
-      tts = playTextToSpeech(itinerary.stops[currentStop].description);                        
+      tts = playTextToSpeech(itinerary.stops[currentStop].description);
     }
-    tts.then((val) => {
-      val.setCompletionHandler(() {
-        state.setState(() {
-          playingAudio = false;
-        });
-      })
-    });
+    tts.then((val) => val.setCompletionHandler(() {
+          state.setState(() => playingAudio = false);
+        }));
     state.setState(() {
       playingAudio = !playingAudio;
     });
   }
-  }
-
+}

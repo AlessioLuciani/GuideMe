@@ -19,4 +19,6 @@ class User {
     id = _id;
     _id++;
   }
+
+  String get fullName => '$name $surname';
 }

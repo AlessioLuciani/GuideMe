@@ -28,7 +28,7 @@ class ConfirmationPage extends StatelessWidget {
                   height: 20,
                 ),
                 Text(
-                  Data.confirmMsg,
+                  confirmMsg,
                   style: TextStyle(fontSize: 24),
                 ),
               ],
@@ -40,7 +40,7 @@ class ConfirmationPage extends StatelessWidget {
               style: TextStyle(fontSize: 18),
             ),
             onPressed: () {
-              Data.reviewItinerary(itinerary);
+              reviewItinerary(itinerary);
               Navigator.of(context).pop();
             },
           ),

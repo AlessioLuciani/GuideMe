@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/widgets/visited_card.dart';
-import 'package:GuideMe/utils/utils.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,7 +16,7 @@ class _ExploreVisitedFragmentState extends State<ExploreVisitedFragment> {
   @override
   Widget build(BuildContext context) {
     //setStatusBarDarkColor();
-    if (Data.userVisits.isEmpty)
+    if (userVisits.isEmpty)
       return AnnotatedRegion<SystemUiOverlayStyle>(
     value: SystemUiOverlayStyle.dark.copyWith(
    statusBarColor: Colors.black, // Color for Android
@@ -58,10 +57,10 @@ class _ExploreVisitedFragmentState extends State<ExploreVisitedFragment> {
                   padding: const EdgeInsets.only(
                       left: 10, right: 10, bottom: 6, top: 0), // it was top: 8 for iOS
                   child: ListView.builder(
-                    itemCount: Data.userVisits.length,
+                    itemCount: userVisits.length,
                     itemBuilder: (BuildContext ctxt, int index) {
                       return VisitCard(
-                        visit: Data.userVisits.elementAt(index),
+                        visit: userVisits.elementAt(index),
                       );
                     },
                     //),

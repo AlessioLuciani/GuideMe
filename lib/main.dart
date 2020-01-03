@@ -1,5 +1,6 @@
 import 'package:GuideMe/base_layouts/android_layout.dart';
 import 'package:GuideMe/base_layouts/ios_layout.dart';
+import 'package:GuideMe/pages/login.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,8 +22,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.red,
       ),
-      home: HomePage(),
-      // home: LoginPage(),
+      //home: HomePage(),
+      home: LoginPage(),
     ));
   }
 }

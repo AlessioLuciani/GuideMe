@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:GuideMe/commons/itinerary_stop.dart';
 import 'package:GuideMe/commons/review.dart';
 import 'package:GuideMe/commons/user.dart';
+import 'package:GuideMe/utils/data.dart';
 import 'package:flutter/material.dart';
 
 class Itinerary {
@@ -22,7 +23,6 @@ class Itinerary {
   String longDescription;
   List<Review> _reviews = [];
   List<ItineraryStop> stops;
-  double _cachedAvgRating = 0;
 
   Itinerary(
       {@required this.stops,
@@ -38,18 +38,33 @@ class Itinerary {
     _id++;
   }
 
-  List<Review> get reviews => _reviews;
-
-  double _avgReview() {
-    // Ideally would be the total rating of the itinerary divided by the number of reviews, but ..
-    if (_cachedAvgRating == 0) {
-      // Generate mock average rating value
-      _cachedAvgRating = Random().nextInt(4) + Random().nextDouble() + 1;
+  List<Review> get reviews {
+    if (_reviews.isEmpty) {
+      Random generator = new Random();
+      int samples = generator.nextInt(globalReviews.length - 4) + 4;
+      for (int i = 0; i < samples; i++) {
+        Review currentReview =
+            globalReviews[generator.nextInt(globalReviews.length)];
+        if (currentReview.user != author) {
+          _reviews.add(currentReview);
+        }
+      }
     }
-    return _cachedAvgRating;
+    return _reviews;
   }
 
-  String get avgReview => _avgReview().toStringAsFixed(1);
+  double get _avgReview {
+    if (reviews.length == 0) {
+      return 0;
+    }
+    int sum = 0;
+    for (Review review in reviews) {
+      sum += review.rating;
+    }
+    return sum / reviews.length;
+  }
+
+  String get avgReview => _avgReview.toStringAsFixed(1);
 
   set addReview(Review review) => _reviews.add(review);
 
