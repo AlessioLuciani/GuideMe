@@ -62,9 +62,8 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Expanded(
-              child: Stack(
+        children: <Widget>[Expanded(child:
+          Stack(
             children: <Widget>[
               GoogleMap(
                 mapType: MapType.terrain,
@@ -86,130 +85,133 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                     label: Text("Next stop"),
                   )),
             ],
-          )),
+          ),),
           SafeArea(
-            child: Stack(
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(
-                        Icons.navigate_before,
-                        color: navigationData.currentStop > 0
-                            ? Colors.black
-                            : Colors.grey,
-                        size: 30,
+            child: Padding(padding: EdgeInsets.symmetric(vertical:15.0, horizontal:0.0),
+              child: Stack(
+                children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      IconButton(
+                        icon: Icon(
+                          Icons.navigate_before,
+                          color: navigationData.currentStop > 0
+                              ? Colors.black
+                              : Colors.grey,
+                          size: 30,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            navigationData.previousStop();
+                          });
+                        },
                       ),
-                      onPressed: () {
-                        setState(() {
-                          navigationData.previousStop();
-                        });
-                      },
-                    ),
-                    Expanded(
-                        child: Row(
-                      children: <Widget>[
-                        SizedBox(
-                          width: 10,
+                      Expanded(
+                          child: Row(
+                        children: <Widget>[
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Expanded(
+                              child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                Text(
+                                  widget.itinerary
+                                      .stops[navigationData.currentStop].name,
+                                  style: new TextStyle(
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  (navigationData.currentStop + 1).toString() +
+                                      "/" +
+                                      (widget.itinerary.stops.length).toString(),
+                                  style: new TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  height: 0,
+                                ),
+                              ])),
+                        
+                              IconButton(
+                                icon: Icon(
+                                  Icons.description,
+                                  size: 40.0,
+                                ),
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      PageRouteBuilder(
+                                        pageBuilder: (
+                                          BuildContext context,
+                                          Animation<double> animation,
+                                          Animation<double> secondaryAnimation,
+                                        ) =>
+                                            NavigationDescriptionPage(
+                                          navigationData: navigationData,
+                                        ),
+                                        transitionsBuilder: (
+                                          BuildContext context,
+                                          Animation<double> animation,
+                                          Animation<double> secondaryAnimation,
+                                          Widget child,
+                                        ) =>
+                                            SlideTransition(
+                                          position: Tween<Offset>(
+                                            begin: const Offset(0, 1),
+                                            end: Offset.zero,
+                                          ).animate(animation),
+                                          child: child,
+                                        ),
+                                      ));
+                                },
+                              ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          IconButton(
+                                icon: Icon(
+                                  navigationData.playingAudio
+                                      ? Icons.stop
+                                      : Icons.record_voice_over,
+                                  size: 40.0,
+                                ),
+                                onPressed: () {
+                                  setState(() {
+                                    navigationData.toggleAudio();
+                                  });
+                                }
+                              ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                        ],
+                      )),
+                      IconButton(
+                        icon: Icon(
+                          Icons.navigate_next,
+                          size: 30,
+                          color: navigationData.currentStop <
+                                  navigationData.itinerary.stops.length - 1
+                              ? Colors.black
+                              : Colors.grey,
                         ),
-                        Expanded(
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                              Text(
-                                widget.itinerary
-                                    .stops[navigationData.currentStop].name,
-                                style: new TextStyle(
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                (navigationData.currentStop + 1).toString() +
-                                    "/" +
-                                    (widget.itinerary.stops.length).toString(),
-                                style: new TextStyle(
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(
-                                height: 0,
-                              ),
-                            ])),
-                        Padding(
-                            padding: EdgeInsets.only(bottom: 15, top: 5),
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.description,
-                                size: 40.0,
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    PageRouteBuilder(
-                                      pageBuilder: (
-                                        BuildContext context,
-                                        Animation<double> animation,
-                                        Animation<double> secondaryAnimation,
-                                      ) =>
-                                          NavigationDescriptionPage(
-                                        navigationData: navigationData,
-                                      ),
-                                      transitionsBuilder: (
-                                        BuildContext context,
-                                        Animation<double> animation,
-                                        Animation<double> secondaryAnimation,
-                                        Widget child,
-                                      ) =>
-                                          SlideTransition(
-                                        position: Tween<Offset>(
-                                          begin: const Offset(0, 1),
-                                          end: Offset.zero,
-                                        ).animate(animation),
-                                        child: child,
-                                      ),
-                                    ));
-                              },
-                            )),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Padding(
-                            padding: EdgeInsets.only(bottom: 15, top: 5),
-                            child: IconButton(
-                              icon: Icon(
-                                navigationData.playingAudio
-                                    ? Icons.stop
-                                    : Icons.record_voice_over,
-                                size: 40.0,
-                              ),
-                              onPressed: () => navigationData.toggleAudio(this),
-                            )),
-                        SizedBox(
-                          width: 10,
-                        ),
-                      ],
-                    )),
-                    IconButton(
-                      icon: Icon(
-                        Icons.navigate_next,
-                        size: 30,
-                        color: navigationData.currentStop <
-                                navigationData.itinerary.stops.length - 1
-                            ? Colors.black
-                            : Colors.grey,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          navigationData.nextStop();
-                        });
-                      },
-                    )
-                  ],
-                ),
-              ],
+                        onPressed: () {
+                          setState(() {
+                            navigationData.nextStop();
+                          });
+                        },
+                      )
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ],
@@ -319,7 +321,7 @@ class NavigationData {
   }
 
 // Toggle the audio
-  void toggleAudio(State state) {
+  void toggleAudio() {
     if (playingAudio) {
       stopTextToSpeech(tts);
     } else {
