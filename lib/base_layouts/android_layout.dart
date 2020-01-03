@@ -51,7 +51,7 @@ class AndroidLayoutState extends State<AndroidLayout> {
   }
 
   _onSelectItem(int index) {
-    if (index == widget.drawerItems.length) {
+    if (index == widget.drawerItems.length - 1) {
       Route route = MaterialPageRoute(builder: (context) => LoginPage());
       Navigator.pushReplacement(context, route);
       return;

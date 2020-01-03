@@ -49,7 +49,7 @@ List<String> _descriptions = [
 ];
 
 // Static list of itineraries uploaded by users
-List<Itinerary> itineraries = [
+List<Itinerary> _itineraries = [
   Itinerary(
       author: users[0],
       coverImage: "assets/images/colosseo.jpg",
@@ -125,7 +125,7 @@ List<Itinerary> itineraries = [
   Itinerary(
       author: users[1],
       coverImage: "assets/images/rome-5.jpg",
-      title: "I segreti della roma antica",
+      title: "Segreti della roma antica",
       duration: "10 minuti",
       distance: "1 km",
       priceRange: "0-32",
@@ -188,7 +188,7 @@ List<Itinerary> itineraries = [
   Itinerary(
       author: users[1],
       coverImage: "assets/images/rome-12.jpg",
-      title: "Le antiche residenze romane",
+      title: "Storiche residenze romane",
       duration: "400 minuti",
       distance: "30 km",
       priceRange: "0-2",
@@ -197,7 +197,7 @@ List<Itinerary> itineraries = [
   Itinerary(
       author: users[1],
       coverImage: "assets/images/rome-13.jpg",
-      title: "Dove si incontrano i romani",
+      title: "Il luogo dei romani",
       duration: "44 minuti",
       distance: "4 km",
       priceRange: "0-64",
@@ -244,18 +244,23 @@ List<Itinerary> itineraries = [
 Random _generator = new Random();
 
 List<ItineraryVisit> _visits = [
-  new ItineraryVisit(itineraries[0], users[0], _getRandomDate),
-  new ItineraryVisit(itineraries[3], users[0], _getRandomDate),
-  new ItineraryVisit(itineraries[1], users[0], _getRandomDate),
-  new ItineraryVisit(itineraries[4], users[0], _getRandomDate),
-  new ItineraryVisit(itineraries[7], users[1], _getRandomDate),
-  new ItineraryVisit(itineraries[6], users[2], _getRandomDate),
-  new ItineraryVisit(itineraries[5], users[3], _getRandomDate),
-  new ItineraryVisit(itineraries[8], users[3], _getRandomDate),
-  new ItineraryVisit(itineraries[10], users[3], _getRandomDate),
-  new ItineraryVisit(itineraries[12], users[3], _getRandomDate),
-  new ItineraryVisit(itineraries[13], users[3], _getRandomDate),
+  new ItineraryVisit(_itineraries[0], users[0], _getRandomDate),
+  new ItineraryVisit(_itineraries[3], users[0], _getRandomDate),
+  new ItineraryVisit(_itineraries[1], users[0], _getRandomDate),
+  new ItineraryVisit(_itineraries[4], users[0], _getRandomDate),
+  new ItineraryVisit(_itineraries[7], users[1], _getRandomDate),
+  new ItineraryVisit(_itineraries[6], users[2], _getRandomDate),
+  new ItineraryVisit(_itineraries[5], users[3], _getRandomDate),
+  new ItineraryVisit(_itineraries[8], users[3], _getRandomDate),
+  new ItineraryVisit(_itineraries[10], users[3], _getRandomDate),
+  new ItineraryVisit(_itineraries[12], users[3], _getRandomDate),
+  new ItineraryVisit(_itineraries[13], users[3], _getRandomDate),
 ];
+
+List<Itinerary> get itineraries {
+  _itineraries.shuffle();
+  return _itineraries;
+}
 
 DateTime get _getRandomDate =>
     DateTime.now().subtract(new Duration(days: _generator.nextInt(365)));

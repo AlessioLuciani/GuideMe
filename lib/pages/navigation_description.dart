@@ -47,6 +47,9 @@ class NavigationDescriptionPageState extends State<NavigationDescriptionPage> {
                   IconButton(
                     icon: Icon(
                       Icons.navigate_before,
+                      color: widget.navigationData.currentStop > 0
+                          ? Colors.black
+                          : Colors.grey,
                       size: 30,
                     ),
                     onPressed: () {
@@ -57,38 +60,54 @@ class NavigationDescriptionPageState extends State<NavigationDescriptionPage> {
                   ),
                   Expanded(
                       child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Padding(
-                          padding: EdgeInsets.only(left: 10, top: 5),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Expanded(
                           child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Text(
-                                  widget
-                                      .navigationData
-                                      .itinerary
-                                      .stops[widget.navigationData.currentStop]
-                                      .name,
-                                  style: new TextStyle(
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                                Text(
-                                  (widget.navigationData.currentStop + 1)
-                                          .toString() +
-                                      "/" +
-                                      (widget.navigationData.itinerary.stops
-                                              .length)
-                                          .toString(),
-                                  style: new TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ])),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Text(
+                              widget
+                                  .navigationData
+                                  .itinerary
+                                  .stops[widget.navigationData.currentStop]
+                                  .name,
+                              style: new TextStyle(
+                                  fontSize: 20.0, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              (widget.navigationData.currentStop + 1)
+                                      .toString() +
+                                  "/" +
+                                  (widget.navigationData.itinerary.stops.length)
+                                      .toString(),
+                              style: new TextStyle(
+                                  fontSize: 18.0, fontWeight: FontWeight.bold),
+                            ),
+                          ])),
+                      Visibility(
+                        child: Padding(
+                            padding: EdgeInsets.only(bottom: 15, top: 5),
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.description,
+                                size: 40.0,
+                              ),
+                              onPressed: () {},
+                            )),
+                        visible: false,
+                      ),
+                      SizedBox(
+                        width: 10,
+                      ),
                       Padding(
-                          padding: EdgeInsets.only(bottom: 5, right: 15),
+                          padding: EdgeInsets.only(bottom: 5, top: 0),
                           child: IconButton(
                             icon: Icon(
                               widget.navigationData.playingAudio
@@ -100,12 +119,19 @@ class NavigationDescriptionPageState extends State<NavigationDescriptionPage> {
                             onPressed: () =>
                                 widget.navigationData.toggleAudio(this),
                           )),
+                      SizedBox(
+                        width: 10,
+                      ),
                     ],
                   )),
                   IconButton(
                     icon: Icon(
                       Icons.navigate_next,
                       size: 30,
+                      color: widget.navigationData.currentStop <
+                              widget.navigationData.itinerary.stops.length - 1
+                          ? Colors.black
+                          : Colors.grey,
                     ),
                     onPressed: () {
                       setState(() {

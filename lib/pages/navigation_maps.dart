@@ -97,6 +97,9 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                     IconButton(
                       icon: Icon(
                         Icons.navigate_before,
+                        color: navigationData.currentStop > 0
+                            ? Colors.black
+                            : Colors.grey,
                         size: 30,
                       ),
                       onPressed: () {
@@ -107,12 +110,15 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                     ),
                     Expanded(
                         child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
-                        Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
                               Text(
                                 widget.itinerary
                                     .stops[navigationData.currentStop].name,
@@ -128,22 +134,12 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.bold),
                               ),
-                              SizedBox(height: 0,),
-                            ]),
-                        Padding(
-                            padding: EdgeInsets.only(bottom: 10),
-                            child: IconButton(
-                              icon: Icon(
-                                navigationData.playingAudio
-                                    ? Icons.stop
-                                    : Icons.record_voice_over,
-                                color: Colors.redAccent,
-                                size: 40.0,
+                              SizedBox(
+                                height: 0,
                               ),
-                              onPressed: () => navigationData.toggleAudio(this),
-                            )),
+                            ])),
                         Padding(
-                            padding: EdgeInsets.only(bottom: 10),
+                            padding: EdgeInsets.only(bottom: 15, top: 5),
                             child: IconButton(
                               icon: Icon(
                                 Icons.description,
@@ -177,10 +173,34 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                                     ));
                               },
                             )),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Padding(
+                            padding: EdgeInsets.only(bottom: 15, top: 5),
+                            child: IconButton(
+                              icon: Icon(
+                                navigationData.playingAudio
+                                    ? Icons.stop
+                                    : Icons.record_voice_over,
+                                size: 40.0,
+                              ),
+                              onPressed: () => navigationData.toggleAudio(this),
+                            )),
+                        SizedBox(
+                          width: 10,
+                        ),
                       ],
                     )),
                     IconButton(
-                      icon: Icon(Icons.navigate_next, size: 30,),
+                      icon: Icon(
+                        Icons.navigate_next,
+                        size: 30,
+                        color: navigationData.currentStop <
+                                navigationData.itinerary.stops.length - 1
+                            ? Colors.black
+                            : Colors.grey,
+                      ),
                       onPressed: () {
                         setState(() {
                           navigationData.nextStop();
