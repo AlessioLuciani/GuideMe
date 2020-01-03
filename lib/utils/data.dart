@@ -188,7 +188,7 @@ List<Itinerary> _itineraries = [
   Itinerary(
       author: users[1],
       coverImage: "assets/images/rome-12.jpg",
-      title: "Storiche residenze romane",
+      title: "Antiche residenze romane",
       duration: "400 minuti",
       distance: "30 km",
       priceRange: "0-2",

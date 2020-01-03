@@ -325,11 +325,7 @@ class NavigationData {
     } else {
       tts = playTextToSpeech(itinerary.stops[currentStop].description);
     }
-    tts.then((val) => val.setCompletionHandler(() {
-          state.setState(() => playingAudio = false);
-        }));
-    state.setState(() {
-      playingAudio = !playingAudio;
-    });
+    tts.then((val) => val.setCompletionHandler(() => playingAudio = false));
+    playingAudio = !playingAudio;
   }
 }
