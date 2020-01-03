@@ -38,6 +38,8 @@ class NavigationDescriptionPageState extends State<NavigationDescriptionPage> {
       body: ListView(
         children: <Widget>[
           Image.asset(widget.navigationData.itinerary.coverImage),
+          Padding(padding: EdgeInsets.symmetric(vertical:15.0, horizontal:0.0),
+              child:
           Stack(
             children: <Widget>[
               Row(
@@ -91,34 +93,24 @@ class NavigationDescriptionPageState extends State<NavigationDescriptionPage> {
                                   fontSize: 18.0, fontWeight: FontWeight.bold),
                             ),
                           ])),
-                      Visibility(
-                        child: Padding(
-                            padding: EdgeInsets.only(bottom: 15, top: 5),
-                            child: IconButton(
-                              icon: Icon(
-                                Icons.description,
-                                size: 40.0,
-                              ),
-                              onPressed: () {},
-                            )),
-                        visible: false,
-                      ),
+                     
                       SizedBox(
                         width: 10,
                       ),
-                      Padding(
-                          padding: EdgeInsets.only(bottom: 5, top: 0),
-                          child: IconButton(
+                      IconButton(
                             icon: Icon(
                               widget.navigationData.playingAudio
                                   ? Icons.stop
                                   : Icons.record_voice_over,
-                              color: Colors.redAccent,
+                              color: Colors.black,
                               size: 40.0,
                             ),
-                            onPressed: () =>
-                                widget.navigationData.toggleAudio(this),
-                          )),
+                            onPressed: () {
+                                setState(() {
+                                  widget.navigationData.toggleAudio();
+                                });
+                              }
+                          ),
                       SizedBox(
                         width: 10,
                       ),
@@ -142,6 +134,7 @@ class NavigationDescriptionPageState extends State<NavigationDescriptionPage> {
                 ],
               ),
             ],
+          ),
           ),
           Divider(
             color: Colors.grey,
