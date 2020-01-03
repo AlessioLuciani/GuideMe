@@ -113,6 +113,7 @@ class NavigationDescriptionPageState extends State<NavigationDescriptionPage> {
                               widget.navigationData.playingAudio
                                   ? Icons.stop
                                   : Icons.record_voice_over,
+                              color: Colors.redAccent,
                               size: 40.0,
                             ),
                             onPressed: () =>
