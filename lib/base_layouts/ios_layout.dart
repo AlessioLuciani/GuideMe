@@ -13,7 +13,8 @@ class IOSLayout extends StatefulWidget {
 
 class IOSLayoutState extends State<IOSLayout> {
   int _tabIndex = 2;
-  int _currentUserLength = MAX_ITINERARY_LENGTH;
+  double _currentUserLength = MAX_ITINERARY_LENGTH.toDouble();
+  int _currentUserRating = RATING_STARS;
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +60,8 @@ class IOSLayoutState extends State<IOSLayout> {
         return new AddItinearyFragment();
       case 2:
         return new ExploreFragment(
-          userSelectedLength: null,
+          userSelectedLength: _currentUserLength,
+          userSelectedRating: _currentUserRating,
         );
       case 3:
         return new ExploreVisitedFragment();

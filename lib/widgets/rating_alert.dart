@@ -1,28 +1,25 @@
+import 'package:GuideMe/utils/data.dart';
 import 'package:flutter/material.dart';
 
-class DistanceDialog extends StatefulWidget {
-  final double maxSliderValue;
-  final double lastValue;
+class RatingAlert extends StatefulWidget {
+  final int lastValue;
   final Function updateCallback;
 
-  const DistanceDialog(
-      {Key key,
-      @required this.maxSliderValue,
-      @required this.lastValue,
-      @required this.updateCallback})
+  const RatingAlert(
+      {Key key, @required this.lastValue, @required this.updateCallback})
       : super(key: key);
 
   @override
-  _DistanceDialogState createState() => new _DistanceDialogState();
+  _RatingAlertState createState() => new _RatingAlertState();
 }
 
-class _DistanceDialogState extends State<DistanceDialog> {
-  double _sliderValue;
+class _RatingAlertState extends State<RatingAlert> {
+  int _ratingValue;
 
   @override
   void initState() {
     super.initState();
-    _sliderValue = widget.lastValue.toDouble();
+    _ratingValue = widget.lastValue;
   }
 
   @override
@@ -40,13 +37,16 @@ class _DistanceDialogState extends State<DistanceDialog> {
           children: <Widget>[
             Row(
               children: <Widget>[
+                SizedBox(
+                  width: 6,
+                ),
                 IconButton(
                   icon: Icon(Icons.close, size: 26),
                   onPressed: () => Navigator.of(context).pop(),
                 ),
                 Expanded(child: Text("")),
                 Text(
-                  "Lunghezza",
+                  "Recensione",
                   style: TextStyle(
                     fontSize: 17,
                   ),
@@ -59,6 +59,9 @@ class _DistanceDialogState extends State<DistanceDialog> {
                   ),
                   opacity: 0,
                 ),
+                SizedBox(
+                  width: 6,
+                ),
               ],
             ),
             SizedBox(
@@ -68,30 +71,50 @@ class _DistanceDialogState extends State<DistanceDialog> {
               color: Colors.grey,
               height: 4.0,
             ),
-            Padding(
-                padding: EdgeInsets.only(left: 20, right: 20, top: 20),
-                child: Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.place,
-                      size: 30,
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text('Fino a ${_sliderValue.toStringAsFixed(2)} km'),
-                  ],
-                )),
+            SizedBox(
+              height: 20,
+            ),
             Padding(
                 padding: EdgeInsets.symmetric(horizontal: 5),
-                child: Slider(
-                  activeColor: Colors.redAccent,
-                  min: 0.0,
-                  max: widget.maxSliderValue,
-                  onChanged: (newRating) {
-                    setState(() => _sliderValue = newRating);
-                  },
-                  value: _sliderValue,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    InkWell(
+                        onTap: () => setState(() => _ratingValue = 1),
+                        child: Icon(
+                          _ratingValue >= 1 ? Icons.star : Icons.star_border,
+                          size: 46,
+                          color: Colors.redAccent,
+                        )),
+                    InkWell(
+                        onTap: () => setState(() => _ratingValue = 2),
+                        child: Icon(
+                          _ratingValue >= 2 ? Icons.star : Icons.star_border,
+                          size: 46,
+                          color: Colors.redAccent,
+                        )),
+                    InkWell(
+                        onTap: () => setState(() => _ratingValue = 3),
+                        child: Icon(
+                          _ratingValue >= 3 ? Icons.star : Icons.star_border,
+                          size: 46,
+                          color: Colors.redAccent,
+                        )),
+                    InkWell(
+                        onTap: () => setState(() => _ratingValue = 4),
+                        child: Icon(
+                          _ratingValue >= 4 ? Icons.star : Icons.star_border,
+                          size: 46,
+                          color: Colors.redAccent,
+                        )),
+                    InkWell(
+                        onTap: () => setState(() => _ratingValue = 5),
+                        child: Icon(
+                          _ratingValue >= 5 ? Icons.star : Icons.star_border,
+                          size: 46,
+                          color: Colors.redAccent,
+                        )),
+                  ],
                 )),
             Padding(
                 padding: EdgeInsets.only(top: 20, bottom: 10),
@@ -113,10 +136,8 @@ class _DistanceDialogState extends State<DistanceDialog> {
                         "Resetta",
                         style: TextStyle(fontSize: 16),
                       ),
-                      onPressed: () {
-                        widget.updateCallback(widget.maxSliderValue);
-                        Navigator.of(context).pop();
-                      },
+                      onPressed: () =>
+                          setState(() => _ratingValue = RATING_STARS),
                     ),
                     FlatButton(
                       padding:
@@ -129,7 +150,7 @@ class _DistanceDialogState extends State<DistanceDialog> {
                         style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
                       onPressed: () {
-                        widget.updateCallback(_sliderValue);
+                        widget.updateCallback(_ratingValue);
                         Navigator.of(context).pop();
                       },
                     ),

@@ -53,7 +53,7 @@ class ExploreCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           _getDistance(itinerary.lengthKm),
-                          _getRating(itinerary.avgReview)
+                          _getRating(itinerary.avgReview.toStringAsFixed(1))
                         ])
                   ],
                 ),

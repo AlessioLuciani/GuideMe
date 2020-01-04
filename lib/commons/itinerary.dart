@@ -62,7 +62,7 @@ class Itinerary {
     return _reviews;
   }
 
-  double get _avgReview {
+  double get avgReview {
     if (reviews.length == 0) {
       return 0;
     }
@@ -72,8 +72,6 @@ class Itinerary {
     }
     return sum / reviews.length;
   }
-
-  String get avgReview => _avgReview.toStringAsFixed(1);
 
   set addReview(Review review) => _reviews.add(review);
 

@@ -8,9 +8,14 @@ import 'package:flutter/services.dart';
 
 class ExploreFragment extends StatefulWidget {
   final double userSelectedLength;
+  final int userSelectedRating;
 
-  const ExploreFragment({Key key, @required this.userSelectedLength})
+  const ExploreFragment(
+      {Key key,
+      @required this.userSelectedLength,
+      @required this.userSelectedRating})
       : super(key: key);
+
   @override
   _ExploreFragmentState createState() => _ExploreFragmentState();
 }
@@ -30,7 +35,8 @@ class _ExploreFragmentState extends State<ExploreFragment> {
   Widget build(BuildContext context) {
     _itineraries = itineraries
         .where((Itinerary itinerary) =>
-            itinerary.length <= widget.userSelectedLength)
+            itinerary.length <= widget.userSelectedLength &&
+            itinerary.avgReview.floor() <= widget.userSelectedRating)
         .toList();
     return AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.dark.copyWith(

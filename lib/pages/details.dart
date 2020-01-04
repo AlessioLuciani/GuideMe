@@ -130,7 +130,7 @@ class DetailsPageState extends State<DetailsPage> {
                       child: Row(
                         children: <Widget>[
                           Text(
-                            widget.itinerary.avgReview,
+                            widget.itinerary.avgReview.toStringAsFixed(1),
                             style: TextStyle(fontSize: 20),
                           ),
                           SizedBox(

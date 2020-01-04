@@ -9,7 +9,8 @@ import 'package:GuideMe/pages/details.dart';
 import 'package:GuideMe/pages/login.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/utils/utils.dart';
-import 'package:GuideMe/widgets/distance_alert.dart';
+import 'package:GuideMe/widgets/length_alert.dart';
+import 'package:GuideMe/widgets/rating_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:material_search/material_search.dart';
 
@@ -37,6 +38,7 @@ class AndroidLayout extends StatefulWidget {
 class AndroidLayoutState extends State<AndroidLayout> {
   int _selectedDrawerIndex = 0;
   double _currentUserLength = MAX_ITINERARY_LENGTH.toDouble();
+  int _currentUserRating = RATING_STARS;
 
   _buildMaterialSearchPage(BuildContext context) {
     return new MaterialPageRoute<String>(
@@ -83,6 +85,7 @@ class AndroidLayoutState extends State<AndroidLayout> {
       case 0:
         return new ExploreFragment(
           userSelectedLength: _currentUserLength,
+          userSelectedRating: _currentUserRating,
         );
       case 1:
         return new AddItinearyFragment();
@@ -172,6 +175,8 @@ class AndroidLayoutState extends State<AndroidLayout> {
           )
         ];
 
+  String get _starWord => _currentUserRating > 1 ? "stelle" : "stella";
+
   Widget get _bottom => _selectedDrawerIndex != 0
       ? null
       : PreferredSize(
@@ -183,19 +188,26 @@ class AndroidLayoutState extends State<AndroidLayout> {
                 child: Row(children: <Widget>[
                   FlatButton(
                     child: Text(
-                      "Lunghezza",
+                      _currentUserLength == MAX_ITINERARY_LENGTH.toDouble()
+                          ? "Lunghezza"
+                          : '${_currentUserLength.toStringAsFixed(0)} km',
                       style: TextStyle(fontSize: 15),
                     ),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0)),
+                        borderRadius: BorderRadius.circular(30.0),
+                        side: BorderSide(
+                            width: 2,
+                            color: _currentUserLength ==
+                                    MAX_ITINERARY_LENGTH.toDouble()
+                                ? Colors.redAccent
+                                : Colors.white)),
                     onPressed: () => showDialog(
                         context: context,
-                        builder: (BuildContext context) => DistanceDialog(
+                        builder: (BuildContext context) => LengthDialog(
                               maxSliderValue: 20,
                               lastValue: _currentUserLength,
-                              updateCallback: (value) {
-                                setState(() => _currentUserLength = value);
-                              },
+                              updateCallback: (value) =>
+                                  setState(() => _currentUserLength = value),
                             )),
                     color: Colors.redAccent,
                     textColor: Colors.white,
@@ -219,12 +231,26 @@ class AndroidLayoutState extends State<AndroidLayout> {
                   ),
                   FlatButton(
                     child: Text(
-                      "Recensioni",
+                      _currentUserRating == RATING_STARS
+                          ? "Recensione"
+                          : '$_currentUserRating $_starWord',
                       style: TextStyle(fontSize: 15),
                     ),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0)),
-                    onPressed: () {},
+                      borderRadius: BorderRadius.circular(30.0),
+                      side: BorderSide(
+                          width: 2,
+                          color: _currentUserRating == RATING_STARS
+                              ? Colors.redAccent
+                              : Colors.white),
+                    ),
+                    onPressed: () => showDialog(
+                        context: context,
+                        builder: (BuildContext context) => RatingAlert(
+                              lastValue: _currentUserRating,
+                              updateCallback: (value) =>
+                                  setState(() => _currentUserRating = value),
+                            )),
                     color: Colors.redAccent,
                     textColor: Colors.white,
                   ),

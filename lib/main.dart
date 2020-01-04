@@ -24,7 +24,6 @@ class MyApp extends StatelessWidget {
       ),
       //home: HomePage(),
       home: LoginPage(),
-      //home: ProvaPage(title: "Esplora"),
     ));
   }
 }
