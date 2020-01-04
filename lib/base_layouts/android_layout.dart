@@ -59,7 +59,8 @@ class AndroidLayoutState extends State<AndroidLayout> {
                           ))
                   .toList(),
               filter: (dynamic value, String criteria) {
-                return value.toLowerCase().trim().contains(
+                final Itinerary current = getitineraryFromId(int.parse(value));
+                return current.title.toLowerCase().trim().contains(
                     new RegExp(r'' + criteria.toLowerCase().trim() + ''));
               },
               onSelect: (dynamic value) {
