@@ -11,7 +11,7 @@ class VisitCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 6),
+      padding: EdgeInsets.only(bottom: 8),
       child: Card(
         elevation: 5,
           shape: RoundedRectangleBorder(

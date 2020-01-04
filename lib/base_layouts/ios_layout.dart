@@ -4,15 +4,17 @@ import 'package:flutter/material.dart';
 import 'package:GuideMe/fragments/explore.dart';
 import 'package:GuideMe/fragments/create_itinerary.dart';
 import 'package:GuideMe/fragments/favourites.dart';
+import 'package:GuideMe/utils/data.dart';
 
 class IOSLayout extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => IOSLayoutState();
 }
 
-class IOSLayoutState extends State<IOSLayout>{
+class IOSLayoutState extends State<IOSLayout> {
   int _tabIndex = 2;
-  
+  int _currentUserLength = MAX_ITINERARY_LENGTH;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +24,6 @@ class IOSLayoutState extends State<IOSLayout>{
         type: BottomNavigationBarType.fixed,
         currentIndex: _tabIndex,
         onTap: (int index) => setState(() => _tabIndex = index),
-        
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: new Icon(Icons.favorite),
@@ -49,21 +50,23 @@ class IOSLayoutState extends State<IOSLayout>{
       body: _getFragmentFrom(_tabIndex),
     );
   }
-_getFragmentFrom(int pos) {
+
+  _getFragmentFrom(int pos) {
     switch (pos) {
       case 0:
         return new FavouritesFragment();
       case 1:
-      return new AddItinearyFragment();
+        return new AddItinearyFragment();
       case 2:
-      return new ExploreFragment();
+        return new ExploreFragment(
+          userSelectedLength: null,
+        );
       case 3:
-      return new ExploreVisitedFragment();
+        return new ExploreVisitedFragment();
       case 4:
-      return new AboutFragment();
+        return new AboutFragment();
       default:
         return new Text("Some error occured.");
     }
   }
-
 }

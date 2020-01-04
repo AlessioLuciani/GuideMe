@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       ),
       //home: HomePage(),
       home: LoginPage(),
+      //home: ProvaPage(title: "Esplora"),
     ));
   }
 }
@@ -31,8 +32,10 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    PermissionHandler().checkPermissionStatus(PermissionGroup.location).then((perm) {
-      if (perm != PermissionStatus.granted ) {
+    PermissionHandler()
+        .checkPermissionStatus(PermissionGroup.location)
+        .then((perm) {
+      if (perm != PermissionStatus.granted) {
         PermissionHandler().requestPermissions([PermissionGroup.location]);
       }
     });

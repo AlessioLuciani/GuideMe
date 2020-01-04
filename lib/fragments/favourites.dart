@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:GuideMe/commons/Itinerary.dart';
+import 'package:GuideMe/commons/itinerary.dart';
 import 'package:GuideMe/utils/utils.dart';
 import 'package:GuideMe/widgets/explore_card.dart';
 import 'package:flutter/material.dart';

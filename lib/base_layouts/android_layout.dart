@@ -1,13 +1,17 @@
+import 'package:GuideMe/commons/itinerary.dart';
 import 'package:GuideMe/commons/user.dart';
 import 'package:GuideMe/fragments/about.dart';
 import 'package:GuideMe/fragments/explore_visited.dart';
 import 'package:GuideMe/fragments/create_itinerary.dart';
 import 'package:GuideMe/fragments/explore.dart';
 import 'package:GuideMe/fragments/favourites.dart';
+import 'package:GuideMe/pages/details.dart';
 import 'package:GuideMe/pages/login.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/utils/utils.dart';
+import 'package:GuideMe/widgets/distance_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:material_search/material_search.dart';
 
 class DrawerItem {
   final String title;
@@ -32,11 +36,54 @@ class AndroidLayout extends StatefulWidget {
 
 class AndroidLayoutState extends State<AndroidLayout> {
   int _selectedDrawerIndex = 0;
+  double _currentUserLength = MAX_ITINERARY_LENGTH.toDouble();
+
+  _buildMaterialSearchPage(BuildContext context) {
+    return new MaterialPageRoute<String>(
+        settings: new RouteSettings(
+          name: 'material_search',
+          isInitialRoute: false,
+        ),
+        builder: (BuildContext context) {
+          return new Material(
+            child: new MaterialSearch<String>(
+              placeholder: 'Prova con "Tour de Roma"',
+              results: itineraries
+                  .map(
+                      (Itinerary itinerary) => new MaterialSearchResult<String>(
+                            icon: Icons.directions_walk,
+                            value: itinerary.id.toString(),
+                            text: itinerary.title,
+                          ))
+                  .toList(),
+              filter: (dynamic value, String criteria) {
+                return value.toLowerCase().trim().contains(
+                    new RegExp(r'' + criteria.toLowerCase().trim() + ''));
+              },
+              onSelect: (dynamic value) {
+                final Itinerary current = getitineraryFromId(int.parse(value));
+                Navigator.of(context).pop();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DetailsPage(
+                              itinerary: current,
+                            )));
+              },
+              onSubmit: (String value) {
+                Navigator.of(context).pop(value);
+              },
+            ),
+          );
+        });
+  }
 
   _getDrawerItemWidget(int pos) {
     switch (pos) {
       case 0:
-        return new ExploreFragment();
+        return new ExploreFragment(
+          userSelectedLength: _currentUserLength,
+        );
       case 1:
         return new AddItinearyFragment();
       case 2:
@@ -79,22 +126,23 @@ class AndroidLayoutState extends State<AndroidLayout> {
     return new Scaffold(
         // Avoid the Scaffold to resize himself when
         resizeToAvoidBottomInset: false,
-        appBar: new AppBar(
-          title: new Text(widget.drawerItems[_selectedDrawerIndex].title),
+        appBar: AppBar(
+          title: Text(widget.drawerItems[_selectedDrawerIndex].title),
+          actions: _actions,
+          bottom: _bottom,
         ),
-        drawer: new Drawer(
-          child: new Column(
+        drawer: Drawer(
+          child: Column(
             children: <Widget>[
               UserAccountsDrawerHeader(
-                accountName:
-                    new Text('${currentUser.name} ${currentUser.surname}'),
-                accountEmail: new Text(currentUser.email),
-                currentAccountPicture: new CircleAvatar(
+                accountName: Text('${currentUser.name} ${currentUser.surname}'),
+                accountEmail: Text(currentUser.email),
+                currentAccountPicture: CircleAvatar(
                   backgroundColor: Colors.white,
-                  child: new Text(currentUser.name[0].toUpperCase()),
+                  child: Text(currentUser.name[0].toUpperCase()),
                 ),
               ),
-              new Column(children: drawerOptions)
+              Column(children: drawerOptions)
             ],
           ),
         ),
@@ -112,4 +160,75 @@ class AndroidLayoutState extends State<AndroidLayout> {
           visible: (_selectedDrawerIndex == 1),
         ));
   }
+
+  List<Widget> get _actions => _selectedDrawerIndex != 0
+      ? <Widget>[]
+      : <Widget>[
+          IconButton(
+            onPressed: () =>
+                Navigator.of(context).push(_buildMaterialSearchPage(context)),
+            tooltip: 'Search',
+            icon: new Icon(Icons.search),
+          )
+        ];
+
+  Widget get _bottom => _selectedDrawerIndex != 0
+      ? null
+      : PreferredSize(
+          preferredSize: const Size.fromHeight(60.0),
+          child: Theme(
+            data: Theme.of(context).copyWith(accentColor: Colors.white),
+            child: Padding(
+                padding: EdgeInsets.only(left: 10, bottom: 10),
+                child: Row(children: <Widget>[
+                  FlatButton(
+                    child: Text(
+                      "Lunghezza",
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
+                    onPressed: () => showDialog(
+                        context: context,
+                        builder: (BuildContext context) => DistanceDialog(
+                              maxSliderValue: 20,
+                              lastValue: _currentUserLength,
+                              updateCallback: (value) {
+                                setState(() => _currentUserLength = value);
+                              },
+                            )),
+                    color: Colors.redAccent,
+                    textColor: Colors.white,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  FlatButton(
+                    child: Text(
+                      "Durata",
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
+                    onPressed: () {},
+                    color: Colors.redAccent,
+                    textColor: Colors.white,
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  FlatButton(
+                    child: Text(
+                      "Recensioni",
+                      style: TextStyle(fontSize: 15),
+                    ),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0)),
+                    onPressed: () {},
+                    color: Colors.redAccent,
+                    textColor: Colors.white,
+                  ),
+                ])),
+          ),
+        );
 }

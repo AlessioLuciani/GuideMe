@@ -1,31 +1,41 @@
 import 'dart:io';
 
-import 'package:GuideMe/commons/Itinerary.dart';
+import 'package:GuideMe/commons/itinerary.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/widgets/explore_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class ExploreFragment extends StatefulWidget {
+  final double userSelectedLength;
+
+  const ExploreFragment({Key key, @required this.userSelectedLength})
+      : super(key: key);
   @override
   _ExploreFragmentState createState() => _ExploreFragmentState();
 }
 
 class _ExploreFragmentState extends State<ExploreFragment> {
+  List<Itinerary> _itineraries;
   final GlobalKey<RefreshIndicatorState> _refreshKey =
-    GlobalKey<RefreshIndicatorState>();
+      GlobalKey<RefreshIndicatorState>();
 
-  List<Itinerary> _itineraries = shuffledItineraries;
+  @override
+  void initState() {
+    super.initState();
+    _itineraries = shuffledItineraries;
+  }
 
   @override
   Widget build(BuildContext context) {
-    //setStatusBarDarkColor();
+    _itineraries = itineraries
+        .where((Itinerary itinerary) =>
+            itinerary.length <= widget.userSelectedLength)
+        .toList();
     return AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.dark.copyWith(
-            statusBarColor: Colors.black, // Color for Android
-            statusBarBrightness:
-                Brightness.light // Dark == white status bar -- for IOS.
-            ),
+            statusBarColor: Colors.black,
+            statusBarBrightness: Brightness.light),
         child: SafeArea(
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -49,7 +59,7 @@ class _ExploreFragmentState extends State<ExploreFragment> {
                             // Add padding to the last item of the list
                             padding: index == _itineraries.length - 1
                                 ? EdgeInsets.only(bottom: 10)
-                                : EdgeInsets.only(bottom: 0),
+                                : EdgeInsets.only(bottom: 4),
                             // Form a new card from the current itinerary information
                             child: ExploreCard(
                               itinerary: _itineraries[index],

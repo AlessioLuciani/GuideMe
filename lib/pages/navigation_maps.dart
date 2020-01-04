@@ -1,4 +1,4 @@
-import 'package:GuideMe/commons/Itinerary.dart';
+import 'package:GuideMe/commons/itinerary.dart';
 import 'package:GuideMe/commons/itinerary_stop.dart';
 import 'package:GuideMe/pages/navigation_description.dart';
 import 'package:GuideMe/utils/utils.dart';

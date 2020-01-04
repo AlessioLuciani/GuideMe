@@ -1,4 +1,4 @@
-import 'package:GuideMe/commons/Itinerary.dart';
+import 'package:GuideMe/commons/itinerary.dart';
 import 'package:GuideMe/commons/user.dart';
 import 'package:GuideMe/pages/confirmation.dart';
 import 'package:GuideMe/utils/data.dart';
@@ -12,6 +12,9 @@ Itinerary getItineraryRef(Itinerary _itinerary) {
   int index = itineraries.indexWhere((Itinerary it) => it.id == _itinerary.id);
   return itineraries[index];
 }
+
+Itinerary getitineraryFromId(int id) =>
+    itineraries.firstWhere((Itinerary itinerary) => itinerary.id == id);
 
 // Super secret authentication
 int userExists(String email) {
@@ -45,7 +48,11 @@ void favourite(Itinerary itinerary) {
 void showReviewConfirm(BuildContext context, Itinerary itinerary) {
   currentMsgIndex = 0;
   Navigator.pushReplacement(
-      context, MaterialPageRoute(builder: (context) => ConfirmationPage(itinerary: itinerary,)));
+      context,
+      MaterialPageRoute(
+          builder: (context) => ConfirmationPage(
+                itinerary: itinerary,
+              )));
 }
 
 void showAdditionConfirm(BuildContext context) {

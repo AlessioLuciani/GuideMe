@@ -1,4 +1,4 @@
-import 'package:GuideMe/commons/Itinerary.dart';
+import 'package:GuideMe/commons/itinerary.dart';
 import 'package:GuideMe/commons/user.dart';
 
 class ItineraryVisit {

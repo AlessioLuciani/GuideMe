@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:GuideMe/commons/Itinerary.dart';
+import 'package:GuideMe/commons/itinerary.dart';
 import 'package:GuideMe/commons/itinerary_stop.dart';
 import 'package:GuideMe/pages/navigation_maps.dart';
 import 'package:GuideMe/pages/review_list.dart';
@@ -30,21 +30,21 @@ class DetailsPageState extends State<DetailsPage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Container(
-              height: 200,
-              child: GoogleMap(
-                mapType: MapType.terrain,
-                //that needs a list<Polyline>
-                myLocationEnabled: true,
-                myLocationButtonEnabled: false,
-                polylines: _polyline,
-                markers: _markers,
-                onMapCreated: _onMapCreated,
-                initialCameraPosition: CameraPosition(
-                  target: widget.itinerary.stops[0].coord,
-                  zoom: 13.0,
-                ),
-              )),
+          Expanded(
+              child: Container(
+                  height: 200,
+                  child: GoogleMap(
+                    mapType: MapType.terrain,
+                    myLocationEnabled: true,
+                    myLocationButtonEnabled: false,
+                    polylines: _polyline,
+                    markers: _markers,
+                    onMapCreated: _onMapCreated,
+                    initialCameraPosition: CameraPosition(
+                      target: widget.itinerary.stops[0].coord,
+                      zoom: 13.0,
+                    ),
+                  ))),
           Padding(
             padding: EdgeInsets.only(left: 20, right: 20, top: 20),
             child: Text(
@@ -65,7 +65,7 @@ class DetailsPageState extends State<DetailsPage> {
                   width: 10,
                 ),
                 Text(
-                  "3 ore e 40 minuti",
+                  widget.itinerary.duration,
                   style: TextStyle(fontSize: 18),
                 )
               ],
@@ -80,7 +80,7 @@ class DetailsPageState extends State<DetailsPage> {
                   width: 10,
                 ),
                 Text(
-                  "7 km",
+                  widget.itinerary.lengthKm,
                   style: TextStyle(fontSize: 18),
                 )
               ],

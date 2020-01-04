@@ -1,4 +1,4 @@
-import 'package:GuideMe/commons/Itinerary.dart';
+import 'package:GuideMe/commons/itinerary.dart';
 import 'package:GuideMe/pages/details.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +52,7 @@ class ExploreCard extends StatelessWidget {
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          _getDistance(itinerary.distance),
+                          _getDistance(itinerary.lengthKm),
                           _getRating(itinerary.avgReview)
                         ])
                   ],

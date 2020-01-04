@@ -59,7 +59,7 @@ class _ExploreVisitedFragmentState extends State<ExploreVisitedFragment> {
                           left: 10,
                           right: 10,
                           bottom: 6,
-                          top: 0), // it was top: 8 for iOS
+                          top: 0),
                       child: ListView.builder(
                         itemCount: userVisits.length,
                         itemBuilder: (BuildContext ctxt, int index) {
