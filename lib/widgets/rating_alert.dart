@@ -136,8 +136,7 @@ class _RatingAlertState extends State<RatingAlert> {
                         "Resetta",
                         style: TextStyle(fontSize: 16),
                       ),
-                      onPressed: () =>
-                          setState(() => _ratingValue = RATING_STARS),
+                      onPressed: () => setState(() => _ratingValue = 1),
                     ),
                     FlatButton(
                       padding:

@@ -38,7 +38,7 @@ class AndroidLayout extends StatefulWidget {
 class AndroidLayoutState extends State<AndroidLayout> {
   int _selectedDrawerIndex = 0;
   double _currentUserLength = MAX_ITINERARY_LENGTH.toDouble();
-  int _currentUserRating = RATING_STARS;
+  int _currentUserRating = 1;
 
   _buildMaterialSearchPage(BuildContext context) {
     return new MaterialPageRoute<String>(
@@ -231,7 +231,7 @@ class AndroidLayoutState extends State<AndroidLayout> {
                   ),
                   FlatButton(
                     child: Text(
-                      _currentUserRating == RATING_STARS
+                      _currentUserRating == 1
                           ? "Recensione"
                           : '$_currentUserRating $_starWord',
                       style: TextStyle(fontSize: 15),
@@ -240,7 +240,7 @@ class AndroidLayoutState extends State<AndroidLayout> {
                       borderRadius: BorderRadius.circular(30.0),
                       side: BorderSide(
                           width: 2,
-                          color: _currentUserRating == RATING_STARS
+                          color: _currentUserRating == 1
                               ? Colors.redAccent
                               : Colors.white),
                     ),

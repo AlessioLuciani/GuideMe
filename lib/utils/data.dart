@@ -308,52 +308,52 @@ List<Review> globalReviews = [
   new Review(
       user: users[0],
       time: _getRandomDate,
-      rating: _generator.nextInt(5) + 1,
+      rating: _generator.nextInt(4) + 2,
       description: _reviewDescription[0]),
   new Review(
       user: users[1],
       time: _getRandomDate,
-      rating: _generator.nextInt(5) + 1,
+      rating: _generator.nextInt(4) + 2,
       description: _reviewDescription[1]),
   new Review(
       user: users[2],
       time: _getRandomDate,
-      rating: _generator.nextInt(5) + 1,
+      rating: _generator.nextInt(4) + 2,
       description: _reviewDescription[2]),
   new Review(
       user: users[3],
       time: _getRandomDate,
-      rating: _generator.nextInt(5) + 1,
+      rating: _generator.nextInt(4) + 2,
       description: _reviewDescription[3]),
   new Review(
       user: users[4],
       time: _getRandomDate,
-      rating: _generator.nextInt(5) + 1,
+      rating: _generator.nextInt(4) + 2,
       description: _reviewDescription[4]),
   new Review(
       user: users[9],
       time: _getRandomDate,
-      rating: _generator.nextInt(5) + 1,
+      rating: _generator.nextInt(4) + 2,
       description: _reviewDescription[5]),
   new Review(
       user: users[10],
       time: _getRandomDate,
-      rating: _generator.nextInt(5) + 1,
+      rating: _generator.nextInt(4) + 2,
       description: _reviewDescription[6]),
   new Review(
       user: users[11],
       time: _getRandomDate,
-      rating: _generator.nextInt(5) + 1,
+      rating: _generator.nextInt(4) + 2,
       description: _reviewDescription[7]),
   new Review(
       user: users[12],
       time: _getRandomDate,
-      rating: _generator.nextInt(5) + 1,
+      rating: _generator.nextInt(4) + 2,
       description: _reviewDescription[8]),
   new Review(
       user: users[13],
       time: _getRandomDate,
-      rating: _generator.nextInt(5) + 1,
+      rating: _generator.nextInt(4) + 2,
       description: _reviewDescription[9]),
 ];
 

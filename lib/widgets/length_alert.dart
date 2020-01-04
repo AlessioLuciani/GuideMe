@@ -79,7 +79,7 @@ class _LengthDialogState extends State<LengthDialog> {
                 child: Row(
                   children: <Widget>[
                     Icon(
-                      Icons.place,
+                      Icons.timeline,
                       size: 30,
                     ),
                     SizedBox(

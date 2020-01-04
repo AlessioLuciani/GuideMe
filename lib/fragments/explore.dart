@@ -36,7 +36,7 @@ class _ExploreFragmentState extends State<ExploreFragment> {
     _itineraries = itineraries
         .where((Itinerary itinerary) =>
             itinerary.length <= widget.userSelectedLength &&
-            itinerary.avgReview.floor() <= widget.userSelectedRating)
+            itinerary.avgReview.floor() >= widget.userSelectedRating)
         .toList();
     return AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.dark.copyWith(
