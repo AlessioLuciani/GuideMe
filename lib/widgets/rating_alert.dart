@@ -71,11 +71,8 @@ class _RatingAlertState extends State<RatingAlert> {
               color: Colors.grey,
               height: 4.0,
             ),
-            SizedBox(
-              height: 20,
-            ),
             Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5),
+                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -117,7 +114,7 @@ class _RatingAlertState extends State<RatingAlert> {
                   ],
                 )),
             Padding(
-                padding: EdgeInsets.only(top: 20, bottom: 10),
+                padding: EdgeInsets.only(bottom: 10),
                 child: Divider(
                   color: Colors.grey,
                   height: 4.0,
