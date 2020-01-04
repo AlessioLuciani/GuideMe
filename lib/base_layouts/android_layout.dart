@@ -9,6 +9,7 @@ import 'package:GuideMe/pages/details.dart';
 import 'package:GuideMe/pages/login.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/utils/utils.dart';
+import 'package:GuideMe/widgets/duration_alert.dart';
 import 'package:GuideMe/widgets/length_alert.dart';
 import 'package:GuideMe/widgets/rating_alert.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,7 @@ class AndroidLayoutState extends State<AndroidLayout> {
   int _selectedDrawerIndex = 0;
   double _currentUserLength = MAX_ITINERARY_LENGTH.toDouble();
   int _currentUserRating = 1;
+  DateTime _currentUserDuration = DateTime.parse(INIT_DATETIME);
 
   _buildMaterialSearchPage(BuildContext context) {
     return new MaterialPageRoute<String>(
@@ -87,6 +89,7 @@ class AndroidLayoutState extends State<AndroidLayout> {
         return new ExploreFragment(
           userSelectedLength: _currentUserLength,
           userSelectedRating: _currentUserRating,
+          userSelectedDuration: _currentUserDuration,
         );
       case 1:
         return new AddItinearyFragment();
@@ -218,12 +221,29 @@ class AndroidLayoutState extends State<AndroidLayout> {
                   ),
                   FlatButton(
                     child: Text(
-                      "Durata",
+                      _currentUserDuration
+                                  .compareTo(DateTime.parse(INIT_DATETIME)) ==
+                              0
+                          ? "Durata"
+                          : '${_currentUserDuration.hour}h ${_currentUserDuration.minute}m',
                       style: TextStyle(fontSize: 15),
                     ),
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30.0)),
-                    onPressed: () {},
+                        borderRadius: BorderRadius.circular(30.0),
+                        side: BorderSide(
+                            width: 2,
+                            color: _currentUserDuration.compareTo(
+                                        DateTime.parse(INIT_DATETIME)) ==
+                                    0
+                                ? Colors.redAccent
+                                : Colors.white)),
+                    onPressed: () => showDialog(
+                        context: context,
+                        builder: (BuildContext context) => DurationDialog(
+                              lastValue: _currentUserDuration,
+                              updateCallback: (value) =>
+                                  setState(() => _currentUserDuration = value),
+                            )),
                     color: Colors.redAccent,
                     textColor: Colors.white,
                   ),

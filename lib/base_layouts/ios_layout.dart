@@ -14,7 +14,8 @@ class IOSLayout extends StatefulWidget {
 class IOSLayoutState extends State<IOSLayout> {
   int _tabIndex = 2;
   double _currentUserLength = MAX_ITINERARY_LENGTH.toDouble();
-  int _currentUserRating = RATING_STARS;
+  int _currentUserRating = 1;
+  DateTime _currentUserDuration = DateTime.parse(INIT_DATETIME);
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +63,7 @@ class IOSLayoutState extends State<IOSLayout> {
         return new ExploreFragment(
           userSelectedLength: _currentUserLength,
           userSelectedRating: _currentUserRating,
+          userSelectedDuration: _currentUserDuration,
         );
       case 3:
         return new ExploreVisitedFragment();

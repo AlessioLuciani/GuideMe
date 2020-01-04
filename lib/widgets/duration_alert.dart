@@ -1,28 +1,31 @@
+import 'package:GuideMe/utils/data.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
 
-class RatingAlert extends StatefulWidget {
-  final int lastValue;
+class DurationDialog extends StatefulWidget {
+  final DateTime lastValue;
   final Function updateCallback;
 
-  const RatingAlert(
-      {Key key, @required this.lastValue, @required this.updateCallback})
+  const DurationDialog({Key key, this.lastValue, this.updateCallback})
       : super(key: key);
 
   @override
-  _RatingAlertState createState() => new _RatingAlertState();
+  _DurationDialogState createState() => new _DurationDialogState();
 }
 
-class _RatingAlertState extends State<RatingAlert> {
-  int _ratingValue;
+class _DurationDialogState extends State<DurationDialog> {
+  DateTime _durationValue;
 
   @override
   void initState() {
     super.initState();
-    _ratingValue = widget.lastValue;
+    _durationValue = widget.lastValue;
   }
 
   @override
   Widget build(BuildContext context) {
+    final _hourWord = _durationValue.hour > 1 ? "ore" : "ora";
+    final _minuteWord = _durationValue.minute > 1 ? "minuti" : "minuto";
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10.0))),
@@ -45,7 +48,7 @@ class _RatingAlertState extends State<RatingAlert> {
                 ),
                 Expanded(child: Text("")),
                 Text(
-                  "Recensione",
+                  "Durata",
                   style: TextStyle(
                     fontSize: 17,
                   ),
@@ -71,49 +74,35 @@ class _RatingAlertState extends State<RatingAlert> {
               height: 4.0,
             ),
             Padding(
-                padding: EdgeInsets.symmetric(horizontal: 5, vertical: 20),
+                padding: EdgeInsets.only(left: 20, right: 20, top: 20),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    InkWell(
-                        onTap: () => setState(() => _ratingValue = 1),
-                        child: Icon(
-                          _ratingValue >= 1 ? Icons.star : Icons.star_border,
-                          size: 46,
-                          color: Colors.redAccent,
-                        )),
-                    InkWell(
-                        onTap: () => setState(() => _ratingValue = 2),
-                        child: Icon(
-                          _ratingValue >= 2 ? Icons.star : Icons.star_border,
-                          size: 46,
-                          color: Colors.redAccent,
-                        )),
-                    InkWell(
-                        onTap: () => setState(() => _ratingValue = 3),
-                        child: Icon(
-                          _ratingValue >= 3 ? Icons.star : Icons.star_border,
-                          size: 46,
-                          color: Colors.redAccent,
-                        )),
-                    InkWell(
-                        onTap: () => setState(() => _ratingValue = 4),
-                        child: Icon(
-                          _ratingValue >= 4 ? Icons.star : Icons.star_border,
-                          size: 46,
-                          color: Colors.redAccent,
-                        )),
-                    InkWell(
-                        onTap: () => setState(() => _ratingValue = 5),
-                        child: Icon(
-                          _ratingValue >= 5 ? Icons.star : Icons.star_border,
-                          size: 46,
-                          color: Colors.redAccent,
-                        )),
+                    Icon(
+                      Icons.access_time,
+                      size: 30,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                        'Fino a ${_durationValue.hour} $_hourWord e ${_durationValue.minute} $_minuteWord'),
                   ],
                 )),
             Padding(
-                padding: EdgeInsets.only(bottom: 10),
+              padding: EdgeInsets.symmetric(horizontal: 5),
+              child: TimePickerWidget(
+                  minDateTime: DateTime.parse(MIN_DATETIME),
+                  maxDateTime: DateTime.parse(MAX_DATETIME),
+                  initDateTime: _durationValue,
+                  dateFormat: DATE_FORMAT,
+                  pickerTheme: DateTimePickerTheme(
+                      showTitle: false, itemTextStyle: TextStyle(fontSize: 18)),
+                  minuteDivider: 5,
+                  onChange: (dateTime, selectedIndex) =>
+                      setState(() => _durationValue = dateTime)),
+            ),
+            Padding(
+                padding: EdgeInsets.only(top: 20, bottom: 10),
                 child: Divider(
                   color: Colors.grey,
                   height: 4.0,
@@ -133,8 +122,9 @@ class _RatingAlertState extends State<RatingAlert> {
                         style: TextStyle(fontSize: 16),
                       ),
                       onPressed: () {
-                        widget.updateCallback(1);
+                        widget.updateCallback(DateTime.parse(INIT_DATETIME));
                         Navigator.of(context).pop();
+                        ;
                       },
                     ),
                     FlatButton(
@@ -148,7 +138,11 @@ class _RatingAlertState extends State<RatingAlert> {
                         style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
                       onPressed: () {
-                        widget.updateCallback(_ratingValue);
+                        final DateTime updatedDate =
+                            DateTime.parse(MIN_DATETIME).add(Duration(
+                                hours: _durationValue.hour,
+                                minutes: _durationValue.minute));
+                        widget.updateCallback(updatedDate);
                         Navigator.of(context).pop();
                       },
                     ),

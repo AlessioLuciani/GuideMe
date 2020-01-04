@@ -48,7 +48,7 @@ class ExploreCard extends StatelessWidget {
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    _getDuration(itinerary.duration),
+                    _getDuration(itinerary.durationString),
                     Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

@@ -65,7 +65,7 @@ class DetailsPageState extends State<DetailsPage> {
                   width: 10,
                 ),
                 Text(
-                  widget.itinerary.duration,
+                  widget.itinerary.durationString,
                   style: TextStyle(fontSize: 18),
                 )
               ],

@@ -119,8 +119,10 @@ class _LengthDialogState extends State<LengthDialog> {
                         "Resetta",
                         style: TextStyle(fontSize: 16),
                       ),
-                      onPressed: () =>
-                          setState(() => _sliderValue = widget.maxSliderValue),
+                      onPressed: () {
+                        widget.updateCallback(widget.maxSliderValue);
+                        Navigator.of(context).pop();
+                      },
                     ),
                     FlatButton(
                       padding:

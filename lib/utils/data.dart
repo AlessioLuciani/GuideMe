@@ -49,7 +49,13 @@ List<String> _descriptions = [
 ];
 
 const int MAX_ITINERARY_LENGTH = 20;
-const int MAX_ITINERARY_DURATION_MIN = 60*6;
+const int MAX_ITINERARY_DURATION_MIN = 60 * 6;
+//const Duration MAX_ITINERARY_DURATION = Duration(hours: 24, minutes: 0);
+
+const String MIN_DATETIME = '2020-12-12 00:00:00';
+const String MAX_DATETIME = '2020-12-13 23:59:59';
+const String INIT_DATETIME = '2020-12-12 12:30:00';
+const String DATE_FORMAT = "HHh:mmm";
 
 // Static list of itineraries uploaded by users
 List<Itinerary> _itineraries = [
@@ -57,8 +63,9 @@ List<Itinerary> _itineraries = [
       author: users[0],
       coverImage: "assets/images/colosseo.jpg",
       title: "Giro de Roma",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-15",
       stops: [stops[0], stops[1], stops[2]],
       longDescription: _descriptions[0]),
@@ -66,8 +73,9 @@ List<Itinerary> _itineraries = [
       author: users[1],
       coverImage: "assets/images/rome-sun.jpg",
       title: "Magna a Roma",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-32",
       stops: [stops[3], stops[2], stops[1]],
       longDescription: _descriptions[1]),
@@ -75,8 +83,9 @@ List<Itinerary> _itineraries = [
       author: users[3],
       coverImage: "assets/images/rome-night.jpg",
       title: "Tour al tramonto",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-64",
       stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[2]),
@@ -84,8 +93,9 @@ List<Itinerary> _itineraries = [
       author: users[1],
       coverImage: "assets/images/piazza_navona.jpg",
       title: "Misteri a Roma",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-64",
       stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[3]),
@@ -93,8 +103,9 @@ List<Itinerary> _itineraries = [
       author: users[1],
       coverImage: "assets/images/rome-1.jpg",
       title: "Tour romano",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-64",
       stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[0]),
@@ -102,8 +113,9 @@ List<Itinerary> _itineraries = [
       author: users[1],
       coverImage: "assets/images/rome-2.jpg",
       title: "Lungo il Tevere",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-64",
       stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[1]),
@@ -111,8 +123,9 @@ List<Itinerary> _itineraries = [
       author: users[1],
       coverImage: "assets/images/rome-3.jpg",
       title: "Pantheon e dintorni",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-32",
       stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[2]),
@@ -120,8 +133,9 @@ List<Itinerary> _itineraries = [
       author: users[1],
       coverImage: "assets/images/rome-4.jpg",
       title: "Zone vaticane",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-32",
       stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[3]),
@@ -129,8 +143,9 @@ List<Itinerary> _itineraries = [
       author: users[1],
       coverImage: "assets/images/rome-5.jpg",
       title: "Segreti della roma antica",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-32",
       stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[0]),
@@ -138,8 +153,9 @@ List<Itinerary> _itineraries = [
       author: users[1],
       coverImage: "assets/images/rome-6.jpg",
       title: "Arte barocca a Roma",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-64",
       stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[1]),
@@ -147,8 +163,9 @@ List<Itinerary> _itineraries = [
       author: users[1],
       coverImage: "assets/images/rome-7.jpg",
       title: "Le chiese capitoline",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-32",
       stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[2]),
@@ -156,8 +173,9 @@ List<Itinerary> _itineraries = [
       author: users[1],
       coverImage: "assets/images/rome-8.jpg",
       title: "Le cripte nascoste",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-64",
       stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[3]),
@@ -165,8 +183,9 @@ List<Itinerary> _itineraries = [
       author: users[1],
       coverImage: "assets/images/rome-9.jpg",
       title: "Nei sotterranei di Roma",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-128",
       stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[0]),
@@ -174,8 +193,9 @@ List<Itinerary> _itineraries = [
       author: users[1],
       coverImage: "assets/images/rome-10.jpg",
       title: "La Roma nascosta",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-256",
       stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[1]),
@@ -183,8 +203,9 @@ List<Itinerary> _itineraries = [
       author: users[1],
       coverImage: "assets/images/rome-11.jpg",
       title: "Luoghi storici a Roma",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-512",
       stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[1]),
@@ -192,8 +213,9 @@ List<Itinerary> _itineraries = [
       author: users[1],
       coverImage: "assets/images/rome-12.jpg",
       title: "Antiche residenze romane",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-2",
       stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[2]),
@@ -201,8 +223,9 @@ List<Itinerary> _itineraries = [
       author: users[1],
       coverImage: "assets/images/rome-13.jpg",
       title: "Il luogo dei romani",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-64",
       stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[3]),
@@ -210,8 +233,9 @@ List<Itinerary> _itineraries = [
       author: users[1],
       coverImage: "assets/images/rome-14.jpg",
       title: "L'occhio segreto di Roma",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-64",
       stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[0]),
@@ -219,8 +243,9 @@ List<Itinerary> _itineraries = [
       author: users[1],
       coverImage: "assets/images/rome-15.jpg",
       title: "Un aperitivo a Roma",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-1024",
       stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[1]),
@@ -228,8 +253,9 @@ List<Itinerary> _itineraries = [
       author: users[1],
       coverImage: "assets/images/rome-16.jpg",
       title: "Un tuffo nel passato",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-512",
       stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[2]),
@@ -237,8 +263,9 @@ List<Itinerary> _itineraries = [
       author: users[1],
       coverImage: "assets/images/rome-17.jpg",
       title: "Una visita fuoriporta",
-      duration: _generator.nextInt(MAX_ITINERARY_DURATION_MIN-60)+60,
-      length: _generator.nextInt(MAX_ITINERARY_LENGTH-4)+4,
+      duration: DateTime.parse(MIN_DATETIME).add(Duration(
+          hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
+      length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-128",
       stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[3]),

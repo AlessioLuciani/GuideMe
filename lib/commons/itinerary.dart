@@ -13,7 +13,7 @@ class Itinerary {
   int id;
   // Heading section
   String title;
-  int _duration;
+  DateTime duration;
   int length;
   String coverImage;
   String priceRange;
@@ -29,23 +29,21 @@ class Itinerary {
       @required this.author,
       @required this.coverImage,
       @required this.title,
-      @required duration,
+      @required this.duration,
       @required this.longDescription,
       @required this.length,
       @required this.priceRange,
       this.isFavourite = false}) {
-    _duration = duration;
     id = _id;
     _id++;
   }
 
   String get lengthKm => '$length km';
 
-  String get duration => '$_hours ore $_minutes minuti';
+  String get _hourWord => duration.hour > 1 ? "ore" : "ora";
+  String get _minuteWord => duration.minute > 1 ? "minuti" : "minuto";
 
-  int get _hours => (_duration / 60).floor();
-
-  int get _minutes => _duration - _hours * 60;
+  String get durationString => '${duration.hour} $_hourWord ${duration.minute} $_minuteWord';
 
   List<Review> get reviews {
     if (_reviews.isEmpty) {
