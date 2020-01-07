@@ -99,7 +99,7 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
                             _markers.isEmpty ? Colors.grey : Colors.redAccent,
                         heroTag: "btn1",
                         child: Icon(Icons.undo),
-                        onPressed: () => _undoLastMarker,
+                        onPressed: () => _undoLastMarker(),
                       ),
                     )),
           ],
