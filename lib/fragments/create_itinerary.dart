@@ -16,244 +16,261 @@ class AddItinearyFragment extends StatefulWidget {
 class _AddItinearyFragmentState extends State<AddItinearyFragment> {
   final List<Marker> _markers = List();
 
-
-
   @override
   Widget build(BuildContext context) {
     //setStatusBarDarkColor();
     return AnnotatedRegion<SystemUiOverlayStyle>(
-    value: SystemUiOverlayStyle.dark.copyWith(
-   statusBarColor: Colors.black, // Color for Android
-   statusBarBrightness: Brightness.light // Dark == white status bar -- for IOS.
-), child: SafeArea(
-        child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              children: <Widget>[
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(
-                      height: Platform.isIOS ? 20 : 4,
-                    ),
-                    Platform.isAndroid
-                        ? Text("")
-                        : Text("Crea",
-                            style: TextStyle(
-                                fontSize: 40, fontWeight: FontWeight.bold)),
-                    SizedBox(height: Platform.isAndroid ? 0 : 20),
-                    Text(
-                      "Titolo",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    SizedBox(height: 10),
-                    _getTextfield("Il nome che vuoi dare all'itinerario.",
-                        "L'itinerario in non più di 20 caratteri.", 1, 20),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(height: 10),
-                    Text(
-                      "Descrizione",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    SizedBox(height: 10),
-                    _getTextfield(
-                        "Cosa è possibile vedere durante l'itinerario? Cosa consigli da non perdere e dove consigli effettuare delle soste?",
-                        "La tua esperienza in non più di 200 caratteri.",
-                        4,
-                        200),
-                  ],
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    SizedBox(height: 10),
-                    Text(
-                      "Durata",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+        value: SystemUiOverlayStyle.dark.copyWith(
+            statusBarColor: Colors.black, // Color for Android
+            statusBarBrightness:
+                Brightness.light // Dark == white status bar -- for IOS.
+            ),
+        child: SafeArea(
+            child: GestureDetector(
+                onTap: () {
+                  FocusScopeNode currentFocus = FocusScope.of(context);
+                  if (!currentFocus.hasPrimaryFocus) {
+                    currentFocus.unfocus();
+                  }
+                },
+                child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Column(
                       children: <Widget>[
-                        Expanded(
-                          child: Text(""),
-                          flex: 3,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            SizedBox(
+                              height: Platform.isIOS ? 20 : 4,
+                            ),
+                            Platform.isAndroid
+                                ? Text("")
+                                : Text("Crea",
+                                    style: TextStyle(
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold)),
+                            SizedBox(height: Platform.isAndroid ? 0 : 20),
+                            Text(
+                              "Titolo",
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            SizedBox(height: 10),
+                            _getTextfield(
+                                "Il nome che vuoi dare all'itinerario.",
+                                "L'itinerario in non più di 20 caratteri.",
+                                1,
+                                20),
+                          ],
                         ),
-                        Expanded(
-                            flex: 2,
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              keyboardType: TextInputType.number,
-                              inputFormatters: [
-                                LengthLimitingTextInputFormatter(2)
-                              ],
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(5),
-                                hintText: "0-24",
-                                labelText: "   Ore",
-                                border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8))),
-                              ),
-                            )),
-                        Expanded(
-                          child: Text(""),
-                          flex: 1,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            SizedBox(height: 10),
+                            Text(
+                              "Descrizione",
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            SizedBox(height: 10),
+                            _getTextfield(
+                                "Cosa è possibile vedere durante l'itinerario? Cosa consigli da non perdere e dove consigli effettuare delle soste?",
+                                "La tua esperienza in non più di 200 caratteri.",
+                                4,
+                                200),
+                          ],
                         ),
-                        Expanded(
-                            flex: 2,
-                            child: TextField(
-                              textAlign: TextAlign.center,
-                              inputFormatters: [
-                                LengthLimitingTextInputFormatter(2)
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            SizedBox(height: 10),
+                            Text(
+                              "Durata",
+                              style: TextStyle(fontSize: 20),
+                            ),
+                            SizedBox(height: 20),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: <Widget>[
+                                Expanded(
+                                  child: Text(""),
+                                  flex: 3,
+                                ),
+                                Expanded(
+                                    flex: 2,
+                                    child: TextField(
+                                      textAlign: TextAlign.center,
+                                      keyboardType: TextInputType.number,
+                                      inputFormatters: [
+                                        LengthLimitingTextInputFormatter(2)
+                                      ],
+                                      decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.all(5),
+                                        hintText: "0-24",
+                                        labelText: "   Ore",
+                                        border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(8))),
+                                      ),
+                                    )),
+                                Expanded(
+                                  child: Text(""),
+                                  flex: 1,
+                                ),
+                                Expanded(
+                                    flex: 2,
+                                    child: TextField(
+                                      textAlign: TextAlign.center,
+                                      inputFormatters: [
+                                        LengthLimitingTextInputFormatter(2)
+                                      ],
+                                      keyboardType: TextInputType.number,
+                                      decoration: InputDecoration(
+                                        contentPadding: EdgeInsets.all(5),
+                                        hintText: "0-60",
+                                        labelText: " Minuti",
+                                        border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(8))),
+                                      ),
+                                    )),
+                                Expanded(
+                                  child: Text(""),
+                                  flex: 3,
+                                ),
                               ],
-                              keyboardType: TextInputType.number,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(5),
-                                hintText: "0-60",
-                                labelText: " Minuti",
-                                border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8))),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                "Tappe",
+                                style: TextStyle(fontSize: 20),
                               ),
-                            )),
-                        Expanded(
-                          child: Text(""),
-                          flex: 3,
+                              Row(
+                                children: <Widget>[
+                                  IconButton(
+                                    iconSize: 36,
+                                    icon: Icon(Icons.pin_drop,
+                                        color: Colors.black87),
+                                    onPressed: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ChooseStopsMaps(
+                                                    addMarker: _addMarker,
+                                                    removeLastMarker:
+                                                        _removeLastMarker,
+                                                    initMarkers: _markers))),
+                                  ),
+                                  IconButton(
+                                    iconSize: 36,
+                                    color: _markers.isEmpty
+                                        ? Colors.grey
+                                        : Colors.black,
+                                    icon: Icon(Icons.clear_all),
+                                    onPressed: () =>
+                                        setState(() => _markers.clear()),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Flexible(
+                            child: ListView.builder(
+                          itemCount: _markers.length,
+                          shrinkWrap: true,
+                          itemBuilder: (BuildContext context, int index) {
+                            final textController = TextEditingController(
+                                text: _markers[index].infoWindow.title);
+                            return Padding(
+                                padding: EdgeInsets.only(
+                                    bottom:
+                                        index == _markers.length - 1 ? 90 : 4),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Icon(
+                                      Icons.fiber_manual_record,
+                                      size: 20,
+                                      color: Colors.redAccent,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Flexible(
+                                        child: TextField(
+                                            onChanged: (text) =>
+                                                _markers[index] = Marker(
+                                                  markerId:
+                                                      _markers[index].markerId,
+                                                  position:
+                                                      _markers[index].position,
+                                                  infoWindow: InfoWindow(
+                                                    title: text,
+                                                  ),
+                                                  icon: BitmapDescriptor
+                                                      .defaultMarkerWithHue(
+                                                          BitmapDescriptor
+                                                              .hueRed),
+                                                ),
+                                            decoration: InputDecoration(
+                                                border: InputBorder.none),
+                                            minLines: 1,
+                                            maxLines: 1,
+                                            controller: textController,
+                                            style: TextStyle(fontSize: 18))),
+                                    SizedBox(
+                                      width: 100,
+                                    ),
+                                    IconButton(
+                                        icon: Icon(
+                                          Icons.cancel,
+                                          color: Colors.redAccent,
+                                        ),
+                                        onPressed: () => setState(
+                                            () => _markers.removeAt(index))),
+                                  ],
+                                ));
+                          },
+                        )),
+                        () {
+                          if (Platform.isIOS) {
+                            return Row(children: <Widget>[
+                              Expanded(
+                                child: Text(""),
+                              ),
+                              FlatButton(
+                                child: Text(
+                                  "Fatto",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0)),
+                                color: Colors.redAccent,
+                                textColor: Colors.white,
+                                onPressed: () {
+                                  showAdditionConfirm(context);
+                                },
+                              ),
+                            ]);
+                          } else {
+                            return Text("");
+                          }
+                        }(),
+                        SizedBox(
+                          height: 10,
                         ),
                       ],
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        "Tappe",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      Row(
-                        children: <Widget>[
-                          IconButton(
-                            iconSize: 36,
-                            icon: Icon(Icons.pin_drop, color: Colors.black87),
-                            onPressed: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => ChooseStopsMaps(
-                                        addMarker: _addMarker,
-                                        removeLastMarker: _removeLastMarker,
-                                        initMarkers: _markers))),
-                          ),
-                          IconButton(
-                            iconSize: 36,
-                            color:
-                                _markers.isEmpty ? Colors.grey : Colors.black,
-                            icon: Icon(Icons.clear_all),
-                            onPressed: () => setState(() => _markers.clear()),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-
-                SizedBox(height: 10),
-                Flexible(
-                    child: ListView.builder(
-                  itemCount: _markers.length,
-                  shrinkWrap: true,
-                  itemBuilder: (BuildContext context, int index) {
-                    final textController = TextEditingController(
-                        text: _markers[index].infoWindow.title);
-                    return Padding(
-                        padding: EdgeInsets.only(
-                            bottom: index == _markers.length - 1 ? 90 : 4),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: <Widget>[
-                            Icon(
-                              Icons.fiber_manual_record,
-                              size: 20,
-                              color: Colors.redAccent,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Flexible(
-                                child: TextField(
-                                    onChanged: (text) =>
-                                        _markers[index] = Marker(
-                                          markerId: _markers[index].markerId,
-                                          position: _markers[index].position,
-                                          infoWindow: InfoWindow(
-                                            title: text,
-                                          ),
-                                          icon: BitmapDescriptor
-                                              .defaultMarkerWithHue(
-                                                  BitmapDescriptor.hueRed),
-                                        ),
-                                    decoration: InputDecoration(
-                                        border: InputBorder.none),
-                                    minLines: 1,
-                                    maxLines: 1,
-                                    controller: textController,
-                                    style: TextStyle(fontSize: 18))),
-                            SizedBox(
-                              width: 100,
-                            ),
-                            IconButton(
-                                icon: Icon(
-                                  Icons.cancel,
-                                  color: Colors.redAccent,
-                                ),
-                                onPressed: () =>
-                                    setState(() => _markers.removeAt(index))),
-                          ],
-                        ));
-                  },
-                )),
-                () {
-                  if (Platform.isIOS) {
-                    return Row(children: <Widget>[
-                  Expanded(child: Text(""),
-
-                  ),
-                  FlatButton(
-                      child: Text(
-                        "Fatto",
-
-                        style: TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-                      color: Colors.redAccent,
-                    textColor: Colors.white,
-                      onPressed: () {
-                        showAdditionConfirm(context);
-                      },
-                    ),
-                ]);
-                  } else {
-                    return Text("");
-                  }
-                }(),
-                
-                    
-                    SizedBox(
-                              height: 10,
-                            ),
-              ],
-            ))));
+                    )))));
   }
 
   void _addMarker(Marker marker) => _markers.add(marker);
