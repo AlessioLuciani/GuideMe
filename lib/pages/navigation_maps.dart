@@ -82,7 +82,7 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                   child: FloatingActionButton.extended(
                     onPressed: moveCamToClosestStop,
                     icon: Icon(Icons.nature_people),
-                    label: Text("Next stop"),
+                    label: Text("Nearby"),
                   )),
             ],
           ),),
