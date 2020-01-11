@@ -27,6 +27,281 @@ Ciascun task è stato testato su gruppi di 4-5 persone e l'approccio al protoypi
 
 \clearpage
 
+%================= NAVIGAZIONE ============================
+
+\subsection{Navigazione}
+\textbf{\emph Scenario}\\
+Immagina di aver avviato un itinerario che parte dal Colosseo e ti sei recato di fronte
+ad esso.\\
+Hai interesse a leggere una descrizione del Colosseo e ad ascoltarla via audio.\\
+Vuoi vedere che altre tappe dell’itinerario ti aspettano dopo il Colosso.\\
+Vuoi selezionare velocemente la tappa dove ti trovi geograficamente in questo momento (sempre il Colosseo).
+\newline
+\textbf{\emph Versione 1}\\
+\textbf{Aspetti negativi riscontrati:}
+\begin{itemize}[label=-]
+
+\item Pin non cliccabili
+\item pulsante posizione fuorviante
+\item freccia in basso fuorviante
+
+\end{itemize}
+
+\textbf{Risoluzioni:}
+\begin{itemize}[label=-]
+
+\item Rendere pin cliccabili (si salta alla tappa cliccata)
+\item Aggiunta figura circolare blu, che indica la posizione attuale
+\item Sostituzione freccia con foglio
+\item Su android aggiungere floating action button con pulsante posizione al posto di pulsante in alto a destra
+
+\end{itemize}
+
+\textbf{\emph Versione 2}\\
+\textbf{Aspetti negativi riscontrati:}
+\begin{itemize}[label=-]
+
+\item Pulsante play fuorviante
+\item Swipe destra e sinistra non intuitivo
+\item Pulsante localizzazione prossima tappa fuorviante
+
+\end{itemize}
+
+\textbf{Risoluzioni:}
+\begin{itemize}[label=-]
+
+\item Sostituzione pulsante play/pause con man speaking / stop
+\item Sostituzione swipe destra e sinistra con frecce destra e sinistra
+\item Sostituzione pulsante localizzazione prossima tappa con pulsante con scritta “prossima tappa”
+
+\end{itemize}
+
+%================= RICERCA FILTRATA ============================
+
+\subsection{Ricerca Filtrata}
+\textbf{\emph Scenario}\\
+Immagina di star organizzando una visita dei luoghi all’aperto di Roma.\\
+Dopo aver fatto una ricerca per parola chiave vorresti poter applicare dei filtri ad essa sulla durata e sulla lunghezza del percorso che ti piacerebbe fare.
+\newline
+\textbf{\emph Versione 1}\\
+\textbf{Aspetti negativi riscontrati:}
+\begin{itemize}[label=-]
+
+\item utilità pulsante cerca, in alcuni test l’utente pensava che sarebbe partita subito la ricerca e non premeva il pulsante cerca
+
+\end{itemize}
+
+\textbf{Aspetti positivi riscontrati:}
+\begin{itemize}[label=-]
+
+\item pulsanti filtraggio ben posizionato ed identificati al primo colpo
+\item pulsante ricerca subito identificato
+\item ricerca effettuata correttamente
+\item informazioni esterne ben comprese (anche icone)
+
+\end{itemize}
+
+\textbf{Risoluzioni:}
+\begin{itemize}[label=-]
+
+\item la ricerca parte direttamente tramite l’invio dalla tastiera, rimosso pulsante cerca.
+
+\end{itemize}
+
+\textbf{\emph Versione 2}\\
+\textbf{Aspetti negativi riscontrati:}
+\newline\newline
+\textbf{Aspetti positivi riscontrati:}
+\begin{itemize}[label=-]
+
+\item più facilità nel inviare la ricerca
+
+\end{itemize}
+
+%================= DETTAGLIO ============================
+
+\subsection{Dettaglio}
+\textbf{\emph Scenario}\\
+Immagina di star organizzando una visita e di aver trovato il percorso perfetto per te,
+e di voler capire tutte le informazioni di quel percorso.\\
+Inoltre ti piacerà talmente tanto da volerlo prima aggiungere ai preferiti e poi avviarlo.
+\newline
+\textbf{\emph Versione 1}\\
+\textbf{Aspetti negativi riscontrati:}
+\begin{itemize}[label=-]
+
+\item difficoltà nel capire a cosa si riferisce il range di prezzo (non per tutti gli utenti).
+\item mancanza di una mappa (alcuni utenti cliccavano sulla foto aspettandosi una mappa).
+\item manca il rating dell’itinerario.
+\item mancano le recensioni.
+
+\end{itemize}
+
+\textbf{Aspetti positivi riscontrati:}
+\begin{itemize}[label=-]
+
+\item pulsante aggiungi ai preferiti perfettamente identificato e usato da tutti correttamente
+\item pulsante avvia ben posizionato e trovato da tutti senza problemi.
+\item descrizione, e icone ben comprese (il prezzo viene compreso dalla maggior parte delle persone ma non dalla totalità).
+
+\end{itemize}
+
+\textbf{Risoluzioni:}
+\begin{itemize}[label=-]
+
+\item aggiunte recensioni in fondo alla pagina
+\item aggiunta mappa al posto dell’immagine
+
+\end{itemize}
+
+\textbf{\emph Versione 2}\\
+\textbf{Aspetti negativi riscontrati:}
+\newline\newline
+\textbf{Aspetti positivi riscontrati:}
+\begin{itemize}[label=-]
+
+\item recensioni identificate e comprese da tutti
+\item icona rating ben compresa da tutti
+\item mappa ben compresa da tutti
+
+\end{itemize}
+
+%================= RECENSIONE ============================
+
+\subsection{Recensione}
+\textbf{\emph Scenario}\\
+Immagina di aver già seguito in passato un itinerario con quest'app.\\
+Finalmente l'hai seguito e ti sei fatto un'idea che vuoi condividere con le altre
+persone.\\
+Vuoi aggiungere i dettagli sulla tua esperienza, magari condividendo foto scattate
+durante il tragitto.
+\newline
+\textbf{\emph Versione 1}\\
+\textbf{Aspetti negativi riscontrati:}
+\begin{itemize}[label=-]
+
+\item l'utente vorrebbe poter rivedere delle info riguardo l'itinerario di interesse
+\item hamburger menù non cliccabile
+\item icone foto non cliccabili
+
+\end{itemize}
+
+\textbf{Aspetti positivi riscontrati:}
+\begin{itemize}[label=-]
+
+\item il task è stato chiaramente identificato
+
+\end{itemize}
+
+\textbf{\emph Versione 2}\\
+\textbf{Aspetti negativi riscontrati:}
+\begin{itemize}[label=-]
+
+\item non sapevano quando avevano visitato l'itinerario
+
+\end{itemize}
+
+\textbf{Aspetti positivi riscontrati:}
+\begin{itemize}[label=-]
+
+\item pulsante per fare la recensione ben identificato
+
+\end{itemize}
+
+\textbf{\emph Versione 3}\\
+\textbf{Aspetti negativi riscontrati:}
+\newline\newline
+
+\textbf{Aspetti positivi riscontrati:}
+\begin{itemize}[label=-]
+
+\item riescono a capire correttamente quando avevano visitato l'itinerario
+
+\end{itemize}
+
+%================= NUOVO ITINERARIO ============================
+
+\subsection{Inserisci Nuovo Itinerario}
+\textbf{\emph Scenario}\\
+Immagina di voler aggiungere un nuovo itinerario all’interno dell’app.\\
+Hai già aperto la schermata di aggiunta, per cui vuoi specificare il nome dell’itinerario, ad esempio Roma In-Tour, una breve descrizione e informazioni riguardo la durata dell’intero tour.\\
+Le tappe che vuoi visitare sono colosseo e circo massimo.
+\newline
+\textbf{\emph Versione 1}\\
+\textbf{Aspetti negativi riscontrati:}
+\begin{itemize}[label=-]
+
+\item il tasto in basso con scritto “Fatto” (che indicava la fine dell’inserimento delle
+informazioni e quindi l’aggiunta effettiva sulla piattaforma) è stato frainteso
+dall’utente.
+\item l’utente ha frainteso il campo “Nome” (che rappresentava il nome dell’intero
+itinerario) con il Nome delle tappe
+\item Anche se non ci sono stati problemi riguardo la comprensione del riepilogo,
+l’utente è apparso infastidito dalla presenza di questo riepilogo.
+
+\end{itemize}
+
+\textbf{Aspetti positivi riscontrati:}
+\begin{itemize}[label=-]
+
+\item la scelta di impostare la selezione delle tappe, mostrando queste da subito
+una sotto l’altra, si è rivelata una buona idea essendo molto simile all’effetto
+che si ha su google Maps, infatti, non ci sono stati problemi nella ricerca.
+
+\end{itemize}
+
+\textbf{Risoluzioni:}
+\begin{itemize}[label=-]
+
+\item Aggiunto Floating Action Button con classica icona “done”
+
+\end{itemize}
+
+\textbf{\emph Versione 2}\\
+\textbf{Aspetti negativi riscontrati:}
+\begin{itemize}[label=-]
+
+\item persiste il problema del Nome dell’itinerario scambiato con il Nome della
+tappa che si vuole visitare
+\item L’utente si è mostrato confuso quando, dopo aver premuto il tasto per aggiungere l’itinerario, gli si è mostrato un riepilogo
+
+\end{itemize}
+
+\textbf{Aspetti positivi riscontrati:}
+\begin{itemize}[label=-]
+
+\item Il pulsante sostituito nella fase 1 funziona bene. La classica icona “done” ha
+dato l’idea all’utente che l’inserimento fosse terminato e che quindi poteva
+procedere con l’inserimento.
+
+\end{itemize}
+
+\textbf{Risoluzioni:}
+\begin{itemize}[label=-]
+\item Per evitare fraintendimenti con il campo “NOME”, i campi sono stati accompagnati da
+un suggerimento che appare nella textfield che dice “Il nome che vuoi dare
+all’itinerario” (nel caso ovviamente del campo Nome).
+\item La label del campo NOME è stata sostituita con Titolo
+\item Pensandoci bene la schermata in sè mostra già una sorta di riepilogo (anche
+minimale a livello di quantità di informazioni) per cui è stato deciso di rimuovere la
+pagina di riepilogo e semplicemente chiedere la classica conferma.
+
+\end{itemize}
+
+\textbf{\emph Versione 3}\\
+\textbf{Aspetti negativi riscontrati:}
+\newline\newline
+
+\textbf{Aspetti positivi riscontrati:}
+\begin{itemize}[label=-]
+
+\item La modifica di Nome-> TITOLO + l’aiuto che mostriamo in ogni textfield hanno
+annullato praticamente ogni dubbio riguardo la semantica del campo!!
+\item La rimozione del riepilogo, oltre a non confondere l’utente, ha anche evitato
+che quest’ultimo si infastidisse (cosa successa in intervista 1-versione 1)
+
+\end{itemize}
+
 %\subsection{Iterazioni e modifiche apportate}
 %
 %In questa sezione vengono descritti gli aspetti negativi e positivi riscontrati nelle varie versioni e le modifiche apportate per risolvere i problemi sollevati nelle precedenti.
