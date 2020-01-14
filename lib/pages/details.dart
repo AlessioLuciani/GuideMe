@@ -21,6 +21,7 @@ class DetailsPageState extends State<DetailsPage> {
   final Set<Marker> _markers = Set();
   final Set<Polyline> _polyline = Set();
   GoogleMapController controller;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +43,7 @@ class DetailsPageState extends State<DetailsPage> {
                     onMapCreated: _onMapCreated,
                     initialCameraPosition: CameraPosition(
                       target: widget.itinerary.stops[0].coord,
-                      zoom: 13.0,
+                      zoom: 12.2,
                     ),
                   ))),
           Padding(

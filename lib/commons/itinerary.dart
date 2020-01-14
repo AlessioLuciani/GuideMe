@@ -22,11 +22,10 @@ class Itinerary {
   // Details section
   String longDescription;
   List<Review> _reviews = [];
-  List<ItineraryStop> stops;
+  List<ItineraryStop> _stops = [];
 
   Itinerary(
-      {@required this.stops,
-      @required this.author,
+      {@required this.author,
       @required this.coverImage,
       @required this.title,
       @required this.duration,
@@ -43,7 +42,8 @@ class Itinerary {
   String get _hourWord => duration.hour > 1 ? "ore" : "ora";
   String get _minuteWord => duration.minute > 1 ? "minuti" : "minuto";
 
-  String get durationString => '${duration.hour} $_hourWord ${duration.minute} $_minuteWord';
+  String get durationString =>
+      '${duration.hour} $_hourWord ${duration.minute} $_minuteWord';
 
   List<Review> get reviews {
     if (_reviews.isEmpty) {
@@ -58,6 +58,21 @@ class Itinerary {
       }
     }
     return _reviews;
+  }
+
+  List<ItineraryStop> get stops {
+    if (_stops.isEmpty) {
+      Random generator = new Random();
+      int samples = generator.nextInt(globalStops.length - 8) + 4;
+      for (int i = 0; i < samples; i++) {
+        ItineraryStop currentStop =
+            globalStops[generator.nextInt(globalStops.length)];
+        if (!_stops.contains(currentStop)) {
+          _stops.add(currentStop);
+        }
+      }
+    }
+    return _stops;
   }
 
   double get avgReview {

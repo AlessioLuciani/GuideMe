@@ -67,7 +67,7 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-15",
-      stops: [stops[0], stops[1], stops[2]],
+      
       longDescription: _descriptions[0]),
   Itinerary(
       author: users[1],
@@ -77,7 +77,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-32",
-      stops: [stops[3], stops[2], stops[1]],
       longDescription: _descriptions[1]),
   Itinerary(
       author: users[3],
@@ -87,7 +86,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-64",
-      stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[2]),
   Itinerary(
       author: users[1],
@@ -97,7 +95,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-64",
-      stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[3]),
   Itinerary(
       author: users[1],
@@ -107,7 +104,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-64",
-      stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[0]),
   Itinerary(
       author: users[1],
@@ -117,7 +113,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-64",
-      stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[1]),
   Itinerary(
       author: users[1],
@@ -127,7 +122,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-32",
-      stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[2]),
   Itinerary(
       author: users[1],
@@ -137,7 +131,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-32",
-      stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[3]),
   Itinerary(
       author: users[1],
@@ -147,7 +140,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-32",
-      stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[0]),
   Itinerary(
       author: users[1],
@@ -157,7 +149,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-64",
-      stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[1]),
   Itinerary(
       author: users[1],
@@ -167,7 +158,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-32",
-      stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[2]),
   Itinerary(
       author: users[1],
@@ -177,7 +167,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-64",
-      stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[3]),
   Itinerary(
       author: users[1],
@@ -187,7 +176,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-128",
-      stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[0]),
   Itinerary(
       author: users[1],
@@ -197,7 +185,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-256",
-      stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[1]),
   Itinerary(
       author: users[1],
@@ -207,7 +194,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-512",
-      stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[1]),
   Itinerary(
       author: users[1],
@@ -217,7 +203,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-2",
-      stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[2]),
   Itinerary(
       author: users[1],
@@ -227,7 +212,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-64",
-      stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[3]),
   Itinerary(
       author: users[1],
@@ -237,7 +221,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-64",
-      stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[0]),
   Itinerary(
       author: users[1],
@@ -247,7 +230,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-1024",
-      stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[1]),
   Itinerary(
       author: users[1],
@@ -257,7 +239,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-512",
-      stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[2]),
   Itinerary(
       author: users[1],
@@ -267,7 +248,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-128",
-      stops: [stops[2], stops[3], stops[1]],
       longDescription: _descriptions[3]),
 ];
 
@@ -409,7 +389,7 @@ List<ItineraryVisit> get userVisits {
 void reviewItinerary(Itinerary itinerary) =>
     _userVisits.removeWhere((visit) => visit.itinerary == itinerary);
 
-List<ItineraryStop> stops = [
+List<ItineraryStop> globalStops = [
   ItineraryStop(
       name: "Colosseo",
       coord: LatLng(41.890447, 12.492420),
@@ -421,20 +401,65 @@ List<ItineraryStop> stops = [
       description:
           "I Fori Imperiali di Roma raccolgono una serie di piazze monumentali edificate tra il 46 a.C. e il 113 d.C. Vengono considerati il centro dell'attività politica di Roma antica, un luogo che nel corso dei secoli si è arricchito di strutture ed edifici.\nLa prima struttura che si incontra in questo sontuoso complesso è il Foro di Cesare. Questa piazza, voluta da Giulio Cesare per motivi propagandistici, fu inaugurata nel 46 a.C. e terminata dall'imperatore Ottaviano Augusto. La piazza presenta due portici sul lato est e ovest mentre in fondo troneggia il tempio dedicato a Venere Genitrice.\nIl terreno sul quale fu edificata la struttura fu acquistatodirettamente da Cesare; il foro venne accostato alle strutture del vecchio centro politico per attribuirgli maggiore visibilità e prestigio. Proseguendo nel nostro itinerario incontriamo il Foro di Augusto.\nFu realizzato per volere di Ottaviano Augusto, unitamente al tempio di Marte Ultore (dal lat. ultor - vendicatore). Il tempio era stato promesso dall'imperatore in voto al dio in occasione della vittoria nella battaglia di Filippi (42 a.C.). Fu tuttavia inaugurato solo 40 anni dopo e inserito in una seconda piazza monumentale, intitolata appunto ad Augusto.\nLa pianta del foro è ortogonale; sul versante nord si ergeva il tempio di Marte, appoggiato ad un muro (ancora oggi visibile) che divideva il foro dal quartiere popolare della Suburra. \nIl foro è alternato da ampie esedre, destinate a ospitare le attività dei tribunali. Ad arricchire l'area vi erano statue ispirate alla storia di Roma, ai membri della gens Giulia, a Enea e a Romolo.\nÈ il 75 d.C. Vespasiano ha appena conquistato Gerusalemme. Tra il Foro di Augusto e quello di Cesare sorge uno spazio dedicato all'imperatore, inizialmente non compreso all'interno dei Fori e conosciuto come Tempio della Pace. Questo luogo a pianta quadrata aveva le sembianze di un giardino-museo, con vasche d'acqua e basamenti per le statue. L'area, distrutta da un incendio, fu ricostruita durante l'epoca severiana (III sec. d.C.) per ospitare la Forma Urbis Severiana, una pianta di Roma antica incisa su lastre di marmo giunta a noi solo in parte.\nFu Domiziano a realizzare una piazza per unificare lo spazio rimasto libero tra il Tempio della Pace e i Fori di Cesare e di Augusto. L'imperatore non riuscì a inaugurare la propria opera: morì nel 96 d.C., lasciando il trono a Nerva. Nacque così il Foro di Nerva con annesso il tempio di Minerva, protettrice dell'imperatore.  Il foro prese inoltre l'attributo di 'transitorio' per la sua funzione di passaggio.\nI lavori iniziati da Domiziano furono in parte continuati da Traiano, al quale è intitolato il quarto Foro. La piazza veniva utilizzata per accogliere accampamenti militari e, in minima parte, per lo svolgimento delle attività forensi. Alle sue spalle sorge ancora oggi la Colonna di Traiano che racconta le gesta dell'imperatore nella guerra contro i Daci. All'edificazione del Foro seguirono la realizzazione della Basilica Argentaria, dei Mercati Traianei e la ricostruzione del tempio di Venere Genitrice. Si giunge infine alla Basilica Ulpia, la più grande del periodo romano. Costruita su progetto di Apollodoro di Damasco tra il 106 e il 113 d.C. fu inserita nel Foro Traianeo. Lo spazio aveva funzioni forensi e commerciali ma era anche luogo della cosiddetta manomissione (dal lat. manumissio - condono, affrancamento), ossia l'atto pubblico di liberazione di uno schiavo da parte del padrone."),
   ItineraryStop(
-      name: "Arco di traiano",
+      name: "Foro di traiano",
       coord: LatLng(41.892446, 12.485346),
       description:
-          "L'arco di Traiano di Roma era un arco del quale si hanno testimonianze letterarie e monetali, ma del quale non si conosce con certezza la collocazione. Forse non venne mai effettivamente eretto. Secondo i cataloghi regionari si trovava nella Regio I Porta Capena.\nUn arco in onore dell'imperatore Traiano è ricordato come decretato dal Senato nel 117. Durante il XIX secolo gli studiosi formularono varie ipotesi sulla sua collocazione, che sembrava più probabile entro il Foro di Traiano stesso, forse dell'ingresso monumentale del Foro, in collegamento col Foro di Augusto, forse come struttura indipendente.\nEsiste infatti un aureo con la raffigurazione di un arco, a fornice unico e sormontato dal carro trionfale imperiale, scandito verticalmente in cinque sezioni scandite da sei colonne; accanto al fornice centrale sono raffigurate due nicchie con timpano per ciascun lato, dove si supposero conservate le statue dei prigionieri Daci (presenti oggi nell'arco di Costantino). Sopra le nicchie vi erano altrettanti scudi con ritratto (imagines clipeatae). Il carro trionfale era trainato da sei cavalli e fiancheggiato da trofei con vittorie.\nIn realtà la raffigurazione monetale non rappresenterebbe nemmeno un arco, ma forse la recinzione meridionale della piazza (forse i resti rimessi in luce nei recenti scavi del Giubileo, mentre nella stessa occasione non furono ritrovate tracce di archi); può darsi che l'accesso sud alla piazza fosse stato monumentalizzato come arco trionfale e dedicato poi effettivamente come tale dal Senato al Traiano, eventualmente con la semplice apposizione di un'iscrizione. Altre interpretazioni sono tuttora in discussione, con parecchie diverse ipotesi, dato che la cosa coinvolge l'aspetto dei lati nord e sud della piazza e la posizione del tempio del Divo Traiano e Plotina, un altro monumento la cui collocazione tradizionale è stata discussa durante i recenti scavi."),
+          "Il Foro di Traiano, ricordato anche come Forum Ulpium in alcune fonti, è il più esteso e monumentale dei Fori Imperiali di Roma, l'ultimo in ordine cronologico. Costruito dall'imperatore Traiano con il bottino di guerra ricavato dalla conquista della Dacia[2], e inaugurato, secondo i Fasti ostiensi[3], nel 112, il foro si disponeva parallelamente al Foro di Cesare e perpendicolarmente a quello di Augusto. Il progetto della struttura è attribuito all'architetto Apollodoro di Damasco."),
   ItineraryStop(
       name: "Piazza di spagna",
       coord: LatLng(41.900890, 12.483260),
       description:
           "Splendido fondale alla via dei Condotti, piazza di Spagna è una delle immagini più famose al mondo, oltre che uno dei complessi urbanistici più monumentali e scenografici di Roma.\nPolo turistico fin dal XVI secolo, quando attirava artisti e letterati ed era già ricca di alberghi, locande ed eleganti edifici residenziali, la piazza assunse l'aspetto attuale soprattutto tra il Sei e il Settecento, con la caratteristica forma 'ad ali di farfalla' , costruita dai due triangoli col vertice in comune. Inizialmente intitolata alla Trinità, dalla chiesa che la domina, venne poi detta piazza di Spagna in riferimento alla residenza dell'ambasciatore spagnolo qui situata.\nAl centro della piazza è la fontana della Barcaccia, del 1629, di Pietro Bernini(padre di GianLorenzo, che collaborò all'opera). Venne realizzata in ricordo dell'alluvione del Tevere del 1598 e la sua forma di barca semisommersa fu un espediente per dissimulare il problema tecnico della scarsa pressione dell'acqua.\nAl centro del triangolo sud-est della piazza si innalza la colonna dell'Immacolata Concezione, rinvenuta nel 1777 nel monastero di S. Maria della Concezione in Campo Marzio e qui collocata nel 1856, a commemorazione del dogma proclamato da Pio IX. Sulla sommità della colonna in cipollino venato, è posta la statua bronzea della Vergine. Poco più avanti, si trova il palazzo di Propaganda Fide, sede dell'omonima congregazione istituita da Gregorio XV nel 1622.\nNel 1644 Bernini ne modificò la facciata sulla piazza mentre Borromini, subentrato come architetto della congregazione nel 1646, realizzò l'ampliamento sulle vie di Propaganda e di Capo le Case: il prospetto sulla via è una delle più innovative e geniali creazioni barocche, con il suo vibrante corpo centrale a elementi curvilinei, l'ordine gigante di lesene tra cui si inseriscono le complesse finestre concave e il contrasto tra il corpo centrale del prospetto, concavo, e il coronamento del finestrone convesso.\nDalla parte opposta della piazza, a partire dal triangolo nord-ovest, si sviluppa la lunga e rettilinea direttrice di Via del Babuino - dal nome della statua a lato della chiesa di S. Anastasio - tracciata tra il 1525 e il 1543, e da sempre considerata la via degli antiquari. Parallelamente si percorre via Margutta, tra le più caratteristiche strade di Roma, tuttora - ma soprattutto durante gli anni '60 - sede di botteghe e di studi di famosi artisti.\nMa è la scalinata centrale che rende la piazza uno degli scenari più spettacolari della città. Fu realizzata da Francesco De Sanctis, nel 1723-26, per volere di Innocenzo XIII, e diede una definitiva sistemazione al notevole dislivello tra la piazza e la superiore chiesa della Trinità. L'ardita soluzione architettonica sostituì un gioco di rampe e di scale che si intersecano e si aprono a ventaglio, alle ripide strade alberate preesistenti.\nIn primavera la scalinata della piazza si colora di meravigliose decorazioni floreali, realizzando un'immagine di rara suggestione, cara ai turisti di tutto il mondo."),
   ItineraryStop(
-      name: "Mole antonelliana",
-      coord: LatLng(41.906479, 12.453602),
+      name: "Vittoriano",
+      coord: LatLng(41.896697, 12.483267),
       description:
-          "La Mole Antonelliana è un edificio monumentale di Torino, situato nel centro storico, simbolo della città e uno dei simboli d'Italia.\nIl nome deriva dal fatto che, in passato, fu la costruzione in muratura più alta del mondo, mentre il suo aggettivo deriva dall'architetto che la concepì, Alessandro Antonelli. Tuttavia, nel corso del XX secolo, subì importanti ristrutturazioni con cemento armato e travi di acciaio, per cui essa non può più considerarsi una struttura esclusivamente in muratura.\nCon un'altezza di 167,5 metri, fu l'edificio in muratura più alto del mondo dal 1889 al 1908. Per anni fu l'edificio più alto di Torino, ma oggi, dopo la costruzione di altre due moderne torri, resta l'edificio più alto del solo profilo centrale urbano della città. Dall'anno 2000 al suo interno ha sede il Museo nazionale del cinema."),
+          "Il Monumento nazionale a Vittorio Emanuele II o (Mole del) Vittoriano, impropriamente detto Altare della Patria, è un complesso monumentale nazionale italiano situato a Roma in piazza Venezia, sul versante settentrionale del colle del Campidoglio, opera degli architetti Ettore Ferrari e Pio Piacentini, che idearono il progetto di massima, e Giuseppe Sacconi, che fu l'artefice del progetto di dettaglio."),
+  ItineraryStop(
+      name: "Ara Pacis",
+      coord: LatLng(41.906200, 12.475484),
+      description:
+          "L'Ara Pacis Augustae (Altare della pace di Augusto) è un altare dedicato da Augusto nel 9 a.C. alla Pace, nell'accezione di divinità, e originariamente posto in una zona del Campo Marzio consacrata alla celebrazione delle vittorie, luogo emblematico perché posto a un miglio romano (1.472 m) dal pomerium, limite della città dove il console di ritorno da una spedizione militare perdeva i poteri ad essa relativi (imperium militiae) e rientrava in possesso dei propri poteri civili (imperium domi). Questo monumento rappresenta una delle più significative testimonianze pervenuteci dell'arte augustea ed intende simboleggiare la pace e la prosperità raggiunte come risultato della Pax Romana."),
+  ItineraryStop(
+      name: "Arco di Costantino",
+      coord: LatLng(41.889778, 12.490536),
+      description:
+          "L'arco di Costantino è un arco trionfale a tre fornici (con un passaggio centrale affiancato da due passaggi laterali più piccoli), situato a Roma, a breve distanza dal Colosseo. Oltre alla notevole importanza storica come monumento, l'Arco può essere considerato come un vero e proprio museo di scultura romana ufficiale, straordinario per ricchezza e importanza[1]. Le dimensioni generali del prospetto sono di 21 m di altezza, 25,9 metri di larghezza e 7,4 m di profondità."),
+  ItineraryStop(
+      name: "Arco di Tito",
+      coord: LatLng(41.890677, 12.488616),
+      description:
+          "L'arco di Tito è un arco di trionfo ad un solo fornice (ossia con una sola arcata), posto sulle pendici settentrionali del Palatino, nella parte orientale del Foro di Roma. Capolavoro dell'arte romana, si tratta del monumento-simbolo dell'epoca flavia, grazie alle sostanziali innovazioni sia in campo architettonico-strutturale, sia in campo artistico-scultoreo."),
+  ItineraryStop(
+      name: "Basilica di Porta Maggiore",
+      coord: LatLng(41.891748, 12.516533),
+      description:
+          "La basilica sotterranea di Porta Maggiore è una basilica neopitagorica che si trova a Roma, nel quartiere Prenestino-Labicano, vicino alla Porta Maggiore. È di epoca tiberiana o claudia (tra il 14 ed il 54 d.C.). La sua scoperta avvenne casualmente il 23 aprile 1917, in seguito al cedimento di una volta della basilica, sulla quale si stava costruendo il viadotto ferroviario da e per la stazione Termini e, a livello stradale, la linea tramviaria che serve i quartieri situati lungo la via Prenestina. La Basilica di Porta Maggiore è considerata la più antica basilica pagana di tutto l'Occidente."),
+  ItineraryStop(
+      name: "Cappella Sistina",
+      coord: LatLng(41.902948, 12.454442),
+      description:
+          "La Cappella Sistina (Latino: Sacellum Sixtinum), dedicata a Maria Assunta in Cielo[1], è la principale cappella del palazzo apostolico, nonché uno dei più famosi tesori culturali e artistici della Città del Vaticano, inserita nel percorso dei Musei Vaticani. Fu costruita tra il 1475 e il 1481 circa, all'epoca di papa Sisto IV della Rovere, da cui prese il nome."),
+  ItineraryStop(
+      name: "Piramide Cestia",
+      coord: LatLng(41.876422, 12.480893),
+      description:
+          "La Piramide Cestia (o Piramide di Caio Cestio, Sepulcrum Cestii in latino) è una piramide di stile egizio costruita a Roma tra il 18 e il 12 a.C. Si trova nelle immediate adiacenze di porta San Paolo ed è inglobata nel perimetro del posteriore cimitero acattolico, costruito tra il XVIII e il XIX secolo."),
+  ItineraryStop(
+      name: "Teatro Marcello",
+      coord: LatLng(41.891919, 12.479898),
+      description:
+          "Il teatro di Marcello (in latino: Theatrum Marcelli) è un teatro della Roma antica, tuttora parzialmente conservato, innalzato per volere di Augusto nella zona meridionale del Campo Marzio (nota come Circo Flaminio) tra il fiume Tevere e il Campidoglio."),
+  ItineraryStop(
+      name: "Galleria Borghese",
+      coord: LatLng(41.902757, 12.496356),
+      description:
+          "Galleria Borghese si trova in piazzale del Museo Borghese 5, all'interno di villa Borghese Pinciana a Roma in Italia. Il museo espone opere di Gian Lorenzo Bernini, Agnolo Bronzino, Antonio Canova, Caravaggio, Raffaello, Perugino, Lorenzo Lotto, Antonello da Messina, Cranach, Annibale Carracci, Pieter Paul Rubens, Bellini, Tiziano. Si può considerare unica al mondo per quel che riguarda il numero e l'importanza delle sculture del Bernini e delle tele del Caravaggio."),
+  ItineraryStop(
+      name: "Palazzo Venezia",
+      coord: LatLng(41.896116, 12.481655),
+      description:
+          "Palazzo Barbo o Palazzo Venezia è un palazzo di Roma compreso tra piazza Venezia e via del Plebiscito a Roma. Vi ha sede il Museo nazionale di Palazzo Venezia e, al n. 3 della omonima piazza, la sede dell'INASA (Istituto Nazionale di Archeologia e Storia dell'Arte) con la biblioteca di Archeologia e Storia dell'Arte. Dal dicembre 2014 palazzo Venezia è divenuta la sede del Polo Museale del Lazio."),
 ];
 
 int currentMsgIndex = 0;

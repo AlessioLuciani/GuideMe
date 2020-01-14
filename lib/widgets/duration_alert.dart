@@ -124,7 +124,6 @@ class _DurationDialogState extends State<DurationDialog> {
                       onPressed: () {
                         widget.updateCallback(DateTime.parse(INIT_DATETIME));
                         Navigator.of(context).pop();
-                        ;
                       },
                     ),
                     FlatButton(

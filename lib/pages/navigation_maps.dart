@@ -22,13 +22,15 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
   final Set<Polyline> _polyline = Set();
   GoogleMapController controller;
   NavigationData navigationData;
-  GoogleMapController mapController;
+  GoogleMapController _mapController;
+  LatLng _currentTarget;
 
   @override
   void initState() {
+    super.initState();
     navigationData = NavigationData(
         itinerary: widget.itinerary, currentStop: 0, playingAudio: false);
-    super.initState();
+    _currentTarget = widget.itinerary.stops[0].coord;
   }
 
   @override
@@ -62,32 +64,35 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[Expanded(child:
-          Stack(
-            children: <Widget>[
-              GoogleMap(
-                mapType: MapType.terrain,
-                //that needs a list<Polyline>
-                polylines: _polyline,
-                markers: _markers,
-                myLocationEnabled: true,
-                myLocationButtonEnabled: false,
-                onMapCreated: _onMapCreated,
-                initialCameraPosition: CameraPosition(
-                    target: widget.itinerary.stops[0].coord, zoom: 14.0),
-              ),
-              Positioned(
-                  bottom: 20,
-                  right: 16,
-                  child: FloatingActionButton.extended(
-                    onPressed: moveCamToClosestStop,
-                    icon: Icon(Icons.nature_people),
-                    label: Text("Nearby"),
-                  )),
-            ],
-          ),),
+        children: <Widget>[
+          Expanded(
+            child: Stack(
+              children: <Widget>[
+                GoogleMap(
+                  mapType: MapType.terrain,
+                  //that needs a list<Polyline>
+                  polylines: _polyline,
+                  markers: _markers,
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: false,
+                  onMapCreated: _onMapCreated,
+                  initialCameraPosition:
+                      CameraPosition(target: _currentTarget, zoom: 14.0),
+                ),
+                Positioned(
+                    bottom: 20,
+                    right: 16,
+                    child: FloatingActionButton.extended(
+                      onPressed: moveCamToClosestStop,
+                      icon: Icon(Icons.nature_people),
+                      label: Text("Nearby"),
+                    )),
+              ],
+            ),
+          ),
           SafeArea(
-            child: Padding(padding: EdgeInsets.symmetric(vertical:15.0, horizontal:0.0),
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 0.0),
               child: Stack(
                 children: <Widget>[
                   Row(
@@ -105,7 +110,13 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                         onPressed: () {
                           setState(() {
                             navigationData.previousStop();
+                            if (navigationData.currentStop >= 0) {
+                              _currentTarget = widget.itinerary
+                                  .stops[navigationData.currentStop].coord;
+                            }
                           });
+                          _mapController.moveCamera(
+                              CameraUpdate.newLatLngZoom(_currentTarget, 14.0));
                         },
                       ),
                       Expanded(
@@ -129,7 +140,8 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                                 Text(
                                   (navigationData.currentStop + 1).toString() +
                                       "/" +
-                                      (widget.itinerary.stops.length).toString(),
+                                      (widget.itinerary.stops.length)
+                                          .toString(),
                                   style: new TextStyle(
                                       fontSize: 18.0,
                                       fontWeight: FontWeight.bold),
@@ -138,56 +150,66 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                                   height: 0,
                                 ),
                               ])),
-                        
-                              IconButton(
-                                icon: Icon(
-                                  Icons.description,
-                                  size: 40.0,
-                                ),
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      PageRouteBuilder(
-                                        pageBuilder: (
-                                          BuildContext context,
-                                          Animation<double> animation,
-                                          Animation<double> secondaryAnimation,
-                                        ) =>
-                                            NavigationDescriptionPage(
-                                          navigationData: navigationData,
-                                        ),
-                                        transitionsBuilder: (
-                                          BuildContext context,
-                                          Animation<double> animation,
-                                          Animation<double> secondaryAnimation,
-                                          Widget child,
-                                        ) =>
-                                            SlideTransition(
-                                          position: Tween<Offset>(
-                                            begin: const Offset(0, 1),
-                                            end: Offset.zero,
-                                          ).animate(animation),
-                                          child: child,
-                                        ),
-                                      ));
-                                },
-                              ),
+                          IconButton(
+                            icon: Icon(
+                              Icons.description,
+                              size: 40.0,
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  PageRouteBuilder(
+                                    pageBuilder: (
+                                      BuildContext context,
+                                      Animation<double> animation,
+                                      Animation<double> secondaryAnimation,
+                                    ) =>
+                                        NavigationDescriptionPage(
+                                      navigationData: navigationData,
+                                      nextStopCallback: (target) {
+                                        _currentTarget = target;
+                                        _mapController.moveCamera(
+                                            CameraUpdate.newLatLngZoom(
+                                                _currentTarget, 14.0));
+                                      },
+                                      previousStopCallback: (target) {
+                                        _currentTarget = target;
+                                        _mapController.moveCamera(
+                                            CameraUpdate.newLatLngZoom(
+                                                _currentTarget, 14.0));
+                                      },
+                                    ),
+                                    transitionsBuilder: (
+                                      BuildContext context,
+                                      Animation<double> animation,
+                                      Animation<double> secondaryAnimation,
+                                      Widget child,
+                                    ) =>
+                                        SlideTransition(
+                                      position: Tween<Offset>(
+                                        begin: const Offset(0, 1),
+                                        end: Offset.zero,
+                                      ).animate(animation),
+                                      child: child,
+                                    ),
+                                  ));
+                            },
+                          ),
                           SizedBox(
                             width: 10,
                           ),
                           IconButton(
-                                icon: Icon(
-                                  navigationData.playingAudio
-                                      ? Icons.stop
-                                      : Icons.record_voice_over,
-                                  size: 40.0,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    navigationData.toggleAudio();
-                                  });
-                                }
+                              icon: Icon(
+                                navigationData.playingAudio
+                                    ? Icons.stop
+                                    : Icons.record_voice_over,
+                                size: 40.0,
                               ),
+                              onPressed: () {
+                                setState(() {
+                                  navigationData.toggleAudio();
+                                });
+                              }),
                           SizedBox(
                             width: 10,
                           ),
@@ -205,7 +227,14 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                         onPressed: () {
                           setState(() {
                             navigationData.nextStop();
+                            if (navigationData.currentStop <
+                                navigationData.itinerary.stops.length - 1) {
+                              _currentTarget = widget.itinerary
+                                  .stops[navigationData.currentStop].coord;
+                            }
                           });
+                          _mapController.moveCamera(
+                              CameraUpdate.newLatLngZoom(_currentTarget, 14.0));
                         },
                       )
                     ],
@@ -220,7 +249,7 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
   }
 
   void _onMapCreated(GoogleMapController controllerParam) {
-    mapController = controllerParam;
+    _mapController = controllerParam;
 
     setState(() {
       _polyline.add(Polyline(
@@ -285,7 +314,7 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
       }
     }
 
-    mapController.moveCamera(CameraUpdate.newLatLngZoom(
+    _mapController.moveCamera(CameraUpdate.newLatLngZoom(
         LatLng(widget.itinerary.stops[closestStop].coord.latitude,
             widget.itinerary.stops[closestStop].coord.longitude),
         14.0));
@@ -327,8 +356,7 @@ class NavigationData {
     } else {
       tts = playTextToSpeech(itinerary.stops[currentStop].description);
     }
-    tts.then((val) => val.setCompletionHandler(
-        () => playingAudio = false));
+    tts.then((val) => val.setCompletionHandler(() => playingAudio = false));
     playingAudio = !playingAudio;
   }
 }
