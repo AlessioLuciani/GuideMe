@@ -45,19 +45,19 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                             ),
                             Platform.isAndroid
                                 ? Text("")
-                                : Text("Crea",
+                                : Text("Create",
                                     style: TextStyle(
                                         fontSize: 40,
                                         fontWeight: FontWeight.bold)),
                             SizedBox(height: Platform.isAndroid ? 0 : 20),
                             Text(
-                              "Titolo",
+                              "Title",
                               style: TextStyle(fontSize: 20),
                             ),
                             SizedBox(height: 10),
                             _getTextfield(
-                                "Il nome che vuoi dare all'itinerario.",
-                                "L'itinerario in non più di 20 caratteri.",
+                                "The name you want to give to your itinerary.",
+                                "The itinerary in not more than 20 characters.",
                                 1,
                                 20),
                           ],
@@ -67,13 +67,13 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                           children: <Widget>[
                             SizedBox(height: 10),
                             Text(
-                              "Descrizione",
+                              "Description",
                               style: TextStyle(fontSize: 20),
                             ),
                             SizedBox(height: 10),
                             _getTextfield(
-                                "Cosa è possibile vedere durante l'itinerario? Cosa consigli da non perdere e dove consigli effettuare delle soste?",
-                                "La tua esperienza in non più di 200 caratteri.",
+                                "What can you see in the itinerary? Where do you suggest stopping and spend time?",
+                                "Your experience in not more than 200 characters.",
                                 4,
                                 200),
                           ],
@@ -83,7 +83,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                           children: <Widget>[
                             SizedBox(height: 10),
                             Text(
-                              "Durata",
+                              "Duration",
                               style: TextStyle(fontSize: 20),
                             ),
                             SizedBox(height: 20),
@@ -105,7 +105,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                                       decoration: InputDecoration(
                                         contentPadding: EdgeInsets.all(5),
                                         hintText: "0-24",
-                                        labelText: "   Ore",
+                                        labelText: "   Hours",
                                         border: OutlineInputBorder(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(8))),
@@ -126,7 +126,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                                       decoration: InputDecoration(
                                         contentPadding: EdgeInsets.all(5),
                                         hintText: "0-60",
-                                        labelText: " Minuti",
+                                        labelText: "Minutes",
                                         border: OutlineInputBorder(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(8))),
@@ -148,7 +148,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
-                                "Tappe",
+                                "Stops",
                                 style: TextStyle(fontSize: 20),
                               ),
                               Row(
@@ -248,7 +248,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                               ),
                               FlatButton(
                                 child: Text(
-                                  "Fatto",
+                                  "Publish",
                                   style: TextStyle(
                                     fontSize: 16,
                                   ),

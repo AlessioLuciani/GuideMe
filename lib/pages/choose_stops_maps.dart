@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:GuideMe/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -10,13 +11,14 @@ class ChooseStopsMaps extends StatefulWidget {
 
   const ChooseStopsMaps(
       {Key key, this.addMarker, this.removeLastMarker, this.initMarkers})
-      : super(key: key);
+      : super(key: key); 
 
   @override
   _ChooseStopsMapsState createState() => _ChooseStopsMapsState();
 }
 
 class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
+    List<Marker> _prevMarkers;
   GoogleMapController controller;
   final Set<Polyline> _polyline = Set();
   final CameraPosition _myLocation =
@@ -37,23 +39,29 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
 
   @override
   void initState() {
+    _prevMarkers = List.from(widget.initMarkers);
     super.initState();
   }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () {
+        widget.initMarkers.removeRange(0, widget.initMarkers.length);
+        widget.initMarkers.addAll(_prevMarkers);
+        Navigator.pop(context);
+        },
+      child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text("Aggiungi tappe all'itinerario"),
+          title: Text("Add stops"),          
           actions: <Widget>[
-            Platform.isAndroid
-                ? Text("")
-                : IconButton(
-                    icon: Icon(
-                      Icons.undo,
-                      color: _markers.isEmpty ? Colors.grey : Colors.white,
-                    ),
-                    onPressed: () => _undoLastMarker(),
+            FlatButton(
+                    child: Text("Done",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16
+                      ),),
+                    onPressed: () => Navigator.pop(context),
                   )
           ],
         ),
@@ -87,23 +95,19 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
               }),
               onMapCreated: _onMapCreated,
               mapType: MapType.terrain,
+              
             ),
-            Platform.isIOS
-                ? Text("")
-                : Align(
-                    alignment: Alignment.topRight,
-                    child: Padding(
-                      padding: EdgeInsets.all(20),
-                      child: FloatingActionButton(
-                        backgroundColor:
-                            _markers.isEmpty ? Colors.grey : Colors.redAccent,
-                        heroTag: "btn1",
-                        child: Icon(Icons.undo),
-                        onPressed: () => _undoLastMarker(),
-                      ),
-                    )),
+                    Positioned(
+                    bottom: 40,
+                    right: 16,
+                    child: FloatingActionButton.extended(
+                      onPressed: () => _undoLastMarker(),
+                      icon: Icon(Icons.undo),
+                      label: Text("Undo"),
+                    )
+                    ),
           ],
-        ));
+        )));
   }
 
   void _undoLastMarker() {
@@ -113,7 +117,7 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
         _markers.removeLast();
         widget.removeLastMarker();
         _polyline.add(Polyline(
-          polylineId: PolylineId("Il tuo itinerario"),
+          polylineId: PolylineId("Your itinerary"),
           visible: true,
           points: _markers.map((marker) => marker.position).toList(),
           width: 3,
