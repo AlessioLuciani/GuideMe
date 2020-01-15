@@ -22,6 +22,7 @@ class NavigationDescriptionPageState extends State<NavigationDescriptionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.lightGreen,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
