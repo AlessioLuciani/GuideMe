@@ -25,22 +25,18 @@ class _LoginPageState extends State<LoginPage> {
     int userIndex = userExists(_emailController.text);
     if (!_isLoginPage) {
       // Create a new account
-      User newUser = User(
-          name: _nameController.text,
-          surname: _surnameController.text,
-          email: _emailController.text);
+      // User newUser = User(name: _nameController.text,surname: _surnameController.text,email: _emailController.text);
       if (_nameKey.currentState.validate() &&
           _surnameKey.currentState.validate() &&
           _emailKey.currentState.validate() &&
-          _passwordKey.currentState.validate() &&
-          addTempUser(newUser)) {
-        userIndex = userExists(_emailController.text);
-        if (userIndex == -1) {
-          userIndex = 0;
-          users[userIndex] = newUser;
-        }
-        createUserSession(userIndex);
-        
+          _passwordKey.currentState.validate()) {
+        createUserSession(0); // mock value, simply rename test test account at the first boot
+        currentUser.name = _nameController.text;
+        currentUser.surname = _surnameController.text;
+        currentUser.email = _emailController.text;
+        //addTempUser(newUser)) {
+        //userIndex = userExists(_emailController.text);
+
         Route route = MaterialPageRoute(builder: (context) => HomePage());
         Navigator.pushReplacement(context, route);
         // and go to the app

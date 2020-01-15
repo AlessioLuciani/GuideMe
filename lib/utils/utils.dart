@@ -46,6 +46,8 @@ Future createUserSession(int userIndex) async {
   sharedPref.setInt("current_user_index", userIndex);
 }
 
+User get currentUser => users[currentUserIndex];
+
 void favourite(Itinerary itinerary) {
   getItineraryRef(itinerary).toggleFavourite();
 }
