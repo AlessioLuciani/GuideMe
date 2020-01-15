@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:GuideMe/utils/utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -13,21 +14,14 @@ class AboutFragment extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Column(
-        children: <Widget>[
-          SizedBox(
-            height: Platform.isIOS ? 20 : 0,
-          ),
-          Align(
-              alignment: Alignment.centerLeft,
-              child: Platform.isAndroid
-                  ? Text("")
-                  : Padding(
-                      padding: EdgeInsets.only(left: 20),
-                      child: Text("About",
-                          style: TextStyle(
-                              fontSize: 40, fontWeight: FontWeight.bold)))),
-          Expanded(
+      child: CustomScrollView(
+                  slivers: <Widget>[
+                Platform.isIOS
+                ? CupertinoSliverNavigationBar(
+                  largeTitle: Text("About"),
+                )
+                : SliverList(delegate: SliverChildBuilderDelegate((_,i) {return Text("");}, childCount: 0),),
+                SliverFillRemaining(
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
@@ -124,14 +118,13 @@ class AboutFragment extends StatelessWidget {
                     ],
                   ),
                 ),
-              ])),
-          SizedBox(
+                SizedBox(
             height: 20,
           ),
           Platform.isIOS 
           ?  FlatButton(
                 child: Text( 
-                  "Logout",
+                  "Log Out",
                   style: TextStyle(color: Colors.white),
                 ),
                 shape: RoundedRectangleBorder(
@@ -143,6 +136,8 @@ class AboutFragment extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
+              ])),
+          
         ],
       ),
     );

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:GuideMe/commons/itinerary.dart';
@@ -5,13 +6,15 @@ import 'package:GuideMe/commons/itinerary_stop.dart';
 import 'package:GuideMe/pages/navigation_maps.dart';
 import 'package:GuideMe/pages/review_list.dart';
 import 'package:GuideMe/utils/utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class DetailsPage extends StatefulWidget {
   final Itinerary itinerary;
+  final String prevPageTitle;
 
-  const DetailsPage({Key key, this.itinerary}) : super(key: key);
+  const DetailsPage({Key key, this.itinerary, this.prevPageTitle}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => DetailsPageState();
@@ -27,7 +30,12 @@ class DetailsPageState extends State<DetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: Text(widget.itinerary.title)),
+      appBar: Platform.isIOS
+        ? CupertinoNavigationBar(
+          middle: Text(widget.itinerary.title),
+          previousPageTitle: widget.prevPageTitle,
+        )
+        : AppBar(title: Text(widget.itinerary.title)),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:GuideMe/commons/itinerary.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/widgets/explore_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -41,25 +42,37 @@ class _ExploreFragmentState extends State<ExploreFragment> {
             itinerary.avgReview.floor() >= widget.userSelectedRating &&
             widget.userSelectedDuration.isAfter(itinerary.duration))
         .toList();
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.dark.copyWith(
-            statusBarColor: Colors.black,
-            statusBarBrightness: Brightness.light),
-        child: SafeArea(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-              Padding(
-                  padding:
-                      EdgeInsets.only(left: 20, top: Platform.isIOS ? 20 : 0),
-                  child: Platform.isAndroid
-                      ? Text("")
-                      : Text("Esplora",
-                          style: TextStyle(
-                              fontSize: 40, fontWeight: FontWeight.bold))),
-              SizedBox(height: Platform.isAndroid ? 0 : 20),
-              Expanded(
-                  child: RefreshIndicator(
+    return SafeArea(
+            child: Platform.isIOS
+              ? CustomScrollView(
+                  slivers: <Widget>[
+                CupertinoSliverNavigationBar(
+                  largeTitle: Text("Explore"),
+                ),
+                CupertinoSliverRefreshControl(
+                  builder: (context, refreshState, pulledExtent,
+                  refreshTriggerPullDistance, refreshIndicatorExtent) {
+                    return CupertinoSliverRefreshControl.buildSimpleRefreshIndicator(
+                      context, refreshState, pulledExtent,
+                      refreshTriggerPullDistance, refreshIndicatorExtent);
+                  },
+                    onRefresh: _refreshList,
+
+                    ),
+              
+                SliverList(
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    return ExploreCard(
+                      itinerary: _itineraries[index],
+                      pageTitle: "Explore"
+
+                    );
+                  },
+                  childCount: _itineraries.length
+                  ),
+                )
+              ])
+              : RefreshIndicator(
                       onRefresh: _refreshList,
                       key: _refreshKey,
                       child: ListView.builder(
@@ -72,9 +85,10 @@ class _ExploreFragmentState extends State<ExploreFragment> {
                             // Form a new card from the current itinerary information
                             child: ExploreCard(
                               itinerary: _itineraries[index],
+                              pageTitle: "Explore"
                             )),
-                      ))),
-            ])));
+                      ))
+              );
   }
 
   Future<Null> _refreshList() async {

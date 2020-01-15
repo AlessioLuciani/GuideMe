@@ -24,12 +24,12 @@ class DrawerItem {
 
 class AndroidLayout extends StatefulWidget {
   final drawerItems = [
-    new DrawerItem("Esplora", Icons.explore),
-    new DrawerItem("Crea itinerario", Icons.add_circle_outline),
-    new DrawerItem("Itinerari seguiti", Icons.done_outline),
-    new DrawerItem("Preferiti", Icons.favorite),
+    new DrawerItem("Explore", Icons.explore),
+    new DrawerItem("Create Itinerary", Icons.add_circle_outline),
+    new DrawerItem("Visited Itineraries", Icons.done_outline),
+    new DrawerItem("Favorites", Icons.favorite),
     new DrawerItem("About", Icons.info),
-    new DrawerItem("Esci", Icons.exit_to_app),
+    new DrawerItem("Log Out", Icons.exit_to_app),
   ];
 
   @override
@@ -51,7 +51,7 @@ class AndroidLayoutState extends State<AndroidLayout> {
         builder: (BuildContext context) {
           return new Material(
             child: new MaterialSearch<String>(
-              placeholder: 'Prova con "Tour de Roma"',
+              placeholder: 'Try with "Tour de Roma"',
               results: itineraries
                   .map(
                       (Itinerary itinerary) => new MaterialSearchResult<String>(

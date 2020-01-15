@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:GuideMe/commons/itinerary.dart';
 import 'package:GuideMe/utils/utils.dart';
 import 'package:GuideMe/widgets/explore_card.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -20,27 +21,15 @@ class _FavouritesFragmentState extends State<FavouritesFragment>{
     List<Itinerary> data = favouriteItineraries;
 
     if (data.length == 0) {
-      return AnnotatedRegion<SystemUiOverlayStyle>(
-    value: SystemUiOverlayStyle.dark.copyWith(
-   statusBarColor: Colors.black, // Color for Android
-   statusBarBrightness: Brightness.light // Dark == white status bar -- for IOS.
-), child:
-      SafeArea(
-          child: Column(children: <Widget>[
-        SizedBox(
-          height: 20,
-        ),
-        Align(
-            alignment: Alignment.centerLeft,
-            child: Platform.isAndroid
-                ? Text("")
-                : Padding(
-                    padding: EdgeInsets.only(left: 20),
-                    child: Text("Preferiti",
-                        style: TextStyle(
-                            fontSize: 40, fontWeight: FontWeight.bold)))),
-        SizedBox(height: Platform.isAndroid ? 10 : 20),
-        Expanded(
+      return SafeArea(
+          child: CustomScrollView(
+                  slivers: <Widget>[
+                Platform.isIOS
+                ? CupertinoSliverNavigationBar(
+                  largeTitle: Text("Favorites"),
+                )
+                : SliverList(delegate: SliverChildBuilderDelegate((_,i) {return Text("");}, childCount: 0),),
+                SliverFillRemaining(
             child: Align(
           alignment: Alignment.center,
           child: Padding(
@@ -51,16 +40,51 @@ class _FavouritesFragmentState extends State<FavouritesFragment>{
                 style: TextStyle(fontSize: 18)),
           ),
         ))
-      ])));
+      ]));
     }
 
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-    value: SystemUiOverlayStyle.dark.copyWith(
-   statusBarColor: Colors.black, // Color for Android
-   statusBarBrightness: Brightness.light // Dark == white status bar -- for IOS.
-), child:
-    SafeArea(
-      child: Column(
+    return SafeArea(
+      child: Platform.isIOS
+              ? CustomScrollView(
+                  slivers: <Widget>[
+                CupertinoSliverNavigationBar(
+                  largeTitle: Text("Favorites"),
+                ),
+                
+                SliverList(
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    return ExploreCard(
+                      itinerary: data[index],
+                      pageTitle: "Favorites"
+                    );
+                  },
+                  childCount: data.length
+                  ),
+              )])
+              : ListView.builder(
+                        itemCount: data.length,
+                        itemBuilder: (_, index) => Container(
+                            // Add padding to the last item of the list
+                            padding: index == data.length - 1
+                                ? EdgeInsets.only(bottom: 10)
+                                : EdgeInsets.only(bottom: 4),
+                            // Form a new card from the current itinerary information
+                            child: ExploreCard(
+                              itinerary: data[index],
+                              pageTitle: "Favorites"
+                            )),
+                      )
+                      
+                      
+            
+    );
+  }
+
+}
+
+
+/*
+ Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SizedBox(
@@ -91,8 +115,5 @@ class _FavouritesFragmentState extends State<FavouritesFragment>{
             ),
           )
         ],
-      ),
-    ));
-  }
-
-}
+      ), 
+ */

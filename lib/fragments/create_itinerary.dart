@@ -18,14 +18,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
 
   @override
   Widget build(BuildContext context) {
-    //setStatusBarDarkColor();
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.dark.copyWith(
-            statusBarColor: Colors.black, // Color for Android
-            statusBarBrightness:
-                Brightness.light // Dark == white status bar -- for IOS.
-            ),
-        child: SafeArea(
+    return SafeArea(
             child: GestureDetector(
                 onTap: () {
                   FocusScopeNode currentFocus = FocusScope.of(context);
@@ -33,7 +26,15 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                     currentFocus.unfocus();
                   }
                 },
-                child: Padding(
+                child: CustomScrollView(
+                  slivers: <Widget>[
+                Platform.isIOS
+                ? CupertinoSliverNavigationBar(
+                  largeTitle: Text("Create"),
+                )
+                : SliverList(delegate: SliverChildBuilderDelegate((_,i) {return Text("");}, childCount: 0),),
+                SliverFillRemaining(
+                  child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20),
                     child: Column(
                       children: <Widget>[
@@ -43,13 +44,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                             SizedBox(
                               height: Platform.isIOS ? 20 : 4,
                             ),
-                            Platform.isAndroid
-                                ? Text("")
-                                : Text("Create",
-                                    style: TextStyle(
-                                        fontSize: 40,
-                                        fontWeight: FontWeight.bold)),
-                            SizedBox(height: Platform.isAndroid ? 0 : 20),
+
                             Text(
                               "Title",
                               style: TextStyle(fontSize: 20),
@@ -270,7 +265,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                           height: 10,
                         ),
                       ],
-                    )))));
+                    )))])));
   }
 
   void _addMarker(Marker marker) => _markers.add(marker);

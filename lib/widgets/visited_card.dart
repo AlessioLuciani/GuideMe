@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:GuideMe/commons/itinerary_visit.dart';
 import 'package:GuideMe/pages/details.dart';
 import 'package:GuideMe/pages/review_page.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class VisitCard extends StatelessWidget {
@@ -33,10 +36,18 @@ class VisitCard extends StatelessWidget {
                     )),
                 onTap: () => Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => DetailsPage(
-                            itinerary: visit.itinerary,
-                          )),
+                  Platform.isIOS
+            ? CupertinoPageRoute(
+              builder: (context) => DetailsPage(
+                      itinerary: visit.itinerary,
+                      prevPageTitle: "Visited",
+                    )
+            )
+            : MaterialPageRoute(
+                builder: (context) => DetailsPage(
+                      itinerary: visit.itinerary,
+                      prevPageTitle: "Visited",
+                    )),
                 ),
               ),
               ListTile(

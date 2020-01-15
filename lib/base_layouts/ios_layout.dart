@@ -1,5 +1,6 @@
 import 'package:GuideMe/fragments/about.dart';
 import 'package:GuideMe/fragments/explore_visited.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:GuideMe/fragments/explore.dart';
 import 'package:GuideMe/fragments/create_itinerary.dart';
@@ -22,26 +23,26 @@ class IOSLayoutState extends State<IOSLayout> {
     return Scaffold(
       // Avoid the Scaffold to resize himself when
       resizeToAvoidBottomInset: false,
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
+      bottomNavigationBar: CupertinoTabBar(
+        //type: BottomNavigationBarType.fixed,
         currentIndex: _tabIndex,
         onTap: (int index) => setState(() => _tabIndex = index),
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: new Icon(Icons.favorite),
-            title: new Text('Preferiti'),
+            title: new Text('Favorites'),
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.add_circle_outline),
-            title: new Text('Crea'),
+            title: new Text('Create'),
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.explore),
-            title: new Text('Esplora'),
+            title: new Text('Explore'),
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.done_outline),
-            title: new Text('Seguiti'),
+            title: new Text('Visited'),
           ),
           BottomNavigationBarItem(
             icon: new Icon(Icons.info),

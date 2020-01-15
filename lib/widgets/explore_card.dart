@@ -1,12 +1,17 @@
+import 'dart:io';
+
 import 'package:GuideMe/commons/itinerary.dart';
 import 'package:GuideMe/pages/details.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ExploreCard extends StatelessWidget {
   final Itinerary itinerary;
+  final String pageTitle;
 
   ExploreCard({
     @required this.itinerary,
+    this.pageTitle
   });
 
   @override
@@ -20,9 +25,17 @@ class ExploreCard extends StatelessWidget {
         child: InkWell(
           onTap: () => Navigator.push(
             context,
-            MaterialPageRoute(
+            Platform.isIOS
+            ? CupertinoPageRoute(
+              builder: (context) => DetailsPage(
+                      itinerary: itinerary,
+                      prevPageTitle: pageTitle,
+                    )
+            )
+            : MaterialPageRoute(
                 builder: (context) => DetailsPage(
                       itinerary: itinerary,
+                      prevPageTitle: pageTitle,
                     )),
           ),
           child: Column(
