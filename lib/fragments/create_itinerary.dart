@@ -85,15 +85,10 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                               ),
                               SizedBox(height: 20),
                               Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  Expanded(
-                                    child: Text(""),
-                                    flex: 4,
-                                  ),
-                                  Expanded(
-                                      flex: 3,
+                                  Container(
+                                      width: 80,
                                       child: TextField(
                                         textAlign: TextAlign.center,
                                         keyboardType: TextInputType.number,
@@ -109,31 +104,24 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                                                   Radius.circular(8))),
                                         ),
                                       )),
-                                  Expanded(
-                                    child: Text(""),
-                                    flex: 1,
-                                  ),
-                                  Expanded(
-                                      flex: 3,
+                                  SizedBox(width: 30),
+                                  Container(
+                                      width: 80,
                                       child: TextField(
-                                        textAlign: TextAlign.center,
                                         inputFormatters: [
                                           LengthLimitingTextInputFormatter(2)
                                         ],
                                         keyboardType: TextInputType.number,
+                                        textAlign: TextAlign.center,
                                         decoration: InputDecoration(
                                           contentPadding: EdgeInsets.all(5),
                                           hintText: "0-60",
-                                          labelText: "Minutes",
+                                          labelText: " Minutes",
                                           border: OutlineInputBorder(
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(8))),
                                         ),
                                       )),
-                                  Expanded(
-                                    child: Text(""),
-                                    flex: 4,
-                                  ),
                                 ],
                               ),
                             ],
