@@ -17,10 +17,10 @@ class _ExploreVisitedFragmentState extends State<ExploreVisitedFragment> {
   Widget build(BuildContext context) {
     if (userVisits.isEmpty)
       return AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.dark.copyWith(
-            statusBarColor: Colors.black,
-            statusBarBrightness: Brightness.light),
-        child: Center(
+          value: SystemUiOverlayStyle.dark.copyWith(
+              statusBarColor: Colors.black,
+              statusBarBrightness: Brightness.light),
+          child: Center(
               child: Text(
             "It looks like you haven't followed any itineraries yet.\nWhat are you waiting for?!",
             textAlign: TextAlign.center,
@@ -30,39 +30,33 @@ class _ExploreVisitedFragmentState extends State<ExploreVisitedFragment> {
           )));
 
     return SafeArea(
-            child: Platform.isIOS
-              ? CustomScrollView(
-                  slivers: <Widget>[
+        child: Platform.isIOS
+            ? CustomScrollView(slivers: <Widget>[
                 CupertinoSliverNavigationBar(
                   largeTitle: Text("Visited"),
                 ),
-                
                 SliverList(
                   delegate: SliverChildBuilderDelegate((context, index) {
                     return VisitCard(
                       visit: userVisits[index],
-                        );
-                  },
-                  childCount: userVisits.length
-                  ), 
+                    );
+                  }, childCount: userVisits.length),
                 )
               ])
-              : ListView.builder(
-                        itemCount: userVisits.length,
-                        itemBuilder: (_, index) => Container(
-                            // Add padding to the last item of the list
-                            padding: index == userVisits.length - 1
-                                ? EdgeInsets.only(bottom: 10)
-                                : EdgeInsets.only(bottom: 4),
-                            // Form a new card from the current itinerary information
-                            child: VisitCard(
-                      visit: userVisits.elementAt(index),
-                        )
-                        )
-                      )
-                      
-                      
-            
-              );
+            : Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: ListView.builder(
+                    itemCount: userVisits.length,
+                    itemBuilder: (_, index) => Container(
+                        // Add padding to the last item of the list
+                        padding: index == userVisits.length - 1
+                            ? EdgeInsets.only(
+                                bottom: 10, top: index == 0 ? 10 : 0)
+                            : EdgeInsets.only(
+                                bottom: 0, top: index == 0 ? 10 : 0),
+                        // Form a new card from the current itinerary information
+                        child: VisitCard(
+                          visit: userVisits.elementAt(index),
+                        )))));
   }
 }

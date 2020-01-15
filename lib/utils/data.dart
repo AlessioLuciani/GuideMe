@@ -67,7 +67,6 @@ List<Itinerary> _itineraries = [
           hours: _generator.nextInt(7) + 1, minutes: _generator.nextInt(60))),
       length: _generator.nextInt(MAX_ITINERARY_LENGTH - 4) + 4,
       priceRange: "0-15",
-      
       longDescription: _descriptions[0]),
   Itinerary(
       author: users[1],
@@ -273,6 +272,8 @@ List<Itinerary> get shuffledItineraries {
 }
 
 List<Itinerary> get itineraries => _itineraries;
+
+void appendItinerary(Itinerary itinerary) => _itineraries.add(itinerary);
 
 DateTime get _getRandomDate =>
     DateTime.now().subtract(new Duration(days: _generator.nextInt(365)));

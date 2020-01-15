@@ -5,16 +5,13 @@ import 'package:GuideMe/utils/utils.dart';
 import 'package:GuideMe/widgets/explore_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class FavouritesFragment extends StatefulWidget {
   @override
   _FavouritesFragmentState createState() => _FavouritesFragmentState();
 }
 
-class _FavouritesFragmentState extends State<FavouritesFragment>{
-
-
+class _FavouritesFragmentState extends State<FavouritesFragment> {
   @override
   Widget build(BuildContext context) {
     //setStatusBarDarkColor();
@@ -22,14 +19,17 @@ class _FavouritesFragmentState extends State<FavouritesFragment>{
 
     if (data.length == 0) {
       return SafeArea(
-          child: CustomScrollView(
-                  slivers: <Widget>[
-                Platform.isIOS
-                ? CupertinoSliverNavigationBar(
-                  largeTitle: Text("Favorites"),
-                )
-                : SliverList(delegate: SliverChildBuilderDelegate((_,i) {return Text("");}, childCount: 0),),
-                SliverFillRemaining(
+          child: CustomScrollView(slivers: <Widget>[
+        Platform.isIOS
+            ? CupertinoSliverNavigationBar(
+                largeTitle: Text("Favorites"),
+              )
+            : SliverList(
+                delegate: SliverChildBuilderDelegate((_, i) {
+                  return Text("");
+                }, childCount: 0),
+              ),
+        SliverFillRemaining(
             child: Align(
           alignment: Alignment.center,
           child: Padding(
@@ -44,44 +44,31 @@ class _FavouritesFragmentState extends State<FavouritesFragment>{
     }
 
     return SafeArea(
-      child: Platform.isIOS
-              ? CustomScrollView(
-                  slivers: <Widget>[
+        child: Platform.isIOS
+            ? CustomScrollView(slivers: <Widget>[
                 CupertinoSliverNavigationBar(
                   largeTitle: Text("Favorites"),
                 ),
-                
                 SliverList(
                   delegate: SliverChildBuilderDelegate((context, index) {
                     return ExploreCard(
-                      itinerary: data[index],
-                      pageTitle: "Favorites"
-                    );
-                  },
-                  childCount: data.length
-                  ),
-              )])
-              : ListView.builder(
-                        itemCount: data.length,
-                        itemBuilder: (_, index) => Container(
-                            // Add padding to the last item of the list
-                            padding: index == data.length - 1
-                                ? EdgeInsets.only(bottom: 10)
-                                : EdgeInsets.only(bottom: 4),
-                            // Form a new card from the current itinerary information
-                            child: ExploreCard(
-                              itinerary: data[index],
-                              pageTitle: "Favorites"
-                            )),
-                      )
-                      
-                      
-            
-    );
+                        itinerary: data[index], pageTitle: "Favorites");
+                  }, childCount: data.length),
+                )
+              ])
+            : ListView.builder(
+                itemCount: data.length,
+                itemBuilder: (_, index) => Container(
+                    // Add padding to the last item of the list
+                    padding: index == data.length - 1
+                        ? EdgeInsets.only(bottom: 10, top: index == 0 ? 10 : 0)
+                        : EdgeInsets.only(bottom: 4, top: index == 0 ? 10 : 0),
+                    // Form a new card from the current itinerary information
+                    child: ExploreCard(
+                        itinerary: data[index], pageTitle: "Favorites")),
+              ));
   }
-
 }
-
 
 /*
  Column(

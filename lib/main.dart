@@ -20,39 +20,34 @@ class MyApp extends StatelessWidget {
         [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
     return AppRoot(
         child: FutureBuilder(
-          future: SharedPreferences.getInstance(),
-          builder: (BuildContext context, AsyncSnapshot<SharedPreferences> snapshot) {
-            if (snapshot.hasData) {
-              return  MaterialApp(
-                  title: 'GuideMe',
-                  debugShowCheckedModeBanner: false,
-                  theme: ThemeData(
-                    primarySwatch: Colors.red,
-                  ),
-                  home: () {
-                    if (snapshot.data.containsKey("current_user_index")) {
-                      int userIndex = snapshot.data.getInt("current_user_index");
-                      if (userIndex == -1) {
-                        return LoginPage();
-                      } else {
-                        createUserSession(userIndex);
-                        return HomePage();
-                      }
-                    } else {
-                      return LoginPage();
-                    }
-                    
-                    
-
-                  }()
-                );
-            } else {
-              return CircularProgressIndicator();
-            }
-
-          },
-        )
-    );
+      future: SharedPreferences.getInstance(),
+      builder:
+          (BuildContext context, AsyncSnapshot<SharedPreferences> snapshot) {
+        if (snapshot.hasData) {
+          return MaterialApp(
+              title: 'GuideMe',
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                primarySwatch: Colors.red,
+              ),
+              home: () {
+                if (snapshot.data.containsKey("current_user_index")) {
+                  int userIndex = snapshot.data.getInt("current_user_index");
+                  if (userIndex == -1) {
+                    return LoginPage();
+                  } else {
+                    createUserSession(userIndex);
+                    return HomePage();
+                  }
+                } else {
+                  return LoginPage();
+                }
+              }());
+        } else {
+          return CircularProgressIndicator();
+        }
+      },
+    ));
   }
 }
 

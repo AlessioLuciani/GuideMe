@@ -5,7 +5,6 @@ import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/widgets/explore_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class ExploreFragment extends StatefulWidget {
   final double userSelectedLength;
@@ -43,52 +42,48 @@ class _ExploreFragmentState extends State<ExploreFragment> {
             widget.userSelectedDuration.isAfter(itinerary.duration))
         .toList();
     return SafeArea(
-            child: Platform.isIOS
-              ? CustomScrollView(
-                  slivers: <Widget>[
+        child: Platform.isIOS
+            ? CustomScrollView(slivers: <Widget>[
                 CupertinoSliverNavigationBar(
                   largeTitle: Text("Explore"),
                 ),
                 CupertinoSliverRefreshControl(
                   builder: (context, refreshState, pulledExtent,
-                  refreshTriggerPullDistance, refreshIndicatorExtent) {
-                    return CupertinoSliverRefreshControl.buildSimpleRefreshIndicator(
-                      context, refreshState, pulledExtent,
-                      refreshTriggerPullDistance, refreshIndicatorExtent);
+                      refreshTriggerPullDistance, refreshIndicatorExtent) {
+                    return CupertinoSliverRefreshControl
+                        .buildSimpleRefreshIndicator(
+                            context,
+                            refreshState,
+                            pulledExtent,
+                            refreshTriggerPullDistance,
+                            refreshIndicatorExtent);
                   },
-                    onRefresh: _refreshList,
-
-                    ),
-              
+                  onRefresh: _refreshList,
+                ),
                 SliverList(
                   delegate: SliverChildBuilderDelegate((context, index) {
                     return ExploreCard(
-                      itinerary: _itineraries[index],
-                      pageTitle: "Explore"
-
-                    );
-                  },
-                  childCount: _itineraries.length
-                  ),
+                        itinerary: _itineraries[index], pageTitle: "Explore");
+                  }, childCount: _itineraries.length),
                 )
               ])
-              : RefreshIndicator(
-                      onRefresh: _refreshList,
-                      key: _refreshKey,
-                      child: ListView.builder(
-                        itemCount: _itineraries.length,
-                        itemBuilder: (_, index) => Container(
-                            // Add padding to the last item of the list
-                            padding: index == _itineraries.length - 1
-                                ? EdgeInsets.only(bottom: 10)
-                                : EdgeInsets.only(bottom: 4),
-                            // Form a new card from the current itinerary information
-                            child: ExploreCard(
-                              itinerary: _itineraries[index],
-                              pageTitle: "Explore"
-                            )),
-                      ))
-              );
+            : RefreshIndicator(
+                onRefresh: _refreshList,
+                key: _refreshKey,
+                child: ListView.builder(
+                  itemCount: _itineraries.length,
+                  itemBuilder: (_, index) => Container(
+                      // Add padding to the last item of the list
+                      padding: index == _itineraries.length - 1
+                          ? EdgeInsets.only(
+                              bottom: 10, top: index == 0 ? 10 : 0)
+                          : EdgeInsets.only(
+                              bottom: 4, top: index == 0 ? 10 : 0),
+                      // Form a new card from the current itinerary information
+                      child: ExploreCard(
+                          itinerary: _itineraries[index],
+                          pageTitle: "Explore")),
+                )));
   }
 
   Future<Null> _refreshList() async {
