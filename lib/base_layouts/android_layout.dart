@@ -104,10 +104,9 @@ class AndroidLayoutState extends State<AndroidLayout> {
     }
   }
 
-  _onSelectItem(int index) {
+  _onSelectItem(int index) async {
     if (index == widget.drawerItems.length - 1) {
-      Route route = MaterialPageRoute(builder: (context) => LoginPage());
-      Navigator.pushReplacement(context, route);
+      await logout(context);
       return;
     }
     if (index != _selectedDrawerIndex) {

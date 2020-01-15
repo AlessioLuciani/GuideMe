@@ -1,5 +1,6 @@
 import 'package:GuideMe/commons/user.dart';
 import 'package:GuideMe/main.dart';
+import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +35,12 @@ class _LoginPageState extends State<LoginPage> {
           _passwordKey.currentState.validate() &&
           addTempUser(newUser)) {
         userIndex = userExists(_emailController.text);
+        if (userIndex == -1) {
+          userIndex = 0;
+          users[userIndex] = newUser;
+        }
         createUserSession(userIndex);
+        
         Route route = MaterialPageRoute(builder: (context) => HomePage());
         Navigator.pushReplacement(context, route);
         // and go to the app
@@ -208,7 +214,7 @@ class _LoginPageState extends State<LoginPage> {
               Row(
                 children: <Widget>[Expanded(child: loginButton)],
               ),
-              _isLoginPage ? forgotLabel : SizedBox(),
+              //_isLoginPage ? forgotLabel : SizedBox(),
               Expanded(
                 child: registerLabel,
               ),

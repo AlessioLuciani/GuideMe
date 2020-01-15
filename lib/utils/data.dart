@@ -6,7 +6,7 @@ import 'package:GuideMe/commons/user.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:math';
 
-int currentUserIndex = 0;
+int currentUserIndex = -1;
 const int RATING_STARS = 5;
 
 int get currentMonth => DateTime.now().month;

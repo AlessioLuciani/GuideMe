@@ -1,11 +1,14 @@
 import 'package:GuideMe/commons/itinerary.dart';
 import 'package:GuideMe/commons/user.dart';
 import 'package:GuideMe/pages/confirmation.dart';
+import 'package:GuideMe/pages/login.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'dart:math';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Function used to retrieve the corresponding index of '_itinerary' among itineraries list located in data
 Itinerary getItineraryRef(Itinerary _itinerary) {
@@ -36,9 +39,11 @@ bool addTempUser(final User user) {
 List<Itinerary> get favouriteItineraries =>
     itineraries.where((it) => it.isFavourite).toList();
 
-void createUserSession(int userIndex) {
+Future createUserSession(int userIndex) async {
   currentUserIndex = userIndex;
   resetUserVisits();
+  SharedPreferences sharedPref = await SharedPreferences.getInstance();
+  sharedPref.setInt("current_user_index", userIndex);
 }
 
 void favourite(Itinerary itinerary) {
@@ -61,14 +66,8 @@ void showAdditionConfirm(BuildContext context) {
       context, MaterialPageRoute(builder: (context) => ConfirmationPage()));
 }
 
-void setStatusBarDarkColor() {
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark.copyWith(
-      statusBarColor: Colors.black, // Color for Android
-      statusBarBrightness:
-          Brightness.light // Dark == white status bar -- for IOS.
-      ));
-}
 
+/// Starts playing the given text with text to speech
 Future<FlutterTts> playTextToSpeech(String text) async {
   FlutterTts tts = FlutterTts();
   await tts.setLanguage("it-IT");
@@ -77,6 +76,7 @@ Future<FlutterTts> playTextToSpeech(String text) async {
   return tts;
 }
 
+/// Stops playing the given text to speech
 Future stopTextToSpeech(Future<FlutterTts> tts) async {
   if (tts == null) {
     return;
@@ -84,10 +84,12 @@ Future stopTextToSpeech(Future<FlutterTts> tts) async {
   tts.then((val) => val.stop());
 }
 
+/// Turns degrees into radians
 double degreesToRadians(degrees) {
   return degrees * pi / 180;
 }
 
+/// Calculates the distance in Km between two Earth coordinates 
 double distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
   var earthRadiusKm = 6371;
 
@@ -101,4 +103,13 @@ double distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
       sin(dLon / 2) * sin(dLon / 2) * cos(lat1) * cos(lat2);
   var c = 2 * atan2(sqrt(a), sqrt(1 - a));
   return earthRadiusKm * c;
+}
+
+/// Logs the user out of the current session
+Future logout (BuildContext context) async {
+  currentUserIndex = -1;
+  SharedPreferences sharedPref = await SharedPreferences.getInstance();
+  sharedPref.setInt("current_user_index", -1);
+  Route route = MaterialPageRoute(builder: (context) => LoginPage());
+  Navigator.pushReplacement(context, route);
 }

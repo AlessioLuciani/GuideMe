@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:GuideMe/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -124,6 +125,21 @@ class AboutFragment extends StatelessWidget {
                   ),
                 ),
               ])),
+          SizedBox(
+            height: 20,
+          ),
+          Platform.isIOS 
+          ?  FlatButton(
+                child: Text( 
+                  "Logout",
+                  style: TextStyle(color: Colors.white),
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0)),
+                color: Colors.redAccent,
+                onPressed: () => logout(context),
+              )
+          : Text(""),
           SizedBox(
             height: 20,
           ),
