@@ -5,6 +5,7 @@ import 'package:GuideMe/pages/confirmation.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/utils/utils.dart';
 import 'package:GuideMe/widgets/confirmation_alert.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -92,7 +93,12 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
-      appBar: AppBar(
+      appBar: Platform.isIOS
+        ? CupertinoNavigationBar(
+          middle: Text(widget.itinerary.title),
+          previousPageTitle: "Visited",
+        )
+        :AppBar(
         title: Text(widget.itinerary.title),
         actions: <Widget>[
           Platform.isAndroid

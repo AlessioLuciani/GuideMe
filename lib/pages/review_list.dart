@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:GuideMe/commons/itinerary.dart';
 import 'package:GuideMe/commons/review.dart';
 import 'package:GuideMe/widgets/description_text.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -11,7 +14,17 @@ class ReviewListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
+        appBar: Platform.isIOS
+        ? CupertinoNavigationBar(
+          middle: Text(itinerary.title),
+          leading: new IconButton(
+            icon: new Icon(Icons.keyboard_arrow_up),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        )
+        :
+        
+        AppBar(
           title: Text(itinerary.title),
           leading: new IconButton(
             icon: new Icon(Icons.keyboard_arrow_up),

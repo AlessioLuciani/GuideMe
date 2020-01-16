@@ -81,10 +81,16 @@ class VisitCard extends StatelessWidget {
                             ),
                             onPressed: () => Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                  builder: (context) => FeedbackFragment(
-                                        itinerary: visit.itinerary,
-                                      )),
+                              Platform.isIOS
+                            ? CupertinoPageRoute(
+                              builder: (context) => FeedbackFragment(
+                                      itinerary: visit.itinerary,
+                                    )
+                            )
+                            : MaterialPageRoute(
+                                builder: (context) => FeedbackFragment(
+                                      itinerary: visit.itinerary,
+                                    )),
                             ),
                             color: Colors.redAccent,
                             textColor: Colors.white,
