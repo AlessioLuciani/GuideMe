@@ -333,10 +333,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                                             BorderRadius.circular(10.0)),
                                     color: Colors.redAccent,
                                     textColor: Colors.white,
-                                    onPressed: () {
-                                      //showAdditionConfirm(context);
-                                      publishCurrentItinerary();
-                                    },
+                                    onPressed: publishCurrentItinerary,
                                   ),
                                 ]);
                               } else {
@@ -348,16 +345,16 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                             ),
                           ],
                         ),
-                        Positioned(
+                        Platform.isAndroid
+                        ? Positioned(
                           bottom: 20,
                           right: 0,
                           child: FloatingActionButton(
                             child: Icon(Icons.send),
-                            onPressed: () {
-                              publishCurrentItinerary();
-                            },
+                            onPressed: publishCurrentItinerary,
                           ),
                         )
+                        : Text("")
                       ])))
             ])));
   }
@@ -398,6 +395,8 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
           });
       if (Platform.isAndroid) {
         widget.updatePage(0);
+      } else if (Platform.isIOS) {
+        widget.updatePage(2);
       }
     }
   }

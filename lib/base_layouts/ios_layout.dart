@@ -59,7 +59,9 @@ class IOSLayoutState extends State<IOSLayout> {
       case 0:
         return new FavouritesFragment();
       case 1:
-        return new AddItinearyFragment();
+        return new AddItinearyFragment(
+          updatePage: (index) =>
+                setState(() => _tabIndex = index));
       case 2:
         return new ExploreFragment(
           userSelectedLength: _currentUserLength,

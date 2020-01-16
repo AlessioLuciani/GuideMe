@@ -47,9 +47,7 @@ class NavigationDescriptionPageState extends State<NavigationDescriptionPage> {
           Image.asset(widget.navigationData.itinerary.coverImage),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 0.0),
-            child: Stack(
-              children: <Widget>[
-                Row(
+            child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
@@ -146,8 +144,6 @@ class NavigationDescriptionPageState extends State<NavigationDescriptionPage> {
                       },
                     )
                   ],
-                ),
-              ],
             ),
           ),
           Divider(
@@ -159,7 +155,7 @@ class NavigationDescriptionPageState extends State<NavigationDescriptionPage> {
                 widget.navigationData.itinerary
                     .stops[widget.navigationData.currentStop].description,
                 style: TextStyle(fontSize: 20),
-              ))
+              )),
         ],
       ),
     );
