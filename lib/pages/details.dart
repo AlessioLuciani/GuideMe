@@ -99,21 +99,6 @@ class DetailsPageState extends State<DetailsPage> {
           Padding(
             child: Row(
               children: <Widget>[
-                Icon(Icons.euro_symbol, size: 30),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  "0 - 30",
-                  style: TextStyle(fontSize: 18),
-                )
-              ],
-            ),
-            padding: EdgeInsets.only(left: 18, top: 4),
-          ),
-          Padding(
-            child: Row(
-              children: <Widget>[
                 Icon(Icons.restaurant, size: 30),
                 SizedBox(
                   width: 10,

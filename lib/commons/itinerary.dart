@@ -16,13 +16,12 @@ class Itinerary {
   DateTime duration;
   int length;
   String coverImage;
-  String priceRange;
   User author;
   bool isFavourite;
   // Details section
   String longDescription;
-  List<Review> _reviews = [];
-  List<ItineraryStop> _stops = [];
+  List<Review> _reviews = new List();
+  List<ItineraryStop> _stops = new List();
 
   Itinerary(
       {@required this.author,
@@ -31,10 +30,13 @@ class Itinerary {
       @required this.duration,
       @required this.longDescription,
       @required this.length,
-      @required this.priceRange,
+      stops,
       this.isFavourite = false}) {
     id = _id;
     _id++;
+    if (stops != null) {
+      _stops.addAll(stops);
+    }
   }
 
   String get lengthKm => '$length km';

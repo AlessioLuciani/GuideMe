@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:GuideMe/commons/itinerary.dart';
 import 'package:GuideMe/utils/data.dart';
+import 'package:GuideMe/utils/utils.dart';
 import 'package:GuideMe/widgets/explore_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,24 +24,20 @@ class ExploreFragment extends StatefulWidget {
 }
 
 class _ExploreFragmentState extends State<ExploreFragment> {
-  List<Itinerary> _itineraries;
+  List<Itinerary> _itineraries = itinerariesCopy;
   final GlobalKey<RefreshIndicatorState> _refreshKey =
       GlobalKey<RefreshIndicatorState>();
 
   @override
-  void initState() {
-    super.initState();
-    _itineraries = shuffledItineraries;
-  }
-
-  @override
   Widget build(BuildContext context) {
-    _itineraries = itineraries
-        .where((Itinerary itinerary) =>
-            itinerary.length <= widget.userSelectedLength &&
-            itinerary.avgReview.floor() >= widget.userSelectedRating &&
-            widget.userSelectedDuration.isAfter(itinerary.duration))
-        .toList();
+    _itineraries.clear();
+    for (Itinerary itinerary in itineraries) {
+      if (itinerary.length <= widget.userSelectedLength &&
+          itinerary.avgReview.floor() >= widget.userSelectedRating &&
+          widget.userSelectedDuration.isAfter(itinerary.duration)) {
+        _itineraries.add(itinerary);
+      }
+    }
     return SafeArea(
         child: Platform.isIOS
             ? CustomScrollView(slivers: <Widget>[
@@ -87,7 +84,8 @@ class _ExploreFragmentState extends State<ExploreFragment> {
   }
 
   Future<Null> _refreshList() async {
-    _itineraries = shuffledItineraries;
+    _itineraries.clear();
+    _itineraries.addAll(shuffledItineraries);
     await Future.delayed(Duration(seconds: 1));
     setState(() {});
     return null;

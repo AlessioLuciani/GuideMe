@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class ItineraryStop {
@@ -5,5 +6,6 @@ class ItineraryStop {
   final LatLng coord;
   final String description;
 
-  ItineraryStop({this.name, this.coord, this.description});
+  ItineraryStop(
+      {@required this.name, @required this.coord, @required this.description});
 }

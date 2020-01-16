@@ -29,7 +29,7 @@ class AndroidLayout extends StatefulWidget {
     new DrawerItem("Visited Itineraries", Icons.done_outline),
     new DrawerItem("Favorites", Icons.favorite),
     new DrawerItem("About", Icons.info),
-    new DrawerItem("Log Out", Icons.exit_to_app),
+    new DrawerItem("Logout", Icons.exit_to_app),
   ];
 
   @override
@@ -92,7 +92,9 @@ class AndroidLayoutState extends State<AndroidLayout> {
           userSelectedDuration: _currentUserDuration,
         );
       case 1:
-        return new AddItinearyFragment();
+        return new AddItinearyFragment(
+            updatePage: (index) =>
+                setState(() => _selectedDrawerIndex = index));
       case 2:
         return new ExploreVisitedFragment();
       case 3:
@@ -130,41 +132,30 @@ class AndroidLayoutState extends State<AndroidLayout> {
     }
     User currentUser = users[currentUserIndex];
     return new Scaffold(
-        // Avoid the Scaffold to resize himself when
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: Text(widget.drawerItems[_selectedDrawerIndex].title),
-          actions: _actions,
-          bottom: _bottom,
-        ),
-        drawer: Drawer(
-          child: Column(
-            children: <Widget>[
-              UserAccountsDrawerHeader(
-                accountName: Text('${currentUser.name} ${currentUser.surname}'),
-                accountEmail: Text(currentUser.email),
-                currentAccountPicture: CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: Text(currentUser.name[0].toUpperCase()),
-                ),
+      // Avoid the Scaffold to resize himself when
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: Text(widget.drawerItems[_selectedDrawerIndex].title),
+        actions: _actions,
+        bottom: _bottom,
+      ),
+      drawer: Drawer(
+        child: Column(
+          children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountName: Text('${currentUser.name} ${currentUser.surname}'),
+              accountEmail: Text(currentUser.email),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Text(currentUser.name[0].toUpperCase()),
               ),
-              Column(children: drawerOptions)
-            ],
-          ),
+            ),
+            Column(children: drawerOptions)
+          ],
         ),
-        body: _getDrawerItemWidget(_selectedDrawerIndex),
-        floatingActionButton: Visibility(
-          child: Padding(
-              padding: EdgeInsets.all(5),
-              child: FloatingActionButton(
-                child: Icon(Icons.send),
-                onPressed: () {
-                  showAdditionConfirm(context);
-                  setState(() => _selectedDrawerIndex = 0);
-                },
-              )),
-          visible: (_selectedDrawerIndex == 1),
-        ));
+      ),
+      body: _getDrawerItemWidget(_selectedDrawerIndex),
+    );
   }
 
   List<Widget> get _actions => _selectedDrawerIndex != 0
@@ -207,7 +198,7 @@ class AndroidLayoutState extends State<AndroidLayout> {
                     onPressed: () => showDialog(
                         context: context,
                         builder: (BuildContext context) => LengthDialog(
-                              maxSliderValue: 20,
+                              maxSliderValue: MAX_ITINERARY_LENGTH,
                               lastValue: _currentUserLength,
                               updateCallback: (value) =>
                                   setState(() => _currentUserLength = value),

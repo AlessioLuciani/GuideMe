@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LengthDialog extends StatefulWidget {
-  final double maxSliderValue;
+  final int maxSliderValue;
   final double lastValue;
   final Function updateCallback;
 
@@ -93,7 +93,7 @@ class _LengthDialogState extends State<LengthDialog> {
                 child: Slider(
                   activeColor: Colors.redAccent,
                   min: 0.0,
-                  max: widget.maxSliderValue,
+                  max: widget.maxSliderValue.toDouble(),
                   onChanged: (newRating) {
                     setState(() => _sliderValue = newRating);
                   },
@@ -120,7 +120,7 @@ class _LengthDialogState extends State<LengthDialog> {
                         style: TextStyle(fontSize: 16),
                       ),
                       onPressed: () {
-                        widget.updateCallback(widget.maxSliderValue);
+                        widget.updateCallback(widget.maxSliderValue.toDouble());
                         Navigator.of(context).pop();
                       },
                     ),

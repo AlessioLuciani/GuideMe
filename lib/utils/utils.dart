@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:GuideMe/commons/itinerary.dart';
+import 'package:GuideMe/commons/itinerary_stop.dart';
 import 'package:GuideMe/commons/user.dart';
 import 'package:GuideMe/pages/confirmation.dart';
 import 'package:GuideMe/pages/login.dart';
@@ -70,7 +71,6 @@ void showAdditionConfirm(BuildContext context) {
       context, MaterialPageRoute(builder: (context) => ConfirmationPage()));
 }
 
-
 /// Starts playing the given text with text to speech
 Future<FlutterTts> playTextToSpeech(String text) async {
   FlutterTts tts = FlutterTts();
@@ -93,7 +93,7 @@ double degreesToRadians(degrees) {
   return degrees * pi / 180;
 }
 
-/// Calculates the distance in Km between two Earth coordinates 
+/// Calculates the distance in Km between two Earth coordinates
 double distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
   var earthRadiusKm = 6371;
 
@@ -109,8 +109,34 @@ double distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
   return earthRadiusKm * c;
 }
 
+void publishItinerary(
+    {@required String title,
+    @required String description,
+    @required int length,
+    @required List<ItineraryStop> stops}) {
+  int currentMinutes = timeFromItineraryLength(length);
+  appendItinerary(Itinerary(
+      author: currentUser,
+      coverImage: coverImages[generator.nextInt(coverImages.length)],
+      title: title,
+      stops: stops,
+      duration: DateTime.parse(MIN_DATETIME).add(
+          Duration(hours: currentMinutes ~/ 60, minutes: currentMinutes % 60)),
+      length: length,
+      longDescription: description));
+}
+
+int timeFromItineraryLength(int length) =>
+    length * 30 + generator.nextInt((1 + length) * 8);
+
+List<Itinerary> get itinerariesCopy {
+  List<Itinerary> resultList = new List();
+  resultList.addAll(itineraries);
+  return resultList;
+}
+
 /// Logs the user out of the current session
-Future logout (BuildContext context) async {
+Future logout(BuildContext context) async {
   currentUserIndex = -1;
   SharedPreferences sharedPref = await SharedPreferences.getInstance();
   sharedPref.setInt("current_user_index", -1);

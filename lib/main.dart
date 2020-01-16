@@ -1,7 +1,6 @@
 import 'package:GuideMe/base_layouts/android_layout.dart';
 import 'package:GuideMe/base_layouts/ios_layout.dart';
 import 'package:GuideMe/pages/login.dart';
-import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
