@@ -49,7 +49,7 @@ class _LengthDialogState extends State<LengthDialog> {
                 ),
                 Expanded(child: Text("")),
                 Text(
-                  "Lunghezza",
+                  "Length",
                   style: TextStyle(
                     fontSize: 17,
                   ),

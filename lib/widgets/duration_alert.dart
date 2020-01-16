@@ -48,7 +48,7 @@ class _DurationDialogState extends State<DurationDialog> {
                 ),
                 Expanded(child: Text("")),
                 Text(
-                  "Durata",
+                  "Duration",
                   style: TextStyle(
                     fontSize: 17,
                   ),

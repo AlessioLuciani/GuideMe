@@ -38,9 +38,7 @@ class AndroidLayout extends StatefulWidget {
 
 class AndroidLayoutState extends State<AndroidLayout> {
   int _selectedDrawerIndex = 0;
-  double _currentUserLength = MAX_ITINERARY_LENGTH.toDouble();
-  int _currentUserRating = 1;
-  DateTime _currentUserDuration = DateTime.parse(INIT_DATETIME);
+
 
   _buildMaterialSearchPage(BuildContext context) {
     return new MaterialPageRoute<String>(
@@ -87,9 +85,9 @@ class AndroidLayoutState extends State<AndroidLayout> {
     switch (pos) {
       case 0:
         return new ExploreFragment(
-          userSelectedLength: _currentUserLength,
-          userSelectedRating: _currentUserRating,
-          userSelectedDuration: _currentUserDuration,
+          userSelectedLength: currentUserLength,
+          userSelectedRating: currentUserRating,
+          userSelectedDuration: currentUserDuration,
         );
       case 1:
         return new AddItinearyFragment(
@@ -169,7 +167,7 @@ class AndroidLayoutState extends State<AndroidLayout> {
           )
         ];
 
-  String get _starWord => _currentUserRating > 1 ? "stelle" : "stella";
+  String get _starWord => currentUserRating > 1 ? "stars" : "star";
 
   Widget get _bottom => _selectedDrawerIndex != 0
       ? null
@@ -182,16 +180,16 @@ class AndroidLayoutState extends State<AndroidLayout> {
                 child: Row(children: <Widget>[
                   FlatButton(
                     child: Text(
-                      _currentUserLength == MAX_ITINERARY_LENGTH.toDouble()
-                          ? "Lunghezza"
-                          : '${_currentUserLength.toStringAsFixed(0)} km',
+                      currentUserLength == MAX_ITINERARY_LENGTH.toDouble()
+                          ? "Length"
+                          : '${currentUserLength.toStringAsFixed(0)} km',
                       style: TextStyle(fontSize: 15),
                     ),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                         side: BorderSide(
                             width: 2,
-                            color: _currentUserLength ==
+                            color: currentUserLength ==
                                     MAX_ITINERARY_LENGTH.toDouble()
                                 ? Colors.redAccent
                                 : Colors.white)),
@@ -199,9 +197,9 @@ class AndroidLayoutState extends State<AndroidLayout> {
                         context: context,
                         builder: (BuildContext context) => LengthDialog(
                               maxSliderValue: MAX_ITINERARY_LENGTH,
-                              lastValue: _currentUserLength,
+                              lastValue: currentUserLength,
                               updateCallback: (value) =>
-                                  setState(() => _currentUserLength = value),
+                                  setState(() => currentUserLength = value),
                             )),
                     color: Colors.redAccent,
                     textColor: Colors.white,
@@ -211,18 +209,18 @@ class AndroidLayoutState extends State<AndroidLayout> {
                   ),
                   FlatButton(
                     child: Text(
-                      _currentUserDuration
+                      currentUserDuration
                                   .compareTo(DateTime.parse(INIT_DATETIME)) ==
                               0
-                          ? "Durata"
-                          : '${_currentUserDuration.hour}h ${_currentUserDuration.minute}m',
+                          ? "Duration"
+                          : '${currentUserDuration.hour}h ${currentUserDuration.minute}m',
                       style: TextStyle(fontSize: 15),
                     ),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),
                         side: BorderSide(
                             width: 2,
-                            color: _currentUserDuration.compareTo(
+                            color: currentUserDuration.compareTo(
                                         DateTime.parse(INIT_DATETIME)) ==
                                     0
                                 ? Colors.redAccent
@@ -230,9 +228,9 @@ class AndroidLayoutState extends State<AndroidLayout> {
                     onPressed: () => showDialog(
                         context: context,
                         builder: (BuildContext context) => DurationDialog(
-                              lastValue: _currentUserDuration,
+                              lastValue: currentUserDuration,
                               updateCallback: (value) =>
-                                  setState(() => _currentUserDuration = value),
+                                  setState(() => currentUserDuration = value),
                             )),
                     color: Colors.redAccent,
                     textColor: Colors.white,
@@ -242,25 +240,25 @@ class AndroidLayoutState extends State<AndroidLayout> {
                   ),
                   FlatButton(
                     child: Text(
-                      _currentUserRating == 1
-                          ? "Recensione"
-                          : '$_currentUserRating $_starWord',
+                      currentUserRating == 1
+                          ? "Rating"
+                          : '$currentUserRating $_starWord',
                       style: TextStyle(fontSize: 15),
                     ),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                       side: BorderSide(
                           width: 2,
-                          color: _currentUserRating == 1
+                          color: currentUserRating == 1
                               ? Colors.redAccent
                               : Colors.white),
                     ),
                     onPressed: () => showDialog(
                         context: context,
                         builder: (BuildContext context) => RatingAlert(
-                              lastValue: _currentUserRating,
+                              lastValue: currentUserRating,
                               updateCallback: (value) =>
-                                  setState(() => _currentUserRating = value),
+                                  setState(() => currentUserRating = value),
                             )),
                     color: Colors.redAccent,
                     textColor: Colors.white,

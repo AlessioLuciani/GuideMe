@@ -478,4 +478,8 @@ List<ItineraryStop> globalStops = [
 int currentMsgIndex = 0;
 List<String> _confirmMsgs = ["Recensione inviata!", "Itinerario creato!"];
 
+int currentUserRating = 1;
+  double currentUserLength = MAX_ITINERARY_LENGTH.toDouble();
+  DateTime currentUserDuration = DateTime.parse(INIT_DATETIME);
+
 String get confirmMsg => _confirmMsgs[currentMsgIndex];

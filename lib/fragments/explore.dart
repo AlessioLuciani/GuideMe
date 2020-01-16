@@ -5,6 +5,7 @@ import 'package:GuideMe/commons/itinerary.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/utils/utils.dart';
 import 'package:GuideMe/widgets/explore_card.dart';
+import 'package:GuideMe/widgets/filters_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -50,6 +51,7 @@ class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProv
         _searchAnimationController.forward();
       }
     });
+  
     super.initState();
   }
 
@@ -81,7 +83,10 @@ class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProv
                       color: Colors.red,
                       fontSize: 16),
                     ),
-                    onPressed: () {},),
+                    onPressed: () => showDialog(
+                        context: context,
+                        builder: (BuildContext context) => FiltersDialog())
+                        ),
                 ),
                 CupertinoSliverRefreshControl(
                   builder: (context, refreshState, pulledExtent,
@@ -94,7 +99,7 @@ class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProv
                             refreshTriggerPullDistance,
                             refreshIndicatorExtent);
                   },
-                  onRefresh: _refreshList,
+                  onRefresh: _refreshListDelayed,
                 ),
                 SliverList(delegate: SliverChildBuilderDelegate((context, index) {
                     return Padding(
@@ -106,7 +111,8 @@ class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProv
                     animation: _searchAnimation,
                     onCancel: _cancelSearch,
                     onClear: _clearSearch,
-                    ),);
+                    onSubmit: (_) => _refreshListNow()),
+                    );
                   }, childCount: 1),
                 ),
                 SliverList(
@@ -117,7 +123,7 @@ class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProv
                 )
               ]))
             : RefreshIndicator(
-                onRefresh: _refreshList,
+                onRefresh: _refreshListDelayed,
                 key: _refreshKey,
                 child: ListView.builder(
                   itemCount: _itineraries.length,
@@ -153,6 +159,17 @@ class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProv
   Future<Null> _refreshList() async {
     _itineraries.clear();
     _itineraries.addAll(shuffledItineraries);
+    return null;
+  }
+
+  Future<Null> _refreshListNow() async {
+    _refreshList();
+    setState(() {});
+    return null;
+  }
+
+  Future<Null> _refreshListDelayed() async {
+    _refreshList();
     await Future.delayed(Duration(seconds: 1));
     setState(() {});
     return null;

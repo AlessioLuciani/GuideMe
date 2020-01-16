@@ -45,7 +45,7 @@ class _RatingAlertState extends State<RatingAlert> {
                 ),
                 Expanded(child: Text("")),
                 Text(
-                  "Recensione",
+                  "Rating",
                   style: TextStyle(
                     fontSize: 17,
                   ),
