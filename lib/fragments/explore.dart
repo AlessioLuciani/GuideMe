@@ -6,7 +6,6 @@ import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/utils/utils.dart';
 import 'package:GuideMe/widgets/duration_alert.dart';
 import 'package:GuideMe/widgets/explore_card.dart';
-import 'package:GuideMe/widgets/filters_dialog.dart';
 import 'package:GuideMe/widgets/length_alert.dart';
 import 'package:GuideMe/widgets/rating_alert.dart';
 import 'package:flutter/cupertino.dart';
