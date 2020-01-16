@@ -4,8 +4,11 @@ import 'package:GuideMe/commons/ios_search_bar.dart';
 import 'package:GuideMe/commons/itinerary.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/utils/utils.dart';
+import 'package:GuideMe/widgets/duration_alert.dart';
 import 'package:GuideMe/widgets/explore_card.dart';
 import 'package:GuideMe/widgets/filters_dialog.dart';
+import 'package:GuideMe/widgets/length_alert.dart';
+import 'package:GuideMe/widgets/rating_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -83,10 +86,49 @@ class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProv
                       color: Colors.red,
                       fontSize: 16),
                     ),
-                    onPressed: () => showDialog(
+                    onPressed: () => showCupertinoModalPopup(
+                      builder: (BuildContext context) {
+                        return CupertinoActionSheet(
+                          title: Text("Filters"),
+                          actions: <Widget>[
+                            CupertinoActionSheetAction(
+                              child: Text("Length"),
+                            onPressed: () => showDialog(
                         context: context,
-                        builder: (BuildContext context) => FiltersDialog())
-                        ),
+                        builder: (BuildContext context) => LengthDialog(
+                              maxSliderValue: MAX_ITINERARY_LENGTH,
+                              lastValue: currentUserLength,
+                              updateCallback: (value) =>
+                                  setState(() => currentUserLength = value),
+                            )),),
+                            CupertinoActionSheetAction(
+                              child: Text("Duration"),
+                            onPressed: () => showDialog(
+                        context: context,
+                        builder: (BuildContext context) => DurationDialog(
+                              lastValue: currentUserDuration,
+                              updateCallback: (value) =>
+                                  setState(() => currentUserDuration = value),
+                            ))),
+                            CupertinoActionSheetAction(
+                              child: Text("Rating"),
+                            onPressed: () => showDialog(
+                        context: context,
+                        builder: (BuildContext context) => RatingAlert(
+                              lastValue: currentUserRating,
+                              updateCallback: (value) =>
+                                  setState(() => currentUserRating = value),
+                            ))),
+                          ],
+                          cancelButton: CupertinoActionSheetAction(
+                            child: Text("Cancel"),
+                            onPressed: () => Navigator.pop(context),
+                          ),
+                        );
+                      },
+                      context: context
+
+                    ),)
                 ),
                 CupertinoSliverRefreshControl(
                   builder: (context, refreshState, pulledExtent,
