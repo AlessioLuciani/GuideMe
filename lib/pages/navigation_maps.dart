@@ -40,6 +40,7 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.lightGreen,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

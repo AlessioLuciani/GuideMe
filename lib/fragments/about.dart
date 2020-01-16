@@ -118,11 +118,13 @@ class AboutFragment extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(
-            height: 20,
-          ),
           Platform.isIOS 
-          ?  FlatButton(
+          ? Column(
+            children: <Widget>[
+              SizedBox(
+            height: 10,
+          ),
+          FlatButton(
                 child: Text( 
                   "Log Out",
                   style: TextStyle(color: Colors.white),
@@ -131,10 +133,14 @@ class AboutFragment extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10.0)),
                 color: Colors.redAccent,
                 onPressed: () => logout(context),
-              )
-          : Text(""),
+              ),
           SizedBox(
-            height: 20,
+            height: 10,
+          ),
+          ],
+          )
+          : SizedBox(
+            height: 10,
           ),
               ])),
           
