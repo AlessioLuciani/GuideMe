@@ -17,10 +17,5 @@
 \contentsline {subsubsection}{Versione 1}{12}{section*.20}% 
 \contentsline {subsubsection}{Versione 2}{12}{section*.21}% 
 \contentsline {subsubsection}{Versione 3}{13}{section*.22}% 
-\contentsline {subsection}{Navigazione}{13}{section*.23}% 
-\contentsline {subsection}{Ricerca Filtrata}{14}{section*.24}% 
-\contentsline {subsection}{Dettaglio}{14}{section*.25}% 
-\contentsline {subsection}{Recensione}{15}{section*.26}% 
-\contentsline {subsection}{Inserisci Nuovo Itinerario}{16}{section*.27}% 
-\contentsline {section}{{}Elenco Interviste}{18}{section.1}% 
-\contentsline {section}{Revisioni}{37}{section*.28}% 
+\contentsline {section}{{}Elenco Interviste}{14}{section.1}% 
+\contentsline {section}{Revisioni}{33}{section*.23}% 
