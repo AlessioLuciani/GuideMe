@@ -1,8 +1,10 @@
 import 'dart:io';
 
 import 'package:GuideMe/commons/itinerary.dart';
+import 'package:GuideMe/pages/confirmation.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/utils/utils.dart';
+import 'package:GuideMe/widgets/confirmation_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -88,6 +90,7 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text(widget.itinerary.title),
@@ -224,7 +227,16 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
     if (_currentStars > -1 &&
         _titleController.text.isNotEmpty &&
         _descriptionController.text.isNotEmpty) {
-      showReviewConfirm(context, widget.itinerary);
+      reviewItinerary(widget.itinerary);
+      Navigator.of(context).pop();
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            Future.delayed(Duration(seconds: 1), () {
+              Navigator.of(context).pop(true);
+            });
+            return ConfirmationDialog(text: "Your review has been sent!");
+          });
     } else {
       _requireRating = (_currentStars == -1);
       _validateTitle = (_titleController.text.isEmpty);

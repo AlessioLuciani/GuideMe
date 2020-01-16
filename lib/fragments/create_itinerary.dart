@@ -376,7 +376,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
         _markersNeeded) {
       setState(() {});
     } else {
-      appendItinerary(Itinerary(
+      Itinerary currentItinerary = Itinerary(
           author: currentUser,
           coverImage: coverImages[generator.nextInt(coverImages.length)],
           title: _titleController.text,
@@ -385,17 +385,16 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
           duration: DateTime.parse(MIN_DATETIME).add(Duration(
               hours: int.parse(_hourController.text),
               minutes: int.parse(_minuteController.text))),
-          length: _length));
+          length: _length);
+      appendItinerary(currentItinerary);
+      reviewItinerary(currentItinerary); // this should probably be removed
       showDialog(
           context: context,
           builder: (BuildContext context) {
             Future.delayed(Duration(seconds: 1), () {
               Navigator.of(context).pop(true);
             });
-            return ConfirmationDialog(
-                maxSliderValue: 20,
-                lastValue: 12,
-                updateCallback: (value) => {});
+            return ConfirmationDialog(text: "Itinerary has been published!");
           });
       if (Platform.isAndroid) {
         widget.updatePage(0);

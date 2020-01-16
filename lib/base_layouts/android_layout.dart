@@ -132,7 +132,7 @@ class AndroidLayoutState extends State<AndroidLayout> {
     }
     User currentUser = users[currentUserIndex];
     return new Scaffold(
-      // Avoid the Scaffold to resize himself when
+      // Avoid the Scaffold to resize himself
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(widget.drawerItems[_selectedDrawerIndex].title),

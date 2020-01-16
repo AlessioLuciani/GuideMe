@@ -12,14 +12,14 @@ class ChooseStopsMaps extends StatefulWidget {
 
   const ChooseStopsMaps(
       {Key key, this.addMarker, this.removeLastMarker, this.initMarkers})
-      : super(key: key); 
+      : super(key: key);
 
   @override
   _ChooseStopsMapsState createState() => _ChooseStopsMapsState();
 }
 
 class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
-    List<Marker> _prevMarkers;
+  List<Marker> _prevMarkers;
   GoogleMapController controller;
   final Set<Polyline> _polyline = Set();
   final CameraPosition _myLocation =
@@ -43,85 +43,90 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
     _prevMarkers = List.from(widget.initMarkers);
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () {
-        widget.initMarkers.removeRange(0, widget.initMarkers.length);
-        widget.initMarkers.addAll(_prevMarkers);
-        Navigator.pop(context);
+        onWillPop: () async {
+          widget.initMarkers.removeRange(0, widget.initMarkers.length);
+          widget.initMarkers.addAll(_prevMarkers);
+          Navigator.pop(context);
+          return false;
         },
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: Platform.isIOS
-        ? CupertinoNavigationBar(
-          middle: Text("Add stops"),
-          previousPageTitle: "Create",
-          trailing: FlatButton(
-                    child: Text("Done",
-                      style: TextStyle(
-                        color: Colors.red,
-                        fontSize: 16
-                      ),),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-        )
-        : AppBar(
-          title: Text("Add stops"),          
-          actions: <Widget>[
-            FlatButton(
-                    child: Text("Done",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16
-                      ),),
-                    onPressed: () => Navigator.pop(context),
+        child: Scaffold(
+            backgroundColor: Colors.white,
+            appBar: Platform.isIOS
+                ? CupertinoNavigationBar(
+                    middle: Text("Add stops"),
+                    previousPageTitle: "Create",
+                    trailing: FlatButton(
+                      child: Text(
+                        "Done",
+                        style: TextStyle(color: Colors.red, fontSize: 16),
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                    ),
                   )
-          ],
-        ),
-        body: Stack(
-          children: <Widget>[
-            GoogleMap(
-              initialCameraPosition: _myLocation,
-              myLocationEnabled: true,
-              myLocationButtonEnabled: false,
-              polylines: _polyline,
-              markers: _markers.toSet(),
-              onTap: (LatLng point) => setState(() {
-                Marker marker = Marker(
-                  markerId: MarkerId(point.toString()),
-                  position: point,
-                  infoWindow: InfoWindow(
-                    title: nextMarkerId(),
+                : AppBar(
+                    title: Text("Add stops"),
+                    actions: <Widget>[
+                      Platform.isIOS
+                          ? FlatButton(
+                              child: Text(
+                                "Done",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 16),
+                              ),
+                              onPressed: () => Navigator.pop(context),
+                            )
+                          : IconButton(
+                              icon: Icon(Icons.done),
+                              onPressed: () => Navigator.pop(context),
+                            )
+                    ],
                   ),
-                  icon: BitmapDescriptor.defaultMarkerWithHue(
-                      BitmapDescriptor.hueRed),
-                );
-                _markers.add(marker);
-                widget.addMarker(marker);
-                _polyline.add(Polyline(
-                  polylineId: PolylineId("Il tuo itinerario"),
-                  visible: true,
-                  points: _markers.map((marker) => marker.position).toList(),
-                  width: 3,
-                  color: Colors.green,
-                ));
-              }),
-              onMapCreated: _onMapCreated,
-              mapType: MapType.terrain,
-              
-            ),
-                    Positioned(
+            body: Stack(
+              children: <Widget>[
+                GoogleMap(
+                  initialCameraPosition: _myLocation,
+                  myLocationEnabled: true,
+                  myLocationButtonEnabled: false,
+                  polylines: _polyline,
+                  markers: _markers.toSet(),
+                  onTap: (LatLng point) => setState(() {
+                    Marker marker = Marker(
+                      markerId: MarkerId(point.toString()),
+                      position: point,
+                      infoWindow: InfoWindow(
+                        title: nextMarkerId(),
+                      ),
+                      icon: BitmapDescriptor.defaultMarkerWithHue(
+                          BitmapDescriptor.hueRed),
+                    );
+                    _markers.add(marker);
+                    widget.addMarker(marker);
+                    _polyline.add(Polyline(
+                      polylineId: PolylineId("Il tuo itinerario"),
+                      visible: true,
+                      points:
+                          _markers.map((marker) => marker.position).toList(),
+                      width: 3,
+                      color: Colors.green,
+                    ));
+                  }),
+                  onMapCreated: _onMapCreated,
+                  mapType: MapType.terrain,
+                ),
+                Positioned(
                     bottom: 40,
                     right: 16,
                     child: FloatingActionButton.extended(
                       onPressed: () => _undoLastMarker(),
                       icon: Icon(Icons.undo),
                       label: Text("Undo"),
-                    )
-                    ),
-          ],
-        )));
+                    )),
+              ],
+            )));
   }
 
   void _undoLastMarker() {

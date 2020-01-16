@@ -1,30 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ConfirmationDialog extends StatefulWidget {
-  final double maxSliderValue;
-  final double lastValue;
-  final Function updateCallback;
+  final String text;
 
-  const ConfirmationDialog(
-      {Key key,
-      @required this.maxSliderValue,
-      @required this.lastValue,
-      @required this.updateCallback})
-      : super(key: key);
+  const ConfirmationDialog({Key key, this.text}) : super(key: key);
 
   @override
   _ConfirmationDialogState createState() => new _ConfirmationDialogState();
 }
 
 class _ConfirmationDialogState extends State<ConfirmationDialog> {
-  double _sliderValue;
-
-  @override
-  void initState() {
-    super.initState();
-    _sliderValue = widget.lastValue.toDouble();
-  }
-
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -46,7 +31,7 @@ class _ConfirmationDialogState extends State<ConfirmationDialog> {
             ),
             SizedBox(height: 16),
             Text(
-              "Itinerary has been published!",
+              widget.text,
               style: TextStyle(fontSize: 18),
             ),
             SizedBox(height: 30)
