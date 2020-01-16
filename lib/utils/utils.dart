@@ -62,6 +62,9 @@ void showReviewConfirm(BuildContext context, Itinerary itinerary) {
               )));
 }
 
+bool isDarkTheme(BuildContext context) =>
+    MediaQuery.of(context).platformBrightness == Brightness.dark;
+
 void showAdditionConfirm(BuildContext context) {
   currentMsgIndex = 1;
   Navigator.push(

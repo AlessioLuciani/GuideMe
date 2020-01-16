@@ -1,3 +1,4 @@
+import 'package:GuideMe/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class ConfirmationDialog extends StatefulWidget {
@@ -27,7 +28,7 @@ class _ConfirmationDialogState extends State<ConfirmationDialog> {
             Icon(
               Icons.check_circle_outline,
               size: 80,
-              color: Colors.redAccent,
+              color: isDarkTheme(context) ? Colors.white : Colors.redAccent,
             ),
             SizedBox(height: 16),
             Text(

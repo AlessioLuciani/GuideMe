@@ -1,6 +1,7 @@
 import 'package:GuideMe/utils/data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cupertino_date_picker/flutter_cupertino_date_picker.dart';
+import 'package:GuideMe/utils/utils.dart';
 
 class DurationDialog extends StatefulWidget {
   final DateTime lastValue;
@@ -96,7 +97,9 @@ class _DurationDialogState extends State<DurationDialog> {
                   initDateTime: _durationValue,
                   dateFormat: DATE_FORMAT,
                   pickerTheme: DateTimePickerTheme(
-                      showTitle: false, itemTextStyle: TextStyle(fontSize: 18)),
+                      showTitle: false,
+                      itemTextStyle: TextStyle(fontSize: 18, color: isDarkTheme(context) ? Colors.white : Colors.black),
+                      backgroundColor : isDarkTheme(context) ? Colors.grey[750] : Colors.white),
                   minuteDivider: 5,
                   onChange: (dateTime, selectedIndex) =>
                       setState(() => _durationValue = dateTime)),

@@ -40,7 +40,7 @@ class _FavouritesFragmentState extends State<FavouritesFragment> {
           child: Padding(
             padding: EdgeInsets.all(40),
             child: Text(
-                "Non ci sono itinerari tra i tuoi preferiti. \nPuoi aggiungerne uno selezionandolo dalla sezione Esplora.",
+                "It seems that you haven't added any itinerary to the favorites. You can do it by selecting it from the Explore section.",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 18)),
           ),

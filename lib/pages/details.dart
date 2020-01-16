@@ -106,7 +106,7 @@ class DetailsPageState extends State<DetailsPage> {
                   width: 10,
                 ),
                 Text(
-                  "Ristoranti tipici",
+                  "Local restaurants",
                   style: TextStyle(fontSize: 18),
                 )
               ],

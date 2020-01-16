@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
               darkTheme: ThemeData(
                 primarySwatch: Colors.red,
                 brightness: Brightness.dark,
+                accentColor: Colors.redAccent,
               ),
               home: () {
                 if (snapshot.data.containsKey("current_user_index")) {

@@ -6,7 +6,6 @@ import 'package:GuideMe/fragments/create_itinerary.dart';
 import 'package:GuideMe/fragments/explore.dart';
 import 'package:GuideMe/fragments/favourites.dart';
 import 'package:GuideMe/pages/details.dart';
-import 'package:GuideMe/pages/login.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/utils/utils.dart';
 import 'package:GuideMe/widgets/duration_alert.dart';
@@ -39,7 +38,6 @@ class AndroidLayout extends StatefulWidget {
 class AndroidLayoutState extends State<AndroidLayout> {
   int _selectedDrawerIndex = 0;
 
-
   _buildMaterialSearchPage(BuildContext context) {
     return new MaterialPageRoute<String>(
         settings: new RouteSettings(
@@ -50,6 +48,9 @@ class AndroidLayoutState extends State<AndroidLayout> {
           return new Material(
             child: new MaterialSearch<String>(
               placeholder: 'Try with "Tour de Roma"',
+              iconColor: isDarkTheme(context) ? Colors.grey[750] : Colors.black,
+              barBackgroundColor:
+                  isDarkTheme(context) ? Colors.grey[750] : Colors.white,
               results: itineraries
                   .map(
                       (Itinerary itinerary) => new MaterialSearchResult<String>(

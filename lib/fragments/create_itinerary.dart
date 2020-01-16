@@ -43,12 +43,18 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
             child: CustomScrollView(slivers: <Widget>[
               Platform.isIOS
                   ? CupertinoSliverNavigationBar(
-                      backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark ?
-                            Colors.grey[850] : Colors.grey[50],
-                  largeTitle: Text("Create",
-                  style: TextStyle(color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
-                  Colors.white : Colors.black)),
-                  
+                      backgroundColor:
+                          MediaQuery.of(context).platformBrightness ==
+                                  Brightness.dark
+                              ? Colors.grey[850]
+                              : Colors.grey[50],
+                      largeTitle: Text("Create",
+                          style: TextStyle(
+                              color:
+                                  MediaQuery.of(context).platformBrightness ==
+                                          Brightness.dark
+                                      ? Colors.white
+                                      : Colors.black)),
                     )
                   : SliverList(
                       delegate: SliverChildBuilderDelegate((_, i) {
@@ -72,13 +78,8 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                                   style: TextStyle(fontSize: 20),
                                 ),
                                 SizedBox(height: 10),
-                                Theme(
-                                  data: new ThemeData(
-                                    primaryColor: Colors.grey,
-                                    primaryColorDark: Colors.grey,
-                                  ),
-                                  child: Container(
-                                      child: TextField(
+                                Container(
+                                  child: TextField(
                                     controller: _titleController,
                                     onChanged: (value) => setState(
                                         () => _validateTitle = value.isEmpty),
@@ -86,19 +87,34 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                                     maxLines: 1,
                                     maxLength: 20,
                                     decoration: new InputDecoration(
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(12)),
+                                        borderSide: BorderSide(
+                                            width: 1, color: Colors.grey),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(12)),
+                                        borderSide: BorderSide(
+                                            width: 1, color: Colors.grey),
+                                      ),
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12)),
+                                          borderSide: BorderSide(
+                                            width: 1,
+                                          )),
                                       errorText: _validateTitle
                                           ? "This field cannot be left empty."
                                           : null,
                                       contentPadding: EdgeInsets.all(12),
-                                      border: new OutlineInputBorder(
-                                          borderSide: new BorderSide(
-                                              color: Colors.teal)),
                                       hintText:
                                           "The name you want to give to your itinerary.",
                                       helperText:
                                           "The itinerary in not more than 20 characters.",
                                     ),
-                                  )),
+                                  ),
                                 ),
                               ],
                             ),
@@ -111,13 +127,8 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                                   style: TextStyle(fontSize: 20),
                                 ),
                                 SizedBox(height: 10),
-                                Theme(
-                                  data: new ThemeData(
-                                    primaryColor: Colors.grey,
-                                    primaryColorDark: Colors.grey,
-                                  ),
-                                  child: Container(
-                                      child: TextField(
+                                Container(
+                                  child: TextField(
                                     controller: _descriptionController,
                                     onChanged: (value) => setState(() =>
                                         _validateDescription = value.isEmpty),
@@ -129,15 +140,30 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                                           ? "This field cannot be left empty."
                                           : null,
                                       contentPadding: EdgeInsets.all(12),
-                                      border: new OutlineInputBorder(
-                                          borderSide: new BorderSide(
-                                              color: Colors.teal)),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(12)),
+                                        borderSide: BorderSide(
+                                            width: 1, color: Colors.grey),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(12)),
+                                        borderSide: BorderSide(
+                                            width: 1, color: Colors.grey),
+                                      ),
+                                      border: OutlineInputBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(12)),
+                                          borderSide: BorderSide(
+                                            width: 1,
+                                          )),
                                       hintText:
                                           "What can you see in the itinerary? Where do you suggest stopping and spend time?",
                                       helperText:
                                           "Your experience in not more than 200 characters.",
                                     ),
-                                  )),
+                                  ),
                                 ),
                               ],
                             ),
@@ -171,9 +197,24 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                                             contentPadding: EdgeInsets.all(5),
                                             hintText: "0-24",
                                             labelText: "   Hours",
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(12)),
+                                              borderSide: BorderSide(
+                                                  width: 1, color: Colors.grey),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(12)),
+                                              borderSide: BorderSide(
+                                                  width: 1, color: Colors.grey),
+                                            ),
                                             border: OutlineInputBorder(
                                                 borderRadius: BorderRadius.all(
-                                                    Radius.circular(8))),
+                                                    Radius.circular(12)),
+                                                borderSide: BorderSide(
+                                                  width: 1,
+                                                )),
                                           ),
                                         )),
                                     SizedBox(width: 30),
@@ -195,9 +236,24 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                                             contentPadding: EdgeInsets.all(5),
                                             hintText: "0-60",
                                             labelText: " Minutes",
+                                            focusedBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(12)),
+                                              borderSide: BorderSide(
+                                                  width: 1, color: Colors.grey),
+                                            ),
+                                            enabledBorder: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(12)),
+                                              borderSide: BorderSide(
+                                                  width: 1, color: Colors.grey),
+                                            ),
                                             border: OutlineInputBorder(
                                                 borderRadius: BorderRadius.all(
-                                                    Radius.circular(8))),
+                                                    Radius.circular(12)),
+                                                borderSide: BorderSide(
+                                                  width: 1,
+                                                )),
                                           ),
                                         )),
                                   ],
@@ -221,7 +277,9 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                                       IconButton(
                                         iconSize: 36,
                                         icon: Icon(Icons.pin_drop,
-                                            color: Colors.black87),
+                                            color: isDarkTheme(context)
+                                                ? Colors.white
+                                                : Colors.black87),
                                         onPressed: () => Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -237,7 +295,9 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                                         iconSize: 36,
                                         color: _markers.isEmpty
                                             ? Colors.grey
-                                            : Colors.black,
+                                            : isDarkTheme(context)
+                                                ? Colors.white
+                                                : Colors.white,
                                         icon: Icon(Icons.clear_all),
                                         onPressed: () =>
                                             setState(() => _markers.clear()),
@@ -351,15 +411,15 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                           ],
                         ),
                         Platform.isAndroid
-                        ? Positioned(
-                          bottom: 20,
-                          right: 0,
-                          child: FloatingActionButton(
-                            child: Icon(Icons.send),
-                            onPressed: publishCurrentItinerary,
-                          ),
-                        )
-                        : Text("")
+                            ? Positioned(
+                                bottom: 20,
+                                right: 0,
+                                child: FloatingActionButton(
+                                  child: Icon(Icons.send),
+                                  onPressed: publishCurrentItinerary,
+                                ),
+                              )
+                            : Text("")
                       ])))
             ])));
   }

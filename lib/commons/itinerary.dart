@@ -41,8 +41,8 @@ class Itinerary {
 
   String get lengthKm => '$length km';
 
-  String get _hourWord => duration.hour > 1 ? "ore" : "ora";
-  String get _minuteWord => duration.minute > 1 ? "minuti" : "minuto";
+  String get _hourWord => duration.hour > 1 ? "hours" : "hour";
+  String get _minuteWord => duration.minute > 1 ? "minutes" : "minute";
 
   String get durationString =>
       '${duration.hour} $_hourWord ${duration.minute} $_minuteWord';

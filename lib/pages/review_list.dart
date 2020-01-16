@@ -15,25 +15,31 @@ class ReviewListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: Platform.isIOS
-        ? CupertinoNavigationBar(
-          backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark ?
-                      CupertinoColors.systemGrey5:      CupertinoColors.white , 
-          middle: Text(itinerary.title, style: TextStyle(color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
-                  Colors.white : Colors.black),),
-          leading: new IconButton(
-            icon: new Icon(Icons.keyboard_arrow_up),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-        )
-        :
-        
-        AppBar(
-          title: Text(itinerary.title),
-          leading: new IconButton(
-            icon: new Icon(Icons.keyboard_arrow_up),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-        ),
+            ? CupertinoNavigationBar(
+                backgroundColor:
+                    MediaQuery.of(context).platformBrightness == Brightness.dark
+                        ? CupertinoColors.systemGrey5
+                        : CupertinoColors.white,
+                middle: Text(
+                  itinerary.title,
+                  style: TextStyle(
+                      color: MediaQuery.of(context).platformBrightness ==
+                              Brightness.dark
+                          ? Colors.white
+                          : Colors.black),
+                ),
+                leading: new IconButton(
+                  icon: new Icon(Icons.keyboard_arrow_up),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              )
+            : AppBar(
+                title: Text(itinerary.title),
+                leading: new IconButton(
+                  icon: new Icon(Icons.keyboard_arrow_up),
+                  onPressed: () => Navigator.of(context).pop(),
+                ),
+              ),
         body: SafeArea(
             child: Center(
                 child: ListView.separated(
@@ -90,7 +96,7 @@ Widget _getListTile(Review review) {
                       ),
                       Text(
                         formattedDate,
-                        style: TextStyle(color: Colors.black54),
+                        
                       )
                     ],
                   )),

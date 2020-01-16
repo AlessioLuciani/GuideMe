@@ -1,6 +1,4 @@
-import 'package:GuideMe/commons/user.dart';
 import 'package:GuideMe/main.dart';
-import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/utils/utils.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +28,8 @@ class _LoginPageState extends State<LoginPage> {
           _surnameKey.currentState.validate() &&
           _emailKey.currentState.validate() &&
           _passwordKey.currentState.validate()) {
-        createUserSession(0); // mock value, simply rename test test account at the first boot
+        createUserSession(
+            0); // mock value, simply rename test test account at the first boot
         currentUser.name = _nameController.text;
         currentUser.surname = _surnameController.text;
         currentUser.email = _emailController.text;
@@ -71,12 +70,26 @@ class _LoginPageState extends State<LoginPage> {
           autofocus: false,
           controller: _nameController,
           validator: (value) =>
-              _isLoginPage || value.isEmpty ? "Inserisci nome" : null,
+              _isLoginPage || value.isEmpty ? "Insert your name" : null,
           decoration: InputDecoration(
-            hintText: 'Nome',
+            hintText: 'Name',
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(32)),
+              borderSide: BorderSide(
+                  width: isDarkTheme(context) ? 1 : 2,
+                  color:
+                      isDarkTheme(context) ? Colors.white : Colors.redAccent),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(32)),
+              borderSide: BorderSide(width: 1, color: Colors.grey),
+            ),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(32)),
+                borderSide: BorderSide(
+                  width: 1,
+                )),
           ),
         ));
 
@@ -87,12 +100,26 @@ class _LoginPageState extends State<LoginPage> {
           autofocus: false,
           controller: _surnameController,
           validator: (value) =>
-              _isLoginPage || value.isEmpty ? "Inserisci cognome" : null,
+              _isLoginPage || value.isEmpty ? "Insert your surname" : null,
           decoration: InputDecoration(
-            hintText: 'Cognome',
+            hintText: 'Surname',
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(32)),
+              borderSide: BorderSide(
+                  width: isDarkTheme(context) ? 1 : 2,
+                  color:
+                      isDarkTheme(context) ? Colors.white : Colors.redAccent),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(32)),
+              borderSide: BorderSide(width: 1, color: Colors.grey),
+            ),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(32)),
+                borderSide: BorderSide(
+                  width: 1,
+                )),
           ),
         ));
 
@@ -104,10 +131,10 @@ class _LoginPageState extends State<LoginPage> {
           validator: (value) {
             String returnValue;
             if (value.isEmpty) {
-              returnValue = "Inserisci una email";
+              returnValue = "Insert an email";
             } else if (!_isLoginPage &&
                 userExists(_emailController.text) >= 0) {
-              returnValue = "Utente già esistente";
+              returnValue = "An user already exists with the given email";
             }
             return returnValue;
           },
@@ -115,8 +142,22 @@ class _LoginPageState extends State<LoginPage> {
           decoration: InputDecoration(
             hintText: 'Email',
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(32)),
+              borderSide: BorderSide(
+                  width: isDarkTheme(context) ? 1 : 2,
+                  color:
+                      isDarkTheme(context) ? Colors.white : Colors.redAccent),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(32)),
+              borderSide: BorderSide(width: 1, color: Colors.grey),
+            ),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(32)),
+                borderSide: BorderSide(
+                  width: 1,
+                )),
           ),
         ));
 
@@ -128,10 +169,10 @@ class _LoginPageState extends State<LoginPage> {
           validator: (value) {
             String returnValue;
             if (value.isEmpty) {
-              returnValue = "Inserisci una password";
+              returnValue = "Insert a password";
             }
             if (_isLoginPage && userExists(_emailController.text) < 0) {
-              returnValue = "I dati inseriti non sono corretti.";
+              returnValue = "Provided data is not correct.";
             }
             return returnValue;
           },
@@ -139,8 +180,22 @@ class _LoginPageState extends State<LoginPage> {
           decoration: InputDecoration(
             hintText: 'Password',
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-            border:
-                OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(32)),
+              borderSide: BorderSide(
+                  width: isDarkTheme(context) ? 1 : 2,
+                  color:
+                      isDarkTheme(context) ? Colors.white : Colors.redAccent),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(32)),
+              borderSide: BorderSide(width: 1, color: Colors.grey),
+            ),
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(Radius.circular(32)),
+                borderSide: BorderSide(
+                  width: 1,
+                )),
           ),
         ));
 
@@ -154,8 +209,8 @@ class _LoginPageState extends State<LoginPage> {
         padding: EdgeInsets.only(top: 12, bottom: 12, left: 36, right: 36),
         color: Colors.red,
         child: _isLoginPage
-            ? Text("Effettua l'accesso", style: TextStyle(color: Colors.white))
-            : Text("Crea account", style: TextStyle(color: Colors.white)),
+            ? Text("Login", style: TextStyle(color: Colors.white))
+            : Text("Sign Up", style: TextStyle(color: Colors.white)),
       ),
     );
 
@@ -164,12 +219,17 @@ class _LoginPageState extends State<LoginPage> {
         child: FlatButton(
           child: _isLoginPage
               ? Text(
-                  'Crea un nuovo account',
-                  style: TextStyle(color: Colors.black54),
+                  'Create a new account',
+                  style: TextStyle(
+                      color: isDarkTheme(context)
+                          ? Colors.white70
+                          : Colors.black54),
                 )
               : Text(
-                  "Effettua l'accesso",
-                  style: TextStyle(color: Colors.black54),
+                  "Login",
+                  style: TextStyle(
+                      color:
+                          isDarkTheme(context) ? Colors.white70 : Colors.black54),
                 ),
           onPressed: () => setState(() {
             _isLoginPage = !_isLoginPage;
@@ -182,7 +242,7 @@ class _LoginPageState extends State<LoginPage> {
 
     final forgotLabel = FlatButton(
       child: Text(
-        'Hai dimenticato la password?',
+        'Did you forget the password?',
         style: TextStyle(color: Colors.black54),
       ),
       onPressed: () {},
@@ -191,7 +251,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       // Avoid the Scaffold to resize himself when
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+
       body: Center(
         child: Padding(
           padding: EdgeInsets.only(left: 24.0, right: 24.0, top: 140),

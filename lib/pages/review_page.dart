@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:GuideMe/commons/itinerary.dart';
-import 'package:GuideMe/pages/confirmation.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/utils/utils.dart';
 import 'package:GuideMe/widgets/confirmation_alert.dart';
@@ -19,12 +18,12 @@ class Star {
 class FeedbackFragment extends StatefulWidget {
   final Itinerary itinerary;
   final List<String> msgs = [
-    "Clicca una stella per recensire",
-    "Orribile",
-    "Scarso",
-    "Medio",
-    "Buono",
-    "Eccellente",
+    "Tap a star to review",
+    "Horrible",
+    "Poor",
+    "Medium",
+    "Good",
+    "Excellent",
   ];
 
   FeedbackFragment({Key key, @required this.itinerary}) : super(key: key);
@@ -52,7 +51,9 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
 
     for (var i = 0; i < RATING_STARS; i++) {
       stars.add(new Star(
-        color: (i <= _currentStars) ? Colors.yellow : Colors.grey[300],
+        color: (i <= _currentStars)
+            ? isDarkTheme(context) ? Colors.white : Colors.yellow
+            : isDarkTheme(context) ? Colors.grey[700] : Colors.grey[300],
         onTap: () => setState(() {
           _requireRating = false;
           _currentStars = i;
@@ -93,24 +94,32 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: Platform.isIOS
-        ? CupertinoNavigationBar(
-          backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark ?
-                      CupertinoColors.systemGrey5:      CupertinoColors.white , 
-          middle: Text(widget.itinerary.title, style: TextStyle(color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
-                  Colors.white : Colors.black),),
-          previousPageTitle: "Visited",
-        )
-        :AppBar(
-        title: Text(widget.itinerary.title),
-        actions: <Widget>[
-          Platform.isAndroid
-              ? Text("")
-              : IconButton(
-                  icon: Icon(Icons.send),
-                  onPressed: () => _handleReviewButton(context),
-                )
-        ],
-      ),
+          ? CupertinoNavigationBar(
+              backgroundColor:
+                  MediaQuery.of(context).platformBrightness == Brightness.dark
+                      ? CupertinoColors.systemGrey5
+                      : CupertinoColors.white,
+              middle: Text(
+                widget.itinerary.title,
+                style: TextStyle(
+                    color: MediaQuery.of(context).platformBrightness ==
+                            Brightness.dark
+                        ? Colors.white
+                        : Colors.black),
+              ),
+              previousPageTitle: "Visited",
+            )
+          : AppBar(
+              title: Text(widget.itinerary.title),
+              actions: <Widget>[
+                Platform.isAndroid
+                    ? Text("")
+                    : IconButton(
+                        icon: Icon(Icons.send),
+                        onPressed: () => _handleReviewButton(context),
+                      )
+              ],
+            ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
@@ -123,7 +132,7 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
               Center(
                 child: Text(
                   _requireRating
-                      ? "Seleziona una stella per la recensione"
+                      ? widget.msgs[0]
                       : widget.msgs[_currentStars >= 0 && _currentStars <= 4
                           ? _currentStars + 1
                           : 0],
@@ -141,17 +150,12 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
                 children: <Widget>[
                   SizedBox(height: 10),
                   Text(
-                    "Titolo",
+                    "Title",
                     style: TextStyle(fontSize: 20),
                   ),
                   SizedBox(height: 10),
-                  Theme(
-                    data: new ThemeData(
-                      primaryColor: Colors.grey,
-                      primaryColorDark: Colors.grey,
-                    ),
-                    child: Container(
-                        child: TextField(
+                  Container(
+                    child: TextField(
                       controller: _titleController,
                       onChanged: (value) =>
                           setState(() => _validateTitle = value.isEmpty),
@@ -160,16 +164,27 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
                       maxLength: 50,
                       decoration: new InputDecoration(
                         errorText: _validateTitle
-                            ? "Questo campo non puó essere lasciato vuoto"
+                            ? "This field cannot be left empty."
                             : null,
-                        border: new OutlineInputBorder(
-                            borderSide: new BorderSide(color: Colors.teal)),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide: BorderSide(width: 1, color: Colors.grey),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide: BorderSide(width: 1, color: Colors.grey),
+                        ),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(4)),
+                            borderSide: BorderSide(
+                              width: 1,
+                            )),
                         hintText:
-                            "Le cose più importanti che vuoi condividere.",
+                            "The most important things you want to share.",
                         helperText:
-                            "La tua esperienza in non più di 50 caratteri.",
+                            "Your experience in no more than 50 characters.",
                       ),
-                    )),
+                    ),
                   ),
                 ],
               ),
@@ -178,17 +193,12 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
                 children: <Widget>[
                   SizedBox(height: 10),
                   Text(
-                    "Descrizione",
+                    "Description",
                     style: TextStyle(fontSize: 20),
                   ),
                   SizedBox(height: 10),
-                  Theme(
-                    data: new ThemeData(
-                      primaryColor: Colors.grey,
-                      primaryColorDark: Colors.grey,
-                    ),
-                    child: Container(
-                        child: TextField(
+                  Container(
+                    child: TextField(
                       controller: _descriptionController,
                       onChanged: (value) =>
                           setState(() => _validateDescription = value.isEmpty),
@@ -197,22 +207,33 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
                       maxLength: 300,
                       decoration: new InputDecoration(
                         errorText: _validateDescription
-                            ? "Questo campo non puó essere lasciato vuoto"
+                            ? "This field cannot be left empty."
                             : null,
-                        border: new OutlineInputBorder(
-                            borderSide: new BorderSide(color: Colors.teal)),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide: BorderSide(width: 1, color: Colors.grey),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4)),
+                          borderSide: BorderSide(width: 1, color: Colors.grey),
+                        ),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(4)),
+                            borderSide: BorderSide(
+                              width: 1,
+                            )),
                         hintText:
-                            "Cosa ti è piaciuto e cosa non ti è piaciuto? A chi lo consiglieresti?",
+                            "What did you like about it and what did you not? To who would you recomend it?",
                         helperText:
-                            "La tua esperienza in non più di 300 caratteri.",
+                            "Your experience in no more than 300 characters.",
                       ),
-                    )),
+                    ),
                   ),
                 ],
               ),
               SizedBox(height: 10),
               Text(
-                "Foto",
+                "Photo",
                 style: TextStyle(fontSize: 20),
               ),
               _getGalleryPickers(),

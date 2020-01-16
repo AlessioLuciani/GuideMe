@@ -39,10 +39,12 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
     _generateMarkers();
 
     return Scaffold(
-      backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark ?
-                 Colors.grey : Colors.white,
+      backgroundColor:
+          MediaQuery.of(context).platformBrightness == Brightness.dark
+              ? Colors.grey[850]
+              : Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.lightGreen,
+        backgroundColor: Color(0xFF5EBA5A),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -87,8 +89,17 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                     right: 16,
                     child: FloatingActionButton.extended(
                       onPressed: moveCamToClosestStop,
-                      icon: Icon(Icons.nature_people),
-                      label: Text("Nearby"),
+                      icon: Icon(Icons.nature_people,
+                          color: isDarkTheme(context)
+                              ? Colors.white
+                              : Colors.black),
+                      label: Text(
+                        "Nearby",
+                        style: TextStyle(
+                            color: isDarkTheme(context)
+                                ? Colors.white
+                                : Colors.black),
+                      ),
                       backgroundColor: Colors.redAccent,
                     )),
               ],
@@ -96,7 +107,6 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
           ),
           SafeArea(
             child: Container(
-              
               padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 0.0),
               child: Stack(
                 children: <Widget>[
@@ -108,7 +118,9 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                         icon: Icon(
                           Icons.navigate_before,
                           color: navigationData.currentStop > 0
-                              ? Colors.black
+                              ? isDarkTheme(context)
+                                  ? Colors.white
+                                  : Colors.black
                               : Colors.grey,
                           size: 30,
                         ),
@@ -226,7 +238,9 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                           size: 30,
                           color: navigationData.currentStop <
                                   navigationData.itinerary.stops.length - 1
-                              ? Colors.black
+                              ? isDarkTheme(context)
+                                  ? Colors.white
+                                  : Colors.black
                               : Colors.grey,
                         ),
                         onPressed: () {
