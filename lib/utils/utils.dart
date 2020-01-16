@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:GuideMe/commons/itinerary.dart';
 import 'package:GuideMe/commons/itinerary_stop.dart';
 import 'package:GuideMe/commons/user.dart';
@@ -7,7 +5,6 @@ import 'package:GuideMe/pages/confirmation.dart';
 import 'package:GuideMe/pages/login.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'dart:math';
 
@@ -107,23 +104,6 @@ double distanceInKmBetweenEarthCoordinates(lat1, lon1, lat2, lon2) {
       sin(dLon / 2) * sin(dLon / 2) * cos(lat1) * cos(lat2);
   var c = 2 * atan2(sqrt(a), sqrt(1 - a));
   return earthRadiusKm * c;
-}
-
-void publishItinerary(
-    {@required String title,
-    @required String description,
-    @required int length,
-    @required List<ItineraryStop> stops}) {
-  int currentMinutes = timeFromItineraryLength(length);
-  appendItinerary(Itinerary(
-      author: currentUser,
-      coverImage: coverImages[generator.nextInt(coverImages.length)],
-      title: title,
-      stops: stops,
-      duration: DateTime.parse(MIN_DATETIME).add(
-          Duration(hours: currentMinutes ~/ 60, minutes: currentMinutes % 60)),
-      length: length,
-      longDescription: description));
 }
 
 int timeFromItineraryLength(int length) =>

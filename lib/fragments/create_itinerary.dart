@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:GuideMe/commons/itinerary.dart';
 import 'package:GuideMe/commons/itinerary_stop.dart';
+import 'package:GuideMe/utils/data.dart';
 import 'package:GuideMe/widgets/confirmation_alert.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -24,6 +26,9 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _hourController = TextEditingController();
   final TextEditingController _minuteController = TextEditingController();
+  bool _validateTitle = false, _validateDescription = false;
+  bool _validateHour = false, _validateMinute = false;
+  bool _markersNeeded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -62,11 +67,34 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                                   style: TextStyle(fontSize: 20),
                                 ),
                                 SizedBox(height: 10),
-                                _getTextfield(
-                                    "The name you want to give to your itinerary.",
-                                    "The itinerary in not more than 20 characters.",
-                                    1,
-                                    20),
+                                Theme(
+                                  data: new ThemeData(
+                                    primaryColor: Colors.grey,
+                                    primaryColorDark: Colors.grey,
+                                  ),
+                                  child: Container(
+                                      child: TextField(
+                                    controller: _titleController,
+                                    onChanged: (value) => setState(
+                                        () => _validateTitle = value.isEmpty),
+                                    minLines: 1,
+                                    maxLines: 1,
+                                    maxLength: 20,
+                                    decoration: new InputDecoration(
+                                      errorText: _validateTitle
+                                          ? "This field cannot be left empty."
+                                          : null,
+                                      contentPadding: EdgeInsets.all(12),
+                                      border: new OutlineInputBorder(
+                                          borderSide: new BorderSide(
+                                              color: Colors.teal)),
+                                      hintText:
+                                          "The name you want to give to your itinerary.",
+                                      helperText:
+                                          "The itinerary in not more than 20 characters.",
+                                    ),
+                                  )),
+                                ),
                               ],
                             ),
                             Column(
@@ -78,11 +106,34 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                                   style: TextStyle(fontSize: 20),
                                 ),
                                 SizedBox(height: 10),
-                                _getTextfield(
-                                    "What can you see in the itinerary? Where do you suggest stopping and spend time?",
-                                    "Your experience in not more than 200 characters.",
-                                    4,
-                                    200),
+                                Theme(
+                                  data: new ThemeData(
+                                    primaryColor: Colors.grey,
+                                    primaryColorDark: Colors.grey,
+                                  ),
+                                  child: Container(
+                                      child: TextField(
+                                    controller: _descriptionController,
+                                    onChanged: (value) => setState(() =>
+                                        _validateDescription = value.isEmpty),
+                                    minLines: 4,
+                                    maxLines: 4,
+                                    maxLength: 200,
+                                    decoration: new InputDecoration(
+                                      errorText: _validateDescription
+                                          ? "This field cannot be left empty."
+                                          : null,
+                                      contentPadding: EdgeInsets.all(12),
+                                      border: new OutlineInputBorder(
+                                          borderSide: new BorderSide(
+                                              color: Colors.teal)),
+                                      hintText:
+                                          "What can you see in the itinerary? Where do you suggest stopping and spend time?",
+                                      helperText:
+                                          "Your experience in not more than 200 characters.",
+                                    ),
+                                  )),
+                                ),
                               ],
                             ),
                             Column(
@@ -100,12 +151,18 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                                     Container(
                                         width: 80,
                                         child: TextField(
+                                          controller: _hourController,
+                                          onChanged: (value) => setState(() =>
+                                              _validateHour = value.isEmpty),
                                           textAlign: TextAlign.center,
                                           keyboardType: TextInputType.number,
                                           inputFormatters: [
                                             LengthLimitingTextInputFormatter(2)
                                           ],
                                           decoration: InputDecoration(
+                                            errorStyle: TextStyle(fontSize: 0),
+                                            errorText:
+                                                _validateHour ? "" : null,
                                             contentPadding: EdgeInsets.all(5),
                                             hintText: "0-24",
                                             labelText: "   Hours",
@@ -118,12 +175,18 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                                     Container(
                                         width: 80,
                                         child: TextField(
+                                          controller: _minuteController,
+                                          onChanged: (value) => setState(() =>
+                                              _validateMinute = value.isEmpty),
                                           inputFormatters: [
                                             LengthLimitingTextInputFormatter(2)
                                           ],
                                           keyboardType: TextInputType.number,
                                           textAlign: TextAlign.center,
                                           decoration: InputDecoration(
+                                            errorStyle: TextStyle(fontSize: 0),
+                                            errorText:
+                                                _validateMinute ? "" : null,
                                             contentPadding: EdgeInsets.all(5),
                                             hintText: "0-60",
                                             labelText: " Minutes",
@@ -182,9 +245,20 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                             SizedBox(height: 10),
                             Flexible(
                                 child: ListView.builder(
-                              itemCount: _markers.length,
+                              itemCount:
+                                  _markers.length == 0 ? 1 : _markers.length,
                               shrinkWrap: true,
                               itemBuilder: (BuildContext context, int index) {
+                                if (_markers.length == 0) {
+                                  return Visibility(
+                                      visible: _markersNeeded,
+                                      child: Text(
+                                        "Please add some stops to the itinerary.",
+                                        style: TextStyle(
+                                            color: Colors.red[700],
+                                            fontSize: 13),
+                                      ));
+                                }
                                 final textController = TextEditingController(
                                     text: _markers[index].infoWindow.title);
                                 return Padding(
@@ -260,13 +334,8 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                                     color: Colors.redAccent,
                                     textColor: Colors.white,
                                     onPressed: () {
-                                      showAdditionConfirm(context);
-                                      publishItinerary(
-                                          title: _titleController.text,
-                                          stops: _stops,
-                                          description:
-                                              _descriptionController.text,
-                                          length: _length);
+                                      //showAdditionConfirm(context);
+                                      publishCurrentItinerary();
                                     },
                                   ),
                                 ]);
@@ -285,28 +354,53 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                           child: FloatingActionButton(
                             child: Icon(Icons.send),
                             onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    Future.delayed(Duration(seconds: 1), () {
-                                      Navigator.of(context).pop(true);
-                                    });
-                                    return ConfirmationDialog(
-                                        maxSliderValue: 20,
-                                        lastValue: 12,
-                                        updateCallback: (value) => {});
-                                  });
-                              widget.updatePage(0);
-                              publishItinerary(
-                                  title: _titleController.text,
-                                  stops: _stops,
-                                  description: _descriptionController.text,
-                                  length: _length);
+                              publishCurrentItinerary();
                             },
                           ),
                         )
                       ])))
             ])));
+  }
+
+  void publishCurrentItinerary() {
+    _validateTitle = _titleController.text.isEmpty;
+    _validateDescription = _descriptionController.text.isEmpty;
+    _validateHour = _hourController.text.isEmpty;
+    _validateMinute = _minuteController.text.isEmpty;
+    _markersNeeded = _markers.isEmpty;
+    debugPrint('$_validateTitle');
+    if (_validateTitle ||
+        _validateDescription ||
+        _validateHour ||
+        _validateMinute ||
+        _markersNeeded) {
+      setState(() {});
+    } else {
+      appendItinerary(Itinerary(
+          author: currentUser,
+          coverImage: coverImages[generator.nextInt(coverImages.length)],
+          title: _titleController.text,
+          longDescription: _descriptionController.text,
+          stops: _stops,
+          duration: DateTime.parse(MIN_DATETIME).add(Duration(
+              hours: int.parse(_hourController.text),
+              minutes: int.parse(_minuteController.text))),
+          length: _length));
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            Future.delayed(Duration(seconds: 1), () {
+              Navigator.of(context).pop(true);
+            });
+            return ConfirmationDialog(
+                maxSliderValue: 20,
+                lastValue: 12,
+                updateCallback: (value) => {});
+          });
+      if (Platform.isAndroid) {
+        widget.updatePage(0);
+      }
+    }
   }
 
   int get _length {
@@ -336,27 +430,4 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
 
   void _addMarker(Marker marker) => _markers.add(marker);
   void _removeLastMarker() => _markers.removeLast();
-
-  Widget _getTextfield(
-      String hintText, String helperText, int lines, int maxChars) {
-    return Theme(
-      data: new ThemeData(
-        primaryColor: Colors.grey,
-        primaryColorDark: Colors.grey,
-      ),
-      child: Container(
-          child: TextField(
-        minLines: lines,
-        maxLines: lines,
-        maxLength: maxChars,
-        decoration: new InputDecoration(
-          contentPadding: EdgeInsets.all(9),
-          border: new OutlineInputBorder(
-              borderSide: new BorderSide(color: Colors.teal)),
-          hintText: hintText,
-          helperText: helperText,
-        ),
-      )),
-    );
-  }
 }
