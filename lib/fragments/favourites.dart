@@ -22,7 +22,12 @@ class _FavouritesFragmentState extends State<FavouritesFragment> {
           child: CustomScrollView(slivers: <Widget>[
         Platform.isIOS
             ? CupertinoSliverNavigationBar(
-                largeTitle: Text("Favorites"),
+                backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                            CupertinoColors.systemGrey5 : CupertinoColors.white,
+                  largeTitle: Text("Favorites",
+                  style: TextStyle(color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                  Colors.white : Colors.black)),
+                  
               )
             : SliverList(
                 delegate: SliverChildBuilderDelegate((_, i) {

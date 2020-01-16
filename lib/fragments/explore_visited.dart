@@ -33,7 +33,11 @@ class _ExploreVisitedFragmentState extends State<ExploreVisitedFragment> {
         child: Platform.isIOS
             ? CustomScrollView(slivers: <Widget>[
                 CupertinoSliverNavigationBar(
-                  largeTitle: Text("Visited"),
+                  backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                            CupertinoColors.systemGrey5 : CupertinoColors.white,
+                  largeTitle: Text("Visited",
+                  style: TextStyle(color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                  Colors.white : Colors.black),),
                 ),
                 SliverList(
                   delegate: SliverChildBuilderDelegate((context, index) {

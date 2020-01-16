@@ -78,7 +78,12 @@ class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProv
         }, child:
             CustomScrollView(slivers: <Widget>[
                 CupertinoSliverNavigationBar(
-                  largeTitle: Text("Explore"),
+                  backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                            CupertinoColors.systemGrey5 : CupertinoColors.white,
+                  largeTitle: Text("Explore",
+                  style: TextStyle(color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                  Colors.white : Colors.black)),
+                  
                   trailing: FlatButton(
                     child: Text("Filters",
                     style: TextStyle(

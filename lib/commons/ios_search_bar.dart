@@ -48,9 +48,11 @@ class IOSSearchBar extends AnimatedWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 8.0, vertical: 0.0),
               decoration: new BoxDecoration(
-                color: CupertinoColors.extraLightBackgroundGray,
+                color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                            CupertinoColors.darkBackgroundGray : CupertinoColors.extraLightBackgroundGray,
                 border:
-                    new Border.all(width: 0.0, color: CupertinoColors.white),
+                    new Border.all(width: 0.0, color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                            CupertinoColors.black : CupertinoColors.white,),
                 borderRadius: new BorderRadius.circular(10.0),
               ),
               child: Stack(alignment: Alignment.centerLeft, children: <Widget>[
@@ -62,7 +64,8 @@ class IOSSearchBar extends AnimatedWidget {
                               const EdgeInsets.fromLTRB(0.0, 0.0, 4.0, 1.0),
                           child: Icon(
                             CupertinoIcons.search,
-                            color: CupertinoColors.inactiveGray,
+                            color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                            CupertinoColors.systemGrey : CupertinoColors.inactiveGray,
                             size: _kFontSize + 2.0,
                           ))
                     ]),

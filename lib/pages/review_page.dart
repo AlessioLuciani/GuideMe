@@ -92,10 +92,12 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
       appBar: Platform.isIOS
         ? CupertinoNavigationBar(
-          middle: Text(widget.itinerary.title),
+          backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                      CupertinoColors.systemGrey5:      CupertinoColors.white , 
+          middle: Text(widget.itinerary.title, style: TextStyle(color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                  Colors.white : Colors.black),),
           previousPageTitle: "Visited",
         )
         :AppBar(

@@ -54,10 +54,12 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
           return false;
         },
         child: Scaffold(
-            backgroundColor: Colors.white,
             appBar: Platform.isIOS
                 ? CupertinoNavigationBar(
-                    middle: Text("Add stops"),
+                    backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                      CupertinoColors.systemGrey5:      CupertinoColors.white , 
+          middle: Text("Add Stops", style: TextStyle(color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                  Colors.white : Colors.black),),
                     previousPageTitle: "Create",
                     trailing: FlatButton(
                       child: Text(
@@ -124,6 +126,7 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
                       onPressed: () => _undoLastMarker(),
                       icon: Icon(Icons.undo),
                       label: Text("Undo"),
+                      backgroundColor: Colors.redAccent,
                     )),
               ],
             )));

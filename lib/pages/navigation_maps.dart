@@ -2,6 +2,7 @@ import 'package:GuideMe/commons/itinerary.dart';
 import 'package:GuideMe/commons/itinerary_stop.dart';
 import 'package:GuideMe/pages/navigation_description.dart';
 import 'package:GuideMe/utils/utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -38,7 +39,8 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
     _generateMarkers();
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                 Colors.grey : Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.lightGreen,
         title: Column(
@@ -87,12 +89,14 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                       onPressed: moveCamToClosestStop,
                       icon: Icon(Icons.nature_people),
                       label: Text("Nearby"),
+                      backgroundColor: Colors.redAccent,
                     )),
               ],
             ),
           ),
           SafeArea(
-            child: Padding(
+            child: Container(
+              
               padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 0.0),
               child: Stack(
                 children: <Widget>[

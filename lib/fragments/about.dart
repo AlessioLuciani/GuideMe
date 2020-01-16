@@ -18,7 +18,12 @@ class AboutFragment extends StatelessWidget {
                   slivers: <Widget>[
                 Platform.isIOS
                 ? CupertinoSliverNavigationBar(
-                  largeTitle: Text("About"),
+                  backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                            CupertinoColors.systemGrey5 : CupertinoColors.white,
+                  largeTitle: Text("About",
+                  style: TextStyle(color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                  Colors.white : Colors.black)),
+                  
                 )
                 : SliverList(delegate: SliverChildBuilderDelegate((_,i) {return Text("");}, childCount: 0),),
                 SliverFillRemaining(

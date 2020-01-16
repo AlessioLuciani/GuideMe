@@ -43,7 +43,12 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
             child: CustomScrollView(slivers: <Widget>[
               Platform.isIOS
                   ? CupertinoSliverNavigationBar(
-                      largeTitle: Text("Create"),
+                      backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                            CupertinoColors.systemGrey5 : CupertinoColors.white,
+                  largeTitle: Text("Create",
+                  style: TextStyle(color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                  Colors.white : Colors.black)),
+                  
                     )
                   : SliverList(
                       delegate: SliverChildBuilderDelegate((_, i) {

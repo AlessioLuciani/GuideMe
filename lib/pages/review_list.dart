@@ -16,7 +16,10 @@ class ReviewListPage extends StatelessWidget {
     return Scaffold(
         appBar: Platform.isIOS
         ? CupertinoNavigationBar(
-          middle: Text(itinerary.title),
+          backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                      CupertinoColors.systemGrey5:      CupertinoColors.white , 
+          middle: Text(itinerary.title, style: TextStyle(color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                  Colors.white : Colors.black),),
           leading: new IconButton(
             icon: new Icon(Icons.keyboard_arrow_up),
             onPressed: () => Navigator.of(context).pop(),
