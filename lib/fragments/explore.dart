@@ -36,6 +36,12 @@ class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProv
   Animation _searchAnimation;
   AnimationController _searchAnimationController;
 
+  @override
+  void dispose() {
+    resetUserFilters();
+    super.dispose();
+  }
+
 
   @override
   void initState() {
@@ -53,7 +59,6 @@ class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProv
         _searchAnimationController.forward();
       }
     });
-  
     super.initState();
   }
 

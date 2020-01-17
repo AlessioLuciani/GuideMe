@@ -3,7 +3,6 @@ import 'package:GuideMe/commons/itinerary_stop.dart';
 import 'package:GuideMe/commons/itinerary_visit.dart';
 import 'package:GuideMe/commons/review.dart';
 import 'package:GuideMe/commons/user.dart';
-import 'package:flutter/foundation.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:math';
 

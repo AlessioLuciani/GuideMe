@@ -1,7 +1,5 @@
 import 'package:GuideMe/commons/itinerary.dart';
-import 'package:GuideMe/commons/itinerary_stop.dart';
 import 'package:GuideMe/commons/user.dart';
-import 'package:GuideMe/pages/confirmation.dart';
 import 'package:GuideMe/pages/login.dart';
 import 'package:GuideMe/utils/data.dart';
 import 'package:flutter/material.dart';
@@ -52,24 +50,8 @@ void favourite(Itinerary itinerary) {
   getItineraryRef(itinerary).toggleFavourite();
 }
 
-void showReviewConfirm(BuildContext context, Itinerary itinerary) {
-  currentMsgIndex = 0;
-  Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-          builder: (context) => ConfirmationPage(
-                itinerary: itinerary,
-              )));
-}
-
 bool isDarkTheme(BuildContext context) =>
     MediaQuery.of(context).platformBrightness == Brightness.dark;
-
-void showAdditionConfirm(BuildContext context) {
-  currentMsgIndex = 1;
-  Navigator.push(
-      context, MaterialPageRoute(builder: (context) => ConfirmationPage()));
-}
 
 /// Starts playing the given text with text to speech
 Future<FlutterTts> playTextToSpeech(String text) async {
@@ -91,6 +73,12 @@ Future stopTextToSpeech(Future<FlutterTts> tts) async {
 /// Turns degrees into radians
 double degreesToRadians(degrees) {
   return degrees * pi / 180;
+}
+
+void resetUserFilters() {
+  currentUserLength = MAX_ITINERARY_LENGTH.toDouble();
+  currentUserRating = 1;
+  currentUserDuration = DateTime.parse(INIT_DATETIME);
 }
 
 /// Calculates the distance in Km between two Earth coordinates
