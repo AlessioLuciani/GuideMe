@@ -169,7 +169,7 @@ class DetailsPageState extends State<DetailsPage> {
                       ),
                       FlatButton(
                         child: Text(
-                          "Avvia",
+                          "Start",
                           style: TextStyle(fontSize: 15),
                         ),
                         shape: RoundedRectangleBorder(

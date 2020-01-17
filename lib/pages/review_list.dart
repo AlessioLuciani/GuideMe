@@ -137,8 +137,8 @@ Widget _getListTile(Review review) {
             trimLines: 3,
             colorClickableText: Colors.blue,
             trimMode: TrimMode.Line,
-            trimCollapsedText: "...Scopri di più",
-            trimExpandedText: " Meno",
+            trimCollapsedText: "...Read more",
+            trimExpandedText: " Less",
           ),
         ],
       ));

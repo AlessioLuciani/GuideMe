@@ -53,7 +53,7 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
               height: 2,
             ),
             Text(
-              'Creato da ${widget.itinerary.authorName()}',
+              'Created by ${widget.itinerary.authorName()}',
               style: TextStyle(fontSize: 13, color: Colors.white70),
               textAlign: TextAlign.left,
             )

@@ -129,7 +129,7 @@ class _RatingAlertState extends State<RatingAlert> {
                   children: <Widget>[
                     FlatButton(
                       child: Text(
-                        "Resetta",
+                        "Reset",
                         style: TextStyle(fontSize: 16),
                       ),
                       onPressed: () {
@@ -144,7 +144,7 @@ class _RatingAlertState extends State<RatingAlert> {
                           borderRadius: BorderRadius.circular(10.0)),
                       color: Colors.redAccent,
                       child: Text(
-                        "Applica",
+                        "Apply",
                         style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
                       onPressed: () {

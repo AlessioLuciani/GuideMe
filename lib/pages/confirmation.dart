@@ -35,7 +35,7 @@ class ConfirmationPage extends StatelessWidget {
           ))),
           FlatButton(
             child: Text(
-              "Chiudi",
+              "Close",
               style: TextStyle(fontSize: 18),
             ),
             onPressed: () {

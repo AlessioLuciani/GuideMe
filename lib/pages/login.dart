@@ -70,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
           autofocus: false,
           controller: _nameController,
           validator: (value) =>
-              _isLoginPage || value.isEmpty ? "Insert your name" : null,
+              _isLoginPage || value.isEmpty ? "Enter your name" : null,
           decoration: InputDecoration(
             hintText: 'Name',
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -100,9 +100,9 @@ class _LoginPageState extends State<LoginPage> {
           autofocus: false,
           controller: _surnameController,
           validator: (value) =>
-              _isLoginPage || value.isEmpty ? "Insert your surname" : null,
+              _isLoginPage || value.isEmpty ? "Enter your last name" : null,
           decoration: InputDecoration(
-            hintText: 'Surname',
+            hintText: 'Last name',
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(32)),
@@ -131,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
           validator: (value) {
             String returnValue;
             if (value.isEmpty) {
-              returnValue = "Insert an email";
+              returnValue = "Enter an email";
             } else if (!_isLoginPage &&
                 userExists(_emailController.text) >= 0) {
               returnValue = "An user already exists with the given email";
@@ -169,7 +169,7 @@ class _LoginPageState extends State<LoginPage> {
           validator: (value) {
             String returnValue;
             if (value.isEmpty) {
-              returnValue = "Insert a password";
+              returnValue = "Enter a password";
             }
             if (_isLoginPage && userExists(_emailController.text) < 0) {
               returnValue = "Provided data is not correct.";

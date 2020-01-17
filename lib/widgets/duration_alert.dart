@@ -25,8 +25,8 @@ class _DurationDialogState extends State<DurationDialog> {
 
   @override
   Widget build(BuildContext context) {
-    final _hourWord = _durationValue.hour > 1 ? "ore" : "ora";
-    final _minuteWord = _durationValue.minute > 1 ? "minuti" : "minuto";
+    final _hourWord = _durationValue.hour > 1 ? "hours" : "hour";
+    final _minuteWord = _durationValue.minute > 1 ? "minutes" : "minute";
     return AlertDialog(
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(10.0))),
@@ -86,7 +86,7 @@ class _DurationDialogState extends State<DurationDialog> {
                       width: 10,
                     ),
                     Text(
-                        'Fino a ${_durationValue.hour} $_hourWord e ${_durationValue.minute} $_minuteWord'),
+                        'Up to ${_durationValue.hour} $_hourWord and ${_durationValue.minute} $_minuteWord'),
                   ],
                 )),
             Padding(
@@ -121,7 +121,7 @@ class _DurationDialogState extends State<DurationDialog> {
                   children: <Widget>[
                     FlatButton(
                       child: Text(
-                        "Resetta",
+                        "Reset",
                         style: TextStyle(fontSize: 16),
                       ),
                       onPressed: () {
@@ -136,7 +136,7 @@ class _DurationDialogState extends State<DurationDialog> {
                           borderRadius: BorderRadius.circular(10.0)),
                       color: Colors.redAccent,
                       child: Text(
-                        "Applica",
+                        "Apply",
                         style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
                       onPressed: () {

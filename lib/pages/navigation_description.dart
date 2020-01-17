@@ -32,7 +32,7 @@ class NavigationDescriptionPageState extends State<NavigationDescriptionPage> {
               height: 2,
             ),
             Text(
-              'Creato da ${widget.navigationData.itinerary.authorName()}',
+              'Created by ${widget.navigationData.itinerary.authorName()}',
               style: TextStyle(fontSize: 13, color: Colors.white70),
               textAlign: TextAlign.left,
             )

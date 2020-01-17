@@ -108,7 +108,7 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
                     _markers.add(marker);
                     widget.addMarker(marker);
                     _polyline.add(Polyline(
-                      polylineId: PolylineId("Il tuo itinerario"),
+                      polylineId: PolylineId("Your itinerary"),
                       visible: true,
                       points:
                           _markers.map((marker) => marker.position).toList(),
@@ -163,7 +163,7 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
       }
 
       _polyline.add(Polyline(
-        polylineId: PolylineId("Il tuo itinerario"),
+        polylineId: PolylineId("Your itinerary"),
         visible: true,
         points: _markers.map((marker) => marker.position).toList(),
         width: 3,

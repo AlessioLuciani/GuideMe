@@ -55,45 +55,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-/*
-  MaterialApp(
-      title: 'GuideMe',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
-      //home: HomePage(),
-      home: LoginPage(),
-    ));
- */
-
-/*
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations(
-        [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-    return AppRoot(
-        child: FutureBuilder(
-    future: SharedPreferences.getInstance(),
-    builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.hasData) {
-            return MaterialApp(
-      title: 'GuideMe',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-      ),
-      home: LoginPage());
-        } else {
-    return CircularProgressIndicator();
-    }
-  }
-  )
-  );
-}
-*/
-
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

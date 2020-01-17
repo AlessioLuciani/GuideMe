@@ -85,7 +85,7 @@ class _LengthDialogState extends State<LengthDialog> {
                     SizedBox(
                       width: 10,
                     ),
-                    Text('Fino a ${_sliderValue.toStringAsFixed(2)} km'),
+                    Text('Up to ${_sliderValue.toStringAsFixed(2)} km'),
                   ],
                 )),
             Padding(
@@ -116,7 +116,7 @@ class _LengthDialogState extends State<LengthDialog> {
                   children: <Widget>[
                     FlatButton(
                       child: Text(
-                        "Resetta",
+                        "Reset",
                         style: TextStyle(fontSize: 16),
                       ),
                       onPressed: () {
@@ -131,7 +131,7 @@ class _LengthDialogState extends State<LengthDialog> {
                           borderRadius: BorderRadius.circular(10.0)),
                       color: Colors.redAccent,
                       child: Text(
-                        "Applica",
+                        "Apply",
                         style: TextStyle(fontSize: 16, color: Colors.white),
                       ),
                       onPressed: () {
