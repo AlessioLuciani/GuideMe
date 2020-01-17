@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:GuideMe/utils/data.dart';
+import 'package:GuideMe/utils/utils.dart';
 import 'package:GuideMe/widgets/visited_card.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -33,10 +34,10 @@ class _ExploreVisitedFragmentState extends State<ExploreVisitedFragment> {
         child: Platform.isIOS
             ? CustomScrollView(slivers: <Widget>[
                 CupertinoSliverNavigationBar(
-                  backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                  backgroundColor: isDarkTheme(context) ?
                             Colors.grey[850] : Colors.grey[50],
                   largeTitle: Text("Visited",
-                  style: TextStyle(color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                  style: TextStyle(color: isDarkTheme(context) ?
                   Colors.white : Colors.black),),
                 ),
                 SliverList(

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:GuideMe/commons/itinerary_visit.dart';
 import 'package:GuideMe/pages/details.dart';
 import 'package:GuideMe/pages/review_page.dart';
+import 'package:GuideMe/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -65,7 +66,7 @@ class VisitCard extends StatelessWidget {
                             height: 2,
                           ),
                           Text(
-                              "Visited on ${visit.date.day}/${visit.date.month}/${visit.date.year}", style: TextStyle(color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                              "Visited on ${visit.date.day}/${visit.date.month}/${visit.date.year}", style: TextStyle(color:isDarkTheme(context) ?
                             CupertinoColors.white : Colors.black54,),),
                         ]),
                     Expanded(

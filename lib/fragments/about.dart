@@ -18,10 +18,10 @@ class AboutFragment extends StatelessWidget {
                   slivers: <Widget>[
                 Platform.isIOS
                 ? CupertinoSliverNavigationBar(
-                  backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                  backgroundColor: isDarkTheme(context) ?
                             Colors.grey[850] : Colors.grey[50],
                   largeTitle: Text("About",
-                  style: TextStyle(color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                  style: TextStyle(color: isDarkTheme(context) ?
                   Colors.white : Colors.black)),
                   
                 )

@@ -40,7 +40,7 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
 
     return Scaffold(
       backgroundColor:
-          MediaQuery.of(context).platformBrightness == Brightness.dark
+          isDarkTheme(context)
               ? Colors.grey[850]
               : Colors.white,
       appBar: AppBar(

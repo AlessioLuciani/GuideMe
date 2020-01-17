@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:GuideMe/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -55,9 +56,9 @@ class _ChooseStopsMapsState extends State<ChooseStopsMaps> {
         child: Scaffold(
             appBar: Platform.isIOS
                 ? CupertinoNavigationBar(
-                    backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                    backgroundColor: isDarkTheme(context) ?
                       CupertinoColors.systemGrey5:      CupertinoColors.white , 
-          middle: Text("Add Stops", style: TextStyle(color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+          middle: Text("Add Stops", style: TextStyle(color: isDarkTheme(context) ?
                   Colors.white : Colors.black),),
                     previousPageTitle: "Create",
                     trailing: FlatButton(

@@ -1,3 +1,4 @@
+import 'package:GuideMe/utils/utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -48,10 +49,10 @@ class IOSSearchBar extends AnimatedWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 8.0, vertical: 0.0),
               decoration: new BoxDecoration(
-                color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                color: isDarkTheme(context) ?
                             CupertinoColors.darkBackgroundGray : CupertinoColors.extraLightBackgroundGray,
                 border:
-                    new Border.all(width: 0.0, color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                    new Border.all(width: 0.0, color: isDarkTheme(context) ?
                             CupertinoColors.black : CupertinoColors.white,),
                 borderRadius: new BorderRadius.circular(10.0),
               ),
@@ -64,7 +65,7 @@ class IOSSearchBar extends AnimatedWidget {
                               const EdgeInsets.fromLTRB(0.0, 0.0, 4.0, 1.0),
                           child: Icon(
                             CupertinoIcons.search,
-                            color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+                            color: isDarkTheme(context) ?
                             CupertinoColors.systemGrey : CupertinoColors.inactiveGray,
                             size: _kFontSize + 2.0,
                           ))
@@ -89,7 +90,7 @@ class IOSSearchBar extends AnimatedWidget {
                                         BorderSide(color: Colors.transparent))),
                             controller: controller,
                             style: TextStyle(
-                              color: Colors.black,
+                              color: isDarkTheme(context) ? Colors.white : Colors.black,
                               fontSize: 15.0,
                             ),
                             autocorrect: false,

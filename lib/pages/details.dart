@@ -31,9 +31,9 @@ class DetailsPageState extends State<DetailsPage> {
     return Scaffold(
       appBar: Platform.isIOS
         ? CupertinoNavigationBar(
-          backgroundColor: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+          backgroundColor: isDarkTheme(context) ?
                       CupertinoColors.systemGrey5:      CupertinoColors.white , 
-          middle: Text(widget.itinerary.title, style: TextStyle(color: MediaQuery.of(context).platformBrightness == Brightness.dark ?
+          middle: Text(widget.itinerary.title, style: TextStyle(color: isDarkTheme(context) ?
                   Colors.white : Colors.black),),
           previousPageTitle: widget.prevPageTitle,
         )

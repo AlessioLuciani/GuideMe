@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:GuideMe/commons/itinerary.dart';
 import 'package:GuideMe/commons/review.dart';
+import 'package:GuideMe/utils/utils.dart';
 import 'package:GuideMe/widgets/description_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class ReviewListPage extends StatelessWidget {
         appBar: Platform.isIOS
             ? CupertinoNavigationBar(
                 backgroundColor:
-                    MediaQuery.of(context).platformBrightness == Brightness.dark
+                   isDarkTheme(context)
                         ? CupertinoColors.systemGrey5
                         : CupertinoColors.white,
                 middle: Text(

@@ -96,7 +96,7 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
       appBar: Platform.isIOS
           ? CupertinoNavigationBar(
               backgroundColor:
-                  MediaQuery.of(context).platformBrightness == Brightness.dark
+                  isDarkTheme(context)
                       ? CupertinoColors.systemGrey5
                       : CupertinoColors.white,
               middle: Text(
