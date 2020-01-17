@@ -8,6 +8,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:location/location.dart';
+import 'dart:math';
 
 class NavigationMapsPage extends StatefulWidget {
   final Itinerary itinerary;
@@ -102,9 +103,16 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
             ),
           ),
           SafeArea(
+            
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 0.0),
-              child: Stack(
+              child: GestureDetector(
+                behavior: HitTestBehavior.translucent,
+            onVerticalDragEnd: (details) {
+              if (details.primaryVelocity < 0){
+                _slideUpLayout();
+                }
+              }, child:  Stack(
                 children: <Widget>[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -138,11 +146,13 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                           SizedBox(
                             width: 10,
                           ),
+                          
                           Expanded(
                               child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
+                                    
                                 Text(
                                   widget.itinerary
                                       .stops[navigationData.currentStop].name,
@@ -168,45 +178,7 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                               Icons.description,
                               size: 40.0,
                             ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  PageRouteBuilder(
-                                    pageBuilder: (
-                                      BuildContext context,
-                                      Animation<double> animation,
-                                      Animation<double> secondaryAnimation,
-                                    ) =>
-                                        NavigationDescriptionPage(
-                                      navigationData: navigationData,
-                                      nextStopCallback: (target) {
-                                        _currentTarget = target;
-                                        _mapController.moveCamera(
-                                            CameraUpdate.newLatLngZoom(
-                                                _currentTarget, 14.0));
-                                      },
-                                      previousStopCallback: (target) {
-                                        _currentTarget = target;
-                                        _mapController.moveCamera(
-                                            CameraUpdate.newLatLngZoom(
-                                                _currentTarget, 14.0));
-                                      },
-                                    ),
-                                    transitionsBuilder: (
-                                      BuildContext context,
-                                      Animation<double> animation,
-                                      Animation<double> secondaryAnimation,
-                                      Widget child,
-                                    ) =>
-                                        SlideTransition(
-                                      position: Tween<Offset>(
-                                        begin: const Offset(0, 1),
-                                        end: Offset.zero,
-                                      ).animate(animation),
-                                      child: child,
-                                    ),
-                                  ));
-                            },
+                            onPressed: _slideUpLayout,
                           ),
                           SizedBox(
                             width: 10,
@@ -257,7 +229,7 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                 ],
               ),
             ),
-          ),
+          )),
         ],
       ),
     );
@@ -337,6 +309,47 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
       navigationData.currentStop = closestStop;
     });
   }
+
+  void _slideUpLayout() {
+    {
+    Navigator.push(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) =>
+              NavigationDescriptionPage(
+            navigationData: navigationData,
+            nextStopCallback: (target) {
+              _currentTarget = target;
+              _mapController.moveCamera(
+                  CameraUpdate.newLatLngZoom(
+                      _currentTarget, 14.0));
+            },
+            previousStopCallback: (target) {
+              _currentTarget = target;
+              _mapController.moveCamera(
+                  CameraUpdate.newLatLngZoom(
+                      _currentTarget, 14.0));
+            },
+          ),
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) =>
+              SlideTransition(
+            position: Tween<Offset>(
+              begin: const Offset(0, 1),
+              end: Offset.zero,
+            ).animate(animation),
+            child: child,
+          ),
+        ));
+  }}
 }
 
 /// Class that contains data for the current navigation.
@@ -374,4 +387,7 @@ class NavigationData {
     tts.then((val) => val.setCompletionHandler(() => playingAudio = false));
     playingAudio = !playingAudio;
   }
+
+  
+  
 }

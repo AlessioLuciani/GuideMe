@@ -120,7 +120,14 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
                       )
               ],
             ),
-      body: SingleChildScrollView(
+      body: GestureDetector(
+            onTap: () {
+              FocusScopeNode currentFocus = FocusScope.of(context);
+              if (!currentFocus.hasPrimaryFocus) {
+                currentFocus.unfocus();
+              }
+            },
+            child: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Column(
@@ -240,7 +247,7 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
             ],
           ),
         ),
-      ),
+      )),
       floatingActionButton: Platform.isIOS
           ? Text("")
           : Padding(

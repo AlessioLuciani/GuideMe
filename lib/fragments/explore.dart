@@ -59,11 +59,6 @@ class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProv
         _searchAnimationController.forward();
       }
     });
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     _itineraries.clear();
     for (Itinerary itinerary in itineraries) {
       if (itinerary.length <= widget.userSelectedLength &&
@@ -72,6 +67,19 @@ class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProv
         _itineraries.add(itinerary);
       }
     }
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    for (Itinerary itinerary in _itineraries) {
+      if (itinerary.length > widget.userSelectedLength ||
+          itinerary.avgReview.floor() < widget.userSelectedRating ||
+          widget.userSelectedDuration.isBefore(itinerary.duration)) {
+        _itineraries.remove(itinerary);
+      }
+    }
+    
     return SafeArea(
         child: Platform.isIOS
             ?  GestureDetector(
@@ -162,7 +170,8 @@ class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProv
                     animation: _searchAnimation,
                     onCancel: _cancelSearch,
                     onClear: _clearSearch,
-                    onSubmit: (_) => _refreshListNow()),
+                    onSubmit: (text) => _refreshListWithSearch(text),
+                    )
                     );
                   }, childCount: 1),
                 ),
@@ -190,11 +199,7 @@ class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProv
                           itinerary: _itineraries[index],
                           pageTitle: "Explore")),
                 )));
-
-
-                
   }
-
 
    void _cancelSearch() {
     _searchTextController.clear();
@@ -205,16 +210,16 @@ class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProv
     _searchTextController.clear();
   }
 
-
-
   Future<Null> _refreshList() async {
     _itineraries.clear();
     _itineraries.addAll(shuffledItineraries);
     return null;
   }
 
-  Future<Null> _refreshListNow() async {
-    _refreshList();
+  Future<Null> _refreshListWithSearch(String text) async {
+    _itineraries.clear();
+   _itineraries.addAll(shuffledItineraries.where((itinerary)
+      => itinerary.title.toLowerCase().contains(text.toLowerCase())));
     setState(() {});
     return null;
   }
