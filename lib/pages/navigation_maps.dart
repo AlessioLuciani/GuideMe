@@ -90,15 +90,11 @@ class NavigationMapsPageState extends State<NavigationMapsPage> {
                     child: FloatingActionButton.extended(
                       onPressed: moveCamToClosestStop,
                       icon: Icon(Icons.nature_people,
-                          color: isDarkTheme(context)
-                              ? Colors.white
-                              : Colors.black),
+                          color: Colors.white),
                       label: Text(
                         "Nearby",
                         style: TextStyle(
-                            color: isDarkTheme(context)
-                                ? Colors.white
-                                : Colors.black),
+                            color: Colors.white),
                       ),
                       backgroundColor: Colors.redAccent,
                     )),
