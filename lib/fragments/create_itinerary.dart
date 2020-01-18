@@ -297,7 +297,7 @@ class _AddItinearyFragmentState extends State<AddItinearyFragment> {
                                             ? Colors.grey
                                             : isDarkTheme(context)
                                                 ? Colors.white
-                                                : Colors.white,
+                                                : Colors.black87,
                                         icon: Icon(Icons.clear_all),
                                         onPressed: () =>
                                             setState(() => _markers.clear()),
