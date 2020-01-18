@@ -45,7 +45,6 @@ class NavigationDescriptionPageState extends State<NavigationDescriptionPage> {
       ),
       body: ListView(
         children: <Widget>[
-          Image.asset(widget.navigationData.itinerary.coverImage),
           GestureDetector(
             behavior: HitTestBehavior.translucent,
             onVerticalDragEnd: (details) {
@@ -53,7 +52,10 @@ class NavigationDescriptionPageState extends State<NavigationDescriptionPage> {
                 Navigator.of(context).pop();
                 }
             }, child:
-          Padding(
+          Column(
+            children: <Widget>[
+                Image.asset(widget.navigationData.itinerary.coverImage),
+            Padding(
             padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 0.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -146,7 +148,11 @@ class NavigationDescriptionPageState extends State<NavigationDescriptionPage> {
                 )
               ],
             ),
-          )),
+          )
+            ],
+            ),
+            ),
+          
           Divider(
             color: Colors.grey,
           ),

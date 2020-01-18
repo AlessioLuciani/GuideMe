@@ -36,6 +36,7 @@ class _ExploreFragmentState extends State<ExploreFragment>
   FocusNode _searchFocusNode = new FocusNode();
   Animation _searchAnimation;
   AnimationController _searchAnimationController;
+  String _searchedText = "";
 
   @override
   void dispose() {
@@ -59,24 +60,21 @@ class _ExploreFragmentState extends State<ExploreFragment>
         _searchAnimationController.forward();
       }
     });
-    _itineraries.clear();
-    for (Itinerary itinerary in itineraries) {
-      if (itinerary.length <= widget.userSelectedLength &&
-          itinerary.avgReview.floor() >= widget.userSelectedRating &&
-          widget.userSelectedDuration.isAfter(itinerary.duration)) {
-        _itineraries.add(itinerary);
-      }
-    }
+    
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    _itineraries.removeWhere((Itinerary itinerary) =>
-        itinerary.length > widget.userSelectedLength ||
-        itinerary.avgReview.floor() < widget.userSelectedRating ||
-        widget.userSelectedDuration.isBefore(itinerary.duration));
-
+    _itineraries.clear();
+    for (Itinerary itinerary in itineraries) {
+      if (itinerary.length <= widget.userSelectedLength &&
+          itinerary.avgReview.floor() >= widget.userSelectedRating &&
+          widget.userSelectedDuration.isAfter(itinerary.duration) &&
+          isTextInTitle(_searchedText, itinerary)) {
+        _itineraries.add(itinerary);
+      }
+    }
     return SafeArea(
         child: Platform.isIOS
             ? GestureDetector(
@@ -178,7 +176,7 @@ class _ExploreFragmentState extends State<ExploreFragment>
                             animation: _searchAnimation,
                             onCancel: _cancelSearch,
                             onClear: _clearSearch,
-                            onSubmit: (text) => _refreshListWithSearch(text),
+                            onUpdate:  (text) => _refreshListWithSearch(text),
                           ));
                     }, childCount: 1),
                   ),
@@ -209,13 +207,15 @@ class _ExploreFragmentState extends State<ExploreFragment>
   }
 
   void _cancelSearch() {
-    _searchTextController.clear();
+    _clearSearch();
     _searchFocusNode.unfocus();
     _searchAnimationController.reverse();
   }
 
   void _clearSearch() {
     _searchTextController.clear();
+    _searchedText = "";
+    setState(() {});
   }
 
   Future<Null> _refreshList() async {
@@ -225,12 +225,13 @@ class _ExploreFragmentState extends State<ExploreFragment>
   }
 
   Future<Null> _refreshListWithSearch(String text) async {
-    _itineraries.clear();
-    _itineraries.addAll(shuffledItineraries.where((itinerary) =>
-        itinerary.title.toLowerCase().contains(text.toLowerCase())));
+    _searchedText = text;
     setState(() {});
     return null;
   }
+
+  bool isTextInTitle(String text, Itinerary itinerary) 
+    => itinerary.title.toLowerCase().contains(text.toLowerCase());
 
   Future<Null> _refreshListDelayed() async {
     _refreshList();

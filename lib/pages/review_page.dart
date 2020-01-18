@@ -108,17 +108,16 @@ class FeedbackFragmentState extends State<FeedbackFragment> {
                         : Colors.black),
               ),
               previousPageTitle: "Visited",
+              trailing: FlatButton(
+                child: Text(
+                  "Publish",
+                  style: TextStyle(color: Colors.red, fontSize: 16),
+                ),
+                onPressed: () => _handleReviewButton(context),
+              ),
             )
           : AppBar(
               title: Text(widget.itinerary.title),
-              actions: <Widget>[
-                Platform.isAndroid
-                    ? Text("")
-                    : IconButton(
-                        icon: Icon(Icons.send),
-                        onPressed: () => _handleReviewButton(context),
-                      )
-              ],
             ),
       body: GestureDetector(
             onTap: () {
