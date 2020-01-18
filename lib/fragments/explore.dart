@@ -27,7 +27,8 @@ class ExploreFragment extends StatefulWidget {
   _ExploreFragmentState createState() => _ExploreFragmentState();
 }
 
-class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProviderStateMixin  {
+class _ExploreFragmentState extends State<ExploreFragment>
+    with SingleTickerProviderStateMixin {
   List<Itinerary> _itineraries = itinerariesCopy;
   final GlobalKey<RefreshIndicatorState> _refreshKey =
       GlobalKey<RefreshIndicatorState>();
@@ -42,10 +43,9 @@ class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProv
     super.dispose();
   }
 
-
   @override
   void initState() {
-      _searchAnimationController = new AnimationController(
+    _searchAnimationController = new AnimationController(
       duration: new Duration(milliseconds: 200),
       vsync: this,
     );
@@ -72,116 +72,123 @@ class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    for (Itinerary itinerary in _itineraries) {
-      if (itinerary.length > widget.userSelectedLength ||
-          itinerary.avgReview.floor() < widget.userSelectedRating ||
-          widget.userSelectedDuration.isBefore(itinerary.duration)) {
-        _itineraries.remove(itinerary);
-      }
-    }
-    
+    _itineraries.removeWhere((Itinerary itinerary) =>
+        itinerary.length > widget.userSelectedLength ||
+        itinerary.avgReview.floor() < widget.userSelectedRating ||
+        widget.userSelectedDuration.isBefore(itinerary.duration));
+
     return SafeArea(
         child: Platform.isIOS
-            ?  GestureDetector(
-        onTapUp: (TapUpDetails _) {
-          _searchFocusNode.unfocus();
-          if (_searchTextController.text == '') {
-            _searchAnimationController.reverse();
-          }
-        }, child:
-            CustomScrollView(slivers: <Widget>[
-                CupertinoSliverNavigationBar(
-                  backgroundColor: isDarkTheme(context) ?
-                            Colors.grey[850] : Colors.grey[50],
-                  largeTitle: Text("Explore",
-                  style: TextStyle(color: isDarkTheme(context) ?
-                  Colors.white : Colors.black)),
-                  
-                  trailing: FlatButton(
-                    child: Text("Filters",
-                    style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 16),
-                    ),
-                    onPressed: () => showCupertinoModalPopup(
-                      builder: (BuildContext context) {
-                        return CupertinoActionSheet(
-                          title: Text("Filters"),
-                          actions: <Widget>[
-                            CupertinoActionSheetAction(
-                              child: Text("Length"),
-                            onPressed: () => showDialog(
-                        context: context,
-                        builder: (BuildContext context) => LengthDialog(
-                              maxSliderValue: MAX_ITINERARY_LENGTH,
-                              lastValue: currentUserLength,
-                              updateCallback: (value) =>
-                                  setState(() => currentUserLength = value),
-                            )),),
-                            CupertinoActionSheetAction(
-                              child: Text("Duration"),
-                            onPressed: () => showDialog(
-                        context: context,
-                        builder: (BuildContext context) => DurationDialog(
-                              lastValue: currentUserDuration,
-                              updateCallback: (value) =>
-                                  setState(() => currentUserDuration = value),
-                            ))),
-                            CupertinoActionSheetAction(
-                              child: Text("Rating"),
-                            onPressed: () => showDialog(
-                        context: context,
-                        builder: (BuildContext context) => RatingAlert(
-                              lastValue: currentUserRating,
-                              updateCallback: (value) =>
-                                  setState(() => currentUserRating = value),
-                            ))),
-                          ],
-                          cancelButton: CupertinoActionSheetAction(
-                            child: Text("Cancel"),
-                            onPressed: () => Navigator.pop(context),
-                          ),
-                        );
-                      },
-                      context: context
-
-                    ),)
-                ),
-                CupertinoSliverRefreshControl(
-                  builder: (context, refreshState, pulledExtent,
-                      refreshTriggerPullDistance, refreshIndicatorExtent) {
-                    return CupertinoSliverRefreshControl
-                        .buildSimpleRefreshIndicator(
-                            context,
-                            refreshState,
-                            pulledExtent,
-                            refreshTriggerPullDistance,
-                            refreshIndicatorExtent);
-                  },
-                  onRefresh: _refreshListDelayed,
-                ),
-                SliverList(delegate: SliverChildBuilderDelegate((context, index) {
-                    return Padding(
-                       padding: EdgeInsets.symmetric(vertical: 5, horizontal: 0),
-                      child:
-                    IOSSearchBar(
-                    controller: _searchTextController,
-                    focusNode: _searchFocusNode,
-                    animation: _searchAnimation,
-                    onCancel: _cancelSearch,
-                    onClear: _clearSearch,
-                    onSubmit: (text) => _refreshListWithSearch(text),
-                    )
-                    );
-                  }, childCount: 1),
-                ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate((context, index) {
-                    return ExploreCard(
-                        itinerary: _itineraries[index], pageTitle: "Explore");
-                  }, childCount: _itineraries.length),
-                )
-              ]))
+            ? GestureDetector(
+                onTapUp: (TapUpDetails _) {
+                  _searchFocusNode.unfocus();
+                  if (_searchTextController.text == '') {
+                    _searchAnimationController.reverse();
+                  }
+                },
+                child: CustomScrollView(slivers: <Widget>[
+                  CupertinoSliverNavigationBar(
+                      backgroundColor: isDarkTheme(context)
+                          ? Colors.grey[850]
+                          : Colors.grey[50],
+                      largeTitle: Text("Explore",
+                          style: TextStyle(
+                              color: isDarkTheme(context)
+                                  ? Colors.white
+                                  : Colors.black)),
+                      trailing: FlatButton(
+                        child: Text(
+                          "Filters",
+                          style: TextStyle(color: Colors.red, fontSize: 16),
+                        ),
+                        onPressed: () => showCupertinoModalPopup(
+                            builder: (BuildContext context) {
+                              return CupertinoActionSheet(
+                                title: Text("Filters"),
+                                actions: <Widget>[
+                                  CupertinoActionSheetAction(
+                                    child: Text("Length"),
+                                    onPressed: () => showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            LengthDialog(
+                                              maxSliderValue:
+                                                  MAX_ITINERARY_LENGTH,
+                                              lastValue: currentUserLength,
+                                              updateCallback: (value) =>
+                                                  setState(() =>
+                                                      currentUserLength =
+                                                          value),
+                                            )),
+                                  ),
+                                  CupertinoActionSheetAction(
+                                      child: Text("Duration"),
+                                      onPressed: () => showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              DurationDialog(
+                                                lastValue: currentUserDuration,
+                                                updateCallback: (value) =>
+                                                    setState(() =>
+                                                        currentUserDuration =
+                                                            value),
+                                              ))),
+                                  CupertinoActionSheetAction(
+                                      child: Text("Rating"),
+                                      onPressed: () => showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              RatingAlert(
+                                                lastValue: currentUserRating,
+                                                updateCallback: (value) =>
+                                                    setState(() =>
+                                                        currentUserRating =
+                                                            value),
+                                              ))),
+                                ],
+                                cancelButton: CupertinoActionSheetAction(
+                                  child: Text("Cancel"),
+                                  onPressed: () => Navigator.pop(context),
+                                ),
+                              );
+                            },
+                            context: context),
+                      )),
+                  CupertinoSliverRefreshControl(
+                    builder: (context, refreshState, pulledExtent,
+                        refreshTriggerPullDistance, refreshIndicatorExtent) {
+                      return CupertinoSliverRefreshControl
+                          .buildSimpleRefreshIndicator(
+                              context,
+                              refreshState,
+                              pulledExtent,
+                              refreshTriggerPullDistance,
+                              refreshIndicatorExtent);
+                    },
+                    onRefresh: _refreshListDelayed,
+                  ),
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate((context, index) {
+                      return Padding(
+                          padding:
+                              EdgeInsets.symmetric(vertical: 5, horizontal: 0),
+                          child: IOSSearchBar(
+                            controller: _searchTextController,
+                            focusNode: _searchFocusNode,
+                            animation: _searchAnimation,
+                            onCancel: _cancelSearch,
+                            onClear: _clearSearch,
+                            onSubmit: (text) => _refreshListWithSearch(text),
+                          ));
+                    }, childCount: 1),
+                  ),
+                  SliverList(
+                    delegate: SliverChildBuilderDelegate((context, index) {
+                      return ExploreCard(
+                          itinerary: _itineraries[index], pageTitle: "Explore");
+                    }, childCount: _itineraries.length),
+                  )
+                ]))
             : RefreshIndicator(
                 onRefresh: _refreshListDelayed,
                 key: _refreshKey,
@@ -201,11 +208,12 @@ class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProv
                 )));
   }
 
-   void _cancelSearch() {
+  void _cancelSearch() {
     _searchTextController.clear();
     _searchFocusNode.unfocus();
     _searchAnimationController.reverse();
   }
+
   void _clearSearch() {
     _searchTextController.clear();
   }
@@ -218,8 +226,8 @@ class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProv
 
   Future<Null> _refreshListWithSearch(String text) async {
     _itineraries.clear();
-   _itineraries.addAll(shuffledItineraries.where((itinerary)
-      => itinerary.title.toLowerCase().contains(text.toLowerCase())));
+    _itineraries.addAll(shuffledItineraries.where((itinerary) =>
+        itinerary.title.toLowerCase().contains(text.toLowerCase())));
     setState(() {});
     return null;
   }
@@ -231,5 +239,3 @@ class _ExploreFragmentState extends State<ExploreFragment> with SingleTickerProv
     return null;
   }
 }
-
-

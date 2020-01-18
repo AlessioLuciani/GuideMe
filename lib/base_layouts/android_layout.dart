@@ -39,6 +39,7 @@ class AndroidLayoutState extends State<AndroidLayout> {
   int _selectedDrawerIndex = 0;
 
   _buildMaterialSearchPage(BuildContext context) {
+    debugPrint('${itineraries.length}');
     return new MaterialPageRoute<String>(
         settings: new RouteSettings(
           name: 'material_search',
@@ -51,6 +52,7 @@ class AndroidLayoutState extends State<AndroidLayout> {
               iconColor: isDarkTheme(context) ? Colors.grey[750] : Colors.black,
               barBackgroundColor:
                   isDarkTheme(context) ? Colors.grey[750] : Colors.white,
+              limit: itineraries.length,
               results: itineraries
                   .map(
                       (Itinerary itinerary) => new MaterialSearchResult<String>(
@@ -61,6 +63,7 @@ class AndroidLayoutState extends State<AndroidLayout> {
                   .toList(),
               filter: (dynamic value, String criteria) {
                 final Itinerary current = getitineraryFromId(int.parse(value));
+                debugPrint('${current.id}');
                 return current.title.toLowerCase().trim().contains(
                     new RegExp(r'' + criteria.toLowerCase().trim() + ''));
               },
