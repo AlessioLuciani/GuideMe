@@ -15,7 +15,7 @@ Mobile app that allows tourists to interact with guides and engage in trips.
 
 </div>
 
-<div>
+ <div class="container" style="width: 750px; margin: 0 auto;">
 
 <p> Android - Dark Mode </p>
 
