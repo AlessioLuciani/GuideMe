@@ -106,7 +106,9 @@ class _ExploreFragmentState extends State<ExploreFragment>
                                 actions: <Widget>[
                                   CupertinoActionSheetAction(
                                     child: Text("Length"),
-                                    onPressed: () => showDialog(
+                                    onPressed: () { 
+                                      Navigator.pop(context);
+                                      showDialog(
                                         context: context,
                                         builder: (BuildContext context) =>
                                             LengthDialog(
@@ -117,11 +119,13 @@ class _ExploreFragmentState extends State<ExploreFragment>
                                                   setState(() =>
                                                       currentUserLength =
                                                           value),
-                                            )),
+                                            ));},
                                   ),
                                   CupertinoActionSheetAction(
                                       child: Text("Duration"),
-                                      onPressed: () => showDialog(
+                                      onPressed: () { 
+                                        Navigator.pop(context);
+                                        showDialog(
                                           context: context,
                                           builder: (BuildContext context) =>
                                               DurationDialog(
@@ -130,10 +134,13 @@ class _ExploreFragmentState extends State<ExploreFragment>
                                                     setState(() =>
                                                         currentUserDuration =
                                                             value),
-                                              ))),
+                                              ));})
+                                          ,
                                   CupertinoActionSheetAction(
                                       child: Text("Rating"),
-                                      onPressed: () => showDialog(
+                                      onPressed: () { 
+                                      Navigator.pop(context);
+                                        showDialog(
                                           context: context,
                                           builder: (BuildContext context) =>
                                               RatingAlert(
@@ -142,7 +149,7 @@ class _ExploreFragmentState extends State<ExploreFragment>
                                                     setState(() =>
                                                         currentUserRating =
                                                             value),
-                                              ))),
+                                              ));}),
                                 ],
                                 cancelButton: CupertinoActionSheetAction(
                                   child: Text("Cancel"),
