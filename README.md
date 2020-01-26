@@ -1,8 +1,8 @@
 # GuideMe
 Mobile app that allows tourists to interact with guides and engage in trips. In order to use the complete version of the app you will need to create an API key for Maps and add it to the project. Please follow the Instructions if you need help during the process.
 
-## Instructions for Maps API key
-You will need to create a Google account if you don't have one, then go to https://console.developers.google.com/ and create a project named 'GuideMe'. Now you can create an API key from the Credentials section. When you generate the key please make sure not to limit its access to the following services: Google Maps, Directions API, Places API, Maps SDK for Android and Maps SDK for iOS. Finally clone the project, browse the AndroidManifest.xml file for Android and the AppDelegate.swift file for iOS, and replace the string YOUR_API_KEY_HERE with your API key. Enjoy the visit!
+## Instructions for installing the Maps API key
+You will need to create a Google account if you don't have one, then go to https://console.developers.google.com/ and create a project named *GuideMe*. Now you can create an API key from the Credentials section. When you generate the key please make sure not to limit its access to the following services: *Google Maps*, *Directions API*, *Places API*, *Maps SDK for Android* and *Maps SDK for iOS*. Finally clone the project, browse the *AndroidManifest.xml* file for Android and the *AppDelegate.swift* file for iOS, and replace the string *YOUR_API_KEY_HERE* with your API key. Enjoy the visit!
 
 ### iOS - Light Mode
 
